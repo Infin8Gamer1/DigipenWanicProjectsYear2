@@ -22,6 +22,12 @@
     <ClCompile Include="Source\stdafx.cpp">
       <Filter>Precompiled</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Level.cpp">
+      <Filter>High-Level API</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Space.cpp">
+      <Filter>High-Level API</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\stdafx.h">
