@@ -15,6 +15,7 @@
 #include "Space.h"
 #include "MeshHelper.h"
 #include "Sprite.h"
+#include <Mesh.h>
 #include <Color.h>
 #include <Engine.h>
 
@@ -62,5 +63,6 @@ void Levels::Level1::Shutdown()
 void Levels::Level1::Unload()
 {
 	std::cout << "Level1::Unload" << std::endl;
+	delete mesh;
 	mesh = nullptr;
 }

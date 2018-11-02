@@ -16,6 +16,7 @@
 #include "SpriteSource.h"
 #include "Sprite.h"
 #include "Animation.h"
+#include <Mesh.h>
 #include <gdiplus.h>
 #include <Texture.h>
 #include <Engine.h>
@@ -58,7 +59,7 @@ void Levels::Level2::Initialize()
 	sprite->SetSpriteSource(spriteSource);
 
 	animation = new Animation(sprite);
-	animation->Play(0, 8, 0.0f, true);
+	animation->Play(0, 8, 0.2f, true);
 }
 
 void Levels::Level2::Update(float dt)
@@ -95,6 +96,8 @@ void Levels::Level2::Unload()
 	std::cout << "Level2::Unload" << std::endl;
 	delete spriteSource;
 	spriteSource = nullptr;
+	delete mesh;
 	mesh = nullptr;
+	delete texture;
 	texture = nullptr;
 }
