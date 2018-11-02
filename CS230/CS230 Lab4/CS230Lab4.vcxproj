@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Animation.cpp" />
     <ClCompile Include="Source\Level.cpp" />
     <ClCompile Include="Source\Level1.cpp" />
     <ClCompile Include="Source\Level2.cpp" />
@@ -46,7 +47,9 @@
     <ClInclude Include="Source\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\Textures\Monkey.png" />
+    <Image Include="Assets\Textures\Monkey.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

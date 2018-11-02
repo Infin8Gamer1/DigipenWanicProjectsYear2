@@ -39,6 +39,4 @@ void SpriteSource::GetUV(unsigned int frameIndex, Vector2D & textureCoords) cons
 	float yOffset = k_Y * (frameIndex / numCols);
 
 	textureCoords = Vector2D(xOffset, yOffset);
-
-	textureCoords = Vector2D(0.3333f, 0.8f);
 }

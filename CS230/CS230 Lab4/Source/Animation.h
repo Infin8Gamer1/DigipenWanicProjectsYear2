@@ -38,7 +38,7 @@ public:
 	// Construct a new animation object.
 	// Params:
 	//   sprite = The sprite this animation will be manipulating.
-	Animation(Sprite* sprite);
+	Animation(Sprite* spriteInput);
 
 	// Play a simple animation sequence (0 .. frameCount).
 	// Params:

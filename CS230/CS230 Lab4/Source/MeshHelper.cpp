@@ -22,10 +22,12 @@ Mesh * CreateTriangleMesh(const Color & color0, const Color & color1, const Colo
 
 Mesh * CreateQuadMesh(const Vector2D & textureSize, const Vector2D & extents)
 {
-	UNREFERENCED_PARAMETER(textureSize);
-	UNREFERENCED_PARAMETER(extents);
+	Vertex p1 = Vertex(Vector2D(-0.5f * extents.x, -0.5f * extents.y), Vector2D(0 * textureSize.x, 1 * textureSize.y));
+	Vertex p2 = Vertex(Vector2D(0.5f  * extents.x, -0.5f * extents.y), Vector2D(1 * textureSize.x, 1 * textureSize.y));
+	Vertex p3 = Vertex(Vector2D(-0.5f * extents.x, 0.5f  * extents.y), Vector2D(0 * textureSize.x, 0 * textureSize.y));
+	Vertex p4 = Vertex(Vector2D(0.5f  * extents.x, 0.5f  * extents.y), Vector2D(1 * textureSize.x, 0 * textureSize.y));
 
-	MeshFactory::GetInstance().AddTriangle(Vertex(Vector2D(-0.5, -0.5), Vector2D(0, 1)), Vertex(Vector2D(0.5, -0.5), Vector2D(1, 1)), Vertex(Vector2D(-0.5, 0.5), Vector2D(0, 0)));
-	MeshFactory::GetInstance().AddTriangle(Vertex(Vector2D(0.5, -0.5), Vector2D(1, 1)), Vertex(Vector2D(0.5, 0.5), Vector2D(1, 0)), Vertex(Vector2D(-0.5, 0.5), Vector2D(0, 0)));
+	MeshFactory::GetInstance().AddTriangle(p1, p2, p3);
+	MeshFactory::GetInstance().AddTriangle(p2, p4, p3);
 	return MeshFactory::GetInstance().EndCreate();
 }

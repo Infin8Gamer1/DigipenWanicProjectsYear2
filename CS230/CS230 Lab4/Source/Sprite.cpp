@@ -33,7 +33,7 @@ void Sprite::Draw() const
 	if (spriteSource != nullptr) {
 
 		Vector2D textureCords = Vector2D(0, 0);
-		spriteSource->GetUV(1, textureCords);
+		spriteSource->GetUV(frameIndex, textureCords);
 		Graphics::GetInstance().SetTexture(spriteSource->GetTexture(), textureCords);
 	} else {
 		Graphics::GetInstance().SetTexture(nullptr);

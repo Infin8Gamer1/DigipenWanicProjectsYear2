@@ -62,6 +62,5 @@ void Levels::Level1::Shutdown()
 void Levels::Level1::Unload()
 {
 	std::cout << "Level1::Unload" << std::endl;
-	//delete mesh;
 	mesh = nullptr;
 }

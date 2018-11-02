@@ -15,6 +15,7 @@
 #include "MeshHelper.h"
 #include "SpriteSource.h"
 #include "Sprite.h"
+#include "Animation.h"
 #include <gdiplus.h>
 #include <Texture.h>
 #include <Engine.h>
@@ -25,8 +26,8 @@ Levels::Level2::Level2() : Level("Level2")
 	texture = nullptr;
 
 	spriteSource = nullptr;
-	columns = 1;
-	rows = 1;
+	columns = 3;
+	rows = 5;
 
 	sprite = nullptr;
 	animation = nullptr;
@@ -38,13 +39,13 @@ Levels::Level2::Level2() : Level("Level2")
 void Levels::Level2::Load()
 {
 	std::cout << "Level2::Load" << std::endl;
-	mesh = CreateQuadMesh(Vector2D(0, 0), Vector2D(0, 0));
 
-	Gdiplus::Bitmap textureBitmap = Gdiplus::Bitmap(64, 64);
-	Gdiplus::Rect textureRect = Gdiplus::Rect(0, 0, 512, 512);
-	texture->CreateTextureFromFile("Monkey.png");
+	Vector2D textureSize = Vector2D(1.0f / columns, 1.0f / rows);
+	mesh = CreateQuadMesh(textureSize, Vector2D(1, 1));
+
+	texture = Texture::CreateTextureFromFile("Monkey.png");
 	
-	spriteSource = new SpriteSource(3,5,texture);
+	spriteSource = new SpriteSource(columns, rows, texture);
 }
 
 void Levels::Level2::Initialize()
@@ -55,15 +56,21 @@ void Levels::Level2::Initialize()
 	sprite = new Sprite();
 	sprite->SetMesh(mesh);
 	sprite->SetSpriteSource(spriteSource);
+
+	animation = new Animation(sprite);
+	animation->Play(0, 8, 0.0f, true);
 }
 
 void Levels::Level2::Update(float dt)
 {
-	UNREFERENCED_PARAMETER(dt);
-	//std::cout << "Level2::Update" << std::endl;
+	animation->Update(dt);
 	sprite->Draw();
 
-	/*currentHealth--;
+	if (animation->IsDone() == false) {
+		return;
+	}
+
+	currentHealth--;
 	if (currentHealth == 0) {
 		lives--;
 		if (lives == 0) {
@@ -71,7 +78,7 @@ void Levels::Level2::Update(float dt)
 		} else {
 			GetSpace()->RestartLevel();
 		}
-	}*/
+	}
 }
 
 void Levels::Level2::Shutdown()
@@ -79,6 +86,8 @@ void Levels::Level2::Shutdown()
 	std::cout << "Level2::Shutdown" << std::endl;
 	delete sprite;
 	sprite = nullptr;
+	delete animation;
+	animation = nullptr;
 }
 
 void Levels::Level2::Unload()
