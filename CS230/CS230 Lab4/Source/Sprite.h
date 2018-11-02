@@ -58,7 +58,7 @@ public:
 	// (NOTE: You must validate the frame index against the sprite source's frame count.)
 	// Params:
 	//   frameIndex = New frame index for the sprite (0 .. frame count).
-	void SetFrame(unsigned int frameIndex);
+	void SetFrame(unsigned int frameIndexInput);
 
 	// Returns the index of the current frame being displayed.
 	unsigned GetFrame() const;
@@ -68,17 +68,17 @@ public:
 	// (NOTE: This mesh may contain any number of triangles.)
 	// Params:
 	//   mesh = Pointer to a mesh created using the Alpha Engine.
-	void SetMesh(Mesh* mesh);
+	void SetMesh(Mesh* meshInput);
 
 	// Set a new SpriteSource for the specified sprite.
 	// Params:
 	//	 spriteSource = A new sprite source for the sprite.
-	void SetSpriteSource(SpriteSource* spriteSource);
+	void SetSpriteSource(SpriteSource* spriteSourceInput);
 
 	// Set the blend color for the specified sprite.
 	// Params:
 	//	 color = A new color for the sprite.
-	void SetColor(Color color);
+	void SetColor(Color colorInput);
 
 	// Retrieves the blend color for the sprite.
 	const Color& GetColor() const;
