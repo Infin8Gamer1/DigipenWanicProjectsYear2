@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Level.cpp" />
+    <ClCompile Include="Source\Level1.cpp" />
+    <ClCompile Include="Source\Level2.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Space.cpp" />
     <ClCompile Include="Source\stdafx.cpp">

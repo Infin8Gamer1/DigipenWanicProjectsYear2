@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Precompiled">
+      <UniqueIdentifier>{c54e400a-0b22-4fb9-ad4a-68aaa9abc7ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{d6a6b6cd-f9a5-4355-88ae-c73c49b1ecae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Levels">
+      <UniqueIdentifier>{eb42e325-6dc2-4ec9-a38c-fed4827f3174}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="High-Level API">
+      <UniqueIdentifier>{72e40003-8b1c-46e8-9f71-ff5f6d46b94f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Behaviors">
+      <UniqueIdentifier>{30b4313e-2f34-40ba-9613-d250bab122eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="High-Level API\Graphics">
+      <UniqueIdentifier>{56c056ef-4a8e-47a6-ac6e-dcc7fb92729d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="High-Level API\Spaces">
+      <UniqueIdentifier>{27774d28-e5e6-4932-9794-c1ddede64c03}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\stdafx.cpp">
+      <Filter>Precompiled</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Level.cpp">
+      <Filter>High-Level API\Spaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Level1.cpp">
+      <Filter>Game\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Level2.cpp">
+      <Filter>Game\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Space.cpp">
+      <Filter>High-Level API\Spaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MeshHelper.cpp">
+      <Filter>High-Level API\Graphics</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\stdafx.h">
+      <Filter>Precompiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Level1.h">
+      <Filter>Game\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Sprite.h">
+      <Filter>High-Level API\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpriteSource.h">
+      <Filter>High-Level API\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Level.h">
+      <Filter>High-Level API\Spaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Space.h">
+      <Filter>High-Level API\Spaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Animation.h">
+      <Filter>High-Level API\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Level2.h">
+      <Filter>Game\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshHelper.h">
+      <Filter>High-Level API\Graphics</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

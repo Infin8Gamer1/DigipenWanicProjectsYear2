@@ -1,0 +1,39 @@
+Engine::Start
+Beta Engine version: 0.2
+
+OpenGL version supported: 4.4.0 - Build 21.20.16.4727
+OpenGL shader version supported: 4.40 - Build 21.20.16.4727
+Compiling shader program 0 vertex shader...
+Shader compiled successfully.
+Compiling shader program 0 fragment shader...
+Shader compiled successfully.
+Shader program 0: defaultShader.vert, defaultShader.frag
+Shaders linked successfully.
+Space::Update
+Space::ChangeLevel
+Level1::Load
+Level1::Initialize
+Level1::Update
+Space::Update
+Level1::Update
+Space::Update
+Level1::Update
+Space::Update
+Space::ChangeLevel
+Level1::Shutdown
+Level1::Unload
+Level2::Load
+Level2::Initialize
+Level2::Update
+Space::Update
+Level2::Update
+Space::Update
+Space::ChangeLevel
+Level2::Shutdown
+Level2::Initialize
+Level2::Update
+Space::Update
+Level2::Update
+Level2::Shutdown
+Level2::Unload
+Engine::Stop

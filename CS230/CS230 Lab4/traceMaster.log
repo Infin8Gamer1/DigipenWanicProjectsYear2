@@ -1,0 +1,92 @@
+Beta Framework Low-Level API version: 0.2.1
+
+OpenGL version supported: 4.6.0 NVIDIA 398.82
+OpenGL shader version supported: 4.60 NVIDIA
+Compiling shader program 0 vertex shader...
+Shader compiled successfully.
+Compiling shader program 0 fragment shader...
+Shader compiled successfully.
+Shader program 0: defaultShader.vert, defaultShader.frag
+Shaders linked successfully.
+
+Space::ChangeLevel
+Level1::Load
+Level1::Initialize
+Space::ChangeLevel
+Level1::Shutdown
+Level1::Unload
+Level2::Load
+Level2::Initialize
+Animation::Play
+Sprite::SetFrame(0)
+Animation::Update
+Sprite::SetFrame(1)
+Animation::Update
+Sprite::SetFrame(2)
+Animation::Update
+Sprite::SetFrame(3)
+Animation::Update
+Sprite::SetFrame(4)
+Animation::Update
+Sprite::SetFrame(5)
+Animation::Update
+Sprite::SetFrame(6)
+Animation::Update
+Sprite::SetFrame(7)
+Animation::Update
+Sprite::SetFrame(0)
+Animation::Update
+Sprite::SetFrame(1)
+Animation::Update
+Sprite::SetFrame(2)
+Animation::Update
+Sprite::SetFrame(3)
+Animation::Update
+Sprite::SetFrame(4)
+Animation::Update
+Sprite::SetFrame(5)
+Animation::Update
+Sprite::SetFrame(6)
+Animation::Update
+Sprite::SetFrame(7)
+Animation::Update
+Sprite::SetFrame(0)
+Space::ChangeLevel
+Level2::Shutdown
+Level2::Initialize
+Animation::Play
+Sprite::SetFrame(0)
+Animation::Update
+Sprite::SetFrame(1)
+Animation::Update
+Sprite::SetFrame(2)
+Animation::Update
+Sprite::SetFrame(3)
+Animation::Update
+Sprite::SetFrame(4)
+Animation::Update
+Sprite::SetFrame(5)
+Animation::Update
+Sprite::SetFrame(6)
+Animation::Update
+Sprite::SetFrame(7)
+Animation::Update
+Sprite::SetFrame(0)
+Animation::Update
+Sprite::SetFrame(1)
+Animation::Update
+Sprite::SetFrame(2)
+Animation::Update
+Sprite::SetFrame(3)
+Animation::Update
+Sprite::SetFrame(4)
+Animation::Update
+Sprite::SetFrame(5)
+Animation::Update
+Sprite::SetFrame(6)
+Animation::Update
+Sprite::SetFrame(7)
+Animation::Update
+Sprite::SetFrame(0)
+Level2::Shutdown
+Level2::Unload
