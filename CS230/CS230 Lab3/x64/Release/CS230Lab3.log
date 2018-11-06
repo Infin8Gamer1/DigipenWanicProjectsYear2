@@ -1,0 +1,14 @@
+﻿  stdafx.cpp
+  Level.cpp
+  Level1.cpp
+x:\_dev\digipen\digipenwanicyear2projects\digipenwanicprojectsyear2\cs230\cs230 lab3\source\level1.cpp(33): warning C4100: 'dt': unreferenced formal parameter
+  Level2.cpp
+x:\_dev\digipen\digipenwanicyear2projects\digipenwanicprojectsyear2\cs230\cs230 lab3\source\level2.cpp(34): warning C4100: 'dt': unreferenced formal parameter
+  Main.cpp
+  Space.cpp
+  Generating code
+  All 186 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  CS230Lab3.vcxproj -> X:\_Dev\Digipen\DigipenWanicYear2Projects\DigipenWanicProjectsYear2\CS230\CS230 Lab3\\x64\Release\CS230Lab3.exe
+  glew\bin\x64\glew32.dll
+  1 File(s) copied

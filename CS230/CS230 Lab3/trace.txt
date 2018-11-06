@@ -1,8 +1,8 @@
 Engine::Start
 Beta Engine version: 0.2
 
-OpenGL version supported: 4.4.0 - Build 21.20.16.4727
-OpenGL shader version supported: 4.40 - Build 21.20.16.4727
+OpenGL version supported: 4.6.0 NVIDIA 398.36
+OpenGL shader version supported: 4.60 NVIDIA
 Compiling shader program 0 vertex shader...
 Shader compiled successfully.
 Compiling shader program 0 fragment shader...

@@ -1,0 +1,18 @@
+﻿  stdafx.cpp
+  Animation.cpp
+  Level.cpp
+  Level1.cpp
+  Level2.cpp
+  Main.cpp
+  Matrix2DStudent.cpp
+  MeshHelper.cpp
+  Space.cpp
+  Sprite.cpp
+  SpriteSource.cpp
+  Transform.cpp
+  Generating code
+  All 133 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  CS230Lab5.vcxproj -> X:\_Dev\Digipen\DigipenWanicYear2Projects\DigipenWanicProjectsYear2\CS230\CS230 Lab5\\x64\Release\BetaFramework.exe
+  glfw\lib\x64\glfw3.dll
+  1 File(s) copied
