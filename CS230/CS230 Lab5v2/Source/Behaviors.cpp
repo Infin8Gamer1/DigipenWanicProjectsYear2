@@ -20,13 +20,15 @@
 
 void Behaviors::UpdateShip(Transform * transform, Physics * physics)
 {
+	const float speed = 15.0f;
+
 	Vector2D MousePos = Graphics::GetInstance().ScreenToWorldPosition(Input::GetInstance().GetCursorPosition());
 
 	Vector2D force = MousePos - transform->GetTranslation();
 
 	force = force.Normalized();
 
-	physics->AddForce(force * 15.0f);
+	physics->AddForce(force * speed);
 
 	transform->LookAt(MousePos);
 }
@@ -34,10 +36,15 @@ void Behaviors::UpdateShip(Transform * transform, Physics * physics)
 
 void Behaviors::UpdateMonkey(Transform * transform, Physics * physics, Animation * animation)
 {
+	const float jumpForce = 5000.0f;
+	const float strafeForce = 5.0f;
+
 	bool isFlying = false;
 
-	if (transform->GetTranslation().y <= (-Graphics::GetInstance().GetScreenWorldDimensions().extents.y) + (transform->GetScale().y / 2)) {
-		transform->SetTranslation(Vector2D(transform->GetTranslation().x, (-Graphics::GetInstance().GetScreenWorldDimensions().extents.y) + (transform->GetScale().y / 2)));
+	float groundLevel = (-Graphics::GetInstance().GetScreenWorldDimensions().extents.y) + (transform->GetScale().y / 2);
+
+	if (transform->GetTranslation().y <= groundLevel) {
+		transform->SetTranslation(Vector2D(transform->GetTranslation().x, groundLevel));
 		//make sure that the verticle velocity is 0 when you are on the floor
 		physics->SetVelocity(Vector2D(physics->GetVelocity().x, 0));
 
@@ -62,15 +69,15 @@ void Behaviors::UpdateMonkey(Transform * transform, Physics * physics, Animation
 
 	//jump
 	if (Input::GetInstance().IsKeyDown(' ') && !isFlying) {
-		physics->AddForce(Vector2D(0, 1) * 5000.0f);
+		physics->AddForce(Vector2D(0, 1) * jumpForce);
 	}
 	//left
 	if (Input::GetInstance().IsKeyDown('A')) {
-		physics->AddForce(Vector2D(-1, 0) * 5.0f);
+		physics->AddForce(Vector2D(-1, 0) * strafeForce);
 	}
 	//right
 	if (Input::GetInstance().IsKeyDown('D')) {
-		physics->AddForce(Vector2D(1, 0) * 5.0f);
+		physics->AddForce(Vector2D(1, 0) * strafeForce);
 	}
 	
 }
