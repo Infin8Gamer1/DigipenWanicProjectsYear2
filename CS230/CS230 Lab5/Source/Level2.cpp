@@ -61,12 +61,10 @@ void Levels::Level2::Initialize()
 
 	animation = new Animation(sprite);
 	animation->Play(0, 8, 0.2f, true);
-	Input::GetInstance().Initialize();
 }
 
 void Levels::Level2::Update(float dt)
 {
-	Input::GetInstance().Update();
 	animation->Update(dt);
 	sprite->Draw();
 

@@ -16,6 +16,8 @@
 #include "MeshHelper.h"
 #include "Sprite.h"
 #include "Transform.h"
+#include "Physics.h"
+#include "Behaviors.h"
 #include <Input.h>
 #include <Mesh.h>
 #include <Color.h>
@@ -27,6 +29,7 @@ Levels::Level1::Level1() : Level("Level1")
 	mesh = nullptr;
 	texture = nullptr;
 	transform = nullptr;
+	physics = nullptr;
 }
 
 void Levels::Level1::Load()
@@ -40,7 +43,9 @@ void Levels::Level1::Initialize()
 {
 	std::cout << "Level1::Initialize" << std::endl;
 
-	transform = new Transform(Vector2D(100,-100), Vector2D(300,150), 40.0f);
+	transform = new Transform(Vector2D(0,0), Vector2D(50,50), 0.0f);
+
+	physics = new Physics(transform);
 
 	sprite = new Sprite(transform);
 	sprite->SetMesh(mesh);
@@ -52,6 +57,8 @@ void Levels::Level1::Update(float dt)
 	//std::cout << "Level1::Update" << std::endl;
 	sprite->Draw();
 
+	Behaviors::UpdateShip(transform, physics);
+
 	if (Input::GetInstance().CheckTriggered('2')) {
 		GetSpace()->SetLevel(new Levels::Level2());
 	} else if (Input::GetInstance().CheckTriggered('1')) {
@@ -59,6 +66,9 @@ void Levels::Level1::Update(float dt)
 	} else if (Input::GetInstance().CheckTriggered(' ')) {
 		Engine::GetInstance().Stop();
 	}
+
+	physics->Update(dt);
+	physics->FixedUpdate(dt);
 }
 
 void Levels::Level1::Shutdown()
@@ -68,6 +78,8 @@ void Levels::Level1::Shutdown()
 	sprite = nullptr;
 	delete transform;
 	transform = nullptr;
+	delete physics;
+	physics = nullptr;
 }
 
 void Levels::Level1::Unload()
