@@ -46,7 +46,7 @@ public:
 	//	 frameCount = The number of frames in the sequence.
 	//	 frameDuration = The amount of time to wait between frames (in seconds).
 	//	 isLooping = True if the animation loops, false otherwise.
-	void Play(unsigned frameStart, unsigned frameCount, float frameDuration, bool isLooping);
+	void Play(unsigned frameStart, unsigned frameCount, float frameDuration, bool isLooping, bool playInReverse = false);
 
 	// Update the animation.
 	// Params:
@@ -84,6 +84,8 @@ private:
 	// True if the end of the animation has been reached, false otherwise.
 	// (Hint: This should be true for only one game loop.)
 	bool isDone;
+
+	bool playInReverse;
 
 	// The sprite this animation will manipulate.
 	Sprite* sprite;

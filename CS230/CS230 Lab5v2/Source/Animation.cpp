@@ -25,11 +25,12 @@ Animation::Animation(Sprite * spriteInput)
 	isRunning = false;
 	isLooping = false;
 	isDone = false;
+	playInReverse = false;
 
 	sprite = spriteInput;
 }
 
-void Animation::Play(unsigned frameStartInput, unsigned frameCountInput, float frameDurationInput, bool isLoopingInput)
+void Animation::Play(unsigned frameStartInput, unsigned frameCountInput, float frameDurationInput, bool isLoopingInput, bool playInReverseInput)
 {
 	//std::cout << "Animation::Play" << std::endl;
 
@@ -39,6 +40,7 @@ void Animation::Play(unsigned frameStartInput, unsigned frameCountInput, float f
 	frameDelay = frameDurationInput;
 	frameDuration = frameDurationInput;
 	isLooping = isLoopingInput;
+	playInReverse = playInReverseInput;
 
 	isRunning = true;
 	isDone = false;
@@ -59,19 +61,28 @@ void Animation::Update(float dt)
 	frameDelay -= dt;
 
 	if (frameDelay <= 0.0f) {
-		frameIndex++;
-		if (frameIndex >= frameCount) {
+		if (playInReverse) {
+			frameIndex--;
+		} else {
+			frameIndex++;
+		}
+		
+		if (frameIndex >= frameCount || (frameIndex < 0 && playInReverse)) {
 			if (isLooping) {
 				frameIndex = frameStart;
 				isDone = true;
 				isRunning = true;
+				sprite->SetFrame(frameIndex);
 			} else {
 				isDone = true;
 				isRunning = false;
+				sprite->SetFrame(frameStart);
 			}
+		} else {
+			sprite->SetFrame(frameIndex);
 		}
 
-		sprite->SetFrame(frameIndex);
+		
 	}
 }
 

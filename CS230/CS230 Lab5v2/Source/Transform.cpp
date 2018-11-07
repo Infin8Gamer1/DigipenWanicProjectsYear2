@@ -1,3 +1,14 @@
+//------------------------------------------------------------------------------
+//
+// File Name:	Transform.cpp
+// Author(s):	Jacob Holyfield
+// Project:		BetaEngine
+// Course:		CS230
+//
+// Copyright © 2018 DigiPen (USA) Corporation.
+//
+//------------------------------------------------------------------------------
+
 #include "stdafx.h"
 #include "Transform.h"
 
@@ -64,16 +75,6 @@ void Transform::LookAt(Vector2D _target)
 	dif.Normalized();
 
 	SetRotation(atan2(dif.y, dif.x));
-	
-	/*Vector2D target = _target - translation;
-
-	target = target.Normalized();
-
-	Vector2D current = Vector2D(cos(rotation), sin(rotation));
-
-	current = current.Normalized();
-
-	SetRotation(acos(current.DotProduct(target)));*/
 }
 
 float Transform::GetRotation() const

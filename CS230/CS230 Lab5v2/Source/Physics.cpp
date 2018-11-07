@@ -1,3 +1,14 @@
+//------------------------------------------------------------------------------
+//
+// File Name:	Physics.cpp
+// Author(s):	Jacob Holyfield
+// Project:		BetaEngine
+// Course:		CS230
+//
+// Copyright © 2018 DigiPen (USA) Corporation.
+//
+//------------------------------------------------------------------------------
+
 #include "stdafx.h"
 #include "Physics.h"
 #include "Transform.h"
@@ -25,6 +36,7 @@ Physics::Physics(Transform * _transform)
 	// Transform component
 	transform = _transform;
 
+	//the gravity that should get applyed
 	gravity = Vector2D(0,0);
 }
 
@@ -33,14 +45,12 @@ void Physics::Update(float dt)
 	UNREFERENCED_PARAMETER(dt);
 
 	acceleration = forcesSum * inverseMass;
-	std::cout << "forceSum : " << forcesSum.x << ", " << forcesSum.y << std::endl;
+	//std::cout << "forceSum : " << forcesSum.x << ", " << forcesSum.y << std::endl;
 	forcesSum = Vector2D(0, 0);
 }
 
 void Physics::FixedUpdate(float dt)
 {
-	AddForce(gravity);
-
 	velocity = velocity + acceleration * dt;
 
 	oldTranslation = transform->GetTranslation();
@@ -48,6 +58,8 @@ void Physics::FixedUpdate(float dt)
 	transform->SetTranslation(oldTranslation + velocity * dt);
 
 	transform->SetRotation(transform->GetRotation() + angularVelocity * dt);
+
+	AddForce(gravity);
 }
 
 void Physics::SetVelocity(const Vector2D & _velocity)
@@ -77,7 +89,7 @@ void Physics::SetMass(float mass)
 
 void Physics::AddForce(const Vector2D & force)
 {
-	forcesSum += force * 100;
+	forcesSum += force;
 }
 
 const Vector2D & Physics::GetAcceleration() const

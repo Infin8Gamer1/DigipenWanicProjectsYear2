@@ -23,6 +23,7 @@
 
 class Transform;
 class Physics;
+class Animation;
 
 //------------------------------------------------------------------------------
 // Public Functions:
@@ -40,5 +41,6 @@ namespace Behaviors
 	// Params:
 	//	 transform = The transform component of the monkey.
 	//   physics = The physics component of the monkey.
-	void UpdateMonkey(Transform* transform, Physics* physics);
+	//   animation = the animation component of the monkey
+	void UpdateMonkey(Transform* transform, Physics* physics, Animation* animation);
 }

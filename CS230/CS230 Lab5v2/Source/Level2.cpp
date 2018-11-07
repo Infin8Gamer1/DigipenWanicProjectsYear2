@@ -58,7 +58,7 @@ void Levels::Level2::Initialize()
 {
 	std::cout << "Level2::Initialize" << std::endl;
 
-	transform = new Transform(Vector2D(0, 0), Vector2D(150, 150), 0.0f);
+	transform = new Transform(Vector2D(0, 0), Vector2D(75, 75), 0.0f);
 
 	physics = new Physics(transform);
 	physics->SetMass(0.3f);
@@ -69,34 +69,22 @@ void Levels::Level2::Initialize()
 	sprite->SetSpriteSource(spriteSource);
 
 	animation = new Animation(sprite);
-	animation->Play(0, 8, 0.4f, true);
+	animation->Play(0, 8, 0.4f, false);
 }
 
 void Levels::Level2::Update(float dt)
 {
-	Behaviors::UpdateMonkey(transform, physics);
-
 	animation->Update(dt);
 	physics->Update(dt);
 	physics->FixedUpdate(dt);
 	sprite->Draw();
 
-	
-
-	if (animation->IsDone() == false) {
-		return;
-	}
-
-	if (Input::GetInstance().CheckTriggered('W')) {
-		GetSpace()->SetPaused(!GetSpace()->IsPaused());
-	}
+	Behaviors::UpdateMonkey(transform, physics, animation);
 
 	if (Input::GetInstance().CheckReleased('1')) {
 		GetSpace()->SetLevel(new Levels::Level1());
 	} else if (Input::GetInstance().CheckReleased('2')) {
 		GetSpace()->RestartLevel();
-	} else if (Input::GetInstance().CheckReleased('Q')) {
-		Engine::GetInstance().Stop();
 	}
 
 	

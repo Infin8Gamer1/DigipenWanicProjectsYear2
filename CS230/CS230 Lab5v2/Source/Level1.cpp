@@ -46,7 +46,6 @@ void Levels::Level1::Initialize()
 	transform = new Transform(Vector2D(0,0), Vector2D(50,50), 0.0f);
 
 	physics = new Physics(transform);
-	physics->SetGravity(Vector2D(0, 0));
 
 	sprite = new Sprite(transform);
 	sprite->SetMesh(mesh);
@@ -54,8 +53,10 @@ void Levels::Level1::Initialize()
 
 void Levels::Level1::Update(float dt)
 {
-	UNREFERENCED_PARAMETER(dt);
 	//std::cout << "Level1::Update" << std::endl;
+
+	physics->Update(dt);
+	physics->FixedUpdate(dt);
 	sprite->Draw();
 
 	Behaviors::UpdateShip(transform, physics);
@@ -64,12 +65,9 @@ void Levels::Level1::Update(float dt)
 		GetSpace()->SetLevel(new Levels::Level2());
 	} else if (Input::GetInstance().CheckReleased('1')) {
 		GetSpace()->RestartLevel();
-	} else if (Input::GetInstance().CheckReleased('Q')) {
-		Engine::GetInstance().Stop();
 	}
 
-	physics->Update(dt);
-	physics->FixedUpdate(dt);
+	
 }
 
 void Levels::Level1::Shutdown()
