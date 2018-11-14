@@ -125,7 +125,7 @@ private:
 	size_t numArchetypes;
 	
 	// Time
-	const float fixedUpdateDt;
+	const float fixedUpdateDt = 1.0f/60.0f;
 	float timeAccumulator;
 };
 
