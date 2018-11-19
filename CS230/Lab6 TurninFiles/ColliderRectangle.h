@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	ColliderPoint.h
+// File Name:	ColliderRectangle.h
 // Author(s):	Jeremy Kings (j.kings)
 // Project:		BetaFramework
 // Course:		WANIC VGP2
@@ -16,6 +16,7 @@
 //------------------------------------------------------------------------------
 
 #include "Collider.h"
+#include "Vector2D.h"
 
 //------------------------------------------------------------------------------
 
@@ -23,7 +24,7 @@
 // Public Structures:
 //------------------------------------------------------------------------------
 
-class ColliderPoint : public Collider
+class ColliderRectangle : public Collider
 {
 public:
 	//------------------------------------------------------------------------------
@@ -34,8 +35,10 @@ public:
 	// Public Functions:
 	//------------------------------------------------------------------------------
 
-	// Constructor for point collider.
-	ColliderPoint();
+	// Constructor for rectangle collider.
+	// Params:
+	//   extents = The rectangle's extents (half-width, half-height).
+	ColliderRectangle(const Vector2D& extents = Vector2D(50.0f, 50.0f));
 
 	// Clone an collider and return a pointer to the cloned object.
 	// Returns:
@@ -44,6 +47,16 @@ public:
 
 	// Debug drawing for colliders.
 	void Draw() override;
+
+	// Get the rectangle collider's extents (half-width, half-height).
+	// Returns:
+	//	 The extents of the rectangle.
+	const Vector2D& GetExtents() const;
+
+	// Set the rectangle collider's extents (half-width, half-height).
+	// Params:
+	//   extents = The new extents of the rectangle.
+	void SetExtents(const Vector2D& extents);
 
 	// Check for collision between a circle and another arbitrary collider.
 	// Params:
@@ -56,6 +69,9 @@ private:
 	//------------------------------------------------------------------------------
 	// Private Variables:
 	//------------------------------------------------------------------------------
+
+	// Extents of the rectangle collider.
+	Vector2D extents;
 };
 
 //------------------------------------------------------------------------------

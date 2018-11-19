@@ -13,38 +13,20 @@
 #include "Sprite.h"
 #include "SpriteSource.h"
 #include "Transform.h"
-#include "GameObject.h"
 #include <Mesh.h>
 #include <Vertex.h>
 #include <Graphics.h>
 
-Sprite::Sprite() : Component("Sprite")
+Sprite::Sprite(Transform* _transform)
 {
-	transform = nullptr;
+	transform = _transform;
 	frameIndex = 0;
 	spriteSource = nullptr;
 	mesh = nullptr;
 	color = Color();
 }
 
-Component * Sprite::Clone() const
-{
-	Sprite* output = new Sprite();
-	
-	output->frameIndex = frameIndex;
-	output->SetColor(color);
-	output->SetSpriteSource(spriteSource);
-	output->SetMesh(mesh);
-
-	return output;
-}
-
-void Sprite::Initialize()
-{
-	transform = static_cast<Transform*>(GetOwner()->GetComponent("Transform"));
-}
-
-void Sprite::Draw()
+void Sprite::Draw() const
 {
 	if (mesh == nullptr || transform == nullptr) {
 		return;
@@ -58,8 +40,6 @@ void Sprite::Draw()
 	} else {
 		Graphics::GetInstance().SetTexture(nullptr);
 	}
-
-	Graphics::GetInstance().SetSpriteBlendColor(color);
 
 	//Graphics::GetInstance().SetTransform(transform->GetTranslation(), transform->GetScale(), transform->GetRotation());
 	Graphics::GetInstance().SetTransform(reinterpret_cast<const Matrix2D&>(transform->GetMatrix()));
