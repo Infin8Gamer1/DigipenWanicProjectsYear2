@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Precompiled">
+      <UniqueIdentifier>{c54e400a-0b22-4fb9-ad4a-68aaa9abc7ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{d6a6b6cd-f9a5-4355-88ae-c73c49b1ecae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Levels">
+      <UniqueIdentifier>{eb42e325-6dc2-4ec9-a38c-fed4827f3174}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="High-Level API">
+      <UniqueIdentifier>{72e40003-8b1c-46e8-9f71-ff5f6d46b94f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Behaviors">
+      <UniqueIdentifier>{30b4313e-2f34-40ba-9613-d250bab122eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="High-Level API\Graphics">
+      <UniqueIdentifier>{56c056ef-4a8e-47a6-ac6e-dcc7fb92729d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="High-Level API\Spaces">
+      <UniqueIdentifier>{27774d28-e5e6-4932-9794-c1ddede64c03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="High-Level API\Transform">
+      <UniqueIdentifier>{0fd933b8-41b5-4a07-9690-efedbb15968f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="High-Level API\GameObjects">
+      <UniqueIdentifier>{b83b14fd-ad5e-470e-a498-743e07899c54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="High-Level API\Collisions">
+      <UniqueIdentifier>{86dbdaaf-1938-408f-ba76-8f5c589fb1f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="High-Level API\Resources">
+      <UniqueIdentifier>{9aa845e3-e06b-4f90-98d3-de3a5e66fe80}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\stdafx.cpp">
+      <Filter>Precompiled</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Animation.cpp">
+      <Filter>High-Level API\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Archetypes.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BulletMovement.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collider.cpp">
+      <Filter>High-Level API\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ColliderCircle.cpp">
+      <Filter>High-Level API\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ColliderPoint.cpp">
+      <Filter>High-Level API\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ColliderRectangle.cpp">
+      <Filter>High-Level API\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ColorChange.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Component.cpp">
+      <Filter>High-Level API\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject.cpp">
+      <Filter>High-Level API\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObjectManager.cpp">
+      <Filter>High-Level API\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Intersection2D.cpp">
+      <Filter>High-Level API\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Level.cpp">
+      <Filter>High-Level API\Spaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Level1.cpp">
+      <Filter>Game\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Level2.cpp">
+      <Filter>Game\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Level3.cpp">
+      <Filter>Game\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Matrix2DStudent.cpp">
+      <Filter>High-Level API\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MeshHelper.cpp">
+      <Filter>High-Level API\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MonkeyMovement.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Physics.cpp">
+      <Filter>High-Level API\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerShip.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ScreenWrap.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Space.cpp">
+      <Filter>High-Level API\Spaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Sprite.cpp">
+      <Filter>High-Level API\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SpriteSource.cpp">
+      <Filter>High-Level API\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TimedDeath.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Transform.cpp">
+      <Filter>High-Level API\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Tilemap.cpp">
+      <Filter>High-Level API\Resources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\stdafx.h">
+      <Filter>Precompiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Animation.h">
+      <Filter>High-Level API\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Sprite.h">
+      <Filter>High-Level API\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpriteSource.h">
+      <Filter>High-Level API\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Space.h">
+      <Filter>High-Level API\Spaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Transform.h">
+      <Filter>High-Level API\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Physics.h">
+      <Filter>High-Level API\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Level.h">
+      <Filter>High-Level API\Spaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshHelper.h">
+      <Filter>High-Level API\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Matrix2DStudent.h">
+      <Filter>High-Level API\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Component.h">
+      <Filter>High-Level API\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject.h">
+      <Filter>High-Level API\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObjectManager.h">
+      <Filter>High-Level API\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MonkeyMovement.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerShip.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TimedDeath.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Archetypes.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Level2.h">
+      <Filter>Game\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Level1.h">
+      <Filter>Game\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Level3.h">
+      <Filter>Game\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collider.h">
+      <Filter>High-Level API\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ColliderCircle.h">
+      <Filter>High-Level API\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ColliderRectangle.h">
+      <Filter>High-Level API\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Intersection2D.h">
+      <Filter>High-Level API\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ColliderPoint.h">
+      <Filter>High-Level API\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ColorChange.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ScreenWrap.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpriteTilemap.h">
+      <Filter>High-Level API\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ColliderTilemap.h">
+      <Filter>High-Level API\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Tilemap.h">
+      <Filter>High-Level API\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BulletMovement.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

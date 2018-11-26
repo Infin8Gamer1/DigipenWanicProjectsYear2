@@ -1,0 +1,23 @@
+﻿  MonkeyMovement.cpp
+Source\MonkeyMovement.cpp(26): error C2065: 'groundHeight': undeclared identifier
+Source\MonkeyMovement.cpp(31): error C2065: 'animation': undeclared identifier
+Source\MonkeyMovement.cpp(43): error C2065: 'animation': undeclared identifier
+Source\MonkeyMovement.cpp(64): error C2065: 'animation': undeclared identifier
+Source\MonkeyMovement.cpp(64): error C2227: left of '->IsDone' must point to class/struct/union/generic type
+  Source\MonkeyMovement.cpp(64): note: type is 'unknown-type'
+Source\MonkeyMovement.cpp(66): error C2065: 'animation': undeclared identifier
+Source\MonkeyMovement.cpp(66): error C2227: left of '->Play' must point to class/struct/union/generic type
+  Source\MonkeyMovement.cpp(66): note: type is 'unknown-type'
+Source\MonkeyMovement.cpp(69): error C2065: 'animation': undeclared identifier
+Source\MonkeyMovement.cpp(69): error C2227: left of '->Play' must point to class/struct/union/generic type
+  Source\MonkeyMovement.cpp(69): note: type is 'unknown-type'
+Source\MonkeyMovement.cpp(77): error C2065: 'animation': undeclared identifier
+Source\MonkeyMovement.cpp(77): error C2227: left of '->IsDone' must point to class/struct/union/generic type
+  Source\MonkeyMovement.cpp(77): note: type is 'unknown-type'
+Source\MonkeyMovement.cpp(78): error C2065: 'animation': undeclared identifier
+Source\MonkeyMovement.cpp(78): error C2227: left of '->Play' must point to class/struct/union/generic type
+  Source\MonkeyMovement.cpp(78): note: type is 'unknown-type'
+Source\MonkeyMovement.cpp(101): error C2511: 'void Behaviors::MonkeyMovement::MoveVertical(void) const': overloaded member function not found in 'Behaviors::MonkeyMovement'
+  c:\users\jacob.holyfield\documents\digipenwanicprojectsyear2\cs230\cs230 lab7\source\MonkeyMovement.h(39): note: see declaration of 'Behaviors::MonkeyMovement'
+  Level2.cpp
+  Generating Code...
