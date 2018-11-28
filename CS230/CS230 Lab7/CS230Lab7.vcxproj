@@ -107,6 +107,7 @@
     <ClCompile Include="Source\ColliderCircle.cpp" />
     <ClCompile Include="Source\ColliderPoint.cpp" />
     <ClCompile Include="Source\ColliderRectangle.cpp" />
+    <ClCompile Include="Source\ColliderTilemap.cpp" />
     <ClCompile Include="Source\ColorChange.cpp" />
     <ClCompile Include="Source\Component.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
@@ -126,6 +127,7 @@
     <ClCompile Include="Source\Space.cpp" />
     <ClCompile Include="Source\Sprite.cpp" />
     <ClCompile Include="Source\SpriteSource.cpp" />
+    <ClCompile Include="Source\SpriteTilemap.cpp" />
     <ClCompile Include="Source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -166,6 +168,9 @@
     <ClInclude Include="Source\Tilemap.h" />
     <ClInclude Include="Source\TimedDeath.h" />
     <ClInclude Include="Source\Transform.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\Levels\Level2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

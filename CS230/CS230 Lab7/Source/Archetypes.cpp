@@ -25,6 +25,8 @@
 #include "ColliderRectangle.h"
 #include "ColorChange.h"
 #include "ScreenWrap.h"
+#include "SpriteTilemap.h"
+#include "ColliderTilemap.h"
 
 GameObject * Archetypes::CreateShip(Mesh * mesh)
 {
@@ -180,4 +182,24 @@ GameObject * Archetypes::CreateRectangle(Mesh * mesh)
 	circle->AddComponent(screenWrap);
 
 	return circle;
+}
+
+GameObject * Archetypes::CreateTilemapObject(Mesh * mesh, SpriteSource * spriteSource, Tilemap * map)
+{
+	GameObject* tileMap = new GameObject("tileMap");
+	//transform
+	Transform* transform = new Transform(Vector2D(-350, 250), Vector2D(100, 100), 0.0f);
+	tileMap->AddComponent(transform);
+	//Sprite
+	SpriteTilemap* sprite = new SpriteTilemap();
+	sprite->SetMesh(mesh);
+	sprite->SetSpriteSource(spriteSource);
+	sprite->SetTilemap(map);
+	tileMap->AddComponent(sprite);
+	//Collider Tilemap
+	ColliderTilemap* colliderTilemap = new ColliderTilemap();
+	colliderTilemap->SetTilemap(map);
+	tileMap->AddComponent(colliderTilemap);
+
+	return tileMap;
 }

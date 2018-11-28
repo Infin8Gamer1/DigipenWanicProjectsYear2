@@ -16,9 +16,9 @@ Tilemap::Tilemap(unsigned _numColumns, unsigned _numRows, int ** _data)
 
 Tilemap::~Tilemap()
 {
-	// Deleting the 2D array
+	// Deleting the 2D array of tiles
 	// delete in the opposite order of creation
-	for (int r = 0; r < numRows; ++r)
+	for (unsigned r = 0; r < numRows; ++r)
 	{
 		delete[] data[r]; // delete each allocated row with array delete
 		data[r] = nullptr; // safely set to nullptr
@@ -60,12 +60,26 @@ Tilemap * Tilemap::CreateTilemapFromFile(const std::string & filename)
 	int rows = -1;
 	int columns = -1;
 
-	ReadIntegerVariable(infile, "width", rows);
-	ReadIntegerVariable(infile, "height", columns);
+	ReadIntegerVariable(infile, "width", columns);
+	ReadIntegerVariable(infile, "height", rows);
 
 	Tilemap* output = new Tilemap(columns, rows, ReadArrayVariable(infile, "data", columns, rows));
 
 	infile.close();
+
+	//print out data from tilemap to check if it was read sucessfully
+	std::cout << "Height : " << output->GetHeight() << std::endl;
+	std::cout << "Width : " << output->GetWidth() << std::endl;
+	
+	//loop through each value in the 2D array of tiles and print out its value
+	for (unsigned r = 0; r < output->GetHeight(); r++)
+	{
+		for (unsigned c = 0; c < output->GetWidth(); c++)
+		{
+			std::cout << output->GetCellValue(c, r) << "   ";
+		}
+		std::cout << std::endl;
+	}
 	
 	return output;
 }
@@ -96,19 +110,22 @@ int ** Tilemap::ReadArrayVariable(std::ifstream & file, const std::string & name
 	}
 
 	//make a new 2D int array
-	int **output = new int *[rows];
-	for (int r = 0; r < rows; ++r)
+	int **output = new int *[columns];
+	for (unsigned r = 0; r < columns; ++r)
 	{
-		output[r] = new int[columns];
-	}	//loop through each value in the 2D array	for (int r = 0; r < rows; r++)
+		output[r] = new int[rows];
+	}
+
+	//loop through each value in the 2D array of tiles and set each one to the correct one here
+	for (unsigned r = 0; r < rows; r++)
 	{
-		for (int c = 0; c < columns; c++)
+		for (unsigned c = 0; c < columns; c++)
 		{
 			//read the next int
 			int value;
 			file >> value;
 			//set that value in output
-			output[r][c] = value;
+			output[c][r] = value;
 		}
 	}
 

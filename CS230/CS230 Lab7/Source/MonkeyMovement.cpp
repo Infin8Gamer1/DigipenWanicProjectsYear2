@@ -20,11 +20,6 @@
 
 Behaviors::MonkeyMovement::MonkeyMovement() : Component("MonkeyMovement")
 {
-	// Movement properties
-	monkeyWalkSpeed = 0.0f;
-	monkeyJumpSpeed = 0.0f;
-	groundHeight = 0.0f;
-
 	// Components
 	transform = nullptr;
 	physics = nullptr;
@@ -38,6 +33,7 @@ Component * Behaviors::MonkeyMovement::Clone() const
 
 void Behaviors::MonkeyMovement::Initialize()
 {
+	//get Components
 	transform = static_cast<Transform*>(GetOwner()->GetComponent("Transform"));
 	physics = static_cast<Physics*>(GetOwner()->GetComponent("Physics"));
 	animation = static_cast<Animation*>(GetOwner()->GetComponent("Animation"));
@@ -47,11 +43,10 @@ void Behaviors::MonkeyMovement::Update(float dt)
 {
 	UNREFERENCED_PARAMETER(dt);
 
-	const float jumpForce = 5000.0f;
-	const float strafeForce = 5.0f;
+	//call movement code
+	Move();
 
-	bool isFlying = false;
-
+	//basic collision handeling
 	float groundLevel = (-Graphics::GetInstance().GetScreenWorldDimensions().extents.y) + (transform->GetScale().y / 2);
 
 	if (transform->GetTranslation().y <= groundLevel) {
@@ -79,6 +74,11 @@ void Behaviors::MonkeyMovement::Update(float dt)
 		}
 	}
 
+	
+}
+
+void Behaviors::MonkeyMovement::Move() const
+{
 	//jump
 	if (Input::GetInstance().IsKeyDown(' ') && !isFlying) {
 		physics->AddForce(Vector2D(0, 1) * jumpForce);
@@ -93,10 +93,8 @@ void Behaviors::MonkeyMovement::Update(float dt)
 	}
 }
 
-void Behaviors::MonkeyMovement::MoveHorizontal() const
+void Behaviors::MonkeyMapCollisionHandler(GameObject & object, MapCollision collision)
 {
-}
-
-void Behaviors::MonkeyMovement::MoveVertical() const
-{
+	UNREFERENCED_PARAMETER(object);
+	UNREFERENCED_PARAMETER(collision);
 }

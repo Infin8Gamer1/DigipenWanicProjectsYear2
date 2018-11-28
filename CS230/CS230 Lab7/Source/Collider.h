@@ -107,6 +107,9 @@ public:
 	// Params:
 	//   handler = A pointer to the collision handler function.
 	void SetMapCollisionHandler(MapCollisionEventHandler mapHandler);
+	
+	// Get the map collision handler function pointer.
+	MapCollisionEventHandler GetMapCollisionHandler() const;
 
 protected:
 	//------------------------------------------------------------------------------
@@ -116,9 +119,6 @@ protected:
 	// Component pointers
 	Transform* transform;
 	Physics* physics;
-
-	// Function pointer for tilemap collision handling
-	MapCollisionEventHandler mapHandler;
 
 private:
 	//------------------------------------------------------------------------------
@@ -130,6 +130,9 @@ private:
 
 	// Function pointer for collision handler
 	CollisionEventHandler handler;
+	
+	// Function pointer for tilemap collision handling
+	MapCollisionEventHandler mapHandler;
 };
 
 //------------------------------------------------------------------------------

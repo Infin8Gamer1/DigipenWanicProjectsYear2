@@ -94,7 +94,7 @@ Component * GameObject::GetComponent(const std::string & _name)
 			return components[i];
 		}
 	}
-	std::cout << "No component with the name " + _name + " was found!" << std::endl;
+	//std::cout << "No component with the name " + _name + " was found!" << std::endl;
 	return nullptr;
 }
 

@@ -29,14 +29,15 @@ Sprite::Sprite() : Component("Sprite")
 
 Component * Sprite::Clone() const
 {
-	Sprite* output = new Sprite();
+	/*Sprite* output = new Sprite();
 	
 	output->frameIndex = frameIndex;
 	output->SetColor(color);
 	output->SetSpriteSource(spriteSource);
 	output->SetMesh(mesh);
 
-	return output;
+	return output;*/
+	return new Sprite(*this);
 }
 
 void Sprite::Initialize()
@@ -45,6 +46,11 @@ void Sprite::Initialize()
 }
 
 void Sprite::Draw()
+{
+	Draw(Vector2D(0, 0));
+}
+
+void Sprite::Draw(const Vector2D& offset)
 {
 	if (mesh == nullptr || transform == nullptr) {
 		return;
@@ -55,14 +61,16 @@ void Sprite::Draw()
 		Vector2D textureCords = Vector2D(0, 0);
 		spriteSource->GetUV(frameIndex, textureCords);
 		Graphics::GetInstance().SetTexture(spriteSource->GetTexture(), textureCords);
-	} else {
+	}
+	else {
 		Graphics::GetInstance().SetTexture(nullptr);
 	}
 
 	Graphics::GetInstance().SetSpriteBlendColor(color);
 
-	//Graphics::GetInstance().SetTransform(transform->GetTranslation(), transform->GetScale(), transform->GetRotation());
-	Graphics::GetInstance().SetTransform(reinterpret_cast<const Matrix2D&>(transform->GetMatrix()));
+	Matrix2D matrix = reinterpret_cast<const Matrix2D&>(transform->GetMatrix());
+	Matrix2D offsetMatrix = Matrix2D().TranslationMatrix(offset.x, offset.y);
+	Graphics::GetInstance().SetTransform(offsetMatrix * matrix);
 
 	mesh->Draw();
 }

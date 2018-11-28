@@ -28,6 +28,7 @@
 
 typedef class Transform Transform;
 typedef class Physics Physics;
+typedef class Animation Animation;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -63,35 +64,33 @@ namespace Behaviors
 		// Params:
 		//   object = The monkey object.
 		//   collision = Which sides the monkey collided on.
-		friend void MonkeyMapCollisionHandler(GameObject& object, 
-			MapCollision collision);
+		friend void MonkeyMapCollisionHandler(GameObject& object, MapCollision collision);
 
 	private:
 		//------------------------------------------------------------------------------
 		// Private Functions:
 		//------------------------------------------------------------------------------
 
-		// Moves horizontally based on input
-		void MoveHorizontal() const;
-
-		// Moves vertically based on input
-		void MoveVertical();
+		//moves the monkey using stuff and things
+		void Move() const;
 
 		//------------------------------------------------------------------------------
 		// Private Variables:
 		//------------------------------------------------------------------------------
 
 		// Movement properties
-		float monkeyWalkSpeed;
-		float monkeyJumpSpeed;
+		const float jumpForce = 5000.0f;
+		const float strafeForce = 5.0f;
 		Vector2D gravity;
 
 		// Components
 		Transform* transform;
 		Physics* physics;
+		Animation* animation;
 
 		// Misc
 		bool onGround;
+		bool isFlying;
 	};
 }
 
