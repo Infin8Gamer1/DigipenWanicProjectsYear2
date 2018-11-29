@@ -64,23 +64,27 @@ namespace Behaviors
 		// Params:
 		//   object = The monkey object.
 		//   collision = Which sides the monkey collided on.
-		friend void MonkeyMapCollisionHandler(GameObject& object, MapCollision collision);
+		friend void MonkeyMapCollisionHandler(GameObject& object, 
+			MapCollision collision);
 
 	private:
 		//------------------------------------------------------------------------------
 		// Private Functions:
 		//------------------------------------------------------------------------------
 
-		//moves the monkey using stuff and things
-		void Move() const;
+		// Moves horizontally based on input
+		void MoveHorizontal() const;
+
+		// Moves vertically based on input
+		void MoveVertical();
 
 		//------------------------------------------------------------------------------
 		// Private Variables:
 		//------------------------------------------------------------------------------
 
 		// Movement properties
-		const float jumpForce = 5000.0f;
-		const float strafeForce = 5.0f;
+		const float jumpForce = 7000.0f;
+		const float strafeForce = 50.0f;
 		Vector2D gravity;
 
 		// Components
@@ -90,7 +94,7 @@ namespace Behaviors
 
 		// Misc
 		bool onGround;
-		bool isFlying;
+		
 	};
 }
 

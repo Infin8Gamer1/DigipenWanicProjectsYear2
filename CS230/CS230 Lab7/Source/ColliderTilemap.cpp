@@ -47,14 +47,23 @@ bool ColliderTilemap::IsCollidingWith(const Collider & other) const
 		otherPhysics->SetVelocity(Vector2D(otherPhysics->GetVelocity().x, 0));
 	}
 
-	if (mapCollision.left || mapCollision.right) {
+	if (mapCollision.left) {
 		otherTransform->SetTranslation(Vector2D(otherPhysics->GetOldTranslation().x, otherTransform->GetTranslation().y));
-		otherPhysics->SetVelocity(Vector2D(0, otherPhysics->GetVelocity().y));
+		if (otherPhysics->GetVelocity().x < 0) {
+			otherPhysics->SetVelocity(Vector2D(0, otherPhysics->GetVelocity().y));
+		}
+	}
+		
+	if (mapCollision.right) {
+		otherTransform->SetTranslation(Vector2D(otherPhysics->GetOldTranslation().x, otherTransform->GetTranslation().y));
+		if (otherPhysics->GetVelocity().x > 0) {
+			otherPhysics->SetVelocity(Vector2D(0, otherPhysics->GetVelocity().y));
+		}
 	}
 
 	if (mapCollision.bottom || mapCollision.left || mapCollision.right || mapCollision.top) {
 		//call collision handler for the other object
-		GetMapCollisionHandler()(*other.GetOwner(), mapCollision);
+		other.GetMapCollisionHandler()(*other.GetOwner(), mapCollision);
 		//we collided so return true
 		return true;
 	}
@@ -73,26 +82,28 @@ bool ColliderTilemap::IsSideColliding(const BoundingRectangle & rectangle, Recta
 	bool isCollidingOnSide = false;
 	Vector2D hotspots[3];
 
+	float offset = 1.05f;
+
 	if (side == RectangleSide::SideBottom) {
 		//create 3 hotspots Left, Middle, Right
-		hotspots[0] = Vector2D((rectangle.center.x + rectangle.extents.x / 2), rectangle.bottom);
+		hotspots[0] = Vector2D((rectangle.center.x + rectangle.extents.x / offset), rectangle.bottom);
 		hotspots[1] = Vector2D(rectangle.center.x, rectangle.bottom);
-		hotspots[2] = Vector2D((rectangle.center.x - rectangle.extents.x / 2), rectangle.bottom);
+		hotspots[2] = Vector2D((rectangle.center.x - rectangle.extents.x / offset), rectangle.bottom);
 	} else if (side == RectangleSide::SideTop) {
 		//create 3 hotspots Left, Middle, Right
-		hotspots[0] = Vector2D((rectangle.center.x + rectangle.extents.x / 2), rectangle.top);
+		hotspots[0] = Vector2D((rectangle.center.x + rectangle.extents.x / offset), rectangle.top);
 		hotspots[1] = Vector2D(rectangle.center.x, rectangle.top);
-		hotspots[2] = Vector2D((rectangle.center.x - rectangle.extents.x / 2), rectangle.top);
+		hotspots[2] = Vector2D((rectangle.center.x - rectangle.extents.x / offset), rectangle.top);
 	} else if (side == RectangleSide::SideLeft) {
 		//create 3 hotspots Top, Middle, Bottom
-		hotspots[0] = Vector2D(rectangle.left, (rectangle.center.y + rectangle.extents.y / 2));
+		hotspots[0] = Vector2D(rectangle.left, (rectangle.center.y + rectangle.extents.y / offset));
 		hotspots[1] = Vector2D(rectangle.left, rectangle.center.y);
-		hotspots[2] = Vector2D(rectangle.left, (rectangle.center.y - rectangle.extents.y / 2));
+		hotspots[2] = Vector2D(rectangle.left, (rectangle.center.y - rectangle.extents.y / offset));
 	} else if (side == RectangleSide::SideRight) {
 		//create 3 hotspots Top, Middle, Bottom
-		hotspots[0] = Vector2D(rectangle.right, (rectangle.center.y + rectangle.extents.y / 2));
+		hotspots[0] = Vector2D(rectangle.right, (rectangle.center.y + rectangle.extents.y / offset));
 		hotspots[1] = Vector2D(rectangle.right, rectangle.center.y);
-		hotspots[2] = Vector2D(rectangle.right, (rectangle.center.y - rectangle.extents.y / 2));
+		hotspots[2] = Vector2D(rectangle.right, (rectangle.center.y - rectangle.extents.y / offset));
 	}
 
 	//for each hotspot check if it is colliding
@@ -113,12 +124,10 @@ bool ColliderTilemap::IsCollidingAtPosition(float x, float y) const
 	Vector2D point = Vector2D(x , y);
 	point = transform->GetInverseMatrix() * point;
 
-	int x2 = static_cast<int>(point.x);
-	int y2 = static_cast<int>(point.y);
+	int x2 = static_cast<int>(point.x + 0.5f);
+	int y2 = static_cast<int>(-point.y + 0.5f);
 
-	if (map->GetCellValue(x2, y2) != 0) {
-		return true;
-	}
+	int cellValue = map->GetCellValue(x2, y2);
 
-	return false;
+	return (cellValue > 0);
 }

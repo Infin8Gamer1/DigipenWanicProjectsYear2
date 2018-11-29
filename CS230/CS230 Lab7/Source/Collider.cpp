@@ -18,6 +18,7 @@
 Collider::Collider(ColliderType _type) : Component("Collider")
 {
 	type = _type;
+	handler = nullptr;
 }
 
 void Collider::Initialize()
@@ -29,8 +30,12 @@ void Collider::Initialize()
 void Collider::CheckCollision(const Collider & other)
 {
 	if (IsCollidingWith(other)) {
-		this->handler(*this->GetOwner(), *other.GetOwner());
-		other.handler(*other.GetOwner(), *this->GetOwner());
+		if (this->handler != nullptr) {
+			this->handler(*this->GetOwner(), *other.GetOwner());
+		}
+		if (other.handler != nullptr) {
+			other.handler(*other.GetOwner(), *this->GetOwner());
+		}
 	}
 }
 
@@ -51,7 +56,7 @@ void Collider::SetMapCollisionHandler(MapCollisionEventHandler _mapHandler)
 
 MapCollisionEventHandler Collider::GetMapCollisionHandler() const
 {
-	return MapCollisionEventHandler();
+	return mapHandler;
 }
 
 MapCollision::MapCollision(bool _bottom, bool _top, bool _left, bool _right)

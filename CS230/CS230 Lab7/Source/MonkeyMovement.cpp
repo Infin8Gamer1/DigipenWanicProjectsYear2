@@ -33,10 +33,14 @@ Component * Behaviors::MonkeyMovement::Clone() const
 
 void Behaviors::MonkeyMovement::Initialize()
 {
+	onGround = false;
+
 	//get Components
 	transform = static_cast<Transform*>(GetOwner()->GetComponent("Transform"));
 	physics = static_cast<Physics*>(GetOwner()->GetComponent("Physics"));
 	animation = static_cast<Animation*>(GetOwner()->GetComponent("Animation"));
+	//set the collision handler for the monkey
+	static_cast<Collider*>(GetOwner()->GetComponent("Collider"))->SetMapCollisionHandler(MonkeyMapCollisionHandler);
 }
 
 void Behaviors::MonkeyMovement::Update(float dt)
@@ -44,18 +48,11 @@ void Behaviors::MonkeyMovement::Update(float dt)
 	UNREFERENCED_PARAMETER(dt);
 
 	//call movement code
-	Move();
+	MoveVertical();
+	MoveHorizontal();
 
-	//basic collision handeling
-	float groundLevel = (-Graphics::GetInstance().GetScreenWorldDimensions().extents.y) + (transform->GetScale().y / 2);
-
-	if (transform->GetTranslation().y <= groundLevel) {
-		transform->SetTranslation(Vector2D(transform->GetTranslation().x, groundLevel));
-		//make sure that the verticle velocity is 0 when you are on the floor
-		physics->SetVelocity(Vector2D(physics->GetVelocity().x, 0));
-
-		isFlying = false;
-
+	//do animations
+	if (onGround) {
 		if (animation->IsDone()) {
 			if (physics->GetVelocity().x >= 0) {
 				animation->Play(0, 8, 0.2f, false);
@@ -67,8 +64,6 @@ void Behaviors::MonkeyMovement::Update(float dt)
 		}
 	}
 	else {
-		isFlying = true;
-
 		if (animation->IsDone()) {
 			animation->Play(9, 1, 0.1f, false);
 		}
@@ -77,12 +72,8 @@ void Behaviors::MonkeyMovement::Update(float dt)
 	
 }
 
-void Behaviors::MonkeyMovement::Move() const
+void Behaviors::MonkeyMovement::MoveHorizontal() const
 {
-	//jump
-	if (Input::GetInstance().IsKeyDown(' ') && !isFlying) {
-		physics->AddForce(Vector2D(0, 1) * jumpForce);
-	}
 	//left
 	if (Input::GetInstance().IsKeyDown('A')) {
 		physics->AddForce(Vector2D(-1, 0) * strafeForce);
@@ -93,8 +84,22 @@ void Behaviors::MonkeyMovement::Move() const
 	}
 }
 
+void Behaviors::MonkeyMovement::MoveVertical()
+{
+	//jump
+	if (Input::GetInstance().IsKeyDown(' ') && onGround) {
+		physics->AddForce(Vector2D(0, 1) * jumpForce);
+		onGround = false;
+	}
+
+	if (physics->GetVelocity().y < -0.5) {
+		onGround = false;
+	}
+}
+
 void Behaviors::MonkeyMapCollisionHandler(GameObject & object, MapCollision collision)
 {
-	UNREFERENCED_PARAMETER(object);
-	UNREFERENCED_PARAMETER(collision);
+	if (collision.bottom) {
+		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->onGround = true;
+	}
 }

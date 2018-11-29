@@ -10,4 +10,5 @@
 //------------------------------------------------------------------------------
 #include "stdafx.h"
 
+
 /* NOTE: there must be at least one empty line after the #include, or the compiler gets confused */

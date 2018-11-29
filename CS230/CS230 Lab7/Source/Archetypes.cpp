@@ -75,7 +75,7 @@ GameObject * Archetypes::CreateMonkey(Mesh * mesh, SpriteSource * spriteSource)
 {
 	GameObject* monkey = new GameObject("Monkey");
 	//transform
-	Transform* transform = new Transform(Vector2D(0, 0), Vector2D(200, 200), 0.0f);
+	Transform* transform = new Transform(Vector2D(0, 0), Vector2D(100, 100), 0.0f);
 	monkey->AddComponent(transform);
 	//Sprite
 	Sprite* sprite = new Sprite();
@@ -91,6 +91,9 @@ GameObject * Archetypes::CreateMonkey(Mesh * mesh, SpriteSource * spriteSource)
 	physics->SetMass(1.0f);
 	physics->SetGravity(Vector2D(0, -98.0f));
 	monkey->AddComponent(physics);
+	//Box Collider
+	ColliderRectangle* collider = new ColliderRectangle(Vector2D(abs(transform->GetScale().x / 2), abs(transform->GetScale().y / 2)));
+	monkey->AddComponent(collider);
 	//Monkey Movement
 	Behaviors::MonkeyMovement* mm = new Behaviors::MonkeyMovement();
 	monkey->AddComponent(mm);
