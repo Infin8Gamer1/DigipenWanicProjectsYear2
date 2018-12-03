@@ -96,8 +96,7 @@ void Animation::Update(float dt)
 		} else {
 			sprite->SetFrame(frameIndex);
 		}
-
-		
+		frameDelay = frameDuration;
 	}
 }
 

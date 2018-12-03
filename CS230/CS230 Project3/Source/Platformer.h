@@ -74,6 +74,8 @@ namespace Levels
 		unsigned columnsMonkey;
 		unsigned rowsMonkey;
 
+		GameObject* MonkeyGO;
+
 		// Tilemap
 		Tilemap* dataMap;
 		Texture* textureMap;
@@ -87,6 +89,15 @@ namespace Levels
 		Mesh* meshCollectable;
 		SpriteSource* spriteSourceCollectable;
 		Texture* textureCollectable;
+
+		//Hazards
+		Mesh* meshHazard;
+		SpriteSource* spriteSourceHazard;
+		Texture* textureHazard;
+
+		//misc
+		int LevelCoinCount;
+		
 	};
 }
 

@@ -133,6 +133,9 @@
     <ClCompile Include="Source\Platformer.cpp">
       <Filter>Game\Levels</Filter>
     </ClCompile>
+    <ClCompile Include="Source\WinLevel.cpp">
+      <Filter>Game\Levels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\stdafx.h">
@@ -233,6 +236,9 @@
     </ClInclude>
     <ClInclude Include="Source\BulletMovement.h">
       <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WinLevel.h">
+      <Filter>Game\Levels</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

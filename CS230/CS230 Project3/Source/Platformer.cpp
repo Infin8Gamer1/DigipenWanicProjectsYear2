@@ -16,6 +16,9 @@
 #include <Engine.h>
 #include "Level3.h"
 #include "Tilemap.h"
+#include "MonkeyMovement.h"
+#include "WinLevel.h"
+#include "ColliderTilemap.h"
 
 Levels::Platformer::Platformer() : Level("Platformer")
 {
@@ -26,6 +29,8 @@ Levels::Platformer::Platformer() : Level("Platformer")
 
 	columnsMonkey = 3;
 	rowsMonkey = 5;
+
+	MonkeyGO = nullptr;
 
 	//map
 	dataMap = nullptr;
@@ -40,6 +45,14 @@ Levels::Platformer::Platformer() : Level("Platformer")
 	meshCollectable = nullptr;
 	spriteSourceCollectable = nullptr;
 	textureCollectable = nullptr;
+
+	//hazards
+	meshHazard = nullptr;
+	spriteSourceHazard = nullptr;
+	textureHazard = nullptr;
+
+	//misc
+	LevelCoinCount = 3;
 }
 
 void Levels::Platformer::Load()
@@ -64,8 +77,16 @@ void Levels::Platformer::Load()
 
 	//collectable
 	meshCollectable = CreateQuadMesh(Vector2D(1, 1), Vector2D(1, 1));
-	textureCollectable = Texture::CreateTextureFromFile("Circle.png");
+	textureCollectable = Texture::CreateTextureFromFile("Coin.png");
 	spriteSourceCollectable = new SpriteSource(1, 1, textureCollectable);
+
+	GameObject* Collectable = Archetypes::CreateCollectable(meshCollectable, spriteSourceCollectable, Vector2D(0, 0));
+	GetSpace()->GetObjectManager().AddObject(*Collectable);
+
+	//hazard
+	meshHazard = CreateQuadMesh(Vector2D(1, 1), Vector2D(1, 1));
+	textureHazard = Texture::CreateTextureFromFile("Hazard.png");
+	spriteSourceHazard = new SpriteSource(1, 1, textureHazard);
 }
 
 void Levels::Platformer::Initialize()
@@ -81,17 +102,37 @@ void Levels::Platformer::Initialize()
 	GameObject* Map = Archetypes::CreatePlatformerTilemapObject(meshMap, spriteSourceMap, dataMap);
 	GetSpace()->GetObjectManager().AddObject(*Map);
 
-	GameObject* Monkey = Archetypes::CreatePlatformerMonkey(meshMonkey, spriteSourceMonkey);
-	static_cast<Animation*>(Monkey->GetComponent("Animation"))->Play(0, 8, 0.4f, false);
-	GetSpace()->GetObjectManager().AddObject(*Monkey);
+	ColliderTilemap* ct = static_cast<ColliderTilemap*>(Map->GetComponent("Collider"));
 
-	GameObject* Collectable1 = Archetypes::CreateCollectable(meshCollectable, spriteSourceCollectable, Vector2D(-725, -25));
+	MonkeyGO = Archetypes::CreatePlatformerMonkey(meshMonkey, spriteSourceMonkey);
+	static_cast<Animation*>(MonkeyGO->GetComponent("Animation"))->Play(0, 8, 0.05f, false);
+	GetSpace()->GetObjectManager().AddObject(*MonkeyGO);
+
+	GameObject* Collectable1 = Archetypes::CreateCollectable(meshCollectable, spriteSourceCollectable, ct->ConvertTileMapCordsToWorldCords(Vector2D(2,5)));
 	GetSpace()->GetObjectManager().AddObject(*Collectable1);
+
+	GameObject* Collectable2 = Archetypes::CreateCollectable(meshCollectable, spriteSourceCollectable, Vector2D(-310, 275));
+	GetSpace()->GetObjectManager().AddObject(*Collectable2);
+
+	GameObject* Collectable3 = Archetypes::CreateCollectable(meshCollectable, spriteSourceCollectable, Vector2D(-210, -325));
+	GetSpace()->GetObjectManager().AddObject(*Collectable3);
+
+	GameObject* Hazard1 = Archetypes::CreateHazard(meshHazard, spriteSourceHazard, Vector2D(-210, -325));
+	GetSpace()->GetObjectManager().AddObject(*Hazard1);
 }
 
 void Levels::Platformer::Update(float dt)
 {
 	UNREFERENCED_PARAMETER(dt);
+	Behaviors::MonkeyMovement* MM = static_cast<Behaviors::MonkeyMovement*>(MonkeyGO->GetComponent("MonkeyMovement"));
+
+	//if we have collected all of the coins then go to the win level
+	if (MM->GetCoinsCollected() >= LevelCoinCount) {
+		GetSpace()->SetLevel(new Levels::WinLevel());
+	}
+	else if (MM->GetHealth() <= 0) {
+		GetSpace()->RestartLevel();
+	}
 }
 
 void Levels::Platformer::Unload()
@@ -123,4 +164,12 @@ void Levels::Platformer::Unload()
 	spriteSourceCollectable = nullptr;
 	delete textureCollectable;
 	textureCollectable = nullptr;
+
+	//Hazards
+	delete meshHazard;
+	meshHazard = nullptr;
+	delete spriteSourceHazard;
+	spriteSourceHazard = nullptr;
+	delete textureHazard;
+	textureHazard = nullptr;
 }

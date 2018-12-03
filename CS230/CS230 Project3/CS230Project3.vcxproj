@@ -136,6 +136,7 @@
     <ClCompile Include="Source\Tilemap.cpp" />
     <ClCompile Include="Source\TimedDeath.cpp" />
     <ClCompile Include="Source\Transform.cpp" />
+    <ClCompile Include="Source\WinLevel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Animation.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Source\Tilemap.h" />
     <ClInclude Include="Source\TimedDeath.h" />
     <ClInclude Include="Source\Transform.h" />
+    <ClInclude Include="Source\WinLevel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -271,11 +271,41 @@ GameObject * Archetypes::CreateCollectable(Mesh * mesh, SpriteSource * spriteSou
 	sprite->SetSpriteSource(spriteSource);
 	Collectable->AddComponent(sprite);
 	//ColliderPoint
-	ColliderCircle* collider = new ColliderCircle(transform->GetScale().x/2);
+	ColliderCircle* collider = new ColliderCircle(transform->GetScale().x/4);
 	Collectable->AddComponent(collider);
-	//ColorChange
-	Behaviors::ColorChange* colorChange = new Behaviors::ColorChange(Color(1, 1, 0), Color(1, 0, 0));
-	Collectable->AddComponent(colorChange);
 
 	return Collectable;
+}
+
+GameObject * Archetypes::CreateHazard(Mesh * mesh, SpriteSource * spriteSource, Vector2D translation, Vector2D scale)
+{
+	GameObject* Hazard = new GameObject("Hazard");
+	//transform
+	Transform* transform = new Transform(translation, scale, 0.0f);
+	Hazard->AddComponent(transform);
+	//Sprite
+	Sprite* sprite = new Sprite();
+	sprite->SetMesh(mesh);
+	sprite->SetSpriteSource(spriteSource);
+	Hazard->AddComponent(sprite);
+	//Box Collider
+	ColliderRectangle* collider = new ColliderRectangle(Vector2D(abs(transform->GetScale().x / 2), abs(transform->GetScale().y / 2)));
+	Hazard->AddComponent(collider);
+
+	return Hazard;
+}
+
+GameObject * Archetypes::CreateText(Mesh * mesh, SpriteSource * spriteSource, Vector2D translation, Vector2D scale)
+{
+	GameObject* Text = new GameObject("Text");
+	//transform
+	Transform* transform = new Transform(translation, scale, 0.0f);
+	Text->AddComponent(transform);
+	//Sprite
+	Sprite* sprite = new Sprite();
+	sprite->SetMesh(mesh);
+	sprite->SetSpriteSource(spriteSource);
+	Text->AddComponent(sprite);
+
+	return Text;
 }

@@ -74,6 +74,8 @@ public:
 	//   map = A pointer to the tilemap resource.
 	void SetTilemap(const Tilemap* map);
 
+	Vector2D ConvertTileMapCordsToWorldCords(Vector2D inputCords);
+
 private:
 	//------------------------------------------------------------------------------
 	// Private Functions:

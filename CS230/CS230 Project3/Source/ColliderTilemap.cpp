@@ -24,13 +24,15 @@ void ColliderTilemap::Draw()
 
 bool ColliderTilemap::IsCollidingWith(const Collider & other) const
 {
-	//check if it is a rectangle if it isn't then just return false and don't bother doing anything
-	if (other.GetType() != ColliderType::ColliderTypeRectangle) {
-		return false;
-	}
 	//get components
 	Transform* otherTransform = static_cast<Transform*>(other.GetOwner()->GetComponent("Transform"));
 	Physics* otherPhysics = static_cast<Physics*>(other.GetOwner()->GetComponent("Physics"));
+
+	//check if it is a rectangle if it isn't then just return false and don't bother doing anything
+	if (other.GetType() != ColliderType::ColliderTypeRectangle || otherPhysics == nullptr) {
+		return false;
+	}
+	
 	//create a bounding box for the other object
 	BoundingRectangle otherRect = BoundingRectangle(otherTransform->GetTranslation(), static_cast<const ColliderRectangle&>(other).GetExtents());
 
@@ -130,4 +132,11 @@ bool ColliderTilemap::IsCollidingAtPosition(float x, float y) const
 	int cellValue = map->GetCellValue(x2, y2);
 
 	return (cellValue > 0);
+}
+
+Vector2D ColliderTilemap::ConvertTileMapCordsToWorldCords(Vector2D inputCords) {
+	Vector2D Output = Vector2D(inputCords.x, -inputCords.y);
+	Output = transform->GetMatrix() * Output;
+
+	return Vector2D(Output.x + 0.5f, Output.y + 0.5f);
 }

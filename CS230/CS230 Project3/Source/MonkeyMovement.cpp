@@ -35,6 +35,8 @@ Component * Behaviors::MonkeyMovement::Clone() const
 void Behaviors::MonkeyMovement::Initialize()
 {
 	onGround = false;
+	CoinsCollected = 0;
+	Health = 1;
 
 	//get Components
 	transform = static_cast<Transform*>(GetOwner()->GetComponent("Transform"));
@@ -42,6 +44,7 @@ void Behaviors::MonkeyMovement::Initialize()
 	animation = static_cast<Animation*>(GetOwner()->GetComponent("Animation"));
 	//set the collision handler for the monkey
 	static_cast<Collider*>(GetOwner()->GetComponent("Collider"))->SetMapCollisionHandler(MonkeyMapCollisionHandler);
+	static_cast<Collider*>(GetOwner()->GetComponent("Collider"))->SetCollisionHandler(MonkeyCollisionHandler);
 }
 
 void Behaviors::MonkeyMovement::Update(float dt)
@@ -56,19 +59,26 @@ void Behaviors::MonkeyMovement::Update(float dt)
 	if (onGround) {
 		if (animation->IsDone()) {
 			if (physics->GetVelocity().x >= 0) {
-				animation->Play(0, 8, 0.2f, false);
+				animation->Play(0, 8, 0.1f, false);
 			}
 			if (physics->GetVelocity().x < 0) {
-				animation->Play(7, 8, 0.2f, false, true);
+				animation->Play(7, 8, 0.1f, false, true);
 			}
 
 		}
+	} else {
+		animation->Play(9, 1, 0.05f, false);
 	}
-	else {
-		if (animation->IsDone()) {
-			animation->Play(9, 1, 0.1f, false);
-		}
-	}
+}
+
+int Behaviors::MonkeyMovement::GetCoinsCollected()
+{
+	return CoinsCollected;
+}
+
+int Behaviors::MonkeyMovement::GetHealth()
+{
+	return Health;
 }
 
 void Behaviors::MonkeyMovement::MoveHorizontal() const
@@ -100,5 +110,17 @@ void Behaviors::MonkeyMapCollisionHandler(GameObject & object, const MapCollisio
 {
 	if (collision.bottom) {
 		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->onGround = true;
+	}
+}
+
+void Behaviors::MonkeyCollisionHandler(GameObject & object, GameObject & other)
+{
+	if (other.GetName() == "Collectable") {
+		other.Destroy();
+		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->CoinsCollected += 1;
+	}
+
+	if (other.GetName() == "Hazard") {
+		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->Health -= 1;
 	}
 }

@@ -61,6 +61,12 @@ namespace Behaviors
 		//   dt = The (fixed) change in time since the last step.
 		void Update(float dt) override;
 
+		//Returns the number of coins collected
+		int GetCoinsCollected();
+
+		//Returns the amount of health that the monkey has
+		int GetHealth();
+
 		// Map collision handler for Monkey objects.
 		// Params:
 		//   object = The monkey object.
@@ -101,6 +107,9 @@ namespace Behaviors
 
 		// Misc
 		bool onGround;
+
+		int CoinsCollected;
+		int Health;
 		
 	};
 }
