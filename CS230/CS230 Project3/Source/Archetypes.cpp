@@ -289,7 +289,7 @@ GameObject * Archetypes::CreateHazard(Mesh * mesh, SpriteSource * spriteSource, 
 	sprite->SetSpriteSource(spriteSource);
 	Hazard->AddComponent(sprite);
 	//Box Collider
-	ColliderRectangle* collider = new ColliderRectangle(Vector2D(abs(transform->GetScale().x / 2), abs(transform->GetScale().y / 2)));
+	ColliderRectangle* collider = new ColliderRectangle(Vector2D(abs(transform->GetScale().x / 2.1f), abs(transform->GetScale().y / 2.1f)));
 	Hazard->AddComponent(collider);
 
 	return Hazard;

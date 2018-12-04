@@ -110,6 +110,15 @@ private:
 	void ResolveCollisions(const BoundingRectangle& objectRectangle, Transform* objectTransform, 
 		Physics* objectPhysics, const MapCollision& collisions) const;
 
+	// Find the center of the closest tile on the x-axis or y-axis.
+	// Used for assisting in collision resolution on a particular side.
+	// Params:
+	//   side = Which side the collision is occurring on.
+	//   sidePosition = The x or y value of that side.
+	// Returns:
+	//   The center of the closest tile to the given position on the given side.
+	float GetNextTileCenter(RectangleSide side, float sidePosition) const;
+
 	//------------------------------------------------------------------------------
 	// Private Variables:
 	//------------------------------------------------------------------------------

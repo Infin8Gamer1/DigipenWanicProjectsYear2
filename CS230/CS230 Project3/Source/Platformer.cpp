@@ -52,7 +52,7 @@ Levels::Platformer::Platformer() : Level("Platformer")
 	textureHazard = nullptr;
 
 	//misc
-	LevelCoinCount = 3;
+	LevelCoinCount = 4;
 }
 
 void Levels::Platformer::Load()
@@ -92,7 +92,7 @@ void Levels::Platformer::Load()
 void Levels::Platformer::Initialize()
 {
 	std::cout << "Platformer::Initialize" << std::endl;
-
+	//Tilemap
 	dataMap = Tilemap::CreateTilemapFromFile("Assets/Levels/PlatformerTilemap.txt");
 	if (dataMap == nullptr)
 	{
@@ -104,21 +104,37 @@ void Levels::Platformer::Initialize()
 
 	ColliderTilemap* ct = static_cast<ColliderTilemap*>(Map->GetComponent("Collider"));
 
+	//Monkey
 	MonkeyGO = Archetypes::CreatePlatformerMonkey(meshMonkey, spriteSourceMonkey);
+	static_cast<Transform*>(MonkeyGO->GetComponent("Transform"))->SetTranslation(ct->ConvertTileMapCordsToWorldCords(Vector2D(1,2)));
 	static_cast<Animation*>(MonkeyGO->GetComponent("Animation"))->Play(0, 8, 0.05f, false);
 	GetSpace()->GetObjectManager().AddObject(*MonkeyGO);
 
+	//Collectables!
 	GameObject* Collectable1 = Archetypes::CreateCollectable(meshCollectable, spriteSourceCollectable, ct->ConvertTileMapCordsToWorldCords(Vector2D(2,5)));
 	GetSpace()->GetObjectManager().AddObject(*Collectable1);
 
-	GameObject* Collectable2 = Archetypes::CreateCollectable(meshCollectable, spriteSourceCollectable, Vector2D(-310, 275));
+	GameObject* Collectable2 = Archetypes::CreateCollectable(meshCollectable, spriteSourceCollectable, ct->ConvertTileMapCordsToWorldCords(Vector2D(5, 8)));
 	GetSpace()->GetObjectManager().AddObject(*Collectable2);
 
-	GameObject* Collectable3 = Archetypes::CreateCollectable(meshCollectable, spriteSourceCollectable, Vector2D(-210, -325));
+	GameObject* Collectable3 = Archetypes::CreateCollectable(meshCollectable, spriteSourceCollectable, ct->ConvertTileMapCordsToWorldCords(Vector2D(6, 2)));
 	GetSpace()->GetObjectManager().AddObject(*Collectable3);
 
-	GameObject* Hazard1 = Archetypes::CreateHazard(meshHazard, spriteSourceHazard, Vector2D(-210, -325));
+	GameObject* Collectable4 = Archetypes::CreateCollectable(meshCollectable, spriteSourceCollectable, ct->ConvertTileMapCordsToWorldCords(Vector2D(11, 8)));
+	GetSpace()->GetObjectManager().AddObject(*Collectable4);
+
+	//Hazards!
+	GameObject* Hazard1 = Archetypes::CreateHazard(meshHazard, spriteSourceHazard, ct->ConvertTileMapCordsToWorldCords(Vector2D(7, 8)));
 	GetSpace()->GetObjectManager().AddObject(*Hazard1);
+
+	GameObject* Hazard2 = Archetypes::CreateHazard(meshHazard, spriteSourceHazard, ct->ConvertTileMapCordsToWorldCords(Vector2D(4, 8)));
+	GetSpace()->GetObjectManager().AddObject(*Hazard2);
+
+	GameObject* Hazard3 = Archetypes::CreateHazard(meshHazard, spriteSourceHazard, ct->ConvertTileMapCordsToWorldCords(Vector2D(3, 8)));
+	GetSpace()->GetObjectManager().AddObject(*Hazard3);
+
+	GameObject* Hazard4 = Archetypes::CreateHazard(meshHazard, spriteSourceHazard, ct->ConvertTileMapCordsToWorldCords(Vector2D(8, 9)));
+	GetSpace()->GetObjectManager().AddObject(*Hazard4);
 }
 
 void Levels::Platformer::Update(float dt)

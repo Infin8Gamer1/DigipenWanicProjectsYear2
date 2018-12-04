@@ -96,13 +96,35 @@ void Behaviors::MonkeyMovement::MoveHorizontal() const
 void Behaviors::MonkeyMovement::MoveVertical()
 {
 	//jump
-	if (Input::GetInstance().IsKeyDown(' ') && onGround) {
+	if (Input::GetInstance().CheckReleased(' ') && onGround) {
 		physics->SetVelocity(Vector2D(physics->GetVelocity().x, jumpForce));
 		onGround = false;
+		//onWallLeft = false;
+		//onWallRight = false;
 	}
 
-	if (physics->GetVelocity().y < -0.05) {
+	if (Input::GetInstance().CheckReleased(' ') && onWallLeft && !onGround && !onWallRight) {
+		physics->SetVelocity(Vector2D(physics->GetVelocity().x + jumpForce / 2, jumpForce/2));
+		//onGround = false;
+		onWallLeft = false;
+		//onWallRight = false;
+	} 
+	
+	if (Input::GetInstance().CheckReleased(' ') && onWallRight && !onGround && !onWallLeft) {
+		physics->SetVelocity(Vector2D(physics->GetVelocity().x - jumpForce / 2, jumpForce/2));
+		//onGround = false;
+		onWallLeft = false;
+		//onWallRight = false;
+	}
+
+	if (physics->GetVelocity().y < 0) {
 		onGround = false;
+	}
+	if (physics->GetVelocity().x < 0) {
+		onWallLeft = false;
+	}
+	if (physics->GetVelocity().x > 0) {
+		onWallRight = false;
 	}
 }
 
@@ -110,6 +132,10 @@ void Behaviors::MonkeyMapCollisionHandler(GameObject & object, const MapCollisio
 {
 	if (collision.bottom) {
 		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->onGround = true;
+	} else if (collision.left) {
+		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->onWallLeft = true;
+	} else if (collision.right) {
+		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->onWallRight = true;
 	}
 }
 

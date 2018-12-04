@@ -32,7 +32,7 @@ Component * ColliderCircle::Clone() const
 
 void ColliderCircle::Draw()
 {
-	DebugDraw::GetInstance().AddCircle(transform->GetTranslation(), radius, Graphics::GetInstance().GetCurrentCamera());
+	DebugDraw::GetInstance().AddCircle(transform->GetTranslation(), radius, Graphics::GetInstance().GetCurrentCamera(), Color(0,1,0,1));
 }
 
 float ColliderCircle::GetRadius() const
