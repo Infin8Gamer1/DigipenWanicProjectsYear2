@@ -1,40 +1,5 @@
-﻿  stdafx.cpp
-  Animation.cpp
-  Archetypes.cpp
-  BulletMovement.cpp
-  Collider.cpp
-  ColliderCircle.cpp
-  ColliderPoint.cpp
-  ColliderRectangle.cpp
-  ColliderTilemap.cpp
-  ColorChange.cpp
-x:\_dev\digipen\digipenwanicyear2projects\digipenwanicprojectsyear2\cs230\cs230 project3\source\colorchange.cpp(42): error C2065: 'ColorChangeCollisionHandler': undeclared identifier
-  Component.cpp
-  GameObject.cpp
-  GameObjectManager.cpp
-  Intersection2D.cpp
-  Level.cpp
-  Level2.cpp
-  Level1.cpp
-  Level3.cpp
-  Main.cpp
-  Matrix2DStudent.cpp
-  MeshHelper.cpp
-  Generating Code...
-  Compiling...
-  MonkeyMovement.cpp
-x:\_dev\digipen\digipenwanicyear2projects\digipenwanicprojectsyear2\cs230\cs230 project3\source\monkeymovement.cpp(46): error C2065: 'MonkeyMapCollisionHandler': undeclared identifier
-x:\_dev\digipen\digipenwanicyear2projects\digipenwanicprojectsyear2\cs230\cs230 project3\source\monkeymovement.cpp(47): error C2065: 'MonkeyCollisionHandler': undeclared identifier
-  Physics.cpp
-  Platformer.cpp
-  PlayerShip.cpp
-  ScreenWrap.cpp
-  Space.cpp
-  Sprite.cpp
-  SpriteSource.cpp
-  SpriteTilemap.cpp
-  Tilemap.cpp
-  TimedDeath.cpp
-  Transform.cpp
-  WinLevel.cpp
-  Generating Code...
+﻿  Platformer.cpp
+  CS230Project3.vcxproj -> C:\Users\jacob.holyfield\Documents\DigipenWanicProjectsYear2\CS230\CS230 Project3\\x64\Debug\BetaFramework.exe
+  CS230Project3.vcxproj -> C:\Users\jacob.holyfield\Documents\DigipenWanicProjectsYear2\CS230\CS230 Project3\\x64\Debug\BetaFramework.pdb (Partial PDB)
+  glfw\lib\x64\glfw3.dll
+  1 File(s) copied
