@@ -51,6 +51,14 @@ Levels::Platformer::Platformer() : Level("Platformer")
 	spriteSourceHazard = nullptr;
 	textureHazard = nullptr;
 
+	//Enemy
+	meshEnemy = nullptr;
+	textureEnemy = nullptr;
+	spriteSourceEnemy = nullptr;
+
+	columnsEnemy = 7;
+	rowsEnemy = 3;
+
 	//misc
 	LevelCoinCount = 4;
 }
@@ -87,6 +95,14 @@ void Levels::Platformer::Load()
 	meshHazard = CreateQuadMesh(Vector2D(1, 1), Vector2D(1, 1));
 	textureHazard = Texture::CreateTextureFromFile("Hazard.png");
 	spriteSourceHazard = new SpriteSource(1, 1, textureHazard);
+
+	//enemy
+	Vector2D textureSizeEnemy = Vector2D(1.0f / columnsEnemy, 1.0f / rowsEnemy);
+	meshEnemy = CreateQuadMesh(textureSizeEnemy, Vector2D(1, 1));
+
+	textureEnemy = Texture::CreateTextureFromFile("Enemy.png");
+
+	spriteSourceEnemy = new SpriteSource(columnsEnemy, rowsEnemy, textureEnemy);
 }
 
 void Levels::Platformer::Initialize()
@@ -135,6 +151,11 @@ void Levels::Platformer::Initialize()
 
 	GameObject* Hazard4 = Archetypes::CreateHazard(meshHazard, spriteSourceHazard, ct->ConvertTileMapCordsToWorldCords(Vector2D(8, 9)));
 	GetSpace()->GetObjectManager().AddObject(*Hazard4);
+
+	//Enemy
+	GameObject* EnemyGO = Archetypes::CreateEnemy(meshEnemy, spriteSourceEnemy, ct->ConvertTileMapCordsToWorldCords(Vector2D(13, 8)));
+	static_cast<Animation*>(EnemyGO->GetComponent("Animation"))->Play(0, 8, 0.1f, true);
+	GetSpace()->GetObjectManager().AddObject(*EnemyGO);
 }
 
 void Levels::Platformer::Update(float dt)

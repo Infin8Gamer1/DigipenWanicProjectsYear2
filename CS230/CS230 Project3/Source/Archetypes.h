@@ -130,7 +130,15 @@ namespace Archetypes
 	//   spriteSource = The sprite source to use for the object.
 	// Returns:
 	//	 A pointer to the newly constructed game object
-	GameObject* CreateHazard(Mesh* mesh, SpriteSource* spriteSource, Vector2D translation = Vector2D(), Vector2D scale = Vector2D(100,100));
+	GameObject* CreateHazard(Mesh* mesh, SpriteSource* spriteSource, Vector2D translation = Vector2D(0,0), Vector2D scale = Vector2D(100,100));
+
+	// Create an Enemy game object.
+	// Params:
+	//   mesh  = The mesh to use for the object's sprite.
+	//   spriteSource = The sprite source to use for the object.
+	// Returns:
+	//	 A pointer to the newly constructed game object
+	GameObject* CreateEnemy(Mesh* mesh, SpriteSource* spriteSource, Vector2D translation = Vector2D(0,0), Vector2D scale = Vector2D(100, 100));
 }
 
 //----------------------------------------------------------------------------

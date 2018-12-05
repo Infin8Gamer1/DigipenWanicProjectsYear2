@@ -95,6 +95,14 @@ namespace Levels
 		SpriteSource* spriteSourceHazard;
 		Texture* textureHazard;
 
+		//Enemy
+		Mesh* meshEnemy;
+		Texture* textureEnemy;
+		SpriteSource* spriteSourceEnemy;
+
+		unsigned columnsEnemy;
+		unsigned rowsEnemy;
+
 		//misc
 		int LevelCoinCount;
 		

@@ -110,6 +110,7 @@
     <ClCompile Include="Source\ColliderTilemap.cpp" />
     <ClCompile Include="Source\ColorChange.cpp" />
     <ClCompile Include="Source\Component.cpp" />
+    <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\GameObjectManager.cpp" />
     <ClCompile Include="Source\Intersection2D.cpp" />

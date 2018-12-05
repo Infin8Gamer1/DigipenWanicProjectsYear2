@@ -27,6 +27,7 @@
 #include "ScreenWrap.h"
 #include "SpriteTilemap.h"
 #include "ColliderTilemap.h"
+#include "Enemy.h"
 #include <Graphics.h>
 
 GameObject * Archetypes::CreateShip(Mesh * mesh)
@@ -308,4 +309,34 @@ GameObject * Archetypes::CreateText(Mesh * mesh, SpriteSource * spriteSource, Ve
 	Text->AddComponent(sprite);
 
 	return Text;
+}
+
+GameObject * Archetypes::CreateEnemy(Mesh * mesh, SpriteSource * spriteSource, Vector2D translation, Vector2D scale)
+{
+	GameObject* enemy = new GameObject("Enemy");
+	//transform
+	Transform* transform = new Transform(translation, scale, 0.0f);
+	enemy->AddComponent(transform);
+	//Sprite
+	Sprite* sprite = new Sprite();
+	sprite->SetMesh(mesh);
+	sprite->SetSpriteSource(spriteSource);
+	enemy->AddComponent(sprite);
+	//Animation
+	Animation* animation = new Animation();
+	//animation->Play(0, 8, 0.4f, false);
+	enemy->AddComponent(animation);
+	//Physics
+	Physics* physics = new Physics();
+	physics->SetMass(1.0f);
+	physics->SetGravity(Vector2D(0, -200.0f));
+	enemy->AddComponent(physics);
+	//Box Collider
+	ColliderRectangle* collider = new ColliderRectangle(Vector2D(abs(transform->GetScale().x / 2), abs(transform->GetScale().y / 2)));
+	enemy->AddComponent(collider);
+	//Enemy
+	Behaviors::Enemy* enemyComponent = new Behaviors::Enemy();
+	enemy->AddComponent(enemyComponent);
+
+	return enemy;
 }

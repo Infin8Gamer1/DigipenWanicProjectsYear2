@@ -103,14 +103,14 @@ void Behaviors::MonkeyMovement::MoveVertical()
 		//onWallRight = false;
 	}
 
-	if (Input::GetInstance().CheckReleased(' ') && onWallLeft && !onGround && !onWallRight) {
+	if (Input::GetInstance().CheckReleased(' ') && onWallLeft && !onGround && !onWallRight && WallJump) {
 		physics->SetVelocity(Vector2D(physics->GetVelocity().x + jumpForce / 2, jumpForce/2));
 		//onGround = false;
 		onWallLeft = false;
 		//onWallRight = false;
 	} 
 	
-	if (Input::GetInstance().CheckReleased(' ') && onWallRight && !onGround && !onWallLeft) {
+	if (Input::GetInstance().CheckReleased(' ') && onWallRight && !onGround && !onWallLeft && WallJump) {
 		physics->SetVelocity(Vector2D(physics->GetVelocity().x - jumpForce / 2, jumpForce/2));
 		//onGround = false;
 		onWallLeft = false;
@@ -146,7 +146,7 @@ void Behaviors::MonkeyCollisionHandler(GameObject & object, GameObject & other)
 		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->CoinsCollected += 1;
 	}
 
-	if (other.GetName() == "Hazard") {
+	if (other.GetName() == "Hazard" || other.GetName() == "Enemy") {
 		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->Health -= 1;
 	}
 }

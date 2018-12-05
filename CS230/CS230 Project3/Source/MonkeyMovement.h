@@ -109,6 +109,7 @@ namespace Behaviors
 		bool onGround;
 		bool onWallLeft;
 		bool onWallRight;
+		const bool WallJump = false;
 
 		int jumpCoolDownMax;
 		int jumpCoolDown;

@@ -136,6 +136,9 @@
     <ClCompile Include="Source\WinLevel.cpp">
       <Filter>Game\Levels</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Enemy.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\stdafx.h">
