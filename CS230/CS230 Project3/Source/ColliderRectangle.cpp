@@ -31,7 +31,7 @@ Component * ColliderRectangle::Clone() const
 
 void ColliderRectangle::Draw()
 {
-	DebugDraw::GetInstance().AddRectangle(transform->GetTranslation(), extents, Graphics::GetInstance().GetCurrentCamera());
+	DebugDraw::GetInstance().AddRectangle(transform->GetTranslation(), extents, Graphics::GetInstance().GetCurrentCamera(), Color(0,1,0,1));
 }
 
 const Vector2D & ColliderRectangle::GetExtents() const

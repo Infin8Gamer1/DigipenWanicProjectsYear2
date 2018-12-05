@@ -32,7 +32,7 @@ Component * ColliderPoint::Clone() const
 
 void ColliderPoint::Draw()
 {
-	DebugDraw::GetInstance().AddCircle(transform->GetTranslation(), 10.0f, Graphics::GetInstance().GetCurrentCamera());
+	DebugDraw::GetInstance().AddCircle(transform->GetTranslation(), 10.0f, Graphics::GetInstance().GetCurrentCamera(), Color(0,1,0,1));
 }
 
 bool ColliderPoint::IsCollidingWith(const Collider & other) const

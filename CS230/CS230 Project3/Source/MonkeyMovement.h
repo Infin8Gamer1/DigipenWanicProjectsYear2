@@ -107,6 +107,11 @@ namespace Behaviors
 
 		// Misc
 		bool onGround;
+		bool onWallLeft;
+		bool onWallRight;
+
+		int jumpCoolDownMax;
+		int jumpCoolDown;
 
 		int CoinsCollected;
 		int Health;
