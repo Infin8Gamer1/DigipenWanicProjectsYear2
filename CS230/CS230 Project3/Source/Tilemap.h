@@ -43,7 +43,7 @@ public:
 	//   numColumns = The width of the map.
 	//   numRows = The height of the map.
 	//   data = The array containing the map data.
-	Tilemap(unsigned numColumns, unsigned numRows, int** data);
+	Tilemap(int numColumns, int numRows, int** data);
 
 	// Destructor.
 	~Tilemap();
@@ -61,7 +61,7 @@ public:
 	// Returns:
 	//   -1 if the indices are invalid, 0 if the cell is empty, 
 	//   or a positive integer otherwise.
-	int GetCellValue(unsigned column, unsigned row) const;
+	int GetCellValue(int column, int row) const;
 
 	// Create a tilemap from the given file.
 	// Params:
@@ -91,15 +91,15 @@ private:
 	// Returns:
 	//   A pointer to the dynamically allocated array if the data is valid, nullptr otherwise.
 	static int** ReadArrayVariable(std::ifstream& file, const std::string& name, 
-		unsigned columns, unsigned rows);
+		int columns, int rows);
 
 	//------------------------------------------------------------------------------
 	// Private Variables:
 	//------------------------------------------------------------------------------
 
 	// Dimensions of the map
-	unsigned numColumns;
-	unsigned numRows;
+	int numColumns;
+	int numRows;
 
 	// The map data (a 2D array)
 	int** data;

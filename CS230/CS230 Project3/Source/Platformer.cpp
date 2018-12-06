@@ -156,6 +156,14 @@ void Levels::Platformer::Initialize()
 	GameObject* EnemyGO = Archetypes::CreateEnemy(meshEnemy, spriteSourceEnemy, ct->ConvertTileMapCordsToWorldCords(Vector2D(13, 8)));
 	static_cast<Animation*>(EnemyGO->GetComponent("Animation"))->Play(0, 8, 0.1f, true);
 	GetSpace()->GetObjectManager().AddObject(*EnemyGO);
+
+	GameObject* EnemyGO2 = Archetypes::CreateEnemy(meshEnemy, spriteSourceEnemy, ct->ConvertTileMapCordsToWorldCords(Vector2D(14, 5)));
+	static_cast<Animation*>(EnemyGO2->GetComponent("Animation"))->Play(0, 8, 0.1f, true);
+	GetSpace()->GetObjectManager().AddObject(*EnemyGO2);
+
+	GameObject* EnemyGO3 = Archetypes::CreateEnemy(meshEnemy, spriteSourceEnemy, ct->ConvertTileMapCordsToWorldCords(Vector2D(12, 1)));
+	static_cast<Animation*>(EnemyGO3->GetComponent("Animation"))->Play(0, 8, 0.1f, true);
+	GetSpace()->GetObjectManager().AddObject(*EnemyGO3);
 }
 
 void Levels::Platformer::Update(float dt)
@@ -209,4 +217,12 @@ void Levels::Platformer::Unload()
 	spriteSourceHazard = nullptr;
 	delete textureHazard;
 	textureHazard = nullptr;
+
+	//Enemy
+	delete spriteSourceEnemy;
+	spriteSourceEnemy = nullptr;
+	delete meshEnemy;
+	meshEnemy = nullptr;
+	delete textureEnemy;
+	textureEnemy = nullptr;
 }

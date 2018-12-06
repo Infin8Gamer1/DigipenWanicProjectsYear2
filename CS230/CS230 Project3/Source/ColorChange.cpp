@@ -35,6 +35,15 @@ Component * Behaviors::ColorChange::Clone() const
 	return new ColorChange(normalColor, collidedColor, collidedColorTime);
 }
 
+void Behaviors::ColorChangeCollisionHandler(GameObject & object, GameObject & other)
+{
+	UNREFERENCED_PARAMETER(other);
+	ColorChange* objectColorChange = static_cast<ColorChange*>(object.GetComponent("ColorChange"));
+
+	objectColorChange->collided = true;
+	objectColorChange->timer = 0.0f;
+}
+
 void Behaviors::ColorChange::Initialize()
 {
 	sprite = static_cast<Sprite*>(GetOwner()->GetComponent("Sprite"));
@@ -54,11 +63,4 @@ void Behaviors::ColorChange::Update(float dt)
 	}
 }
 
-void Behaviors::ColorChangeCollisionHandler(GameObject & object, GameObject & other)
-{
-	UNREFERENCED_PARAMETER(other);
-	ColorChange* objectColorChange = static_cast<ColorChange*>(object.GetComponent("ColorChange"));
 
-	objectColorChange->collided = true;
-	objectColorChange->timer = 0.0f;
-}

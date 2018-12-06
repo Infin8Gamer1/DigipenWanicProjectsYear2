@@ -7,6 +7,7 @@
 #include "Collider.h"
 #include "Sprite.h"
 #include "Space.h"
+#include <ctime>
 
 Behaviors::Enemy::Enemy() : Component("Enemy")
 {
@@ -27,8 +28,17 @@ Component * Behaviors::Enemy::Clone() const
 	return new Enemy(*this);
 }
 
+void Behaviors::EnemyMapCollisionHandler(GameObject & object, const MapCollision & collision)
+{
+	static_cast<Enemy*>(object.GetComponent("Enemy"))->onWallRight = collision.right;
+	static_cast<Enemy*>(object.GetComponent("Enemy"))->onWallLeft = collision.left;
+	static_cast<Enemy*>(object.GetComponent("Enemy"))->onGround = collision.bottom;
+}
+
 void Behaviors::Enemy::Initialize()
 {
+	//seed random numbers
+	srand(static_cast <unsigned> (time(0)));
 	//get Components
 	transform = static_cast<Transform*>(GetOwner()->GetComponent("Transform"));
 	physics = static_cast<Physics*>(GetOwner()->GetComponent("Physics"));
@@ -53,16 +63,18 @@ void Behaviors::Enemy::Update(float dt)
 					animation->Play(0, 0, 0.1f, true);
 					break;
 				case InnerStateUpdate:
-					//Idle for 1 second then go back to wander state
-					if (timer > 1.0f) {
+					//Idle for random seconds then go back to wander state
+					if (timer > 0.25f + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (2.0f - 0.25f)))) {
 						Vector2D translation = static_cast<Transform*>(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("Monkey")->GetComponent("Transform"))->GetTranslation();
 						if (translation.Distance(transform->GetTranslation()) > 400) {
 							innerState = InnerStateExit;
 							SetState(EnemyStates::StateWander);
+							sprite->SetColor(normalColor);
 						}
 						else {
 							innerState = InnerStateExit;
 							SetState(EnemyStates::StateChase);
+							sprite->SetColor(madColor);
 						}	
 					}
 					break;
@@ -105,14 +117,20 @@ void Behaviors::Enemy::Update(float dt)
 					switch (wanderDirection)
 					{
 						case Behaviors::Left:
-							physics->SetVelocity(Vector2D(150, 0));
+							physics->AddForce(Vector2D(100, 0));
 							break;
 						case Behaviors::Right:
-							physics->SetVelocity(Vector2D(-150, 0));
+							physics->AddForce(Vector2D(-100, 0));
 							break;
 						case Behaviors::Jump:
-							physics->AddForce(Vector2D(0, 250.0f));
+							physics->AddForce(Vector2D(0, 270.0f));
 							break;
+					}
+
+					//check player distance and exit if he is too close
+					if (static_cast<Transform*>(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("Monkey")->GetComponent("Transform"))->GetTranslation().Distance(transform->GetTranslation()) < 400) {
+						innerState = InnerStateExit;
+						SetState(EnemyStates::StateIdle);
 					}
 
 					//do this for 2 seconds then go back to idle
@@ -138,19 +156,29 @@ void Behaviors::Enemy::Update(float dt)
 			switch (innerState)
 			{
 				case InnerStateEnter:
-					sprite->SetColor(madColor);
+					
 					innerState = InnerStateUpdate;
+					//make him look mad!
+					sprite->SetColor(madColor);
+					//reset timer
 					timer = 0;
 					break;
 				case InnerStateUpdate:
 					// TO DO: Chasing behavior
-					if (timer > 5.0f) {
+					//check player distance
+					if (static_cast<Transform*>(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("Monkey")->GetComponent("Transform"))->GetTranslation().Distance(transform->GetTranslation()) < 400) {
+						//the player is tooo close he freeks
+						physics->SetAngularVelocity(25);
+					} else {
 						innerState = InnerStateExit;
 						SetState(EnemyStates::StateIdle);
 					}
 					
 					break;
 				case InnerStateExit:
+					//put him back to normal state
+					physics->SetAngularVelocity(0);
+					transform->SetRotation(0);
 					currentState = nextState;
 					innerState = InnerStateEnter;
 					break;
@@ -167,9 +195,4 @@ void Behaviors::Enemy::SetState(EnemyStates _nextState)
 	nextState = _nextState;
 }
 
-void Behaviors::EnemyMapCollisionHandler(GameObject & object, const MapCollision & collision)
-{
-	static_cast<Enemy*>(object.GetComponent("Enemy"))->onWallRight = collision.right;
-	static_cast<Enemy*>(object.GetComponent("Enemy"))->onWallLeft = collision.left;
-	static_cast<Enemy*>(object.GetComponent("Enemy"))->onGround = collision.bottom;
-}
+

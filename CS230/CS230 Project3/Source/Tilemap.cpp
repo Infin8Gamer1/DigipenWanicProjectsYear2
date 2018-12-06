@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-Tilemap::Tilemap(unsigned _numColumns, unsigned _numRows, int ** _data)
+Tilemap::Tilemap(int _numColumns, int _numRows, int ** _data)
 {
 	// Dimensions of the map
 	numColumns = _numColumns;
@@ -12,13 +12,14 @@ Tilemap::Tilemap(unsigned _numColumns, unsigned _numRows, int ** _data)
 
 	// The map data (a 2D array)
 	data = _data;
+		
 }
 
 Tilemap::~Tilemap()
 {
 	// Deleting the 2D array of tiles
 	// delete in the opposite order of creation
-	for (unsigned r = 0; r < numRows; ++r)
+	for (int r = 0; r < numRows; ++r)
 	{
 		delete[] data[r]; // delete each allocated row with array delete
 		data[r] = nullptr; // safely set to nullptr
@@ -38,7 +39,7 @@ unsigned Tilemap::GetHeight() const
 	return numRows;
 }
 
-int Tilemap::GetCellValue(unsigned column, unsigned row) const
+int Tilemap::GetCellValue(int column, int row) const
 {
 	//if given row or column is outside of the array then just return -1
 	if ((column >= numColumns || column < 0) || (row >= numRows || row < 0)) {
@@ -63,7 +64,9 @@ Tilemap * Tilemap::CreateTilemapFromFile(const std::string & filename)
 	ReadIntegerVariable(infile, "width", columns);
 	ReadIntegerVariable(infile, "height", rows);
 
-	Tilemap* output = new Tilemap(columns, rows, ReadArrayVariable(infile, "data", columns, rows));
+	int** data = ReadArrayVariable(infile, "data", columns, rows);
+
+	Tilemap* output = new Tilemap(columns, rows, data);
 
 	infile.close();
 
@@ -98,7 +101,7 @@ bool Tilemap::ReadIntegerVariable(std::ifstream & file, const std::string & name
 	return false;
 }
 
-int ** Tilemap::ReadArrayVariable(std::ifstream & file, const std::string & name, unsigned columns, unsigned rows)
+int ** Tilemap::ReadArrayVariable(std::ifstream & file, const std::string & name, int columns, int rows)
 {
 
 	std::string str;
@@ -110,24 +113,26 @@ int ** Tilemap::ReadArrayVariable(std::ifstream & file, const std::string & name
 	}
 
 	//make a new 2D int array
-	int **output = new int *[columns];
-	for (unsigned r = 0; r < columns; ++r)
+	int ** data = new int *[columns];
+	for (int r = 0; r < columns; ++r)
 	{
-		output[r] = new int[rows];
+		//warning creates memory leak!
+		//TODO: FIX MEMORY LEAK FROM THIS!
+		data[r] = new int[rows];
 	}
 
 	//loop through each value in the 2D array of tiles and set each one to the correct one here
-	for (unsigned r = 0; r < rows; r++)
+	for (int r = 0; r < rows; r++)
 	{
-		for (unsigned c = 0; c < columns; c++)
+		for (int c = 0; c < columns; c++)
 		{
 			//read the next int
 			int value;
 			file >> value;
 			//set that value in output
-			output[c][r] = value;
+			data[c][r] = value;
 		}
 	}
 
-	return output;
+	return data;
 }

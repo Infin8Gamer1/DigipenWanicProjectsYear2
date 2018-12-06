@@ -32,6 +32,31 @@ Component * Behaviors::MonkeyMovement::Clone() const
 	return new MonkeyMovement();
 }
 
+void Behaviors::MonkeyMapCollisionHandler(GameObject & object, const MapCollision& collision)
+{
+	if (collision.bottom) {
+		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->onGround = true;
+	}
+	else if (collision.left) {
+		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->onWallLeft = true;
+	}
+	else if (collision.right) {
+		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->onWallRight = true;
+	}
+}
+
+void Behaviors::MonkeyCollisionHandler(GameObject & object, GameObject & other)
+{
+	if (other.GetName() == "Collectable") {
+		other.Destroy();
+		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->CoinsCollected += 1;
+	}
+
+	if (other.GetName() == "Hazard" || other.GetName() == "Enemy") {
+		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->Health -= 1;
+	}
+}
+
 void Behaviors::MonkeyMovement::Initialize()
 {
 	onGround = false;
@@ -128,25 +153,4 @@ void Behaviors::MonkeyMovement::MoveVertical()
 	}
 }
 
-void Behaviors::MonkeyMapCollisionHandler(GameObject & object, const MapCollision& collision)
-{
-	if (collision.bottom) {
-		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->onGround = true;
-	} else if (collision.left) {
-		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->onWallLeft = true;
-	} else if (collision.right) {
-		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->onWallRight = true;
-	}
-}
 
-void Behaviors::MonkeyCollisionHandler(GameObject & object, GameObject & other)
-{
-	if (other.GetName() == "Collectable") {
-		other.Destroy();
-		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->CoinsCollected += 1;
-	}
-
-	if (other.GetName() == "Hazard" || other.GetName() == "Enemy") {
-		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->Health -= 1;
-	}
-}
