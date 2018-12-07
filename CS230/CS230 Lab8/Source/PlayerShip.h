@@ -23,8 +23,10 @@
 // Forward Declarations:
 //------------------------------------------------------------------------------
 
-typedef class Transform Transform;
-typedef class Physics Physics;
+class Transform;
+class Physics;
+
+namespace FMOD { namespace Studio { class EventInstance; } }
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -92,6 +94,9 @@ namespace Behaviors
 		// Components
 		Transform* transform;
 		Physics* physics;
+
+		// Other
+		FMOD::Studio::EventInstance* soundEvent;
 	};
 }
 

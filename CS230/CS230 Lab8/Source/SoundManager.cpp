@@ -36,7 +36,7 @@ SoundManager::SoundManager() : BetaObject("SoundManager")
 	// Directories
 	audioFilePath = "Audio/"; // Directory of audio assets
 	bankFilePath = "Banks/"; // Subdirectory for FMOD bank files
-	eventPrefix = "events:/"; // All events start with "event:/"
+	eventPrefix = "event:/"; // All events start with "event:/"
 }
 
 SoundManager::~SoundManager()
@@ -56,12 +56,18 @@ void SoundManager::Shutdown(void)
 	for (size_t i = 0; i < numSounds; i++)
 	{
 		FMOD_Assert(soundList[i]->release());
+		soundList[i] = nullptr;
 	}
+
+	numSounds = 0;
 
 	for (size_t i = 0; i < numBanks; i++)
 	{
 		FMOD_Assert(bankList[i]->unload());
+		bankList[i] = nullptr;
 	}
+
+	numBanks = 0;
 }
 
 void SoundManager::AddEffect(const std::string & filename)
@@ -84,7 +90,6 @@ void SoundManager::AddBank(const std::string & filename)
 	//add bank to banks list
 	bankList[numBanks] = bank;
 	numBanks += 1;
-
 }
 
 FMOD::Channel * SoundManager::PlaySound(const std::string & _name)
@@ -204,7 +209,7 @@ void SoundManager::AddSound(const std::string & filename, FMOD_MODE mode)
 	//Create an FMOD::Sound pointer variable
 	FMOD::Sound *sound;
 	//Use the low - level system to create a sound using the given path and mode
-	FMOD_Assert(system->createSound(filePath.c_str(), mode, 0, &sound));
+	FMOD_Assert(system->createSound(filePath.c_str(), mode, nullptr, &sound));
 
 	//Put the sound in the sound list at the next available index
 	soundList[numSounds] = sound;

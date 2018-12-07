@@ -19,7 +19,7 @@ Tilemap::~Tilemap()
 {
 	// Deleting the 2D array of tiles
 	// delete in the opposite order of creation
-	for (int r = 0; r < numRows; ++r)
+	for (int r = 0; r < numColumns; ++r)
 	{
 		delete[] data[r]; // delete each allocated row with array delete
 		data[r] = nullptr; // safely set to nullptr

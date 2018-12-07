@@ -18,6 +18,8 @@
 #include "BulletMovement.h"
 #include <Graphics.h>
 #include <Input.h>
+#include "SoundManager.h"
+#include <Engine.h>
 
 Behaviors::PlayerShip::PlayerShip(float _forwardThrust, float _maximumSpeed, float _rotationSpeed, float _bulletSpeed) : Component("PlayerShip")
 {
@@ -33,6 +35,9 @@ Behaviors::PlayerShip::PlayerShip(float _forwardThrust, float _maximumSpeed, flo
 	// Components
 	transform = nullptr;
 	physics = nullptr;
+
+	//other
+	soundEvent = nullptr;
 }
 
 Component * Behaviors::PlayerShip::Clone() const
@@ -46,6 +51,12 @@ void Behaviors::PlayerShip::Initialize()
 	physics = static_cast<Physics*>(GetOwner()->GetComponent("Physics"));
 
 	bulletArchetype = GetOwner()->GetSpace()->GetObjectManager().GetArchetypeByName("Bullet");
+
+	soundEvent = Engine::GetInstance().GetModule<SoundManager>()->PlayEvent("Test Tones");
+	soundEvent->setPaused(true);
+	soundEvent->setVolume(0.5f);
+	soundEvent->setParameterValue("Wave Type", 0);
+	soundEvent->setParameterValue("LowMidHigh", 0);
 }
 
 void Behaviors::PlayerShip::Update(float dt)
@@ -62,14 +73,21 @@ void Behaviors::PlayerShip::Update(float dt)
 void Behaviors::PlayerShip::Move() const
 {
 	//const float speed = 15.0f;
+	if (Input::GetInstance().IsKeyDown('W')) {
+		Vector2D MousePos = Graphics::GetInstance().ScreenToWorldPosition(Input::GetInstance().GetCursorPosition());
 
-	Vector2D MousePos = Graphics::GetInstance().ScreenToWorldPosition(Input::GetInstance().GetCursorPosition());
+		Vector2D force = MousePos - transform->GetTranslation();
 
-	Vector2D force = MousePos - transform->GetTranslation();
+		force = force.Normalized();
 
-	force = force.Normalized();
+		physics->AddForce(force * forwardThrust);
 
-	physics->AddForce(force * forwardThrust);
+		soundEvent->setPaused(false);
+	} else {
+		soundEvent->setPaused(true);
+	}
+
+	
 }
 
 void Behaviors::PlayerShip::Rotate() const

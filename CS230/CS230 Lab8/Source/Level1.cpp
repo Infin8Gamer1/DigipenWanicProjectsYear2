@@ -48,6 +48,9 @@ void Levels::Level1::Load()
 	soundManager = Engine::GetInstance().GetModule<SoundManager>();
 	soundManager->AddMusic("Asteroid_Field.mp3");
 	soundManager->AddEffect("teleport.wav");
+
+	soundManager->AddBank("Master Bank.strings.bank");
+	soundManager->AddBank("Master Bank.bank");
 }
 
 void Levels::Level1::Initialize()
