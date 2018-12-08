@@ -18,6 +18,7 @@
 #include "Physics.h"
 #include "Space.h"
 #include <Texture.h>
+#include <Mesh.h>
 #include <Input.h>
 #include "Level1.h"
 #include "Level2.h"
@@ -88,7 +89,7 @@ void Levels::Level3::Unload()
 {
 	std::cout << "Level3::Unload" << std::endl;
 
-	//delete meshQuad;
+	delete meshQuad;
 	meshQuad = nullptr;
 	delete spriteSourceCircle;
 	spriteSourceCircle = nullptr;
