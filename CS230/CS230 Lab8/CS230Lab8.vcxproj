@@ -98,7 +98,9 @@ xcopy fmod\lib\fmodstudioL64.dll "$(OutDir)" /Y</Command>
       <AdditionalDependencies>BetaLow_x64.lib;BetaHigh_x64.lib;fmod64_vc.lib;fmodstudio64_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy glfw\lib\x64\glfw3.dll "$(OutDir)" /Y</Command>
+      <Command>xcopy glfw\lib\x64\glfw3.dll "$(OutDir)" /Y
+xcopy fmod\lib\fmod64.dll "$(OutDir)" /Y
+xcopy fmod\lib\fmodstudio64.dll "$(OutDir)" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

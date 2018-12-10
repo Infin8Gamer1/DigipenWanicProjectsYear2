@@ -38,7 +38,7 @@ Levels::Level1::Level1() : Level("Level1")
 
 void Levels::Level1::Load()
 {
-	std::cout << "Level1::Load" << std::endl;
+	std::cout << GetName() << "::Load" << std::endl;
 	meshShip = CreateTriangleMesh(Color(1, 0, 0), Color(0, 1, 0), Color(0, 0, 1));
 	meshBullet = CreateTriangleMesh(Color(1, 0, 0), Color(1, 0, 0), Color(1, 0, 0));
 
@@ -55,7 +55,7 @@ void Levels::Level1::Load()
 
 void Levels::Level1::Initialize()
 {
-	std::cout << "Level1::Initialize" << std::endl;
+	std::cout << GetName() << "::Initialize" << std::endl;
 
 	GameObject* Ship = Archetypes::CreateShip(meshShip);
 	GetSpace()->GetObjectManager().AddObject(*Ship);
@@ -66,7 +66,7 @@ void Levels::Level1::Initialize()
 void Levels::Level1::Update(float dt)
 {
 	UNREFERENCED_PARAMETER(dt);
-	//std::cout << "Level1::Update" << std::endl;
+
 	if (Input::GetInstance().CheckReleased('T')) {
 		soundManager->PlaySound("teleport.wav");
 	}
@@ -85,13 +85,15 @@ void Levels::Level1::Update(float dt)
 
 void Levels::Level1::Shutdown()
 {
+	std::cout << GetName() << "::Shutdown" << std::endl;
+
 	musicChannel->stop();
 	musicChannel = nullptr;
 }
 
 void Levels::Level1::Unload()
 {
-	std::cout << "Level1::Unload" << std::endl;
+	std::cout << GetName() << "::Unload" << std::endl;
 
 	delete meshShip;
 	meshShip = nullptr;
