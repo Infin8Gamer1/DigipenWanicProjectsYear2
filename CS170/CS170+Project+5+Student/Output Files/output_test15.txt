@@ -1,0 +1,17 @@
+TestAddAssign1...
+Before addition:
+List 1:    5   4   3   2   1
+List 2:   50  40  30  20  10
+After addition:
+List 1:    5   4   3   2   1  50  40  30  20  10
+List 2:   50  40  30  20  10
+Items in the list: 10
+
+============================================
+Total number of Lists created: 2
+============================================
+
+============================================
+Total number of nodes alive: 0
+============================================
+

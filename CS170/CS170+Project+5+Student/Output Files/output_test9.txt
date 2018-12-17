@@ -1,0 +1,27 @@
+TestRemoveNode...
+Original List:
+List:    5   4   3   2   1
+After removing value 3:
+List:    5   4   2   1
+After removing value 1:
+List:    5   4   2
+After removing value 5:
+List:    4   2
+After removing value 10:
+List:    4   2
+After removing value 2:
+List:    4
+After removing value 4:
+List: 
+After remove attempt in empty list:
+List: 
+Items in the list: 0
+
+============================================
+Total number of Lists created: 1
+============================================
+
+============================================
+Total number of nodes alive: 0
+============================================
+
