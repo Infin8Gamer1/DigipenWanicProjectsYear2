@@ -1,3 +1,3 @@
 ﻿  List.cpp
-c:\users\jacob.holyfield\documents\digipenwanicprojectsyear2\cs170\cs170 project 5\cs170_project_5\cs170_project_5\src\list.cpp(56): error C4716: 'CS170::List::operator=': must return a value
-c:\users\jacob.holyfield\documents\digipenwanicprojectsyear2\cs170\cs170 project 5\cs170_project_5\cs170_project_5\src\list.cpp(66): error C4716: 'CS170::List::operator+=': must return a value
+  CS170_Project_5.vcxproj -> C:\Users\jacob.holyfield\Documents\DigipenWanicProjectsYear2\CS170\CS170 Project 5\CS170_Project_5\Debug\CS170_Project_5.exe
+  CS170_Project_5.vcxproj -> C:\Users\jacob.holyfield\Documents\DigipenWanicProjectsYear2\CS170\CS170 Project 5\CS170_Project_5\Debug\CS170_Project_5.pdb (Partial PDB)

@@ -4,6 +4,9 @@
 
 namespace CS170
 {
+	int List::list_count = 0;
+	int List::Node::nodes_alive = 0;
+
     /*
 	Public Methods
 	*/
@@ -13,19 +16,40 @@ namespace CS170
 		head = nullptr; // pointer to the head of the list
 		tail = nullptr; // pointer to the last node
 		size = 0;   // number of items in the list
-		list_count++;
+		List::list_count++;
 	}
 
 	List::List(const List & list)
 	{
+		head = nullptr;
+		tail = nullptr;
+		size = 0;
+		List::list_count++;
+
+		Node *temp = list.head;
+
+		while (temp != nullptr) {
+			push_back(temp->data);
+			temp = temp->next;
+		}
 	}
 
-	List::List(const int * array, int size)
+	List::List(const int * array, int _size)
 	{
+		head = nullptr; // pointer to the head of the list
+		tail = nullptr; // pointer to the last node
+		size = 0;   // number of items in the list
+		List::list_count++;
+
+		for (int i = 0; i < _size; i++)
+		{
+			push_back(array[i]);
+		}
 	}
 
 	List::~List()
 	{
+		this->clear();
 	}
 
 	void List::push_front(int value_)
@@ -45,6 +69,8 @@ namespace CS170
 			head = tempNode;
 			tail = tempNode;
 		}
+
+		size += 1;
 	}
 
 	void List::push_back(int value_)
@@ -63,7 +89,8 @@ namespace CS170
 			head = tempNode;
 			tail = tempNode;
 		}
-		
+
+		size += 1;
 	}
 
 	int List::pop_front()
@@ -76,6 +103,8 @@ namespace CS170
 		delete head;
 		//make the new head the temp
 		head = temp;
+
+		size -= 1;
 		
 		return oldHeadData;
 	}
@@ -86,10 +115,17 @@ namespace CS170
 		Node* temp = head;
 
 		//loop until we find the node that is pointing to the tail
-		while (temp->next != tail)
-		{
-			temp = temp->next;
+		if (temp->next == nullptr) {
+			head = nullptr;
 		}
+		else {
+			while (temp->next != tail)
+			{
+				temp = temp->next;
+			}
+		}
+
+		
 		
 		//store the old tail data
 		int oldTailData = tail->data;
@@ -103,67 +139,109 @@ namespace CS170
 		//make the new tail the temp
 		tail = temp;
 
+		size -= 1;
+
 		return oldTailData;
 	}
 
 	void List::remove_node_by_value(int value_)
 	{
+		if (empty()) {
+			return;
+		}
+
 		//create a pointer to the node that we want to get rid of
 		Node* nodeToBeDeleted = head;
 
 		//loop until we find a node that has the value we are looking for
-		while (nodeToBeDeleted->data == value_)
+		while (nodeToBeDeleted->data != value_)
 		{
 			nodeToBeDeleted = nodeToBeDeleted->next;
+
+			if (nodeToBeDeleted == nullptr) {
+				return;
+			}
 		}
 
-		//create a pointer to the previous node from the one we want to delete
-		Node* previousNode = head;
+		if (head == nodeToBeDeleted) {
+			if (nodeToBeDeleted->next != nullptr) {
+				head = nodeToBeDeleted->next;
+			} else {
+				head = nullptr;
+				tail = nullptr;
+				size = 0;
+				return;
+			}
 
-		//loop until we find the node that is pointing to the node that we are going to delete
-		while (previousNode->next != nodeToBeDeleted)
-		{
-			previousNode = previousNode->next;
+			if (head->next == nullptr) {
+				tail = head;
+			}
+		} else {
+			//create a pointer to the previous node from the one we want to delete
+			Node* previousNode = head;
+
+			//loop until we find the node that is pointing to the node that we are going to delete
+			while (previousNode->next != nodeToBeDeleted)
+			{
+				previousNode = previousNode->next;
+			}
+
+			//make a pointer to the next node that the node we are getting rid of is pointing to
+			Node* nextNode = nodeToBeDeleted->next;
+
+			//update the previous node to point to the next node
+			previousNode->next = nextNode;
+
+			if (previousNode->next == nullptr) {
+				tail = previousNode;
+			}
 		}
-
-		//make a pointer to the next node that the node we are getting rid of is pointing to
-		Node* nextNode = nodeToBeDeleted->next;
-
-		//update the previous node to point to the next node
-		previousNode->next = nextNode;
 
 		//delete the one we want to get rid of
 		delete nodeToBeDeleted;
+
+		size -= 1;
 	}
 
 	void List::insert_node_at(int location_, int value_)
 	{
-		//create a pointer to the node that we want to add
-		Node* nodeToBeAdded = new_node(value_);
-
-		//create a pointer to the previous node from the one we want to delete
-		Node* nodeAtLocation = head;
-
-		//loop until we find the node that is at the desired location
-		for (size_t i = 0; i < location_; i++)
-		{
-			nodeAtLocation = nodeAtLocation->next;
+		//if the location is 0 or smaller then add a node at the front
+		if (location_ <= 0) {
+			push_front(value_);
 		}
-
-		//make a pointer to the next node that the node we are getting rid of is pointing to
-		Node* previousNode = head;
-
-		//loop until we find the node that previous to the node at the location
-		while (previousNode->next != nodeAtLocation)
+		//otherwise if the location is bigger than the size then add a node to the back
+		else if (location_ >= size)
 		{
-			previousNode = previousNode->next;
+			push_back(value_);
 		}
+		else {
+			//get the node at the location
+			Node * nodeAtLocation = head;
 
-		//set the new nodes next to be the the node that was at the location
-		nodeToBeAdded->next = nodeAtLocation;
+			for (int i = 0; i < location_; i++)
+			{
+				nodeAtLocation = nodeAtLocation->next;
+			}
 
-		//set the previous nodes next to be the new node
-		previousNode->next = nodeToBeAdded;
+			//get the node previous to the location
+			Node * nodeAtLocationMinusOne = head;
+			while (nodeAtLocationMinusOne->next != nodeAtLocation)
+			{
+				nodeAtLocationMinusOne = nodeAtLocationMinusOne->next;
+			}
+
+			//create the node to be added to the location
+			Node *nodeToBeAdded = new_node(value_);
+
+			//make previous node point to new node
+			nodeAtLocationMinusOne->next = nodeToBeAdded;
+
+			//make the new node point to the old node at its position
+			nodeToBeAdded->next = nodeAtLocation;
+
+			//increase the size
+			size += 1;
+		}
 	}
 
 	List & List::operator=(const List & list_)
@@ -178,7 +256,7 @@ namespace CS170
 		do {
 			this->push_back(temp->data);
 			temp = temp->next;
-		} while (temp != list_.tail);
+		} while (temp != nullptr);
 
 		return *this;
 	}
@@ -186,7 +264,25 @@ namespace CS170
 	List List::operator+(const List & list_) const
 	{
 		//make a new list
+		List outputList = List(*this);
 
+		//make a temp node
+		Node* temp = list_.head;
+
+		//loop through the entire list_ and add the temp node
+		do {
+			outputList.push_back(temp->data);
+			temp = temp->next;
+		} while (temp != nullptr);
+
+		return outputList;
+	}
+
+	List & List::operator+=(const List & list_)
+	{
+		if (list_.empty()) {
+			return *this;
+		}
 
 		//make a temp node
 		Node* temp = list_.head;
@@ -195,28 +291,28 @@ namespace CS170
 		do {
 			this->push_back(temp->data);
 			temp = temp->next;
-		} while (temp != list_.tail);
+		} while (temp != nullptr);
 
 		return *this;
 	}
 
-	List & List::operator+=(const List & list_)
-	{
-		// TODO: insert return statement here
-	}
-
 	int List::list_size() const
 	{
-		return 0;
+		return size;
 	}
 
 	bool List::empty() const
 	{
-		return false;
+		return (head == nullptr || tail == nullptr || size <= 0);
 	}
 
 	void List::clear()
 	{
+		int _size = size;
+		for (int i = 0; i < _size; i++)
+		{
+			pop_back();
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////////////
@@ -260,12 +356,12 @@ namespace CS170
 	{
 		next = nullptr;  // pointer to the next Node
 		data = _data;  // the actual data in the node
-		nodes_alive++;
+		Node::nodes_alive += 1;
 	}
 
 	List::Node::~Node()
 	{
-		nodes_alive--;
+		Node::nodes_alive -= 1;
 	}
 
 	List::Node *List::new_node(int data) const
@@ -274,7 +370,5 @@ namespace CS170
 		Node *node = new Node(data); // create the node
 		return node;
 	}
-
-	
 
 } //namespace CS170
