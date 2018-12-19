@@ -1,3 +1,8 @@
+////////////////////////////////////
+//CS170 Linked Lists
+//By: Jacob Holyfield
+////////////////////////////////////
+
 #include <iomanip>  // setw
 #include <iostream> // ostream, endl
 #include "List.h"
@@ -146,6 +151,7 @@ namespace CS170
 
 	void List::remove_node_by_value(int value_)
 	{
+		//if the list is empty just give up
 		if (empty()) {
 			return;
 		}
@@ -163,18 +169,15 @@ namespace CS170
 			}
 		}
 
+		//if the head is the node we are trying to delete then
 		if (head == nodeToBeDeleted) {
+			//if there is a next node move the head to be that one. other wise make the list empty.
 			if (nodeToBeDeleted->next != nullptr) {
 				head = nodeToBeDeleted->next;
 			} else {
-				head = nullptr;
-				tail = nullptr;
-				size = 0;
+				//make the list empty
+				clear();
 				return;
-			}
-
-			if (head->next == nullptr) {
-				tail = head;
 			}
 		} else {
 			//create a pointer to the previous node from the one we want to delete
@@ -280,6 +283,7 @@ namespace CS170
 
 	List & List::operator+=(const List & list_)
 	{
+		//if the list being passed in is empty then just return this
 		if (list_.empty()) {
 			return *this;
 		}
