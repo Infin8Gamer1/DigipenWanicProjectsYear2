@@ -1,0 +1,7 @@
+
+******************** TestDuplicates7 ********************
+List1 (10000 nodes): 
+Duplicates removed: 9991
+List1 ( 9 nodes): 1   2   3   4   5   6   7   8   9   
+
+Number of nodes still in memory: 0

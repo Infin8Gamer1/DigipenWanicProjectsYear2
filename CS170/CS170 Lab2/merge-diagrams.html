@@ -1,0 +1,102 @@
+
+<!-- saved from url=(0093)http://azrael.digipen.edu/~mmead/www/Courses/2014/winter/cs170/labs/week8/merge-diagrams.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="./merge-diagrams_files/new.css">
+<title>Merge Diagrams</title>
+<style>
+body {
+   background : #ffffff; 
+   margin-left : 50;
+   margin-right : 20;
+   background : url("../../../../../../images/notebook.jpg");
+   }
+</style></head>
+
+
+
+<body>  
+<center>
+<h1>Merge Diagrams<p></p></h1>
+</center>
+
+<!--
+<p class="technote">
+</p>
+-->
+
+<p class="SectionHeader">
+Diagrams
+</p>
+
+<ol>
+<li><b>Before:</b>
+<blockquote>
+<img src="./merge-diagrams_files/Merge-before.png">
+</blockquote>
+
+</li><li><b>After:</b>
+<blockquote>
+<img src="./merge-diagrams_files/Merge-after.png">
+</blockquote>
+
+<p>
+</p><hr width="90%">
+<p>
+	
+</p></li><li><b>Pseudocode</b> There are a variety of ways to approach this. This is just an overview of the
+	things that you are going to do. Some of the details have been left out, but you should be able
+	to write C++ code from the description below. As always <b>DRAW DIAGRAMS</b>. You will not get 
+	any help from a TA if you are working without diagrams. 
+	
+<blockquote><pre>Setup a pointer to the first node of the left list. (left) 
+Setup a pointer to the first node of the right list (right)
+Setup a pointer to point to the head of the new list. (This pointer will only be set once.)
+Setup a pointer to point to the tail of the new list. (This will be updated every time you add a node to the new list).
+
+While both pointers (left and right) are pointing at a node
+  Compare the value of the left node with the right node
+  If the left node is less than or equal to the right node, 
+    Place the left node in the new list
+    Move the left pointer to the next node
+  Else  (The left node is greater than the right node)
+    Place the right node in the new list
+    Move the right pointer to the next node
+  End If
+End While
+
+If the right side is empty and the left side still has nodes
+  Add all of the nodes from the left side to the end of the list
+If the left side is empty and the right side still has nodes
+  Add all of the nodes from the right side to the end of the list
+
+Make sure to update any other members before returning.
+
+</pre></blockquote>	
+
+<b>Other hints</b>:<p>
+</p><ul>
+<li>Make sure you can handle the case when either the left or right list is empty.</li>
+<li>The lists are unlikely to be the same length, so don't assume that fact.</li>
+<li>Make sure the rhs list is empty afterwards. If you are storing a counter in that list, make
+  sure you set the count to 0.</li>
+</ul>
+
+
+</li></ol>
+
+
+<br><br><br>
+<hr>
+
+<blockquote><pre></pre></blockquote>
+
+
+<blockquote><pre></pre></blockquote>
+
+
+
+
+
+<blockquote><pre></pre></blockquote>
+
+</body></html>

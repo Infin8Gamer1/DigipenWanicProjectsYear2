@@ -1,0 +1,7 @@
+
+******************** TestDuplicates1 ********************
+List1 (16 nodes): 12   12   12   12   12   12   12   12   24   27   27   27   34   34   59   88   
+Duplicates removed: 10
+List1 ( 6 nodes): 12   24   27   34   59   88   
+
+Number of nodes still in memory: 0

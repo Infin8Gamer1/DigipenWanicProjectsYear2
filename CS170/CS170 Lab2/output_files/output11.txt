@@ -1,0 +1,7 @@
+
+******************** TestDuplicates3 ********************
+List1 ( 8 nodes): 4   5   8   9   10   11   12   17   
+Duplicates removed: 0
+List1 ( 8 nodes): 4   5   8   9   10   11   12   17   
+
+Number of nodes still in memory: 0

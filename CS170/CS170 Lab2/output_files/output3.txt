@@ -1,0 +1,9 @@
+
+******************** TestMerge3 ********************
+List1 ( 4 nodes): 12   21   34   56   
+List2 ( 8 nodes): 10   17   19   23   30   59   67   88   
+Merge list2 into list1:
+List1 (12 nodes): 10   12   17   19   21   23   30   34   56   59   67   88   
+List2 ( 0 nodes): 
+
+Number of nodes still in memory: 0

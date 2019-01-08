@@ -1,0 +1,19 @@
+Question 1:
+
+1. F
+2. T
+3. T
+4. T
+5. T
+6. F
+7. F
+8. T
+
+Question 2:
+
+1. No
+2. No
+3. Yes
+4. No
+5. Yes
+6. No

@@ -1,0 +1,10 @@
+
+******************** TestMerge8 ********************
+Merging a list into itself...
+List1 (11 nodes): 8   12   12   12   20   21   21   43   55   56   70   
+List2 (11 nodes): 8   12   12   12   20   21   21   43   55   56   70   
+Merge list2 into list1:
+List1 (22 nodes): 8   8   12   12   12   12   12   12   20   20   21   21   21   21   43   43   55   55   56   56   70   70   
+List2 ( 0 nodes): 
+
+Number of nodes still in memory: 0

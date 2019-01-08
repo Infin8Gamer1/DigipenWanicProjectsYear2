@@ -1,0 +1,9 @@
+
+******************** TestMerge5 ********************
+List1 ( 8 nodes): 12   21   22   27   34   38   56   94   
+List2 ( 0 nodes): 
+Merge list2 into list1:
+List1 ( 8 nodes): 12   21   22   27   34   38   56   94   
+List2 ( 0 nodes): 
+
+Number of nodes still in memory: 0

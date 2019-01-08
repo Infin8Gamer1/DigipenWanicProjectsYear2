@@ -1,0 +1,15 @@
+Question 1:
+
+1. NV
+2. NV
+3. V
+4. V
+5. V
+6. V
+7. NV
+
+Question 2:
+
+1. Destructor
+2. Copy Constructor
+3. Assigment Operator
