@@ -1,0 +1,16 @@
+Question 1:
+
+NV
+NV
+V
+NV
+V
+NV
+
+Question 2:
+
+F
+T
+T
+F
+F

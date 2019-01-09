@@ -1,0 +1,165 @@
+
+<!-- saved from url=(0085)http://azrael.digipen.edu/~mmead/www/Courses/2014/winter/cs170/labs/week10/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="./CS170_Lab3_files/new.css">
+<title>CS 170 - Lab Quiz</title>
+<style>
+body {
+   background : #ffffff; 
+   margin-left : 50;
+   margin-right : 20;
+   background : url("./images/notebook.jpg");
+   }
+</style></head>
+
+
+
+<body>  
+<center>
+<h1>CS 170 - Lab 3<p></p></h1>
+</center>
+
+<!--
+<p class="technote">
+</p>
+-->
+
+<p class="SectionHeader">
+Information
+</p>
+
+The next few labs we will be implementing a different class. The class is <b><tt>Vector</tt></b> and will be similar to the <b><tt>std::vector</tt></b>
+that is in the STL. Just as with the linked list labs, all of the labs will build off of each other so you'll have to complete all of them. Near the end
+of the semester, you will submit all of the code just like you did with the <b><tt>List</tt></b> class.
+
+<ol>
+<li>In this lab, you will be creating a <tt>Vector</tt> class, similar to the one in the Standard Template Library. You won't be providing
+	any iterator classes, as that is beyond the scope of CS170. There are only a couple of non-trivial methods that you need to implement for this lab.
+<p>
+</p><ul>
+<li>You are given the header file <a href="./Vector.h">Vector.h</a> (<a href="./CS170_Lab3_files/Vector.h.html">HTML</a>) 
+to start with, and a partial implementation in <a href="./Vector.cpp">Vector.cpp</a> (<a href="./CS170_Lab3_files/Vector.cpp.html">HTML</a>)
+to help get you started. There are 11 public methods so far, and 9 of them are trivial. The ones
+in <font color="blue">blue</font> have already been implemented for you. (You're welcome!)
+<ol>
+	<p>
+	</p><li><font color="blue">Default constructor</font></li>
+	<li>Destructor</li>
+	<li>clear</li>
+	<li>operator[] (non-const)</li>
+	<li>operator[] (const)</li>
+	<li><font color="blue">empty</font></li>
+	<li><font color="blue">size</font></li>
+	<li><font color="blue">capacity</font></li>
+	<li><font color="blue">allocations</font></li>
+</ol>	
+<p>
+	The remaining 2 public methods are a little more involved:
+	</p><p>
+</p><ol>
+	<li>push_front (You need to shift all elements over one position, and you may need to grow the array first.)</li>
+	<li>push_back (No shifting, but if the array is full, you will need to grow the array first.)</li>
+</ol>
+
+<p>
+</p></li><li>Your task is to implement all of the methods that are defined in the header file. There are some private fields already
+defined, and you shouldn't need any others. There are also some simple methods already implemented.
+<p>
+</p></li><li>Start with the <b><tt>push_back</tt></b> method and try to pass the first test. Once you get <b><tt>push_back</tt></b> working, the rest will
+	come pretty quickly.
+<p>
+</p></li><li>Probably, the most difficult method at this point is the <b><tt>grow</tt></b> method. <b><tt>push_back</tt></b> calls this method, so
+	you will need to implement it to get <b><tt>push_back</tt></b> to work.
+	<p>
+</p></li><li>Growing a vector/array simply means allocating another array that is <b>twice</b> the size of the original array, copying the elements
+	from the orginal array into the new array, and then deleting the original array.
+</li></ul>
+<p>
+<b>Growing a vector:</b>
+</p><ol>
+<li>Original vector:
+<blockquote>
+<img src="./CS170_Lab3_files/Vector-grow-1.jpg">
+</blockquote>
+
+</li><li>After growing (allocate another array that is twice as large):
+<blockquote>
+<img src="./CS170_Lab3_files/Vector-grow-2.jpg">
+</blockquote>
+
+</li><li>Copy existing elements from original array into new array <i>using a loop of some kind</i>. 
+	Do not use <b><tt>memcpy</tt></b> or anything like that.
+<blockquote>
+<img src="./CS170_Lab3_files/Vector-grow-4.jpg">
+</blockquote>
+
+</li><li><b>Don't forget: Free the memory from the original array or you'll have a memory leak.</b></li>
+</ol>
+<p><br><br>
+<b>Pushing to the front: Example: <tt>push_front(2);</tt></b>
+</p><ol>
+<li>Original vector:
+<blockquote>
+<img src="./CS170_Lab3_files/Vector-push_front-1.jpg">
+</blockquote>
+
+</li><li>Copy all elements to the right one slot starting with the <b>right-most element first</b>:
+<blockquote>
+<img src="./CS170_Lab3_files/Vector-push_front-2.jpg">
+</blockquote>
+
+</li><li>Put the value in the open slot:
+<blockquote>
+<img src="./CS170_Lab3_files/Vector-push_front-3.jpg">
+</blockquote>
+	
+</li><li>Make sure there is enough room in the array before shifting all of the elements. You may have to grow
+	the array first.
+</li></ol>
+
+<p>
+</p><hr width="100%">
+<p>
+
+</p></li><li>Add a file header comment to <tt><b>Vector.h</b></tt> and <tt><b>Vector.cpp</b></tt>.<p>
+</p><hr width="100%">
+<p>
+
+
+
+</p><blockquote><pre></pre></blockquote>
+
+Here is some test code in <a href="./driver.cpp">driver.cpp</a> (<a href="./CS170_Lab3_files/driver.cpp.html">HTML</a>). Command lines:
+
+<blockquote><pre><b>g++</b> -o gnu -O -Wall -Wextra -Werror -ansi -pedantic driver.cpp Vector.cpp<br>
+<b>cl</b> /EHa /MTd /W4 /WX /Za /Fems.exe driver.cpp Vector.cpp<br>
+</pre></blockquote>
+
+To run a single test, provide the number on the command line. Example:
+
+<blockquote><pre>gnu 5
+</pre></blockquote>
+
+will run test #5 (calls the TestALot1 function). If you don't provide any number, all tests will be run.
+
+<blockquote>
+<a href="./CS170_Lab3_files/output-all.txt">Output from all functions</a>
+</blockquote>
+
+Don't forget to add <tt>--strip-trailing-cr</tt> to the <tt>diff</tt> program to ignore the newlines between GNU's
+output and the other compilers.
+<p>
+<br><br><br>
+
+</p><blockquote><pre></pre></blockquote>
+
+
+<blockquote><pre></pre></blockquote>
+
+
+
+
+
+<blockquote><pre></pre></blockquote>
+
+</li></ol></body></html>

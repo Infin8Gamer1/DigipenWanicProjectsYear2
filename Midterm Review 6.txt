@@ -1,0 +1,13 @@
+Question 1:
+
+int& minimum(int& a, int& b){
+	if(b < a){
+		return b;
+	}
+	
+	return a;
+}
+
+Question 2:
+
+B

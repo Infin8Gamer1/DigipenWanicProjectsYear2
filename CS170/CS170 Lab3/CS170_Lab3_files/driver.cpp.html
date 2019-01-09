@@ -1,0 +1,165 @@
+
+<!-- saved from url=(0090)http://azrael.digipen.edu/~mmead/www/Courses/2014/winter/cs170/labs/week10/driver.cpp.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="./driver.cpp_files/new.css">
+<title>driver.cpp</title>
+</head>
+<body>  
+
+<pre class="sourcecode"><code>
+<font color="990099">#include &lt;iostream&gt; // cout, endl</font>
+<font color="990099">#include &lt;cstdlib&gt;  // atoi</font>
+<font color="990099">#include "Vector.h"</font>
+
+<b>void</b> Print(<b>const</b> CS170::Vector&amp; array, <b>bool</b> newline = <b>true</b>)
+{
+  <b>for</b> (<b>unsigned</b> i = 0; i &lt; array.size(); i++)
+  {
+    std::cout &lt;&lt; array[i] &lt;&lt; <font color="#9933CC">"  "</font>;
+  }
+
+  std::cout &lt;&lt; <font color="#9933CC">"(size="</font> &lt;&lt; array.size() &lt;&lt; <font color="#9933CC">", capacity="</font> &lt;&lt; 
+                           array.capacity() &lt;&lt; <font color="#9933CC">", allocs="</font> &lt;&lt; 
+                           array.allocations() &lt;&lt; <font color="#9933CC">")"</font>;
+  <b>if</b> (newline)
+    std::cout &lt;&lt; std::endl;
+}
+
+
+<b>void</b> TestPush(<b>void</b>)
+{
+  std::cout &lt;&lt; <font color="#9933CC">"\n********** TestPush **********\n"</font>;
+  CS170::Vector a;
+  std::cout &lt;&lt; <font color="#9933CC">"Empty array:\n"</font>;
+  Print(a);
+
+  std::cout &lt;&lt; <font color="#9933CC">"push_back 5 integers:\n"</font>;
+  <b>for</b> (<b>int</b> i = 0; i &lt; 5; i++)
+  {
+    a.push_back(i);
+    Print(a);
+  }
+
+  std::cout &lt;&lt; <font color="#9933CC">"push_front 5 integers:\n"</font>;
+  <b>for</b> (<b>int</b> i = 0; i &lt; 5; i++)
+  {
+    a.push_front(i);
+    Print(a);
+  }
+}
+
+<b>void</b> TestSubscripts(<b>void</b>)
+{
+  std::cout &lt;&lt; <font color="#9933CC">"\n********** TestSubscripts **********\n"</font>;
+  CS170::Vector a;
+
+  std::cout &lt;&lt; <font color="#9933CC">"push_back 10 even integers:\n"</font>;
+  <b>for</b> (<b>int</b> i = 0; i &lt; 10; i++)
+    a.push_back(2 * i);
+
+  Print(a);
+
+  std::cout &lt;&lt; <font color="#9933CC">"multiple each value by 3:\n"</font>;
+  <b>for</b> (<b>int</b> i = 0; i &lt; 10; i++)
+    a[i] = a[i] * 3;
+  Print(a);
+}
+
+<b>void</b> TestSubscript1(<b>void</b>)
+{
+  std::cout &lt;&lt; <font color="#9933CC">"\n********** TestSubscript1 **********\n"</font>;
+  CS170::Vector a;
+
+  <b>int</b> ia[] = {2, 4, 6, 6, 8, 10, 6, 12, -6, 14, 16, 6, 6};
+  <b>int</b> size = <b>sizeof</b>(ia)/<b>sizeof</b>(*ia);
+  std::cout &lt;&lt; <font color="#9933CC">"push_back 10 even integers:\n"</font>;
+  <b>for</b> (<b>int</b> i = 0; i &lt; size; i++)
+    a.push_back(ia[i]);
+  Print(a);
+
+  <b>int</b> index = a.size() / 2;
+  std::cout &lt;&lt; <font color="#9933CC">"using subscript: a["</font> &lt;&lt; index &lt;&lt; <font color="#9933CC">"]"</font> &lt;&lt; std::endl;
+  std::cout &lt;&lt; <font color="#9933CC">"a["</font> &lt;&lt; index &lt;&lt; <font color="#9933CC">"] = "</font> &lt;&lt; a[index] &lt;&lt; std::endl;
+}
+
+<b>void</b> TestSubscript2(<b>void</b>)
+{
+  std::cout &lt;&lt; <font color="#9933CC">"\n********** TestSubscript2 **********\n"</font>;
+  CS170::Vector a;
+
+  <b>int</b> ia[] = {2, 4, 6, 6, 8, 10, 6, 12, -6, 14, 16, 6, 6};
+  <b>int</b> size = <b>sizeof</b>(ia)/<b>sizeof</b>(*ia);
+  std::cout &lt;&lt; <font color="#9933CC">"push_back 10 even integers:\n"</font>;
+  <b>for</b> (<b>int</b> i = 0; i &lt; size; i++)
+    a.push_back(ia[i]);
+  Print(a);
+
+<font color="990099">#if 0</font>
+  <b>int</b> index = a.size() * 2;
+  std::cout &lt;&lt; <font color="#9933CC">"using subscript: a["</font> &lt;&lt; index &lt;&lt; <font color="#9933CC">"]"</font> &lt;&lt; std::endl;
+  std::cout &lt;&lt; <font color="#9933CC">"a["</font> &lt;&lt; index &lt;&lt; <font color="#9933CC">"] = "</font> &lt;&lt; a[index] &lt;&lt; std::endl;
+<font color="990099">#endif</font>
+}
+
+<b>void</b> TestALot1(<b>void</b>)
+{
+  std::cout &lt;&lt; <font color="#9933CC">"\n********** TestALot1 **********\n"</font>;
+  CS170::Vector a;
+
+  std::cout &lt;&lt; <font color="#9933CC">"push_back 10 even integers:\n"</font>;
+  <b>for</b> (<b>int</b> i = 0; i &lt; 10; i++)
+    a.push_back(2 * i);
+  Print(a);
+
+  std::cout &lt;&lt; <font color="#9933CC">"clear:\n"</font>;
+  a.clear();
+  Print(a);
+
+  std::cout &lt;&lt; <font color="#9933CC">"push_back 10 odd integers:\n"</font>;
+  <b>for</b> (<b>int</b> i = 0; i &lt; 10; i++)
+    a.push_back(2 * i + 1);
+  Print(a);
+
+  std::cout &lt;&lt; <font color="#9933CC">"push_back 10 more integers:\n"</font>;
+  <b>for</b> (<b>int</b> i = 0; i &lt; 10; i++)
+    a.push_back(i);
+  Print(a);
+
+  std::cout &lt;&lt; <font color="#9933CC">"clear:\n"</font>;
+  a.clear();
+  Print(a);
+}
+
+<b>int</b> main(<b>int</b> argc, <b>char</b> **argv)
+{
+  <b>int</b> test_num = 0;
+  <b>if</b> (argc &gt; 1)
+    test_num = std::atoi(argv[1]);
+
+  <b>typedef</b> <b>void</b> (*Test)(<b>void</b>);
+  Test Tests[] = {
+                    TestPush,        <font color="#003399"><i>//  1 </i></font>
+                    TestSubscripts,  <font color="#003399"><i>//  2</i></font>
+                    TestSubscript1,  <font color="#003399"><i>//  3</i></font>
+                    TestSubscript2,  <font color="#003399"><i>//  4</i></font>
+                    TestALot1,       <font color="#003399"><i>//  5</i></font>
+                 };
+
+  <b>int</b> num = <b>sizeof</b>(Tests) / <b>sizeof</b>(*Tests);
+  <b>if</b> (test_num == 0)
+  {
+    <b>for</b> (<b>int</b> i = 0; i &lt; num; i++)
+      Tests[i]();
+  }
+  <b>else</b> <b>if</b> (test_num &gt; 0 &amp;&amp; test_num &lt;= num)
+    Tests[test_num - 1]();
+
+  <b>return</b> 0;
+}
+</code></pre>
+
+
+
+<blockquote><pre></pre></blockquote>
+
+</body></html>
