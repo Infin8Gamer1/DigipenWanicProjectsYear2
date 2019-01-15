@@ -1,0 +1,7 @@
+Part 1:
+
+Widget& operator+=(const Widget& _widget);
+
+Part 2:
+
+Point& operator+=(const Point& _point);

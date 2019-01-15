@@ -1,0 +1,9 @@
+Part 1:
+
+friend std::ostream& operator<<(const std::ostream & _stream, const Point & _point)
+
+Part 2:
+
+std::ostream& operator<<(const std::ostream & _stream, const Point & _point){
+	return _stream << "X: " << _point.x_ << " Y: " << _point.y_ << endl;
+}
