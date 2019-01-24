@@ -113,7 +113,7 @@ GameObject * Archetypes::CreateCircle(Mesh * mesh, SpriteSource * spriteSource)
 	//physics->SetGravity(Vector2D(0, -98.0f));
 	circle->AddComponent(physics);
 	//ColliderPoint
-	ColliderCircle* collider = new ColliderCircle(50.0f);
+	ColliderCircle* collider = new ColliderCircle(25.0f);
 	circle->AddComponent(collider);
 	//ColorChange
 	Behaviors::ColorChange* colorChange = new Behaviors::ColorChange(Color(1, 1, 0), Color(1, 0, 0));
@@ -170,7 +170,7 @@ GameObject * Archetypes::CreateRectangle(Mesh * mesh)
 	//physics->SetGravity(Vector2D(0, -98.0f));
 	circle->AddComponent(physics);
 	//ColliderPoint
-	ColliderRectangle* collider = new ColliderRectangle(Vector2D(abs(transform->GetScale().x / 2), abs(transform->GetScale().y / 2)));
+	ColliderRectangle* collider = new ColliderRectangle(Vector2D(abs(transform->GetScale().x / 4), abs(transform->GetScale().y / 4)));
 	circle->AddComponent(collider);
 	//ColorChange
 	Behaviors::ColorChange* colorChange = new Behaviors::ColorChange(Color(0, 1, 0), Color(1, 0, 0));

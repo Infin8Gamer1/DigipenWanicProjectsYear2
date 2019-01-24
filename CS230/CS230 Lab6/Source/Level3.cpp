@@ -21,6 +21,7 @@
 #include <Input.h>
 #include "Level1.h"
 #include "Level2.h"
+#include <Mesh.h>
 
 Levels::Level3::Level3() : Level("Level3")
 {
@@ -37,7 +38,7 @@ Levels::Level3::Level3() : Level("Level3")
 void Levels::Level3::Load()
 {
 	std::cout << "Level3::Load" << std::endl;
-	meshQuad = CreateQuadMesh(Vector2D(1, 1), Vector2D(1, 1));
+	meshQuad = CreateQuadMesh(Vector2D(1, 1), Vector2D(0.5, 0.5));
 
 	textureCircle = Texture::CreateTextureFromFile("Circle.png");
 
@@ -88,7 +89,7 @@ void Levels::Level3::Unload()
 {
 	std::cout << "Level3::Unload" << std::endl;
 
-	//delete meshQuad;
+	delete meshQuad;
 	meshQuad = nullptr;
 	delete spriteSourceCircle;
 	spriteSourceCircle = nullptr;

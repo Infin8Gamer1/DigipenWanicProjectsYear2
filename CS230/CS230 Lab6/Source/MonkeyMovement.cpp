@@ -52,7 +52,7 @@ void Behaviors::MonkeyMovement::Update(float dt)
 
 	bool isFlying = false;
 
-	float groundLevel = (-Graphics::GetInstance().GetScreenWorldDimensions().extents.y) + (transform->GetScale().y / 2);
+	float groundLevel = (-Graphics::GetInstance().GetScreenWorldDimensions().extents.y) + (transform->GetScale().y / 4);
 
 	if (transform->GetTranslation().y <= groundLevel) {
 		transform->SetTranslation(Vector2D(transform->GetTranslation().x, groundLevel));

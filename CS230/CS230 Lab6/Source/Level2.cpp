@@ -42,7 +42,7 @@ void Levels::Level2::Load()
 	std::cout << "Level2::Load" << std::endl;
 
 	Vector2D textureSize = Vector2D(1.0f / columns, 1.0f / rows);
-	meshMonkey = CreateQuadMesh(textureSize, Vector2D(1, 1));
+	meshMonkey = CreateQuadMesh(textureSize, Vector2D(0.5, 0.5));
 
 	textureMonkey = Texture::CreateTextureFromFile("Monkey.png");
 	

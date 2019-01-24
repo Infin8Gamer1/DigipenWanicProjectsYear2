@@ -43,9 +43,6 @@
     <ClCompile Include="Source\Archetypes.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Source\BulletMovement.cpp">
-      <Filter>Game\Behaviors</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Component.cpp">
       <Filter>High-Level API\GameObjects</Filter>
     </ClCompile>
@@ -76,9 +73,6 @@
     <ClCompile Include="Source\Physics.cpp">
       <Filter>High-Level API\Transform</Filter>
     </ClCompile>
-    <ClCompile Include="Source\PlayerShip.cpp">
-      <Filter>Game\Behaviors</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Space.cpp">
       <Filter>High-Level API\Spaces</Filter>
     </ClCompile>
@@ -87,9 +81,6 @@
     </ClCompile>
     <ClCompile Include="Source\SpriteSource.cpp">
       <Filter>High-Level API\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TimedDeath.cpp">
-      <Filter>Game\Behaviors</Filter>
     </ClCompile>
     <ClCompile Include="Source\Transform.cpp">
       <Filter>High-Level API\Transform</Filter>
@@ -117,6 +108,15 @@
     </ClCompile>
     <ClCompile Include="Source\Level3.cpp">
       <Filter>Game\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BulletMovement.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerShip.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TimedDeath.cpp">
+      <Filter>Game\Behaviors</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -162,12 +162,6 @@
     <ClInclude Include="Source\MonkeyMovement.h">
       <Filter>Game\Behaviors</Filter>
     </ClInclude>
-    <ClInclude Include="Source\PlayerShip.h">
-      <Filter>Game\Behaviors</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TimedDeath.h">
-      <Filter>Game\Behaviors</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Archetypes.h">
       <Filter>Game</Filter>
     </ClInclude>
@@ -202,6 +196,12 @@
       <Filter>Game\Behaviors</Filter>
     </ClInclude>
     <ClInclude Include="Source\BulletMovement.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlayerShip.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TimedDeath.h">
       <Filter>Game\Behaviors</Filter>
     </ClInclude>
   </ItemGroup>
