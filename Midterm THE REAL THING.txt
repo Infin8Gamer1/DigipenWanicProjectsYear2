@@ -1,0 +1,88 @@
+Midterm Notes:
+
+Q5:
+Write the prototype for a function named "volume".
+This function takes 3 integers that represent the length, width, and height of a box.
+The return value is a reference to an integer.
+The length parameter has a default value of 5 and the height parameter has a default of 8.
+There is no default value for the width.
+
+int& volume(int length = 5, int width, int height = 8);
+
+Q11:
+Given a class named Fidget, write the declaration (prototype) for operator*=.
+This operator is a non-member (i.e. global) function and the right operand is another Fidget.
+
+
+Fidget operator*=(Fidget &a);
+
+Q12:
+Vector2D operator++(){
+	this.x += 1;
+	this.y += 1;
+}
+
+Q13:
+friend iostream& operator<<(iostream& stream, Vector2D& a);
+
+
+Q14:
+
+iostream& operator<<(iostream& stream, Vector2D& a){
+	stream << "(" << a.x << "," << a.y << ")";
+	
+	return stream;
+}
+
+Q26:
+8 ladies go to 
+/*eight shops at 
+eight o'clock in the morning.*/
+
+only have eight pounds between them. 
+
+Each lady wants to buy 8 spiders. 
+	For each spider, = 8 pence
+		eight spider shoes must also be bought. = 8 pence each shoe
+		
+Each spider costs eight pence and each spider shoe costs an eighth pence each.
+
+240 pence per pound! 
+
+The journey costs eight pence per stop
+and is made up of eight stops.
+
+
+Will the ladies have enough change for the bus home?
+
+TOTAL MONEY = 1920
+MONEY PER LADY = 240
+
+TOTAL SPIDERS = 8 * 8 = 64
+TOTAL SPIDER SHOES = SPIDERS * 8 = 512
+
+TOTAL COST OF SPIDER SHOES = 512 * 8 = 4096
+TOTAL COST OF SPIDERS = 64 * 8 = 512
+TOTAL COST FOR SPIDERS + SHOES = 4608
+
+BUS COST ONE WAY FOR ALL 8 = 8 * 8 * 8 = 512
+BUS COST ROUND TRIP FOR ALL = 512 * 2 = 1024
+
+TOTAL COST OF ALL SHENAGANS = 4608 + 1024 = 5632
+
+1920 < 5632 so the answer is they don't even have enough to buy the spiders
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
