@@ -1,0 +1,152 @@
+
+<!-- saved from url=(0082)http://azrael.digipen.edu/~mmead/www/Courses/2014/winter/cs170/project6/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="./CS170_Project6_files/new.css">
+<title>CS170 - Project #6</title>
+<style>
+body {
+   background : #ffffff; 
+   margin-left : 50;
+   margin-right : 20;
+   background : url("./images/notebook.jpg");
+   }
+</style></head>
+
+
+
+
+<body><bodyxx bgcolor="#FFFFFF" background="./images/notebook.jpg" leftmargin="50" rightmargin="0">
+
+<center>
+<h1>CS170 - Project #6</h1>
+Due Date Posted on Canvas Submission Link <br>
+</center>
+
+<p>
+
+</p><p class="SectionHeader">
+Information
+</p>
+
+<!--
+<table border=0>
+<tr><td><img src="../../../../../images/annew3.gif" width="90" height="45"></td>
+<td>
+<p class="technote">
+</p>
+</td>
+</tr></table>	
+-->
+
+<ul>
+<li><b>READ INSTRUCTIONS ON CANVAS FIRST</b></li>
+<li>Partial interface: <a href="./CS170_Project6_files/Functions.h.html">HTML</a> <a href="./CS170_Project6_files/Functions.h">Text</a></li>
+<li>Partial implementation: <a href="./CS170_Project6_files/Functions.cpp.html">HTML</a> <a href="./CS170_Project6_files/Functions.cpp">Text</a></li>
+<li>Sample driver program: <a href="./CS170_Project6_files/driver-sample.cpp.html">HTML</a> <a href="./CS170_Project6_files/driver-sample.cpp">Text</a></li>
+<li>Sample output: <a href="./CS170_Project6_files/output-sample.txt">output.txt</a></li>
+<li><a href="./CS170_Project6_files/CS170-FAQ-Functions.html">FAQ</a> for this assignment</li>
+
+<li>Sample command lines for compiling: (Notice that <tt>Functions.cpp</tt> is not mentioned. It is included in <tt>Functions.h</tt>.)
+	
+	<blockquote>
+		GNU:
+<blockquote><pre>  <b>g++</b> -o gnu driver-sample.cpp -O -Wall -Wextra -std=c++11 -pedantic
+</pre></blockquote>
+</blockquote>
+
+
+	<blockquote>
+		Microsoft
+<blockquote><pre>  <b>cl</b> /W4 /EHa /WX /Za /MT /O2 /FeAlgorithms.exe driver-sample.cpp
+</pre></blockquote>
+</blockquote>
+
+<!--
+<li>Makefiles for <a href="makefile">GNU</a> and <a href="makefile.vc7">Microsoft</a>.
+	</li>-->
+</li>
+<li>Some additional tests:
+<ul>
+<li>Another driver: <a href="./CS170_Project6_files/driver-stress.cpp.html">HTML</a> <a href="./CS170_Project6_files/driver-stress.cpp">Text</a></li>
+<li>Output <a href="./CS170_Project6_files/output-stress.txt">output.txt</a> This is from GNU's compiler (won't match the others due to the random numbers)</li> 
+<li><b>If you've implemented your functions properly, you should be able to finish these tests in less than 2 seconds.</b></li>
+<!--
+<blockquote><pre>
+real 1.82
+user 1.17
+sys 0.03
+</pre></blockquote>
+-->
+</li>
+</ul>
+<p>
+</p><li>Here's an example: (What are the types of <tt>begin</tt>, <tt>end</tt>, and <tt>value</tt>?)
+<blockquote><pre><b>template</b>&lt;<b>typename</b> T&gt;
+<b>int</b> count(<b>const</b> T *begin, <b>const</b> T *end, <b>const</b> T&amp; value)
+{
+  <b>int</b> counter = 0;
+  <b>while</b> (begin != end)
+  {
+    <b>if</b> (*begin == value)
+      counter++;
+    begin++;
+  }
+  <b>return</b> counter;
+}
+</pre></blockquote></li>
+<li>What operations must <tt>T</tt> support for the code above to compile?</li>
+<li>More details on the <tt><b>remove</b></tt> function:
+<blockquote><pre><b>void</b> TestRemove(<b>void</b>)
+{
+    <font color="#003399"><i>// Initialize an array with 10 elements</i></font>
+  <b>int</b> i1[] = {1, 50, 50, 4, 5, 50, 7, 8, 50, 10};
+
+    <font color="#003399"><i>// Print all of them</i></font>
+  CS170::display(i1, i1 + 10);
+
+    <font color="#003399"><i>// Remove all occurrences of 50, returns a</i></font>
+    <font color="#003399"><i>// pointer to the new 'end'</i></font>
+  <b>int</b> *newend = CS170::remove(i1, i1 + 10,  50);
+
+    <font color="#003399"><i>// Print out the list (only up to newend)</i></font>
+  cout &lt;&lt; <font color="#9933CC">"remove 50, new list: "</font>;
+  CS170::display(i1, newend);
+
+    <font color="#003399"><i>// Print all items out</i></font>
+  CS170::display(i1, i1 + 10);
+}
+</pre></blockquote>
+
+Output:
+<blockquote><pre>1, 50, 50, 4, 5, 50, 7, 8, 50, 10
+remove 50, new list: 1, 4, 5, 7, 8, 10
+1, 4, 5, 7, 8, 10, 7, 8, 50, 10
+</pre></blockquote>
+
+A closer look at the modified array:
+
+<font size="+1"><blockquote><pre>  1  4  5  7  8  10  7  8  50  10
+  ^                  ^            ^
+begin             new end     real end
+</pre></blockquote></font>
+
+Usually, when we remove elements from an array, we must shift all of the elements to the right of the deleted item over to the left.
+Shifting elements (especially in a very large array) is a very expensive operation. The technique that <b><tt>remove</tt></b> implements
+does not shift any elements. Instead, it just copies a few elements. <!--The number of elements copied is at most the number of elements that were
+removed.-->
+
+<p>
+It's also important to notice that the <b><tt>remove</tt></b> function returns <i>the new end</i> (or logical end). This is important because
+it tells the caller where the end of the remaining elements is. Without that return value, the caller would have no way to know where 
+the "good" elements stop.
+
+</p></li></ul>
+
+<hr>
+
+
+
+
+<blockquote><pre></pre></blockquote>
+
+</body></html>

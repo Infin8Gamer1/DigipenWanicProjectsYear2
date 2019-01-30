@@ -1,0 +1,141 @@
+
+<!-- saved from url=(0085)http://azrael.digipen.edu/~mmead/www/Courses/2014/winter/cs170/labs/week11/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="./CS170Lab4_files/new.css">
+<title>CS 170 - Lab 4</title>
+<style>
+body {
+   background : #ffffff; 
+   margin-left : 50;
+   margin-right : 20;
+   background : url("./images/notebook.jpg");
+   }
+</style></head>
+
+
+
+<body>  
+<center>
+<h1>CS 170 - Lab 4<p></p></h1>
+</center>
+
+<!--
+<p class="technote">
+</p>
+-->
+
+<p class="SectionHeader">
+Information
+</p>
+
+You will be continuing your implementation of the Vector class by adding more functionality to your existing code. You already have the basic functionality
+of a vector, so try to reuse your code when possible and efficient (unless instructed otherwise). For example, in the <tt>operator+=</tt> method, you should simply be calling <tt>push_back</tt>
+for each element from the right-hand-side. That will make <tt>operator+=</tt> trivial to write. Another example is that <tt>operator+</tt> should be
+calling <tt>operator+=</tt> to do a lot of the work. There are several methods where code reuse will make them very easy to implement. However, not all methods
+will use code reuse. For example, look closely at the output and pay attention to the allocations when implementing <tt>operator=</tt>, as you may not have to do as many allocations.
+<p>
+Also, since the goal of these labs are for you to learn how to build structures like lists and vectors,
+you can't use anything from the STL (containers, algorithms, etc.).
+
+</p><ol>
+<li>Several more methods have been added to the <tt>Vector</tt> class.
+<p>
+You are given the header file <a href="./CS170Lab4_files/Vector.h">Vector.h</a> (<a href="./CS170Lab4_files/Vector.h.html">HTML</a>) which includes the 9 new methods as well as the previous ones. 
+If you've added other private members from the previous lab, be sure to add them to this file.
+
+</p><p>
+Your task is to implement all of the new methods that are declared in the header file. Here is the list of new methods:
+
+
+</p><blockquote><pre>  <font color="#003399"><i>// Copy constructor</i></font>
+Vector(<b>const</b> Vector&amp; rhs);
+
+  <font color="#003399"><i>// Constructor to create a Vector from an array</i></font>
+Vector(<b>const</b> <b>int</b> array[], <b>unsigned</b> size);
+
+  <font color="#003399"><i>// Removes the last element. Does nothing if empty.</i></font>
+<b>void</b> pop_back(<b>void</b>);
+
+  <font color="#003399"><i>// Removes the first element, shifts the remaining elements to the left.</i></font>
+  <font color="#003399"><i>// Does nothing if empty.</i></font>
+<b>void</b> pop_front(<b>void</b>);
+
+  <font color="#003399"><i>// Inserts a new node at the specified position. Causes an</i></font>
+  <font color="#003399"><i>// abort() if the position is invalid. (Calls check_bounds)</i></font>
+<b>void</b> insert(<b>int</b> value, <b>unsigned</b> position);
+
+  <font color="#003399"><i>// Removes an element with the specified value (first occurrence only).</i></font>
+<b>void</b> remove(<b>int</b> value);
+
+  <font color="#003399"><i>// Assignment operator</i></font>
+Vector&amp; <b>operator</b>=(<b>const</b> Vector&amp; rhs);
+
+  <font color="#003399"><i>// Concatenates a vector onto the end of this vector.</i></font>
+Vector&amp; <b>operator</b>+=(<b>const</b> Vector&amp; rhs);
+
+  <font color="#003399"><i>// Concatenates two Vectors.</i></font>
+Vector <b>operator</b>+(<b>const</b> Vector&amp; rhs) <b>const</b>;
+</pre></blockquote>
+
+<p>
+Most of these methods are very simple to implement. You should implement the easier ones first, and work your way toward the
+more difficult ones. You should work on the methods in this order (easy to less easy):
+	</p><ol>
+	<li><tt>pop_back</tt>
+	</li><li><tt>operator+=</tt>
+	</li><li><tt>operator+</tt>
+	</li><li><tt>Vector(const int *array, unsigned size)</tt>
+	</li><li><tt>Vector(const Vector&amp; rhs)</tt>
+	</li><li><tt>operator=</tt>
+	</li><li><tt>pop_front</tt>
+	</li><li><tt>remove</tt>
+	</li><li><tt>insert</tt>
+</li></ol>
+<p>
+ <a href="./CS170Lab4_files/vector-diagrams.html">Diagrams</a> for removing and inserting.
+</p><p>
+</p><p class="technote">
+Depending on how you factor out your code for reuse, the order of difficulty may be slightly different for you. 
+At this point, I am generally more concerned in your code reuse than in your runtime efficiency (which usually requires code duplication).
+Not only does code reuse cut down on development time, but it introduces less bugs. Once a function has been written (and thoroughly tested)
+there is little danger that reusing it will introduce bugs. Newly written code is the primary source of bugs in a program.
+</p>
+
+<hr width="100%">
+<p>
+
+</p></li><li>Add a Doxygen-style file header comment to <tt><b>Vector.h</b></tt> and <tt><b>Vector.cpp</b></tt>.
+	Create Doxygen-style function header comments for each function. You <strong>DO NOT</strong>, however, need to generate a compiled help file (index.chm). 
+
+<p>
+</p><hr width="100%">
+<p>
+
+
+
+</p><blockquote><pre></pre></blockquote>
+
+Here is some test code in <a href="./CS170Lab4_files/driver.cpp">driver.cpp</a> (<a href="./CS170Lab4_files/driver.cpp.html">HTML</a>). Command lines:
+
+<blockquote><pre><b>g++</b> -o gnu -O -Wall -Wextra -Werror -std=c++11 -pedantic driver.cpp Vector.cpp<br>
+<b>cl</b> /EHa /MTd /W4 /WX /Za /Fems.exe driver.cpp Vector.cpp<br>
+</pre></blockquote>
+
+To run a single test, provide the number on the command line. Example:
+
+<blockquote><pre>gnu 3
+</pre></blockquote>
+
+will run test #3 (tests the remove method). If you don't provide any number, all tests will be run.
+
+<blockquote>
+<a href="./CS170Lab4_files/output-all.txt">Output from all functions</a>
+<p>
+<a href="./CS170Lab4_files/individual-tests.zip">Individual tests</a> Download this zip file and extract the output files. Look at the driver
+to see how the numbers correspond to the test cases.
+</p></blockquote>
+
+Don't forget to add <tt>--strip-trailing-cr</tt> to the <tt>diff</tt> program to ignore the newlines between GNU's
+output and the other compilers.
+
+</li></ol></body></html>

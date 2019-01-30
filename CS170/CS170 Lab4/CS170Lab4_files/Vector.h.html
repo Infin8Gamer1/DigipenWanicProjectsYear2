@@ -1,0 +1,112 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="./new.css">
+<title>Vector.h</title>
+</head>
+
+<style>
+body {
+   background : #ffffff; 
+   margin-left : 50;
+   margin-right : 20;
+   background : url("../images/notebook.jpg");
+   }
+</style>
+
+<body>  
+<pre class="sourcecode"><code>
+<font color="#003399"><i>////////////////////////////////////////////////////////////////////////////////</i></font>
+<font color="990099">#ifndef VECTOR_H</font>
+<font color="990099">#define VECTOR_H</font>
+<font color="#003399"><i>////////////////////////////////////////////////////////////////////////////////</i></font>
+
+<b>namespace</b> CS170
+{
+
+<b>class</b> Vector
+{
+  <b>public</b>:
+
+      <font color="#003399"><i>// Default constructor</i></font>
+    Vector(<b>void</b>);
+
+      <font color="#003399"><i>// Destructor</i></font>
+    ~Vector();
+
+      <font color="#003399"><i>// Copy constructor</i></font>
+    Vector(<b>const</b> Vector&amp; rhs);
+
+      <font color="#003399"><i>// Constructor to create a Vector from an array</i></font>
+    Vector(<b>const</b> <b>int</b> array[], <b>unsigned</b> size);
+
+      <font color="#003399"><i>// Adds a node to the front of the list</i></font>
+    <b>void</b> push_back(<b>int</b> value);
+
+      <font color="#003399"><i>// Adds a node to the end of the list</i></font>
+    <b>void</b> push_front(<b>int</b> value);
+
+      <font color="#003399"><i>// Removes the last element. Does nothing if empty.</i></font>
+    <b>void</b> pop_back(<b>void</b>);
+
+      <font color="#003399"><i>// Removes the first element. Does nothing if empty.</i></font>
+    <b>void</b> pop_front(<b>void</b>);
+
+      <font color="#003399"><i>// Inserts a new node at the specified position. Causes an</i></font>
+      <font color="#003399"><i>// abort() if the position is invalid. (Calls check_bounds)</i></font>
+    <b>void</b> insert(<b>int</b> value, <b>unsigned</b> position);
+
+      <font color="#003399"><i>// Removes an element with the specified value (first occurrence)</i></font>
+    <b>void</b> remove(<b>int</b> value);
+
+      <font color="#003399"><i>// Deletes the underlying array and sets size_ to 0</i></font>
+    <b>void</b> clear(<b>void</b>);
+
+      <font color="#003399"><i>// Return true if the vector is empty, otherwise, false</i></font>
+    <b>bool</b> empty(<b>void</b>) <b>const</b>;
+
+      <font color="#003399"><i>// Assignment operator</i></font>
+    Vector&amp; <b>operator</b>=(<b>const</b> Vector&amp; rhs);
+
+      <font color="#003399"><i>// Concatenates a vector onto the end of this vector.</i></font>
+    Vector&amp; <b>operator</b>+=(<b>const</b> Vector&amp; rhs);
+
+      <font color="#003399"><i>// Concatenates two Vectors.</i></font>
+    Vector <b>operator</b>+(<b>const</b> Vector&amp; rhs) <b>const</b>;
+
+      <font color="#003399"><i>// Subscript operators.</i></font>
+    <b>int</b> <b>operator</b>[](<b>unsigned</b> index) <b>const</b>;
+    <b>int</b>&amp; <b>operator</b>[](<b>unsigned</b> index);
+
+      <font color="#003399"><i>// Returns the number of elements in the vector.</i></font>
+    <b>unsigned</b> size(<b>void</b>) <b>const</b>;
+
+      <font color="#003399"><i>// Returns the size of the underlying array</i></font>
+    <b>unsigned</b> capacity(<b>void</b>) <b>const</b>;
+
+      <font color="#003399"><i>// The number of memory allocations that have occurred</i></font>
+    <b>unsigned</b> allocations(<b>void</b>) <b>const</b>;
+
+  <b>private</b>:
+    <b>int</b> *array_;        <font color="#003399"><i>// The dynamically allocated array</i></font>
+    <b>unsigned</b> size_;     <font color="#003399"><i>// The number of elements in the array</i></font>
+    <b>unsigned</b> capacity_; <font color="#003399"><i>// The allocated size of the array</i></font>
+    <b>unsigned</b> allocs_;   <font color="#003399"><i>// Number of allocations (resizes)</i></font>
+
+    <font color="#003399"><i>// Private methods...</i></font>
+    <b>void</b> check_bounds(<b>unsigned</b> index) <b>const</b>;
+    <b>void</b> grow(<b>void</b>);
+    
+    <font color="#003399"><i>// Other private methods...</i></font>
+};
+
+} <font color="#003399"><i>// namespace CS170</i></font>
+
+<font color="990099">#endif // VECTOR_H</font>
+</code></pre>
+
+</body>
+</html>
+
+<blockquote><pre>
+</pre></blockquote>
+

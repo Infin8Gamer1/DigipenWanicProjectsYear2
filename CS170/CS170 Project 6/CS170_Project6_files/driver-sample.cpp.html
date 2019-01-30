@@ -1,0 +1,427 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="./new.css">
+<title>driver-sample.cpp</title>
+</head>
+
+<body>  
+
+
+<pre class="sourcecode"><code>
+<b>#include</b> <font color="#9933CC">&quot;Functions.h&quot;</font>
+<b>#include</b> &lt;iostream&gt; <font color="#003399"><i>// ostream, cout, endl</i></font>
+
+<b>using</b> std::cout;
+<b>using</b> std::endl;
+
+<b>struct</b> Student
+{
+  <b>char</b> login[9];
+  <b>int</b> age;
+  <b>int</b> year;
+  <b>double</b> GPA;
+};
+
+std::ostream&amp; <b>operator</b>&lt;&lt;(std::ostream&amp; os, <b>const</b> Student&amp; s)
+{
+  os &lt;&lt; <font color="#9933CC">&quot;(login) &quot;</font> &lt;&lt; s.login &lt;&lt; <font color="#9933CC">&quot;, &quot;</font>;
+  os &lt;&lt; <font color="#9933CC">&quot;(age) &quot;</font> &lt;&lt; s.age &lt;&lt; <font color="#9933CC">&quot;, &quot;</font>;
+  os &lt;&lt; <font color="#9933CC">&quot;(year) &quot;</font> &lt;&lt; s.year &lt;&lt; <font color="#9933CC">&quot;, &quot;</font>;
+  os &lt;&lt; <font color="#9933CC">&quot;(GPA) &quot;</font> &lt;&lt; s.GPA &lt;&lt; endl;
+  <b>return</b> os;
+}
+
+<b>bool</b> <b>operator</b>&gt;(<b>const</b> Student&amp; lhs, <b>const</b> Student&amp; rhs)
+{
+  <b>return</b> lhs.GPA &gt; rhs.GPA;
+}
+
+<b>bool</b> <b>operator</b>&lt;(<b>const</b> Student&amp; lhs, <b>const</b> Student&amp; rhs)
+{
+  <b>return</b> lhs.GPA &lt; rhs.GPA;
+}
+
+<b>void</b> print_students(<b>const</b> Student *s, <b>int</b> size)
+{
+  <b>for</b> (<b>int</b> i = 0; i &lt; size; i++)
+    cout &lt;&lt; s[i];
+}
+
+<b>static</b> <b>void</b> TestSwap1(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** TestSwap1 *****&quot;</font> &lt;&lt; endl;
+
+  <b>int</b> a = 5, b = 8;
+
+  cout &lt;&lt; <font color="#9933CC">&quot;a = &quot;</font> &lt;&lt; a &lt;&lt; <font color="#9933CC">&quot;, b = &quot;</font> &lt;&lt; b &lt;&lt; endl;
+  CS170::swap(a, b);
+  cout &lt;&lt; <font color="#9933CC">&quot;a = &quot;</font> &lt;&lt; a &lt;&lt; <font color="#9933CC">&quot;, b = &quot;</font> &lt;&lt; b &lt;&lt; endl;
+}
+
+<b>static</b> <b>void</b> TestSwap2(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** TestSwap2 *****&quot;</font> &lt;&lt; endl;
+  Student s1 = {<font color="#9933CC">&quot;jdoe&quot;</font>, 20, 3, 3.82};
+  Student s2 = {<font color="#9933CC">&quot;fbar&quot;</font>, 22, 1, 1.28};
+
+  cout &lt;&lt; <font color="#9933CC">&quot;s1: &quot;</font> &lt;&lt; s1;
+  cout &lt;&lt; <font color="#9933CC">&quot;s2: &quot;</font> &lt;&lt; s2;
+  CS170::swap(s1, s2);
+  cout &lt;&lt; <font color="#9933CC">&quot;s1: &quot;</font> &lt;&lt; s1;
+  cout &lt;&lt; <font color="#9933CC">&quot;s2: &quot;</font> &lt;&lt; s2;
+}
+
+<b>static</b> <b>void</b> TestSwapRanges1(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** SwapRanges *****&quot;</font> &lt;&lt; endl;
+  <b>int</b> i1[] = {-1, 2, 6, -1, 9, 5, 7, -1, -1, 8, -1};
+  <b>int</b> i2[] = {3, 6, 8, 0, -1, 5, -3, -9, 3, 5, 8};
+
+  <b>int</b> size = <b>sizeof</b>(i1) / <b>sizeof</b>(<b>int</b>);
+
+  CS170::display(i1, i1 + size);
+  CS170::display(i2, i2 + size);
+  CS170::swap_ranges(i1, i1 + size, i2);
+  CS170::display(i1, i1 + size);
+  CS170::display(i2, i2 + size);
+}
+
+<b>static</b> <b>void</b> TestRemove1(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Remove1 *****&quot;</font> &lt;&lt; endl;
+  <b>int</b> i1[] = {5, -7, 4, 10, -21, 15, 9};
+
+  <b>int</b> size = <b>sizeof</b>(i1) / <b>sizeof</b>(<b>int</b>);
+  CS170::display(i1, i1 + size);
+  <b>int</b> item = -1;
+  <b>int</b> *newend = CS170::remove(i1, i1 + size,  item);
+  cout &lt;&lt; <font color="#9933CC">&quot;remove &quot;</font> &lt;&lt; item &lt;&lt; <font color="#9933CC">&quot;, new list: &quot;</font>;
+  CS170::display(i1, newend);
+}
+
+<b>static</b> <b>void</b> TestRemove2(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Remove2 *****&quot;</font> &lt;&lt; endl;
+  <b>int</b> i1[] = {5, -7, 4, 10, -7, 15, 9};
+
+  <b>int</b> size = <b>sizeof</b>(i1) / <b>sizeof</b>(<b>int</b>);
+  CS170::display(i1, i1 + size);
+  <b>int</b> item = -7;
+  <b>int</b> *newend = CS170::remove(i1, i1 + size,  item);
+  cout &lt;&lt; <font color="#9933CC">&quot;remove &quot;</font> &lt;&lt; item &lt;&lt; <font color="#9933CC">&quot;, new list: &quot;</font>;
+  CS170::display(i1, newend);
+}
+
+<b>static</b> <b>void</b> TestRemove3(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Remove3 *****&quot;</font> &lt;&lt; endl;
+  <b>int</b> i1[] = {-1, -1, -1, -1, -1, -1, -1};
+
+  <b>int</b> size = <b>sizeof</b>(i1) / <b>sizeof</b>(<b>int</b>);
+  CS170::display(i1, i1 + size);
+  <b>int</b> item = -1;
+  <b>int</b> *newend = CS170::remove(i1, i1 + size,  item);
+  cout &lt;&lt; <font color="#9933CC">&quot;remove &quot;</font> &lt;&lt; item &lt;&lt; <font color="#9933CC">&quot;, new list: &quot;</font>;
+  CS170::display(i1, newend);
+}
+
+<b>static</b> <b>void</b> TestCount1(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Count1 *****&quot;</font> &lt;&lt; endl;
+  <b>int</b> i1[] = {-1, 2, 6, -1, 9, 5, 7, -1, -1, 8, -1};
+
+  <b>int</b> size = <b>sizeof</b>(i1) / <b>sizeof</b>(<b>int</b>);
+  CS170::display(i1, i1 + size);
+  <b>int</b> item = -1;
+  <b>int</b> c = CS170::count(i1, i1 + size, item);
+  cout &lt;&lt; <font color="#9933CC">&quot;Count of &quot;</font> &lt;&lt; item &lt;&lt; <font color="#9933CC">&quot; is &quot;</font> &lt;&lt; c &lt;&lt; endl;
+}
+
+<b>static</b> <b>void</b> TestCount2(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Count2 *****&quot;</font> &lt;&lt; endl;
+  <b>int</b> i1[] = {-1, 2, 6, -1, 9, 5, 7, -1, -1, 8, -1};
+
+  <b>int</b> size = <b>sizeof</b>(i1) / <b>sizeof</b>(<b>int</b>);
+  CS170::display(i1, i1 + size);
+  <b>int</b> item = 50;
+  <b>int</b> c = CS170::count(i1, i1 + size, item);
+  cout &lt;&lt; <font color="#9933CC">&quot;Count of &quot;</font> &lt;&lt; item &lt;&lt; <font color="#9933CC">&quot; is &quot;</font> &lt;&lt; c &lt;&lt; endl;
+}
+
+<b>static</b> <b>void</b> TestFind1(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Find1 *****&quot;</font> &lt;&lt; endl;
+  <b>const</b> <b>int</b> i1[] = {-1, 2, 6, -1, 9, 5, 7, -1, -1, 8, -1};
+
+  <b>int</b> size = <b>sizeof</b>(i1) / <b>sizeof</b>(<b>int</b>);
+  <b>const</b> <b>int</b> *end = i1 + size;
+  CS170::display(i1, end);
+  <b>const</b> <b>int</b> item = 9;
+  <b>const</b> <b>int</b> *pos = CS170::find(i1, end, item);
+  <b>if</b> (pos != end)
+    cout &lt;&lt; <font color="#9933CC">&quot;Item &quot;</font> &lt;&lt; item &lt;&lt; <font color="#9933CC">&quot; is &quot;</font> &lt;&lt; *pos &lt;&lt; endl;
+  <b>else</b>
+    cout &lt;&lt; <font color="#9933CC">&quot;Item &quot;</font> &lt;&lt; item &lt;&lt; <font color="#9933CC">&quot; was not found&quot;</font> &lt;&lt; endl;
+}
+
+<b>static</b> <b>void</b> TestFind2(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Find2 *****&quot;</font> &lt;&lt; endl;
+  <b>int</b> i1[] = {-1, 2, 6, -1, 9, 5, 7, -1, -1, 8, -1};
+
+  <b>int</b> size = <b>sizeof</b>(i1) / <b>sizeof</b>(<b>int</b>);
+  <b>int</b> *end = i1 + size;
+  CS170::display(i1, end);
+  <b>const</b> <b>int</b> item = 9;
+  <b>int</b> *pos = CS170::find(i1, end, item);
+  
+  <b>if</b> (pos != end)
+  {
+    cout &lt;&lt; <font color="#9933CC">&quot;Changing &quot;</font> &lt;&lt; item &lt;&lt; <font color="#9933CC">&quot; to 100&quot;</font> &lt;&lt; endl;
+    *pos = 100;
+  }
+  <b>else</b>
+    cout &lt;&lt; <font color="#9933CC">&quot;Item &quot;</font> &lt;&lt; item &lt;&lt; <font color="#9933CC">&quot; was not found&quot;</font> &lt;&lt; endl;
+
+  CS170::display(i1, end);
+}
+
+<b>static</b> <b>void</b> TestFind3(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Find3 *****&quot;</font> &lt;&lt; endl;
+  <b>const</b> <b>int</b> i1[] = {-1, 2, 6, -1, 9, 5, 7, -1, -1, 8, -1};
+
+  <b>int</b> size = <b>sizeof</b>(i1) / <b>sizeof</b>(<b>int</b>);
+  <b>const</b> <b>int</b> *end = i1 + size;
+  CS170::display(i1, end);
+  <b>const</b> <b>int</b> item = 19;
+  <b>const</b> <b>int</b> *pos = CS170::find(i1, end, item);
+  <b>if</b> (pos != end)
+    cout &lt;&lt; <font color="#9933CC">&quot;Item &quot;</font> &lt;&lt; item &lt;&lt; <font color="#9933CC">&quot; is &quot;</font> &lt;&lt; *pos &lt;&lt; endl;
+  <b>else</b>
+    cout &lt;&lt; <font color="#9933CC">&quot;Item &quot;</font> &lt;&lt; item &lt;&lt; <font color="#9933CC">&quot; was not found&quot;</font> &lt;&lt; endl;
+}
+
+<b>static</b> <b>void</b> TestCopy1(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Copy1 *****&quot;</font> &lt;&lt; endl;
+  <b>const</b> <b>short</b> i1[] = {-1, 2, 6, -1, 9, 5, 7, -1, -1, 8, -1};
+  <b>int</b> size = <b>sizeof</b>(i1) / <b>sizeof</b>(<b>short</b>);
+  <b>short</b> i2[20] = {0};
+
+  CS170::display(i1, i1 + size);
+  <b>short</b> *i2end = CS170::copy(i1, i1 + size, i2);
+  CS170::display(i2, i2end);
+}
+
+<b>static</b> <b>void</b> TestFill1(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Fill1 *****&quot;</font> &lt;&lt; endl;
+  <b>int</b> i1[10];
+  <b>int</b> size = 10;
+
+  CS170::fill(i1, i1 + size, 12);
+  CS170::display(i1, i1 + size);
+}
+
+<b>static</b> <b>void</b> TestReplace1(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Replace1 *****&quot;</font> &lt;&lt; endl;
+  <b>int</b> i1[] = {-1, 2, 6, -1, 9, 5, 7, -1, -1, 8, -1};
+  <b>int</b> size = <b>sizeof</b>(i1) / <b>sizeof</b>(<b>int</b>);
+
+  CS170::display(i1, i1 + size);
+  <b>int</b> olditem = -1;
+  <b>int</b> newitem = -8;
+  cout &lt;&lt; <font color="#9933CC">&quot;Replacing &quot;</font> &lt;&lt; olditem &lt;&lt; <font color="#9933CC">&quot; with &quot;</font> &lt;&lt; newitem &lt;&lt; endl;
+  CS170::replace(i1, i1 + size, olditem, newitem);
+  CS170::display(i1, i1 + size);
+}
+
+<b>static</b> <b>void</b> TestMin1(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Min1 *****&quot;</font> &lt;&lt; endl;
+  <b>const</b> <b>int</b> i1[] = {-1, 2, 6, -31, 9, 5, 7, -21, -1, 8, -10};
+  <b>int</b> size = <b>sizeof</b>(i1) / <b>sizeof</b>(<b>int</b>);
+
+  CS170::display(i1, i1 + size);
+  <b>const</b> <b>int</b> *pos = CS170::min_element(i1, i1 + size);
+
+  cout &lt;&lt; <font color="#9933CC">&quot;The min element is: &quot;</font> &lt;&lt; *pos &lt;&lt; endl;
+}
+
+<b>static</b> <b>void</b> TestMin2(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Min2 *****&quot;</font> &lt;&lt; endl;
+  <b>int</b> i1[] = {-1, 2, 6, -31, 9, 5, 7, -21, -1, 8, -10};
+  <b>int</b> size = <b>sizeof</b>(i1) / <b>sizeof</b>(<b>int</b>);
+
+  CS170::display(i1, i1 + size);
+  <b>int</b> *pos = CS170::min_element(i1, i1 + size);
+
+  cout &lt;&lt; <font color="#9933CC">&quot;The min element is: &quot;</font> &lt;&lt; *pos &lt;&lt; endl;
+}
+
+<b>static</b> <b>void</b> TestMin3(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Min3 *****&quot;</font> &lt;&lt; endl;
+  Student s1[] = { {<font color="#9933CC">&quot;jdoe&quot;</font>, 20, 3, 3.82},
+                   {<font color="#9933CC">&quot;fbar&quot;</font>, 22, 1, 1.28},
+                   {<font color="#9933CC">&quot;wxyz&quot;</font>, 19, 3, 1.59},
+                   {<font color="#9933CC">&quot;abcd&quot;</font>, 20, 1, 1.99},
+                   {<font color="#9933CC">&quot;jbar&quot;</font>, 22, 2, 3.38}
+                 };
+
+  <b>int</b> size = <b>sizeof</b>(s1) / <b>sizeof</b>(*s1);
+  Student *end = s1 + size;
+
+  print_students(s1, size);
+  Student *pos = CS170::min_element(s1, end);
+
+  cout &lt;&lt; <font color="#9933CC">&quot;The min element is: &quot;</font> &lt;&lt; *pos;
+}
+
+<b>static</b> <b>void</b> TestMax1(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Max1 *****&quot;</font> &lt;&lt; endl;
+  <b>const</b> <b>int</b> i1[] = {-1, 2, 6, -31, 9, 5, 7, -21, -1, 8, -10};
+  <b>int</b> size = <b>sizeof</b>(i1) / <b>sizeof</b>(<b>int</b>);
+
+  CS170::display(i1, i1 + size);
+  <b>const</b> <b>int</b> *pos = CS170::max_element(i1, i1 + size);
+
+  cout &lt;&lt; <font color="#9933CC">&quot;The max element is: &quot;</font> &lt;&lt; *pos &lt;&lt; endl;
+}
+
+<b>static</b> <b>void</b> TestMax2(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Max2 *****&quot;</font> &lt;&lt; endl;
+  <b>int</b> i1[] = {-1, 2, 6, -31, 9, 5, 7, -21, -1, 8, -10};
+  <b>int</b> size = <b>sizeof</b>(i1) / <b>sizeof</b>(<b>int</b>);
+
+  CS170::display(i1, i1 + size);
+  <b>int</b> *pos = CS170::max_element(i1, i1 + size);
+
+  cout &lt;&lt; <font color="#9933CC">&quot;The max element is: &quot;</font> &lt;&lt; *pos &lt;&lt; endl;
+}
+
+<b>static</b> <b>void</b> TestMax3(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Max3 *****&quot;</font> &lt;&lt; endl;
+  Student s1[] = { {<font color="#9933CC">&quot;jdoe&quot;</font>, 20, 3, 3.82},
+                   {<font color="#9933CC">&quot;fbar&quot;</font>, 22, 1, 1.28},
+                   {<font color="#9933CC">&quot;wxyz&quot;</font>, 19, 3, 1.59},
+                   {<font color="#9933CC">&quot;abcd&quot;</font>, 20, 1, 1.99},
+                   {<font color="#9933CC">&quot;jbar&quot;</font>, 22, 2, 3.38}
+                 };
+
+  <b>int</b> size = <b>sizeof</b>(s1) / <b>sizeof</b>(*s1);
+  Student *end = s1 + size;
+
+  print_students(s1, size);
+  Student *pos = CS170::max_element(s1, end);
+
+  cout &lt;&lt; <font color="#9933CC">&quot;The max element is: &quot;</font> &lt;&lt; *pos;
+}
+
+<b>static</b> <b>void</b> TestEqual1(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Equal1 *****&quot;</font> &lt;&lt; endl;
+  <b>int</b> i1[] = {-1, 2, 6, -1, 9, 5, 7, -1, -1, 8, -1};
+  <b>short</b> i2[] = {-1, 2, 6, -1, 9, 5, 7, -1, -1, 8, -1};
+
+  <b>int</b> size1 = <b>sizeof</b>(i1) / <b>sizeof</b>(<b>int</b>);
+  <b>int</b> size2 = <b>sizeof</b>(i2) / <b>sizeof</b>(<b>short</b>);
+
+  CS170::display(i1, i1 + size1);
+  CS170::display(i2, i2 + size2);
+  <b>bool</b> same = CS170::equal(i1, i1 + size1, i2);
+  <b>if</b> (same)
+    std::cout &lt;&lt; <font color="#9933CC">&quot;Arrays are equal\n&quot;</font>;
+  <b>else</b>
+    std::cout &lt;&lt; <font color="#9933CC">&quot;Arrays are not equal\n&quot;</font>;
+}
+
+<b>static</b> <b>void</b> TestEqual2(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Equal2 *****&quot;</font> &lt;&lt; endl;
+  <b>int</b> i1[] = {-1, 2, 6, -1, 9, 5, 7};
+  <b>short</b> i2[] = {-1, 2, 6, -1, 9, 5, 7, -1, -1, 8, -1};
+
+  <b>int</b> size1 = <b>sizeof</b>(i1) / <b>sizeof</b>(<b>int</b>);
+  <b>int</b> size2 = <b>sizeof</b>(i2) / <b>sizeof</b>(<b>short</b>);
+
+  CS170::display(i1, i1 + size1);
+  CS170::display(i2, i2 + size2);
+  <b>bool</b> same = CS170::equal(i1, i1 + size1, i2);
+  <b>if</b> (same)
+    std::cout &lt;&lt; <font color="#9933CC">&quot;Arrays are equal\n&quot;</font>;
+  <b>else</b>
+    std::cout &lt;&lt; <font color="#9933CC">&quot;Arrays are not equal\n&quot;</font>;
+}
+
+<b>static</b> <b>void</b> TestEqual3(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Equal3 *****&quot;</font> &lt;&lt; endl;
+  <b>int</b> i1[] = {-1, 2, 6, -1, 9, 5, 7};
+  <b>short</b> i2[] = {-1, 2, 6, -1, 9, 6, 7};
+
+  <b>int</b> size1 = <b>sizeof</b>(i1) / <b>sizeof</b>(<b>int</b>);
+  <b>int</b> size2 = <b>sizeof</b>(i2) / <b>sizeof</b>(<b>short</b>);
+
+  CS170::display(i1, i1 + size1);
+  CS170::display(i2, i2 + size2);
+  <b>bool</b> same = CS170::equal(i1, i1 + size1, i2);
+  <b>if</b> (same)
+    std::cout &lt;&lt; <font color="#9933CC">&quot;Arrays are equal\n&quot;</font>;
+  <b>else</b>
+    std::cout &lt;&lt; <font color="#9933CC">&quot;Arrays are not equal\n&quot;</font>;
+}
+
+<b>static</b> <b>void</b> TestSum1(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Sum1 *****&quot;</font> &lt;&lt; endl;
+  <b>int</b> i1[] = {3, 6, 8, 0, -1, 5, -3, -9, 3, 5, 8, -20, -5};
+
+  <b>int</b> size = <b>sizeof</b>(i1) / <b>sizeof</b>(<b>int</b>);
+
+  CS170::display(i1, i1 + size);
+  <b>int</b> total = CS170::sum(i1, i1 + size);
+  std::cout &lt;&lt; <font color="#9933CC">&quot;Sum is &quot;</font> &lt;&lt; total &lt;&lt; std::endl;
+}
+
+<b>int</b> main(<b>void</b>)
+{
+  TestSwap1();
+  TestSwap2();
+  TestSwapRanges1();
+  TestRemove1();
+  TestRemove2();
+  TestRemove3();
+  TestCount1();
+  TestCount2();
+  TestFind1();
+  TestFind2();
+  TestFind3();
+  TestCopy1();
+  TestFill1();
+  TestReplace1();
+  TestMin1();
+  TestMin2();
+  TestMin3();
+  TestMax1();
+  TestMax2();
+  TestMax3();
+  TestEqual1();
+  TestEqual2();
+  TestEqual3();
+  TestSum1();
+  <b>return</b> 0;
+}
+</code></pre>
+
+</body>
+</html>
+
+  

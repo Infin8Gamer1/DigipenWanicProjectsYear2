@@ -1,0 +1,34 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="./new.css">
+<title>List.cpp</title>
+</head>
+
+<body>  
+
+<pre class="sourcecode"><code>
+<font color="#003399"><i>/******************************************************************************/</i></font>
+<font color="#003399"><i>/*!
+  \brief
+    Swaps two objects. There is no return value but the two objects are
+    swapped in place.
+  
+  \param left
+    The first object to swap.
+  
+  \param right
+    The second object to swap.
+*/</i></font>
+<font color="#003399"><i>/******************************************************************************/</i></font>
+<b>template</b> &lt;<b>typename</b> T&gt; 
+<b>void</b> swap(T &amp;left, T &amp;right)
+{
+  T temp(right); <font color="#003399"><i>// need a temporary copy</i></font>
+  right = left;
+  left = temp;
+}
+</code></pre>
+
+</body>
+</html>
+  

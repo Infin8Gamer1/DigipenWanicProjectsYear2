@@ -1,0 +1,132 @@
+
+<!-- saved from url=(0095)http://azrael.digipen.edu/~mmead/www/Courses/2014/winter/cs170/labs/week11/vector-diagrams.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="./vector-diagrams_files/new.css">
+<title>Vector Diagrams</title>
+<style>
+body {
+   background : #ffffff; 
+   margin-left : 50;
+   margin-right : 20;
+   background : url("../../../../../../images/notebook.jpg");
+   }
+</style></head>
+
+
+
+<body>  
+<center>
+<h1>Vector Diagrams<p></p></h1>
+</center>
+
+<!--
+<p class="technote">
+</p>
+-->
+
+<p class="SectionHeader">
+Diagrams
+</p>
+
+<b>Growing a vector:</b>
+<ol>
+<li>Original vector:
+<blockquote>
+<img src="./vector-diagrams_files/Vector-grow-1.jpg">
+</blockquote>
+
+</li><li>After growing (allocate an array twice as large):
+<blockquote>
+<img src="./vector-diagrams_files/Vector-grow-2.jpg">
+</blockquote>
+
+</li><li>Copy existing elements from original array into new array using a loop of some kind. <del><b>DO NOT USE</b> <b><tt>memcpy</tt></b> or anything like that.</del> Feel free to use <b><tt>memcpy</tt></b> if you like.
+<blockquote>
+<img src="./vector-diagrams_files/Vector-grow-4.jpg">
+</blockquote>
+
+</li><li><b>Free the memory from the original array.</b></li>
+</ol>
+
+<p>
+</p><hr width="90%">
+<p>
+	
+<b>Removing an element from a vector:</b>
+</p><ol>
+	<li>Assume this call: <tt>remove(5);// Removes first occurrence of the number 5</tt></li>
+	<p>
+	<b>Original array:</b> (size is 7)
+	</p><blockquote>
+		<img src="./vector-diagrams_files/Vector-remove-1.jpg">
+	</blockquote>
+	<p>
+	</p><li>The index of the item to remove is 3:</li>
+  <p>
+	</p><blockquote>
+		<img src="./vector-diagrams_files/Vector-remove-2.jpg">
+	</blockquote>
+	<li>For each element to the right of the item to be removed, shift it over one slot to the left (working left to right):</li>
+	<blockquote>
+		<img src="./vector-diagrams_files/Vector-remove-3.jpg">
+	</blockquote>
+	<blockquote>
+		<img src="./vector-diagrams_files/Vector-remove-4.jpg">
+	</blockquote>
+	<blockquote>
+		<img src="./vector-diagrams_files/Vector-remove-5.jpg">
+	</blockquote>
+	<li>The array after the removal (size is now 6). Notice that the last element is in the array twice. (This is how it is supposed to work.)</li>
+	<blockquote>
+		<img src="./vector-diagrams_files/Vector-remove-6.jpg">
+	</blockquote>
+</ol>
+
+<p>
+</p><hr width="90%">
+<p>
+
+<b>Inserting into a vector:</b>
+</p><ol>
+	<li>Assume this call: <tt>Insert(7, 2); <i>// Insert the value 7 at position 2</i></tt></li>
+	<p>
+	</p><li>You must make sure that there is enough room in the array for one additional element. If the array is full, you must 
+	grow it first (like the above diagrams).</li>
+	<p>
+	</p><li>The insertion point is index 2: (size is 5)</li>
+  <p>
+	</p><blockquote>
+		<img src="./vector-diagrams_files/Vector-insert-1.jpg">
+	</blockquote>
+	<li>For each element to the right of the insertion point, shift (copy) it over one slot to the right (working right to left).</li>
+	<blockquote>
+		<img src="./vector-diagrams_files/Vector-insert-2.jpg">
+	</blockquote>
+	<blockquote>
+		<img src="./vector-diagrams_files/Vector-insert-3.jpg">
+	</blockquote>
+	<li>Then copy the item at the index over to the right.</li>
+	<blockquote>
+		<img src="./vector-diagrams_files/Vector-insert-4.jpg">
+	</blockquote>
+	<li>Finally, insert the value at the proper index: (size is now 6)</li>
+	<blockquote>
+		<img src="./vector-diagrams_files/Vector-insert-5.jpg">
+	</blockquote>
+</ol>
+
+<br><br><br>
+<hr>
+
+<blockquote><pre></pre></blockquote>
+
+
+<blockquote><pre></pre></blockquote>
+
+
+
+
+
+<blockquote><pre></pre></blockquote>
+
+</body></html>

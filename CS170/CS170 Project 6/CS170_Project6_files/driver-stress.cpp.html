@@ -1,0 +1,147 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="./new.css">
+<title>driver-stress.cpp</title>
+</head>
+
+<body>  
+
+
+<pre class="sourcecode"><code>
+<b>#include</b> <font color="#9933CC">&quot;Functions.h&quot;</font>
+<b>#include</b> &lt;iostream&gt;
+<b>#include</b> &lt;cstdlib&gt;  <font color="#003399"><i>// rand</i></font>
+
+<b>using</b> std::cout;
+<b>using</b> std::endl;
+
+<font color="#003399"><i>// generate random numbers between low and high </i></font>
+<b>int</b> RandomInt(<b>int</b> low, <b>int</b> high)
+{
+  <b>int</b> number = std::rand() % (high - low + 1) + low;
+  <b>return</b> number;
+}
+
+<b>void</b> TestStress1(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Stress1 *****&quot;</font> &lt;&lt; endl;
+  
+  <b>int</b> size = 100;
+  <b>int</b> *array = <b>new</b> <b>int</b>[size];
+  <b>int</b> low = 1;
+  <b>int</b> high = 9;
+  <b>for</b> (<b>int</b> i = 0; i &lt; size; i++)
+    array[i] = RandomInt(1, 9);
+
+  <b>int</b> *begin = array;
+  <b>int</b> *end = array + size;
+  CS170::display(begin, end);
+
+  <b>int</b> *newend = end;
+  <b>for</b> (<b>int</b> i = low; i &lt;= high; i++)
+  {
+    <b>int</b> item = i;
+    newend = CS170::remove(begin, newend, item);
+    cout &lt;&lt; <font color="#9933CC">&quot;remove &quot;</font> &lt;&lt; item &lt;&lt; <font color="#9933CC">&quot;, new list: &quot;</font>;
+    CS170::display(begin, newend);
+  }
+  <b>delete</b> [] array;
+}
+
+<b>void</b> TestStress2(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Stress2 *****&quot;</font> &lt;&lt; endl;
+  
+  <b>int</b> size = 10000000;
+  <b>int</b> *array = <b>new</b> <b>int</b>[size];
+  <b>int</b> low = -10;
+  <b>int</b> high = 10;
+  <b>for</b> (<b>int</b> i = 0; i &lt; size; i++)
+    array[i] = RandomInt(low, high);
+
+  <b>int</b> *begin = array;
+  <b>int</b> *end = array + size;
+  <font color="#003399"><i>//CS170::display(begin, end);</i></font>
+
+  <b>int</b> sum = CS170::sum(begin, end);
+  std::cout &lt;&lt; <font color="#9933CC">&quot;Sum is &quot;</font> &lt;&lt; sum &lt;&lt; std::endl;
+
+  <b>int</b> *newend = end;
+  <b>for</b> (<b>int</b> i = low; i &lt;= high; i++)
+  {
+    <b>int</b> item = i;
+    newend = CS170::remove(begin, newend, item);
+    sum = CS170::sum(begin, newend);
+    cout &lt;&lt; <font color="#9933CC">&quot;remove &quot;</font> &lt;&lt; item &lt;&lt; <font color="#9933CC">&quot;, sum is &quot;</font> &lt;&lt; sum &lt;&lt; std::endl;
+    <font color="#003399"><i>//std::cout &lt;&lt; &quot;new list: &quot;;</i></font>
+    <font color="#003399"><i>//CS170::display(begin, newend);</i></font>
+  }
+  <b>delete</b> [] array;
+}
+
+<b>void</b> TestStress3(<b>void</b>)
+{
+  cout &lt;&lt; <font color="#9933CC">&quot;***** Stress3 *****&quot;</font> &lt;&lt; endl;
+  
+  <b>int</b> size = 10000000;
+  <b>int</b> *array = <b>new</b> <b>int</b>[size];
+  <b>for</b> (<b>int</b> i = 0; i &lt; size; i++)
+    array[i] = 1;
+
+  <b>for</b> (<b>int</b> i = 1; i &lt; size; i *= 10)
+    array[i] = 5;
+
+  <b>int</b> *begin = array;
+  <b>int</b> *end = array + size;
+  <font color="#003399"><i>//CS170::display(begin, end);</i></font>
+
+  <b>int</b> sum = CS170::sum(begin, end);
+  std::cout &lt;&lt; <font color="#9933CC">&quot;Sum is &quot;</font> &lt;&lt; sum &lt;&lt; std::endl;
+
+  <b>int</b> *newend = end;
+  <b>int</b> item = 1;
+  newend = CS170::remove(begin, newend, item);
+  sum = CS170::sum(begin, newend);
+  cout &lt;&lt; <font color="#9933CC">&quot;remove &quot;</font> &lt;&lt; item &lt;&lt; <font color="#9933CC">&quot;, sum is &quot;</font> &lt;&lt; sum &lt;&lt; std::endl;
+  <font color="#003399"><i>//std::cout &lt;&lt; &quot;new list: &quot;;</i></font>
+  <font color="#003399"><i>//CS170::display(begin, newend);</i></font>
+  <b>delete</b> [] array;
+}
+
+<b>int</b> main(<b>int</b> argc, <b>char</b> **argv)
+{
+  std::srand(0);
+
+  <b>int</b> test = 0;
+  <b>if</b> (argc &gt; 1)
+    test = std::atoi(argv[1]);
+
+  <b>switch</b> (test)
+  {
+    <b>case</b> 1:
+        TestStress1();
+      <b>break</b>;
+
+    <b>case</b> 2:
+        TestStress2();
+      <b>break</b>;
+
+    <b>case</b> 3:
+        TestStress3();
+      <b>break</b>;
+
+    <b>default</b>:
+        TestStress1();
+        TestStress2();
+        TestStress3();
+      <b>break</b>;
+  }
+  <b>return</b> 0;
+}
+
+</code></pre>
+
+
+</body>
+</html>
+  
