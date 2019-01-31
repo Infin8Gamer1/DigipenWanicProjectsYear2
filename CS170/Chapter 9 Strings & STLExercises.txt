@@ -1,0 +1,28 @@
+1)
+	Containers
+	Algorithims
+	Itterators
+2)
+	L
+	L
+	C
+	L
+3)
+	has to grow a bunch of times but we can reserve size before we start adding data to save on resources
+	
+	v1.Reserve(50);
+4)
+	typedef std::list<int>::iteratorIntIter;
+	// Use the typedef to declare a loop variable
+	
+	container.reserve(10);
+	container.fill(0);
+	
+	int i = 0;
+	
+	for(IntIter iter= cont1.begin(); iter != cont1.end(); ++iter)
+	{
+		*iter = i;
+		i++;
+	}
+	

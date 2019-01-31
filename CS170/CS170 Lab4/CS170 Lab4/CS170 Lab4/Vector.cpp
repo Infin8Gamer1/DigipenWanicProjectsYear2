@@ -20,14 +20,30 @@ namespace CS170
 
 	Vector::Vector(const Vector & rhs)
 	{
-		array_ = rhs.array_;
-		size_ = rhs.size_;
-		capacity_ = rhs.capacity_;
-		allocs_ = rhs.allocs_;
+		allocs_ += 1;
+
+		size_ = 0;
+
+		capacity_ = rhs.size_;
+
+		//allocate a fresh array
+		array_ = new int[capacity_];
+
+		for (unsigned i = 0; i < rhs.size_; i++)
+		{
+			push_back(rhs.array_[i]);
+		}
 	}
 
 	Vector::Vector(const int array[], unsigned size)
 	{
+		allocs_ += 1;
+
+		capacity_ = size;
+
+		//allocate a fresh array
+		array_ = new int[capacity_];
+
 		for (unsigned i = 0; i < size; i++)
 		{
 			push_back(array[i]);
@@ -87,30 +103,28 @@ namespace CS170
 	{
 		if (position >= size_) {
 			push_back(value);
-			return;
-		}
-
-		if (position <= 0) {
+		} else if (position <= 0) {
 			push_front(value);
-			return;
+		} else {
+			//add one to the size as we are adding a value
+			size_ += 1;
+
+			//check if the array needs to grow and call grow if it does
+			if (capacity_ < size_) {
+				grow();
+			}
+
+			//shift everything down to make room at the position
+			for (unsigned i = size_ - 2; i >= position; i--)
+			{
+				array_[i + 1] = array_[i];
+			}
+
+			//put the value in the array
+			array_[position] = value;
 		}
 		
-		//add one to the size as we are adding a value
-		size_ += 1;
-
-		//check if the array needs to grow and call grow if it does
-		if (capacity_ < size_) {
-			grow();
-		}
-
-		//shift everything down to make room at the position
-		for (int i = size_ - 1; i > position; i--)
-		{
-			array_[i + 1] = array_[i];
-		}
 		
-		//put the value in the array
-		array_[position] = value;
 	}
 
 	void Vector::remove(int value)
@@ -155,21 +169,94 @@ namespace CS170
 
 	Vector & Vector::operator=(const Vector & rhs)
 	{
-		//copy the thing
-		return Vector(rhs);
+		//pop all the elements
+		size_ = 0;
+
+		//check if we need to allocate new memory
+		if (capacity_ < rhs.size_) {
+			allocs_ += 1;
+
+			capacity_ = rhs.size_;
+
+			//allocate a fresh array
+			array_ = new int[capacity_];
+		}
+		
+		//add other elements
+		for (unsigned i = 0; i < rhs.size_; i++)
+		{
+			push_back(rhs.array_[i]);
+		}
+		
+		return *this;
 	}
 
 	Vector & Vector::operator+=(const Vector & rhs)
 	{
-		Vector output = Vector(rhs);
-		output = output + *this;
+		//check if we need to allocate new memory
+		if (capacity_ < rhs.size_ + size_) {
+			allocs_ += 1;
 
-		return output;
+			//save the original capacity
+			int originalCapacity = capacity_;
+
+			capacity_ = rhs.size_ + size_;
+
+			//allocate a fresh array
+			int *freshArray = new int[capacity_];
+
+			//copy the data over
+			for (int i = 0; i < originalCapacity; i++)
+			{
+				freshArray[i] = array_[i];
+			}
+
+			//free up the memory and set the array to be the fresh one
+			delete array_;
+
+			array_ = freshArray;
+		}
+
+		//add other elements to the end
+		unsigned size = rhs.size_;
+
+		for (unsigned i = 0; i < size; i++)
+		{
+			push_back(rhs.array_[i]);
+		}
+
+		return *this;
 	}
 
 	Vector Vector::operator+(const Vector & rhs) const
 	{
-		return Vector();
+
+		Vector output = Vector();
+
+		//check if we need to allocate new memory
+		if (output.capacity_ < rhs.size_ + size_) {
+			output.allocs_ += 1;
+
+			output.capacity_ = rhs.size_ + size_;
+
+			//allocate a fresh array
+			output.array_ = new int[output.capacity_];
+		}
+
+		//add my elements to the end
+		for (unsigned i = 0; i < size_; i++)
+		{
+			output.push_back(array_[i]);
+		}
+
+		//add others elements to the end
+		for (unsigned i = 0; i < rhs.size_; i++)
+		{
+			output.push_back(rhs.array_[i]);
+		}
+
+		
+		return output;
 	}
 
 	int Vector::operator[](unsigned index) const

@@ -383,7 +383,7 @@ void TestAdd3(void)
 
 int main(int argc, char **argv)
 {
-  int test_num = 4;
+  int test_num = 0;
   if (argc > 1)
     test_num = std::atoi(argv[1]);
 
@@ -415,7 +415,7 @@ int main(int argc, char **argv)
   else if (test_num > 0 && test_num <= num)
     Tests[test_num - 1]();
 
-  getchar();
+  //getchar();
 
   return 0;
 }
