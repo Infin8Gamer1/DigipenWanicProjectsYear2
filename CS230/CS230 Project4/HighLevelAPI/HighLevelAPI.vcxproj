@@ -111,6 +111,9 @@
     <ClInclude Include="include\Transform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\GameObjectFactory.cpp" />
+    <ClCompile Include="include\Parser.cpp" />
+    <ClCompile Include="include\Serializable.cpp" />
     <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\Collider.cpp" />
     <ClCompile Include="src\ColliderCircle.cpp" />

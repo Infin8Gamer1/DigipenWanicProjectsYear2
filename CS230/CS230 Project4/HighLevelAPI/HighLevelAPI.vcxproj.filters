@@ -85,9 +85,6 @@
     <ClInclude Include="include\Serializable.h">
       <Filter>Serialization</Filter>
     </ClInclude>
-    <ClInclude Include="include\Parser.h">
-      <Filter>Serialization</Filter>
-    </ClInclude>
     <ClInclude Include="include\Tilemap.h">
       <Filter>Levels</Filter>
     </ClInclude>
@@ -108,6 +105,9 @@
     </ClInclude>
     <ClInclude Include="include\GameObjectManager.h">
       <Filter>GameObject\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Parser.h">
+      <Filter>Serialization</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +176,15 @@
     </ClCompile>
     <ClCompile Include="src\GameObjectManager.cpp">
       <Filter>GameObject\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="include\GameObjectFactory.cpp">
+      <Filter>GameObject\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Serializable.cpp">
+      <Filter>Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Parser.cpp">
+      <Filter>Serialization</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
