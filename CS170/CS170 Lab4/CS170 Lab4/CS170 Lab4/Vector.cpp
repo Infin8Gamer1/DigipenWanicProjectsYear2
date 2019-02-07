@@ -1,7 +1,7 @@
 /*
 Author - Jacob Holyfield
-Date - 1/9/2019
-Other information - SpaceX has an iridium flight scheduled for 1/11/19
+Date - 2/1/2019
+Random SpaceX fact - Spacex is testing the Crew Dragon this Month! The first demo flight should happen in Febuary 2019!
 */
 
 #include <iostream>  // cout
@@ -18,24 +18,23 @@ namespace CS170
 		clear();
 	}
 
-	Vector::Vector(const Vector & rhs)
+	Vector::Vector(const Vector & rhs) : array_(0), size_(0), capacity_(0), allocs_(0)
 	{
 		allocs_ += 1;
-
-		size_ = 0;
 
 		capacity_ = rhs.size_;
 
 		//allocate a fresh array
 		array_ = new int[capacity_];
 
+		//add elements of other array to this
 		for (unsigned i = 0; i < rhs.size_; i++)
 		{
 			push_back(rhs.array_[i]);
 		}
 	}
 
-	Vector::Vector(const int array[], unsigned size)
+	Vector::Vector(const int array[], unsigned size) : array_(0), size_(0), capacity_(0), allocs_(0)
 	{
 		allocs_ += 1;
 
@@ -44,6 +43,7 @@ namespace CS170
 		//allocate a fresh array
 		array_ = new int[capacity_];
 
+		//add elements of the array to this
 		for (unsigned i = 0; i < size; i++)
 		{
 			push_back(array[i]);
@@ -169,6 +169,11 @@ namespace CS170
 
 	Vector & Vector::operator=(const Vector & rhs)
 	{
+		//check if we are trying to assign us to us if we are us then return us however if us isn't them then dont return us and coppy stuff over
+		if (this == &rhs) {
+			return *this;
+		}
+
 		//pop all the elements
 		size_ = 0;
 
@@ -233,15 +238,14 @@ namespace CS170
 
 		Vector output = Vector();
 
-		//check if we need to allocate new memory
-		if (output.capacity_ < rhs.size_ + size_) {
-			output.allocs_ += 1;
+		//allocate new memory
+		output.allocs_ += 1;
 
-			output.capacity_ = rhs.size_ + size_;
+		output.capacity_ = rhs.size_ + size_;
 
-			//allocate a fresh array
-			output.array_ = new int[output.capacity_];
-		}
+		//allocate a fresh array
+		output.array_ = new int[output.capacity_];
+		
 
 		//add my elements to the end
 		for (unsigned i = 0; i < size_; i++)

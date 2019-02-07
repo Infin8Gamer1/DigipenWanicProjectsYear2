@@ -136,7 +136,7 @@ Assign: b = a, print a,b
 0  2  4  6  8  10  12  14  16  18  (size=10, capacity=16, allocs=5)
 0  2  4  6  8  10  12  14  16  18  (size=10, capacity=16, allocs=5)
 Assign: a = a, print a
-(size=0, capacity=16, allocs=5)
+0  2  4  6  8  10  12  14  16  18  (size=10, capacity=16, allocs=5)
 Assign: a = c, print a,c
 3  9  15  21  27  (size=5, capacity=16, allocs=5)
 3  9  15  21  27  (size=5, capacity=8, allocs=4)
