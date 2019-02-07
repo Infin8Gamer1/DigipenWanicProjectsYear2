@@ -17,6 +17,7 @@
 #include <Mesh.h>
 #include <Vertex.h>
 #include <Graphics.h>
+#include <Parser.h>
 
 Sprite::Sprite() : Component("Sprite")
 {
@@ -38,6 +39,22 @@ Component * Sprite::Clone() const
 
 	return output;*/
 	return new Sprite(*this);
+}
+
+void Sprite::Deserialize(Parser & parser)
+{
+	//set frame index
+	parser.ReadVariable("frameIndex", frameIndex);
+	//set color
+	parser.ReadVariable("color", color);
+}
+
+void Sprite::Serialize(Parser & parser) const
+{
+	//get frame index
+	parser.WriteVariable("frameIndex", frameIndex);
+	//get color
+	parser.WriteVariable("color", color);
 }
 
 void Sprite::Initialize()

@@ -50,6 +50,12 @@ public:
 	// Clone the transform, returning a dynamically allocated copy.
 	Component* Clone() const override;
 
+	// Loads object data from a file.
+	void Deserialize(Parser& parser) override;
+
+	// Saves object data to a file.
+	void Serialize(Parser& parser) const override;
+
 	// Get the transform matrix, based upon translation, rotation and scale settings.
 	// Returns:
 	//	 A reference to the component's matrix.

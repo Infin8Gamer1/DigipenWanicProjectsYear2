@@ -11,6 +11,8 @@
 
 #include "stdafx.h"
 #include "Transform.h"
+#include <Parser.h>
+#include <sstream>
 
 Transform::Transform(float x, float y) : Component("Transform")
 {
@@ -37,6 +39,39 @@ Transform::Transform(Vector2D _translation, Vector2D _scale, float _rotation) : 
 Component * Transform::Clone() const
 {
 	return new Transform(translation, scale, rotation);
+}
+
+void Transform::Deserialize(Parser & parser)
+{
+	//get translation
+	Vector2D translation;
+	parser.ReadVariable("translation", translation);
+
+	SetTranslation(translation);
+
+	//get rotation
+	float rotation;
+	parser.ReadVariable("rotation", rotation);
+
+	SetRotation(rotation);
+
+	//get scale
+	Vector2D scale;
+	parser.ReadVariable("scale", scale);
+
+	SetScale(scale);
+}
+
+void Transform::Serialize(Parser & parser) const
+{
+	//set translation
+	parser.WriteVariable("translation", GetTranslation());
+
+	//set rotation
+	parser.WriteVariable("rotation", GetRotation());
+
+	//set scale
+	parser.WriteVariable("scale", GetScale());
 }
 
 const CS230::Matrix2D & Transform::GetMatrix()

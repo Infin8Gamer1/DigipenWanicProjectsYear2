@@ -13,7 +13,7 @@
 #include "Component.h"
 #include "GameObject.h"
 
-Component::Component(const std::string & name) : BetaObject(name)
+Component::Component(const std::string & name) : BetaObject(name), Serializable()
 {
 }
 
