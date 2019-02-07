@@ -25,7 +25,11 @@ void GameObjectFactory::SaveObjectToFile(GameObject * object)
 
 GameObjectFactory & GameObjectFactory::GetInstance()
 {
-	// TODO: insert return statement here
+	if (&Instance == nullptr) {
+		Instance = new GameObjectFactory();
+	}
+
+	return *Instance;
 }
 
 

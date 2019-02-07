@@ -63,8 +63,10 @@ public:
 	// Register a component so it can be created on the fly.
 	// Template parameters:
 	//   ComponentType = The type of the component to be registered.
-	//template <class ComponentType>
-	//void RegisterComponent()
+	template <class ComponentType>
+	void RegisterComponent() {
+
+	}
 
 	// Returns an instance of the factory.
 	static GameObjectFactory& GetInstance();
@@ -78,6 +80,8 @@ private:
 	std::vector<Component*> registeredComponents;
 
 	std::string objectFilePath;
+
+	static GameObjectFactory* Instance;
 
 	//------------------------------------------------------------------------------
 	// Private Functions:

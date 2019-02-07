@@ -59,24 +59,63 @@ public:
 	void EndScope();
 
 	// Writes a variable name and value to the currently open file.
-	//template<typename T>
-	//void WriteVariable(const std::string& name, const T& variable)
+	template<typename T>
+	void WriteVariable(const std::string& name, const T& variable) {
+		CheckFileOpen();
+
+		for (unsigned i = 0; i < indentLevel; i++)
+		{
+			stream << tab;
+		}
+
+		stream << name << " : " << variable << std::endl;
+	}
 
 	// Writes a value to the currently open file.
-	//template<typename T>
-	//void WriteValue(const T& value)
+	template<typename T>
+	void WriteValue(const T& value) {
+		CheckFileOpen();
+
+		for (unsigned i = 0; i < indentLevel; i++)
+		{
+			stream << tab;
+		}
+
+		stream << value << std::endl;
+	}
 
 	// Reads the value of a variable with the given name from the currently open file.
 	// Returns:
 	//   True if read was successful, false otherwise.
-	//template<typename T>
-	//void ReadVariable(const std::string& name, T& variable)
+	template<typename T>
+	void ReadVariable(const std::string& name, T& variable) {
+		CheckFileOpen();
+
+		//Create a string variable and use the input operator (>>) to place the next word in the stream into it.
+		std::string word;
+		stream >> word;
+
+		//If the contents of the string don't match the name parameter, throw a ParseException, passing it the name and filename.
+		if (word != name) {
+			throw ParseException(filename, "the name " + name + "didn't match " + word + ". ERROR 1");
+		}
+
+		//skip forward in the stream to after the next colon character
+		ReadSkip(':');
+
+		//place the next item in the stream into variable
+		stream >> variable;
+	}
 
 	// Reads the next value from the currently open file.
 	// Returns:
 	//   True if read was successful, false otherwise.
-	//template<typename T>
-	//void ReadValue(T& value)
+	template<typename T>
+	void ReadValue(T& value) {
+		CheckFileOpen();
+
+		stream >> value;
+	}
 
 	// Reads a piece of text from the currently open file
 	// and skips to the next word afterwards.

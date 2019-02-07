@@ -24,6 +24,7 @@
 #include <Engine.h>
 #include "Level3.h"
 #include "SoundManager.h"
+#include <Parser.h>
 
 Levels::Level1::Level1() : Level("Level1")
 {
@@ -89,6 +90,29 @@ void Levels::Level1::Shutdown()
 void Levels::Level1::Unload()
 {
 	std::cout << GetName() << "::Unload" << std::endl;
+
+	/*Parser* myParser = new Parser("testparse.txt", std::fstream::out);
+	try {
+		myParser->WriteValue("MY_Thing");
+
+		myParser->BeginScope();
+
+		myParser->WriteValue("MY_Sub_Thing");
+
+		myParser->BeginScope();
+
+		myParser->WriteVariable("TestVar", 42);
+		myParser->WriteValue("MYVALUE");
+
+		myParser->EndScope();
+		myParser->EndScope();
+	}
+	catch (ParseException e) {
+		std::cout << e.what() << std::endl;
+	}
+	
+	delete myParser;
+	myParser = nullptr;*/
 
 	delete meshShip;
 	meshShip = nullptr;
