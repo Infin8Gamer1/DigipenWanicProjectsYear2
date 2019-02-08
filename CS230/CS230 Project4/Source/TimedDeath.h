@@ -52,6 +52,12 @@ namespace Behaviors
 		//   A pointer to a dynamically allocated clone of the component.
 		Component* Clone() const override;
 
+		// Loads object data from a file.
+		void Deserialize(Parser& parser) override;
+
+		// Saves object data to a file.
+		void Serialize(Parser& parser) const override;
+
 		// Update function for this component.
 		// Params:
 		//   dt = The (fixed) change in time since the last step.

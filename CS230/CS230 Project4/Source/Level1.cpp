@@ -101,7 +101,9 @@ void Levels::Level1::Unload()
 
 		myParser->BeginScope();
 
-		myParser->WriteVariable("TestVar", 42);
+		int testingLife = 43;
+		myParser->WriteVar(testingLife);
+		//myParser->WriteVariable(testingLife);
 		myParser->WriteValue("MYVALUE");
 
 		myParser->EndScope();

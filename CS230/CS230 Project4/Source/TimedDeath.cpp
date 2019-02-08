@@ -12,6 +12,7 @@
 #include "stdafx.h"
 #include "TimedDeath.h"
 #include "GameObject.h"
+#include <Parser.h>
 
 Behaviors::TimedDeath::TimedDeath(float _timeUntilDeath) : Component("TimedDeath")
 {
@@ -21,6 +22,16 @@ Behaviors::TimedDeath::TimedDeath(float _timeUntilDeath) : Component("TimedDeath
 Component * Behaviors::TimedDeath::Clone() const
 {
 	return new TimedDeath(timeUntilDeath);
+}
+
+void Behaviors::TimedDeath::Deserialize(Parser & parser)
+{
+	parser.ReadVariable("timeUntilDeath", timeUntilDeath);
+}
+
+void Behaviors::TimedDeath::Serialize(Parser & parser) const
+{
+	parser.WriteVariable("timeUntilDeath", timeUntilDeath);
 }
 
 void Behaviors::TimedDeath::Update(float dt)

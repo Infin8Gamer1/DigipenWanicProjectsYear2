@@ -13,6 +13,7 @@
 #include "Physics.h"
 #include "Transform.h"
 #include "GameObject.h"
+#include <Parser.h>
 
 Physics::Physics() : Component("Physics")
 {
@@ -44,6 +45,30 @@ Physics::Physics() : Component("Physics")
 Component * Physics::Clone() const
 {
 	return new Physics();
+}
+
+void Physics::Deserialize(Parser & parser)
+{
+	parser.ReadVariable("acceleration", acceleration);
+
+	parser.ReadVariable("velocity", velocity);
+
+	parser.ReadVariable("angularVelocity", angularVelocity);
+
+	float mass;
+	parser.ReadVariable("mass", mass);
+	SetMass(mass);
+}
+
+void Physics::Serialize(Parser & parser) const
+{
+	parser.WriteVariable("acceleration", acceleration);
+
+	parser.WriteVariable("velocity", velocity);
+
+	parser.WriteVariable("angularVelocity", angularVelocity);
+
+	parser.WriteVariable("mass", 1 / inverseMass);
 }
 
 void Physics::Initialize()

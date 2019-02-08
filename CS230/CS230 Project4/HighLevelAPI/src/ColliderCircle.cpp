@@ -18,6 +18,7 @@
 #include "Intersection2D.h"
 #include <DebugDraw.h>
 #include <Graphics.h>
+#include <Parser.h>
 
 
 ColliderCircle::ColliderCircle(float _radius) : Collider(ColliderType::ColliderTypeCircle)
@@ -28,6 +29,16 @@ ColliderCircle::ColliderCircle(float _radius) : Collider(ColliderType::ColliderT
 Component * ColliderCircle::Clone() const
 {
 	return new ColliderCircle(*this);
+}
+
+void ColliderCircle::Deserialize(Parser & parser)
+{
+	parser.ReadVariable("radius", radius);
+}
+
+void ColliderCircle::Serialize(Parser & parser) const
+{
+	parser.WriteVariable("radius", radius);
 }
 
 void ColliderCircle::Draw()

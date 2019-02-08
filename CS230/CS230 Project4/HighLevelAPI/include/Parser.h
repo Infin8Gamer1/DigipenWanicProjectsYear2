@@ -29,6 +29,8 @@ class Vector2D;
 // Public Structures:
 //------------------------------------------------------------------------------
 
+//#define WRITE_VARIABLE(var) WriteVariable(#var, (var))
+
 // Exception class for problems encountered while reading/writing from files
 class ParseException : public std::exception
 {
@@ -58,6 +60,8 @@ public:
 	// Outputs an end curly brace and decreases tab count.
 	void EndScope();
 
+#define WriteVar(var) WriteVariable(#var, var)
+
 	// Writes a variable name and value to the currently open file.
 	template<typename T>
 	void WriteVariable(const std::string& name, const T& variable) {
@@ -83,6 +87,8 @@ public:
 
 		stream << value << std::endl;
 	}
+
+#define ReadVar(var) ReadVariable(#var, var)
 
 	// Reads the value of a variable with the given name from the currently open file.
 	// Returns:

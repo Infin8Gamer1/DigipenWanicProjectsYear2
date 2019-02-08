@@ -18,6 +18,7 @@
 #include "Intersection2D.h"
 #include <DebugDraw.h>
 #include <Graphics.h>
+#include <Parser.h>
 
 ColliderRectangle::ColliderRectangle(const Vector2D & _extents) : Collider(ColliderType::ColliderTypeRectangle)
 {
@@ -27,6 +28,16 @@ ColliderRectangle::ColliderRectangle(const Vector2D & _extents) : Collider(Colli
 Component * ColliderRectangle::Clone() const
 {
 	return new ColliderRectangle(extents);
+}
+
+void ColliderRectangle::Deserialize(Parser & parser)
+{
+	parser.ReadVar(extents);
+}
+
+void ColliderRectangle::Serialize(Parser & parser) const
+{
+	parser.WriteVar(extents);
 }
 
 void ColliderRectangle::Draw()

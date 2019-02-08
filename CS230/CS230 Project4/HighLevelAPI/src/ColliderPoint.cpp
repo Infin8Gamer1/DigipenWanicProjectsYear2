@@ -19,6 +19,7 @@
 #include "GameObject.h"
 #include <Graphics.h>
 #include <DebugDraw.h>
+#include <Parser.h>
 
 
 ColliderPoint::ColliderPoint() : Collider(ColliderType::ColliderTypePoint)

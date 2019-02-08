@@ -1,0 +1,8 @@
+MY_Thing
+{
+  MY_Sub_Thing
+  {
+    testingLife : 43
+    MYVALUE
+  }
+}

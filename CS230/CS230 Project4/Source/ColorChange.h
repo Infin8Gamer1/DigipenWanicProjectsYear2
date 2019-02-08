@@ -50,6 +50,12 @@ namespace Behaviors
 		// Return a new copy of the component.
 		Component* Clone() const;
 
+		// Loads object data from a file.
+		void Deserialize(Parser& parser) override;
+
+		// Saves object data to a file.
+		void Serialize(Parser& parser) const override;
+
 		// Initialize data for this object.
 		void Initialize();
 

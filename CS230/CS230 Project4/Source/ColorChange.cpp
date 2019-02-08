@@ -14,6 +14,7 @@
 #include "Sprite.h"
 #include "Collider.h"
 #include "GameObject.h"
+#include <Parser.h>
 
 Behaviors::ColorChange::ColorChange(const Color & _normalColor, const Color & _collidedColor, float _collidedColorTime) : Component("ColorChange")
 {
@@ -33,6 +34,24 @@ Behaviors::ColorChange::ColorChange(const Color & _normalColor, const Color & _c
 Component * Behaviors::ColorChange::Clone() const
 {
 	return new ColorChange(normalColor, collidedColor, collidedColorTime);
+}
+
+void Behaviors::ColorChange::Deserialize(Parser & parser)
+{
+	parser.ReadVariable("normalColor", normalColor);
+
+	parser.ReadVariable("collidedColor", collidedColor);
+
+	parser.ReadVariable("collidedColorTime", collidedColorTime);
+}
+
+void Behaviors::ColorChange::Serialize(Parser & parser) const
+{
+	parser.WriteVariable("normalColor", normalColor);
+
+	parser.WriteVariable("collidedColor", collidedColor);
+
+	parser.WriteVariable("collidedColorTime", collidedColorTime);
 }
 
 void Behaviors::ColorChangeCollisionHandler(GameObject & object, GameObject & other)
