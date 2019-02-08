@@ -16,6 +16,7 @@
 //------------------------------------------------------------------------------
 
 #include <BetaObject.h>
+#include <Serializable.h>
 
 //------------------------------------------------------------------------------
 
@@ -32,7 +33,7 @@ class Space;
 
 // You are free to change the contents of this structure as long as you do not
 //   change the public interface declared in the header.
-class GameObject : public BetaObject
+class GameObject : public BetaObject, public Serializable
 {
 public:
 	//------------------------------------------------------------------------------
@@ -51,6 +52,12 @@ public:
 
 	// Free the memory associated with a game object.
 	~GameObject();
+
+	// Loads object data from a file.
+	void Deserialize(Parser& parser) override;
+
+	// Saves object data to a file.
+	void Serialize(Parser& parser) const override;
 
 	// Initialize this object's components and set it to active.
 	void Initialize() override;

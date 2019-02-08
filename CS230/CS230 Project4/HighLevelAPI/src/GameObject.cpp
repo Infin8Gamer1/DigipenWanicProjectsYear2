@@ -13,6 +13,8 @@
 #include "GameObject.h"
 #include "Component.h"
 #include "Space.h"
+#include <Parser.h>
+#include <GameObjectFactory.h>
 
 GameObject::GameObject(const std::string & name) : BetaObject(name)
 {
@@ -44,6 +46,58 @@ GameObject::~GameObject()
 		delete components[i];
 		components[i] = nullptr;
 	}
+}
+
+void GameObject::Deserialize(Parser & parser)
+{
+	parser.ReadSkip(GetName());
+	parser.ReadSkip('{');
+
+	unsigned numComponents = 0;
+	parser.ReadVar(numComponents);
+
+	for (unsigned i = 0; i < numComponents; i++)
+	{
+		std::string componentName;
+		parser.ReadValue(componentName);
+
+		Component* component = GameObjectFactory::GetInstance().CreateComponent(componentName);
+
+		if (component == nullptr) {
+			throw ParseException(componentName, "Component could not be found! ERROR 404");
+		}
+
+		AddComponent(component);
+
+		parser.ReadSkip('{');
+		component->Deserialize(parser);
+		parser.ReadSkip('}');
+	}
+
+	parser.ReadSkip('}');
+}
+
+void GameObject::Serialize(Parser & parser) const
+{
+	parser.WriteValue(GetName());
+
+	parser.BeginScope();
+
+	parser.WriteVar(numComponents);
+
+	for (unsigned i = 0; i < numComponents; i++)
+	{
+		//write components name
+		parser.WriteValue(std::string(typeid(*components[i]).name()).substr(6));
+
+		parser.BeginScope();
+
+		components[i]->Serialize(parser);
+
+		parser.EndScope();
+	}
+
+	parser.EndScope();
 }
 
 void GameObject::Initialize()
