@@ -27,8 +27,8 @@ Component * Behaviors::ScreenWrap::Clone() const
 
 void Behaviors::ScreenWrap::Initialize()
 {
-	transform = static_cast<Transform*>(GetOwner()->GetComponent("Transform"));
-	physics = static_cast<Physics*>(GetOwner()->GetComponent("Physics"));
+	transform = GetOwner()->GetComponent<Transform>();
+	physics = GetOwner()->GetComponent<Physics>();
 }
 
 void Behaviors::ScreenWrap::Update(float dt)

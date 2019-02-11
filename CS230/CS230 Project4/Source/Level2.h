@@ -66,19 +66,9 @@ namespace Levels
 		//------------------------------------------------------------------------------
 
 		// Monkey
-		Mesh* meshMonkey;
-		Texture* textureMonkey;
-    SpriteSource* spriteSourceMonkey;
-		unsigned columnsMonkey;
-		unsigned rowsMonkey;
 
 		// Tilemap
 		Tilemap* dataMap;
-		Texture* textureMap;
-    SpriteSource* spriteSourceMap;
-		Mesh* meshMap;
-		unsigned columnsMap;
-		unsigned rowsMap;
 	};
 }
 

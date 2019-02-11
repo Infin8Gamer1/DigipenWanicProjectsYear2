@@ -44,6 +44,8 @@ public:
 	//	 texture = A pointer to a texture that has been loaded by the Alpha Engine.
 	SpriteSource(int numCols = 1, int numRows = 1, Texture* texture = nullptr);
 
+	~SpriteSource();
+
 	// Returns a pointer to the texture, for the purposes of rendering a sprite.
 	// Returns:
 	//	 A pointer to the sprite source texture.

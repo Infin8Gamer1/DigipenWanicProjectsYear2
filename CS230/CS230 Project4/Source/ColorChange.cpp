@@ -57,7 +57,7 @@ void Behaviors::ColorChange::Serialize(Parser & parser) const
 void Behaviors::ColorChangeCollisionHandler(GameObject & object, GameObject & other)
 {
 	UNREFERENCED_PARAMETER(other);
-	ColorChange* objectColorChange = static_cast<ColorChange*>(object.GetComponent("ColorChange"));
+	ColorChange* objectColorChange = object.GetComponent<ColorChange>();
 
 	objectColorChange->collided = true;
 	objectColorChange->timer = 0.0f;
@@ -65,8 +65,8 @@ void Behaviors::ColorChangeCollisionHandler(GameObject & object, GameObject & ot
 
 void Behaviors::ColorChange::Initialize()
 {
-	sprite = static_cast<Sprite*>(GetOwner()->GetComponent("Sprite"));
-	Collider* collider = static_cast<Collider*>(GetOwner()->GetComponent("Collider"));
+	sprite = GetOwner()->GetComponent<Sprite>();
+	Collider* collider = GetOwner()->GetComponent<Collider>();
 	collider->SetCollisionHandler(ColorChangeCollisionHandler);
 }
 

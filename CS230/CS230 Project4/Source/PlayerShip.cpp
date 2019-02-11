@@ -29,14 +29,14 @@ Behaviors::PlayerShip::PlayerShip(float _forwardThrust, float _maximumSpeed, flo
 	bulletSpeed = _bulletSpeed;
 
 	// Bullet archetype
-	bulletArchetype = nullptr;
+	//bulletArchetype = nullptr;
 
 	// Components
 	transform = nullptr;
 	physics = nullptr;
 
 	//other
-	soundEvent = nullptr;
+	//soundEvent = nullptr;
 }
 
 Component * Behaviors::PlayerShip::Clone() const
@@ -46,16 +46,16 @@ Component * Behaviors::PlayerShip::Clone() const
 
 void Behaviors::PlayerShip::Initialize()
 {
-	transform = static_cast<Transform*>(GetOwner()->GetComponent("Transform"));
-	physics = static_cast<Physics*>(GetOwner()->GetComponent("Physics"));
+	transform = GetOwner()->GetComponent<Transform>();
+	physics = GetOwner()->GetComponent<Physics>();
 
-	bulletArchetype = GetOwner()->GetSpace()->GetObjectManager().GetArchetypeByName("Bullet");
+	//bulletArchetype = GetOwner()->GetSpace()->GetObjectManager().GetArchetypeByName("Bullet");
 
-	soundEvent = Engine::GetInstance().GetModule<SoundManager>()->PlayEvent("Test Tones");
+	/*soundEvent = Engine::GetInstance().GetModule<SoundManager>()->PlayEvent("Test Tones");
 	soundEvent->setPaused(true);
 	soundEvent->setVolume(0.5f);
 	soundEvent->setParameterValue("Wave Type", 0);
-	soundEvent->setParameterValue("LowMidHigh", 0);
+	soundEvent->setParameterValue("LowMidHigh", 0);*/
 }
 
 void Behaviors::PlayerShip::Update(float dt)
@@ -81,9 +81,9 @@ void Behaviors::PlayerShip::Move() const
 
 		physics->AddForce(force * forwardThrust);
 
-		soundEvent->setPaused(false);
+		//soundEvent->setPaused(false);
 	} else {
-		soundEvent->setPaused(true);
+		//soundEvent->setPaused(true);
 	}
 
 	

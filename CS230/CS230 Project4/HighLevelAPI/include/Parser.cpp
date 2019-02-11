@@ -59,13 +59,6 @@ void Parser::ReadSkip(const std::string & text)
 	}
 }
 
-void Parser::ReadSkip(char delimiter)
-{
-	CheckFileOpen();
-
-	stream.ignore(delimiter);
-}
-
 void Parser::CheckFileOpen()
 {
 	if (!stream.is_open()) {

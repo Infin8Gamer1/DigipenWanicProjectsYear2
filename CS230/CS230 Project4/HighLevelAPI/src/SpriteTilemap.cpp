@@ -5,7 +5,7 @@
 #include "Sprite.h"
 #include <vector>
 
-SpriteTilemap::SpriteTilemap()
+SpriteTilemap::SpriteTilemap() : Sprite()
 {
 	map = nullptr;
 }

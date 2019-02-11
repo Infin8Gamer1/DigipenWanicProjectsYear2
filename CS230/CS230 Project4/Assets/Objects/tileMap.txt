@@ -1,4 +1,4 @@
-Tilemap
+tileMap
 {
   numComponents : 3
   Transform
@@ -11,6 +11,9 @@ Tilemap
   {
     frameIndex : 0
     color : { 1 , 1 , 1 , 1 }
+	textureName : Tilemap.png
+    textureRows : 3
+    textureColumns : 4
   }
   ColliderTilemap
   {

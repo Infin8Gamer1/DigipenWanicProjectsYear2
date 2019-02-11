@@ -107,7 +107,7 @@ public:
 		}
 
 		//skip forward in the stream to after the next colon character
-		ReadSkip(':');
+		ReadSkip(":");
 
 		//place the next item in the stream into variable
 		stream >> variable;
@@ -126,10 +126,6 @@ public:
 	// Reads a piece of text from the currently open file
 	// and skips to the next word afterwards.
 	void ReadSkip(const std::string& text);
-
-	// Skips characters in the stream up until the next
-	// occurrence of the given delimiter.
-	void ReadSkip(char delimiter);
 
 private:
 	//------------------------------------------------------------------------------

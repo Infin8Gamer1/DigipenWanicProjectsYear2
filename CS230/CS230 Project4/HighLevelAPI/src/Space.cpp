@@ -13,6 +13,8 @@
 #include "Space.h"
 #include "Level.h"
 #include "GameObjectManager.h"
+#include <GameObjectFactory.h>
+#include <ResourceManager.h>
 
 Space::Space(const std::string & name) : BetaObject(name), objectManager(this)
 {

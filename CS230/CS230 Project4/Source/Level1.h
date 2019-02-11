@@ -26,7 +26,6 @@
 //------------------------------------------------------------------------------
 
 class GameObject;
-class Mesh;
 class SoundManager;
 
 //------------------------------------------------------------------------------
@@ -67,16 +66,13 @@ namespace Levels
 		// Private Variables:
 		//------------------------------------------------------------------------------
 
-		// Meshes
-		Mesh* meshShip;
-
 		// Title
 		static const unsigned titleStringLength = 20;
 		char windowTitle[titleStringLength];
 
-		// Sound manager
+		/*// Sound manager
 		SoundManager* soundManager;
-		FMOD::Channel* musicChannel;
+		FMOD::Channel* musicChannel;*/
 	};
 }
 

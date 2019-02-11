@@ -1,25 +1,19 @@
-Point
+Ship
 {
-  numComponents : 6
+  numComponents : 4
   Transform
   {
     translation : { 0, 0 }
     rotation : 0
-    scale : { 20, 20 }
+    scale : { 25, 25 }
   }
   Sprite
   {
     frameIndex : 0
     color : { 1 , 1 , 1 , 1 }
-  }
-  ColliderPoint
-  {
-  }
-  Behaviors::ColorChange
-  {
-    normalColor : { 0 , 0 , 1 , 1 }
-    collidedColor : { 1 , 0 , 0 , 1 }
-    collidedColorTime : 0.1
+	textureName : null
+    textureRows : 1
+    textureColumns : 1
   }
   Physics
   {
@@ -27,8 +21,9 @@ Point
     velocity : { 0, 0 }
     angularVelocity : 0
     mass : 1
+	gravity : { 0, 0 }
   }
-  Behaviors::ScreenWrap
+  Behaviors::PlayerShip
   {
   }
 }

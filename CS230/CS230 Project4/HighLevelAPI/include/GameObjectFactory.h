@@ -57,6 +57,45 @@ public:
 	//    of the specified component, else nullptr.
 	Component* CreateComponent(const std::string& name);
 
+	// Create a single instance of the specified component.
+	// Returns:
+	//	 If the component exists, then return a pointer to a new instance 
+	//    of the specified component, else nullptr.
+	template<class T>
+	Component* CreateComponent() {
+		std::string compName = std::string(typeid(T).name());
+
+		for (size_t i = 0; i < registeredComponents.size(); i++)
+		{
+			std::string currentName = std::string(typeid(*registeredComponents[i]).name());
+
+			if (currentName == compName) {
+				return registeredComponents[i]->Clone();
+			}
+		}
+
+		return nullptr;
+	}
+
+	// Check if a component exists in the registered components or not
+	// Returns:
+	//	 a bool that is true if it does exist and false if it doesn't
+	template<class T>
+	bool ComponentExists() {
+		std::string compName = std::string(typeid(T).name());
+
+		for (size_t i = 0; i < registeredComponents.size(); i++)
+		{
+			std::string currentName = std::string(typeid(*registeredComponents[i]).name());
+
+			if (currentName == compName) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	// Saves an object to an archetype file so it can be loaded later.
 	void SaveObjectToFile(GameObject* object);
 
@@ -65,11 +104,16 @@ public:
 	//   ComponentType = The type of the component to be registered.
 	template <class ComponentType>
 	void RegisterComponent() {
-
+		if (!ComponentExists<ComponentType>()) {
+			registeredComponents.push_back(new ComponentType());
+		}
 	}
 
 	// Returns an instance of the factory.
 	static GameObjectFactory& GetInstance();
+
+	// Destructor is private to prevent accidental destruction
+	~GameObjectFactory();
 
 private:
 	//------------------------------------------------------------------------------
@@ -81,7 +125,7 @@ private:
 
 	std::string objectFilePath;
 
-	static GameObjectFactory* Instance;
+	
 
 	//------------------------------------------------------------------------------
 	// Private Functions:
@@ -90,8 +134,7 @@ private:
 	// Constructor is private to prevent accidental instantiation
 	GameObjectFactory();
 
-	// Destructor is private to prevent accidental destruction
-	~GameObjectFactory();
+	
 };
 
 //------------------------------------------------------------------------------

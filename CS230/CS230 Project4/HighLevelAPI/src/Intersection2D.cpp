@@ -36,10 +36,10 @@ bool PointRectangleIntersection(const Vector2D & point, const BoundingRectangle 
 
 bool CircleCircleIntersection(const Circle & circle1, const Circle & circle2)
 {
-	float distanceSq = circle1.center.DistanceSquared(circle2.center);
-	float radiSq = (circle1.radius * circle1.radius) + (circle2.radius * circle2.radius);
+	float distance = circle1.center.Distance(circle2.center);
+	float radi = (circle1.radius) + (circle2.radius);
 
-	if (distanceSq <= radiSq) {
+	if (distance <= radi) {
 		return true;
 	}
 

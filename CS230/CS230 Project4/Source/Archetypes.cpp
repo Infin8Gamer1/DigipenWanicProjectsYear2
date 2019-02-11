@@ -27,6 +27,7 @@
 #include "SpriteTilemap.h"
 #include "ColliderTilemap.h"
 #include <Graphics.h>
+#include <GameObjectFactory.h>
 
 GameObject * Archetypes::CreateShip(Mesh * mesh)
 {
@@ -44,6 +45,9 @@ GameObject * Archetypes::CreateShip(Mesh * mesh)
 	//PlayerShip
 	Behaviors::PlayerShip* ps = new Behaviors::PlayerShip();
 	ship->AddComponent(ps);
+
+	//GameObjectFactory::GetInstance().RegisterComponent<Behaviors::PlayerShip>();
+	GameObjectFactory::GetInstance().SaveObjectToFile(ship);
 
 	return ship;
 }
@@ -75,6 +79,8 @@ GameObject * Archetypes::CreateMonkey(Mesh * mesh, SpriteSource * spriteSource)
 	Behaviors::MonkeyMovement* mm = new Behaviors::MonkeyMovement();
 	monkey->AddComponent(mm);
 
+	GameObjectFactory::GetInstance().SaveObjectToFile(monkey);
+
 	return monkey;
 }
 
@@ -103,6 +109,8 @@ GameObject * Archetypes::CreateCircle(Mesh * mesh, SpriteSource * spriteSource)
 	//Screen Wrap
 	Behaviors::ScreenWrap* screenWrap = new Behaviors::ScreenWrap();
 	circle->AddComponent(screenWrap);
+
+	GameObjectFactory::GetInstance().SaveObjectToFile(circle);
 
 	return circle;
 }
@@ -133,12 +141,14 @@ GameObject * Archetypes::CreatePoint(Mesh * mesh, SpriteSource * spriteSource)
 	Behaviors::ScreenWrap* screenWrap = new Behaviors::ScreenWrap();
 	point->AddComponent(screenWrap);
 
+	GameObjectFactory::GetInstance().SaveObjectToFile(point);
+
 	return point;
 }
 
 GameObject * Archetypes::CreateRectangle(Mesh * mesh)
 {
-	GameObject* circle = new GameObject("Circle");
+	GameObject* circle = new GameObject("Rectangle");
 	//transform
 	Transform* transform = new Transform(Vector2D(0, 0), Vector2D(250, 100), 0.0f);
 	circle->AddComponent(transform);
@@ -161,6 +171,8 @@ GameObject * Archetypes::CreateRectangle(Mesh * mesh)
 	Behaviors::ScreenWrap* screenWrap = new Behaviors::ScreenWrap();
 	circle->AddComponent(screenWrap);
 
+	GameObjectFactory::GetInstance().SaveObjectToFile(circle);
+
 	return circle;
 }
 
@@ -180,6 +192,8 @@ GameObject * Archetypes::CreateTilemapObject(Mesh * mesh, SpriteSource * spriteS
 	ColliderTilemap* colliderTilemap = new ColliderTilemap();
 	colliderTilemap->SetTilemap(map);
 	tileMap->AddComponent(colliderTilemap);
+
+	GameObjectFactory::GetInstance().SaveObjectToFile(tileMap);
 
 	return tileMap;
 }

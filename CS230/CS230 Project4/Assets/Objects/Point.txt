@@ -1,26 +1,19 @@
-Circle
+Point
 {
   numComponents : 6
   Transform
   {
     translation : { 0, 0 }
     rotation : 0
-    scale : { 100, 100 }
+    scale : { 20, 20 }
   }
   Sprite
   {
     frameIndex : 0
     color : { 1 , 1 , 1 , 1 }
-  }
-  Behaviors::ColorChange
-  {
-    normalColor : { 1 , 1 , 0 , 1 }
-    collidedColor : { 1 , 0 , 0 , 1 }
-    collidedColorTime : 0.1
-  }
-  ColliderCircle
-  {
-    radius : 50
+	textureName : Circle.png
+    textureRows : 1
+    textureColumns : 1
   }
   Physics
   {
@@ -28,6 +21,16 @@ Circle
     velocity : { 0, 0 }
     angularVelocity : 0
     mass : 1
+	gravity : { 0, 0 }
+  }
+  ColliderPoint
+  {
+  }
+  Behaviors::ColorChange
+  {
+    normalColor : { 0 , 0 , 1 , 1 }
+    collidedColor : { 1 , 0 , 0 , 1 }
+    collidedColorTime : 0.1
   }
   Behaviors::ScreenWrap
   {

@@ -58,6 +58,8 @@ void Physics::Deserialize(Parser & parser)
 	float mass;
 	parser.ReadVariable("mass", mass);
 	SetMass(mass);
+
+	parser.ReadVariable("gravity", gravity);
 }
 
 void Physics::Serialize(Parser & parser) const
@@ -69,11 +71,13 @@ void Physics::Serialize(Parser & parser) const
 	parser.WriteVariable("angularVelocity", angularVelocity);
 
 	parser.WriteVariable("mass", 1 / inverseMass);
+
+	parser.WriteVariable("gravity", gravity);
 }
 
 void Physics::Initialize()
 {
-	transform = static_cast<Transform*>(GetOwner()->GetComponent("Transform"));
+	transform = GetOwner()->GetComponent<Transform>();
 }
 
 void Physics::Update(float dt)

@@ -64,15 +64,8 @@ namespace Levels
 		//------------------------------------------------------------------------------
 		// Private Variables:
 		//------------------------------------------------------------------------------
-
-		// Resources
-		Mesh* meshQuad;
-		Texture* textureCircle;
-    SpriteSource* spriteSourceCircle;
-
-		// Properties
-		float circleSpeed;
-		float pointSpeed;
+		
+		GameObject* circle2;
 	};
 }
 

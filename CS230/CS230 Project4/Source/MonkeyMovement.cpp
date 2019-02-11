@@ -11,7 +11,7 @@
 
 #include "stdafx.h"
 #include "MonkeyMovement.h"
-#include "GameObject.h"
+#include <GameObject.h>
 #include "Transform.h"
 #include "Physics.h"
 #include "Animation.h"
@@ -35,13 +35,13 @@ Component * Behaviors::MonkeyMovement::Clone() const
 void Behaviors::MonkeyMapCollisionHandler(GameObject & object, const MapCollision& collision)
 {
 	if (collision.bottom) {
-		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->onGround = true;
+		object.GetComponent<MonkeyMovement>()->onGround = true;
 	}
 	else if (collision.left) {
-		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->onWallLeft = true;
+		object.GetComponent<MonkeyMovement>()->onWallLeft = true;
 	}
 	else if (collision.right) {
-		static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->onWallRight = true;
+		object.GetComponent<MonkeyMovement>()->onWallRight = true;
 	}
 }
 
@@ -65,12 +65,12 @@ void Behaviors::MonkeyMovement::Initialize()
 	onGround = false;
 
 	//get Components
-	transform = static_cast<Transform*>(GetOwner()->GetComponent("Transform"));
-	physics = static_cast<Physics*>(GetOwner()->GetComponent("Physics"));
-	animation = static_cast<Animation*>(GetOwner()->GetComponent("Animation"));
+	transform = GetOwner()->GetComponent<Transform>();
+	physics = GetOwner()->GetComponent<Physics>();
+	animation = GetOwner()->GetComponent<Animation>();
 	//set the collision handler for the monkey
-	static_cast<Collider*>(GetOwner()->GetComponent("Collider"))->SetMapCollisionHandler(MonkeyMapCollisionHandler);
-	static_cast<Collider*>(GetOwner()->GetComponent("Collider"))->SetCollisionHandler(MonkeyCollisionHandler);
+	GetOwner()->GetComponent<Collider>()->SetMapCollisionHandler(MonkeyMapCollisionHandler);
+	GetOwner()->GetComponent<Collider>()->SetCollisionHandler(MonkeyCollisionHandler);
 }
 
 void Behaviors::MonkeyMovement::Update(float dt)

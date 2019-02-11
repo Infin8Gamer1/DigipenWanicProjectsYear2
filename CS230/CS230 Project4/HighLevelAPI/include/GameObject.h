@@ -17,6 +17,7 @@
 
 #include <BetaObject.h>
 #include <Serializable.h>
+#include <Component.h>
 
 //------------------------------------------------------------------------------
 
@@ -81,7 +82,39 @@ public:
 	// Retrieves the component with the given name if it exists.
 	// Params:
 	//   name = The name of the component to find.
+	[[deprecated("Replaced by GetComponent<Type>(), which has an improved interface")]]
 	Component* GetComponent(const std::string& name);
+
+	template<class T>
+	T * GetComponent()
+	{
+		std::string Type = std::string(typeid(T).name());
+
+		for (size_t i = 0; i < components.size(); i++)
+		{
+			std::string compType = std::string(typeid(*components[i]).name());
+			
+			if (Type == compType)
+			{
+				return static_cast<T*>(components[i]);
+			}
+
+			//attempt dynamic cast
+			try
+			{
+				T* output = dynamic_cast<T*>(components[i]);
+				if (output != nullptr) {
+					return output;
+				}
+			}
+			catch (std::bad_cast e)
+			{
+				std::cout << "Caught: " << e.what() << std::endl;
+			}
+		}
+
+		return nullptr;
+	}
 
 	// Retrieves the component with the given type if it exists.
 	// Template params:
@@ -108,8 +141,7 @@ private:
 	//------------------------------------------------------------------------------
 
 	// Components
-	Component* components[10];
-	unsigned numComponents;
+	std::vector<Component*> components;
 
 	// Whether the object has been marked for destruction.
 	bool isDestroyed;

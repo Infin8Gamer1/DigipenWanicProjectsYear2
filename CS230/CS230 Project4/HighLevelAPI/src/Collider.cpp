@@ -23,8 +23,8 @@ Collider::Collider(ColliderType _type) : Component("Collider")
 
 void Collider::Initialize()
 {
-	transform = static_cast<Transform*>(GetOwner()->GetComponent("Transform"));
-	physics = static_cast<Physics*>(GetOwner()->GetComponent("Physics"));
+	transform = GetOwner()->GetComponent<Transform>();
+	physics = GetOwner()->GetComponent<Physics>();
 }
 
 void Collider::CheckCollision(const Collider & other)

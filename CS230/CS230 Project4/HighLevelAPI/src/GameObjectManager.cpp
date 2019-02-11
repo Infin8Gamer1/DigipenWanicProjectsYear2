@@ -14,18 +14,24 @@
 #include "Space.h"
 #include "GameObject.h"
 #include "Collider.h"
+#include <GameObjectFactory.h>
+#include <ResourceManager.h>
 
 GameObjectManager::GameObjectManager(Space * space) : BetaObject("ObjectManager", space)
 {
 	timeAccumulator = 0.0f;
-	numArchetypes = 0;
-	numObjects = 0;
 }
 
 GameObjectManager::~GameObjectManager()
 {
 	Shutdown();
 	Unload();
+
+	GameObjectFactory* GOFactory = &GameObjectFactory::GetInstance();
+	delete GOFactory;
+
+	ResourceManager* ReManager = &ResourceManager::GetInstance();
+	delete ReManager;
 }
 
 void GameObjectManager::Update(float dt)
@@ -40,56 +46,47 @@ void GameObjectManager::Update(float dt)
 
 void GameObjectManager::Shutdown(void)
 {
-	for (size_t i = 0; i < numObjects; i++)
+	std::vector<GameObject*>::iterator i;
+
+	for (i = gameObjectActiveList.begin(); i != gameObjectActiveList.end(); ++i)
 	{
-		delete gameObjectActiveList[i];
-		gameObjectActiveList[i] = nullptr;
+		delete (*i);
+		*i = nullptr;
 	}
 
-	numObjects = 0;
+	gameObjectActiveList.clear();
+	gameObjectActiveList.shrink_to_fit();
 }
 
 void GameObjectManager::Unload(void)
 {
-	for (size_t i = 0; i < numArchetypes; i++)
+	std::vector<GameObject*>::iterator i;
+
+	for (i = gameObjectArchetypes.begin(); i != gameObjectArchetypes.end(); ++i)
 	{
-		delete gameObjectArchetypes[i];
-		gameObjectArchetypes[i] = nullptr;
+		delete (*i);
+		*i = nullptr;
 	}
 
-	numArchetypes = 0;
+	gameObjectArchetypes.clear();
+	gameObjectArchetypes.shrink_to_fit();
 }
 
 void GameObjectManager::AddObject(GameObject & _gameObject)
 {
-	if (numObjects + 1 < maxObjects) {
-		gameObjectActiveList[numObjects] = &_gameObject;
-		gameObjectActiveList[numObjects]->SetParent(GetParent());
-		gameObjectActiveList[numObjects]->Initialize();
-
-		numObjects++;
-	}
-	else {
-		std::cout << "added too many objects!" << std::endl;
-		//_gameObject.~GameObject();
-	}
+	gameObjectActiveList.push_back(&_gameObject);
+	gameObjectActiveList.back()->SetParent(GetParent());
+	gameObjectActiveList.back()->Initialize();
 }
 
 void GameObjectManager::AddArchetype(GameObject & _gameObject)
 {
-	if (numArchetypes + 1 < maxArchetypes) {
-		gameObjectArchetypes[numArchetypes] = &_gameObject;
-		numArchetypes++;
-	}
-	else {
-		std::cout << "added too many Archetypes!" << std::endl;
-		//_gameObject.~GameObject();
-	}
+	gameObjectArchetypes.push_back(&_gameObject);
 }
 
 GameObject * GameObjectManager::GetObjectByName(const std::string & objectName) const
 {
-	for (size_t i = 0; i < numObjects; i++)
+	for (size_t i = 0; i < gameObjectActiveList.size(); i++)
 	{
 		if (gameObjectActiveList[i]->GetName() == objectName) {
 			return gameObjectActiveList[i];
@@ -101,7 +98,7 @@ GameObject * GameObjectManager::GetObjectByName(const std::string & objectName) 
 
 GameObject * GameObjectManager::GetArchetypeByName(const std::string & objectName) const
 {
-	for (size_t i = 0; i < numArchetypes; i++)
+	for (size_t i = 0; i < gameObjectArchetypes.size(); i++)
 	{
 		if (gameObjectArchetypes[i]->GetName() == objectName) {
 			return gameObjectArchetypes[i];
@@ -116,7 +113,7 @@ unsigned GameObjectManager::GetObjectCount(const std::string & objectName) const
 {
 	int output = 0;
 
-	for (size_t i = 0; i < numObjects; i++)
+	for (size_t i = 0; i < gameObjectActiveList.size(); i++)
 	{
 		if (gameObjectActiveList[i]->GetName() == objectName && !gameObjectActiveList[i]->IsDestroyed()) {
 			output++;
@@ -128,7 +125,7 @@ unsigned GameObjectManager::GetObjectCount(const std::string & objectName) const
 
 void GameObjectManager::VariableUpdate(float dt)
 {
-	for (size_t i = 0; i < numObjects; i++)
+	for (size_t i = 0; i < gameObjectActiveList.size(); i++)
 	{
 		gameObjectActiveList[i]->Update(dt);
 	}
@@ -140,7 +137,7 @@ void GameObjectManager::FixedUpdate(float dt)
 
 	if (timeAccumulator >= fixedUpdateDt)
 	{
-		for (size_t i = 0; i < numObjects; i++)
+		for (size_t i = 0; i < gameObjectActiveList.size(); i++)
 		{
 			gameObjectActiveList[i]->FixedUpdate(fixedUpdateDt);
 		}
@@ -153,28 +150,26 @@ void GameObjectManager::FixedUpdate(float dt)
 
 void GameObjectManager::DestroyObjects()
 {
-	for (size_t i = 0; i < numObjects; i++)
-	{
+	if (gameObjectActiveList.empty()) {
+		return;
+	}
+
+	for (size_t i = 0; i < gameObjectActiveList.size(); i++) {
 		if (gameObjectActiveList[i]->IsDestroyed()) {
-			//delete the memory assosiated with it
 			delete gameObjectActiveList[i];
 			gameObjectActiveList[i] = nullptr;
 
-			//shift the array so that there isn't a gap
-			for (size_t z = i; z < numObjects; z++)
-			{
-				gameObjectActiveList[z] = gameObjectActiveList[z + 1];
-			}
-			
-			//decrease the number of objects
-			numObjects--;
+			gameObjectActiveList.erase(gameObjectActiveList.begin() + i);
 		}
 	}
+
+	//gameObjectArchetypes.clear();
+	gameObjectActiveList.shrink_to_fit();
 }
 
 void GameObjectManager::Draw(void)
 {
-	for (size_t i = 0; i < numObjects; i++)
+	for (size_t i = 0; i < gameObjectActiveList.size(); i++)
 	{
 		gameObjectActiveList[i]->Draw();
 	}
@@ -182,17 +177,17 @@ void GameObjectManager::Draw(void)
 
 void GameObjectManager::CheckCollisions()
 {
-	for (size_t i = 0; i < numObjects; i++)
+	for (size_t i = 0; i < gameObjectActiveList.size(); i++)
 	{
 		GameObject* go1 = gameObjectActiveList[i];
 		if (!go1->IsDestroyed()) {
-			Collider* collider1 = static_cast<Collider*>(go1->GetComponent("Collider"));
+			Collider* collider1 = go1->GetComponent<Collider>();
 			if (collider1 != nullptr) {
-				for (size_t x = 0; x < numObjects; x++)
+				for (size_t x = 0; x < gameObjectActiveList.size(); x++)
 				{
 					GameObject* go2 = gameObjectActiveList[x];
 					if (!go2->IsDestroyed()) {
-						Collider* collider2 = static_cast<Collider*>(go2->GetComponent("Collider"));
+						Collider* collider2 = go2->GetComponent<Collider>();
 						if (collider2 != nullptr && go1 != go2) {
 							collider1->CheckCollision(*collider2);
 						}

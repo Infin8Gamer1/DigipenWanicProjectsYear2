@@ -70,6 +70,14 @@ public:
 	void SetLevel(Level* level);
 
 	// Sets the level that the space is using after unloading the current level.
+	// Params:
+	//   level = The next level that the space will be using.
+	template<class T>
+	void SetLevel() {
+		SetLevel(new T());
+	}
+
+	// Sets the level that the space is using after unloading the current level.
 	// Template params:
 	//   LevelType = The next level that the space will be using.
 	//template <class LevelType>

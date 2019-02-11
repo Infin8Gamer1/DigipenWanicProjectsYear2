@@ -18,6 +18,7 @@
 #include <Vertex.h>
 #include <Graphics.h>
 #include <Parser.h>
+#include <ResourceManager.h>
 
 Sprite::Sprite() : Component("Sprite")
 {
@@ -35,23 +36,46 @@ Component * Sprite::Clone() const
 
 void Sprite::Deserialize(Parser & parser)
 {
-	//set frame index
+	//get frame index
 	parser.ReadVariable("frameIndex", frameIndex);
-	//set color
+	//get color
 	parser.ReadVariable("color", color);
+	//get spritesource
+	std::string textureName;
+	parser.ReadVariable("textureName", textureName);
+	int rows;
+	parser.ReadVariable("textureRows", rows);
+	int columns;
+	parser.ReadVariable("textureColumns", columns);
+
+	if (textureName != "null" && textureName != "none") {
+		SetSpriteSource(ResourceManager::GetInstance().GetSpriteSource(textureName, columns, rows));
+	}
+	//get mesh
+	SetMesh(ResourceManager::GetInstance().GetMesh(GetOwner()->GetName() + "_AutoMesh", true, Vector2D(1.0f / columns, 1.0f / rows)));
 }
 
 void Sprite::Serialize(Parser & parser) const
 {
-	//get frame index
+	//set frame index
 	parser.WriteVariable("frameIndex", frameIndex);
-	//get color
+	//set color
 	parser.WriteVariable("color", color);
+	//set texture
+	if (spriteSource != nullptr) {
+		parser.WriteVariable("textureName", spriteSource->GetTexture()->GetName());
+		parser.WriteVariable("textureRows", spriteSource->numRows);
+		parser.WriteVariable("textureColumns", spriteSource->numCols);
+	} else {
+		parser.WriteVariable("textureName", "null");
+		parser.WriteVariable("textureRows", 1);
+		parser.WriteVariable("textureColumns", 1);
+	}
 }
 
 void Sprite::Initialize()
 {
-	transform = static_cast<Transform*>(GetOwner()->GetComponent("Transform"));
+	transform = GetOwner()->GetComponent<Transform>();
 }
 
 void Sprite::Draw()

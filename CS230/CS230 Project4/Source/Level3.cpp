@@ -22,56 +22,56 @@
 #include <Input.h>
 #include "Level1.h"
 #include "Level2.h"
+#include <GameObjectFactory.h>
+#include "ColorChange.h"
+#include "ScreenWrap.h"
+#include <Transform.h>
+#include <Graphics.h>
+#include <ResourceManager.h>
+
 
 Levels::Level3::Level3() : Level("Level3")
 {
-	// Resources
-	meshQuad = nullptr;
-	spriteSourceCircle = nullptr;
-	textureCircle = nullptr;
-
-	// Properties
-	circleSpeed = 45.0f;
-	pointSpeed = 100.0f;
+	circle2 = nullptr;
 }
 
 void Levels::Level3::Load()
 {
 	std::cout << "Level3::Load" << std::endl;
-	meshQuad = CreateQuadMesh(Vector2D(1, 1), Vector2D(1, 1));
 
-	textureCircle = Texture::CreateTextureFromFile("Circle.png");
-
-	spriteSourceCircle = new SpriteSource(1, 1, textureCircle);
+	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::ColorChange>();
+	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::ScreenWrap>();
 }
 
 void Levels::Level3::Initialize()
 {
 	std::cout << "Level3::Initialize" << std::endl;
 
-	GameObject* circle1 = Archetypes::CreateCircle(meshQuad, spriteSourceCircle);
+	GameObject* circle1 = GameObjectFactory::GetInstance().CreateObject("Circle");
 	GetSpace()->GetObjectManager().AddObject(*circle1);
 
-	GameObject* point = Archetypes::CreatePoint(meshQuad, spriteSourceCircle);
-	static_cast<Physics*>(point->GetComponent("Physics"))->SetVelocity(Vector2D(0, -500));
+	circle2 = GameObjectFactory::GetInstance().CreateObject("Circle");
+	//circle2->GetComponent<Physics>()->SetVelocity(Vector2D(400, 15));
+	GetSpace()->GetObjectManager().AddObject(*circle2);
+
+	GameObject* point = GameObjectFactory::GetInstance().CreateObject("Point");
+	point->GetComponent<Physics>()->SetVelocity(Vector2D(0, -500));
 	GetSpace()->GetObjectManager().AddObject(*point);
 
-	GameObject* rectangle = Archetypes::CreateRectangle(meshQuad);
-	static_cast<Physics*>(rectangle->GetComponent("Physics"))->SetVelocity(Vector2D(200, 200));
+	GameObject* rectangle = GameObjectFactory::GetInstance().CreateObject("Rectangle");
+	rectangle->GetComponent<Physics>()->SetVelocity(Vector2D(200, 200));
 	GetSpace()->GetObjectManager().AddObject(*rectangle);
 
-	GameObject* rectangle2 = Archetypes::CreateRectangle(meshQuad);
-	static_cast<Physics*>(rectangle2->GetComponent("Physics"))->SetVelocity(Vector2D(-200, 400));
+	GameObject* rectangle2 = GameObjectFactory::GetInstance().CreateObject("Rectangle");
+	rectangle2->GetComponent<Physics>()->SetVelocity(Vector2D(-200, 400));
 	GetSpace()->GetObjectManager().AddObject(*rectangle2);
-
-	GameObject* circle2 = Archetypes::CreateCircle(meshQuad, spriteSourceCircle);
-	static_cast<Physics*>(circle2->GetComponent("Physics"))->SetVelocity(Vector2D(400, 100));
-	GetSpace()->GetObjectManager().AddObject(*circle2);
 }
 
 void Levels::Level3::Update(float dt)
 {
 	UNREFERENCED_PARAMETER(dt);
+
+	circle2->GetComponent<Transform>()->SetTranslation(Graphics::GetInstance().ScreenToWorldPosition(Input::GetInstance().GetCursorPosition()));
 
 	if (Input::GetInstance().CheckReleased('1')) {
 		GetSpace()->SetLevel(new Levels::Level1());
@@ -89,10 +89,5 @@ void Levels::Level3::Unload()
 {
 	std::cout << "Level3::Unload" << std::endl;
 
-	delete meshQuad;
-	meshQuad = nullptr;
-	delete spriteSourceCircle;
-	spriteSourceCircle = nullptr;
-	delete textureCircle;
-	textureCircle = nullptr;
+	ResourceManager::GetInstance().Shutdown();
 }

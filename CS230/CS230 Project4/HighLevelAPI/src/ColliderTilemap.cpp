@@ -26,8 +26,8 @@ void ColliderTilemap::Draw()
 bool ColliderTilemap::IsCollidingWith(const Collider & other) const
 {
 	//get components
-	Transform* otherTransform = static_cast<Transform*>(other.GetOwner()->GetComponent("Transform"));
-	Physics* otherPhysics = static_cast<Physics*>(other.GetOwner()->GetComponent("Physics"));
+	Transform* otherTransform = other.GetOwner()->GetComponent<Transform>();;
+	Physics* otherPhysics = other.GetOwner()->GetComponent<Physics>();;
 
 	//check if it is a rectangle if it isn't then just return false and don't bother doing anything
 	if (other.GetType() != ColliderType::ColliderTypeRectangle || otherPhysics == nullptr) {

@@ -45,13 +45,13 @@ bool ColliderPoint::IsCollidingWith(const Collider & other) const
 	//if the other collider is a rectangle then test if they collided
 	if (other.GetType() == ColliderType::ColliderTypeRectangle) {
 		const ColliderRectangle& rect = static_cast<const ColliderRectangle&>(other);
-		Transform* rectTransform = static_cast<Transform*>(other.GetOwner()->GetComponent("Transform"));
+		Transform* rectTransform = other.GetOwner()->GetComponent<Transform>();
 		return PointRectangleIntersection(transform->GetTranslation(), BoundingRectangle(rectTransform->GetTranslation(), rect.GetExtents()));
 	}
 	//if the other collider is circle then check if they collided
 	if (other.GetType() == ColliderType::ColliderTypeCircle) {
 		const ColliderCircle& circ = static_cast<const ColliderCircle&>(other);
-		Transform* circTransform = static_cast<Transform*>(other.GetOwner()->GetComponent("Transform"));
+		Transform* circTransform = other.GetOwner()->GetComponent<Transform>();
 		return PointCircleIntersection(transform->GetTranslation(), Circle(circTransform->GetTranslation(), circ.GetRadius()));
 	}
 	//other wise they didn't collide

@@ -89,14 +89,14 @@ namespace Behaviors
 		float bulletSpeed;
 
 		// Bullet archetype
-		GameObject* bulletArchetype;
+		//GameObject* bulletArchetype;
 
 		// Components
 		Transform* transform;
 		Physics* physics;
 
 		// Other
-		FMOD::Studio::EventInstance* soundEvent;
+		//FMOD::Studio::EventInstance* soundEvent;
 	};
 }
 

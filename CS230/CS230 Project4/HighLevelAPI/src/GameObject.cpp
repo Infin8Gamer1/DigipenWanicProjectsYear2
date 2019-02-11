@@ -18,15 +18,13 @@
 
 GameObject::GameObject(const std::string & name) : BetaObject(name)
 {
-	numComponents = 0;
 	isDestroyed = false;
 }
 
 GameObject::GameObject(const GameObject & other) : BetaObject(other.GetName())
 {
-	numComponents = 0;
 
-	for (unsigned i = 0; i < other.numComponents; i++)
+	for (size_t i = 0; i < other.components.size(); i++)
 	{
 		Component* newComp = other.components[i]->Clone();
 
@@ -41,17 +39,23 @@ GameObject::GameObject(const GameObject & other) : BetaObject(other.GetName())
 
 GameObject::~GameObject()
 {
-	for (unsigned i = 0; i < numComponents; i++)
+	std::vector<Component*>::iterator i;
+
+	for (i = components.begin(); i != components.end(); ++i)
 	{
-		delete components[i];
-		components[i] = nullptr;
+		delete (*i);
+		*i = nullptr;
 	}
+
+	components.clear();
+	components.shrink_to_fit();
 }
 
 void GameObject::Deserialize(Parser & parser)
 {
-	parser.ReadSkip(GetName());
-	parser.ReadSkip('{');
+	std::string mName = this->GetName();
+	parser.ReadSkip(mName);
+	parser.ReadSkip("{");
 
 	unsigned numComponents = 0;
 	parser.ReadVar(numComponents);
@@ -64,17 +68,17 @@ void GameObject::Deserialize(Parser & parser)
 		Component* component = GameObjectFactory::GetInstance().CreateComponent(componentName);
 
 		if (component == nullptr) {
-			throw ParseException(componentName, "Component could not be found! ERROR 404");
+			throw ParseException(componentName, "Component " + componentName + " could not be found! ERROR 404");
 		}
 
 		AddComponent(component);
 
-		parser.ReadSkip('{');
+		parser.ReadSkip("{");
 		component->Deserialize(parser);
-		parser.ReadSkip('}');
+		parser.ReadSkip("}");
 	}
 
-	parser.ReadSkip('}');
+	parser.ReadSkip("}");
 }
 
 void GameObject::Serialize(Parser & parser) const
@@ -83,6 +87,7 @@ void GameObject::Serialize(Parser & parser) const
 
 	parser.BeginScope();
 
+	unsigned numComponents = 0;
 	parser.WriteVar(numComponents);
 
 	for (unsigned i = 0; i < numComponents; i++)
@@ -102,7 +107,7 @@ void GameObject::Serialize(Parser & parser) const
 
 void GameObject::Initialize()
 {
-	for (unsigned i = 0; i < numComponents; i++)
+	for (size_t i = 0; i < components.size(); i++)
 	{
 		components[i]->Initialize();
 	}
@@ -110,7 +115,7 @@ void GameObject::Initialize()
 
 void GameObject::Update(float dt)
 {
-	for (unsigned i = 0; i < numComponents; i++)
+	for (size_t i = 0; i < components.size(); i++)
 	{
 		components[i]->Update(dt);
 	}
@@ -118,7 +123,7 @@ void GameObject::Update(float dt)
 
 void GameObject::FixedUpdate(float dt)
 {
-	for (unsigned i = 0; i < numComponents; i++)
+	for (size_t i = 0; i < components.size(); i++)
 	{
 		components[i]->FixedUpdate(dt);
 	}
@@ -126,7 +131,7 @@ void GameObject::FixedUpdate(float dt)
 
 void GameObject::Draw()
 {
-	for (unsigned i = 0; i < numComponents; i++)
+	for (size_t i = 0; i < components.size(); i++)
 	{
 		components[i]->Draw();
 	}
@@ -135,13 +140,12 @@ void GameObject::Draw()
 void GameObject::AddComponent(Component * component)
 {
 	component->SetParent(this);
-	components[numComponents] = component;
-	numComponents++;
+	components.push_back(component);
 }
 
 Component * GameObject::GetComponent(const std::string & _name)
 {
-	for (unsigned i = 0; i < numComponents; i++)
+	for (size_t i = 0; i < components.size(); i++)
 	{
 		if (components[i]->GetName() == _name)
 		{

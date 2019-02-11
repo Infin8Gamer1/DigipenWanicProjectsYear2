@@ -12,12 +12,19 @@
 #include "stdafx.h"
 #include "SpriteSource.h"
 #include <Vector2D.h>
+#include <Texture.h>
 
 SpriteSource::SpriteSource(int numColsInput, int numRowsInput, Texture * textureInput)
 {
 	numRows = numRowsInput;
 	numCols = numColsInput;
 	texture = textureInput;
+}
+
+SpriteSource::~SpriteSource()
+{
+	delete texture;
+	texture = nullptr;
 }
 
 Texture * SpriteSource::GetTexture() const

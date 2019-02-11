@@ -42,7 +42,7 @@ Component * Animation::Clone() const
 
 void Animation::Initialize()
 {
-	sprite = static_cast<Sprite*>(GetOwner()->GetComponent("Sprite"));
+	sprite = GetOwner()->GetComponent<Sprite>();
 }
 
 void Animation::Play(unsigned frameStartInput, unsigned frameCountInput, float frameDurationInput, bool isLoopingInput, bool playInReverseInput)
@@ -60,7 +60,7 @@ void Animation::Play(unsigned frameStartInput, unsigned frameCountInput, float f
 	isRunning = true;
 	isDone = false;
 
-	static_cast<Sprite*>(GetOwner()->GetComponent("Sprite"))->SetFrame(frameIndex);
+	GetOwner()->GetComponent<Sprite>()->SetFrame(frameIndex);
 }
 
 void Animation::Update(float dt)
