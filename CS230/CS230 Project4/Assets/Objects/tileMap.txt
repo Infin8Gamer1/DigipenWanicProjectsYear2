@@ -14,8 +14,10 @@ tileMap
 	textureName : Tilemap.png
     textureRows : 3
     textureColumns : 4
+	tilemapLoc : Assets/Levels/Level2.txt
   }
   ColliderTilemap
   {
+	tilemapLoc : Assets/Levels/Level2.txt
   }
 }

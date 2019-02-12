@@ -67,9 +67,9 @@ public:
 	// Params:
 	//   tilemapName = The name of the tilemap.
 	//   createIfNotFound = Whether to create a tilemap if no tilemap is found.
-	Tilemap* GetTilemap(const std::string& tilemapName, bool createIfNotFound = true, std::string FilePath = "Assets/Levels/default.txt");
+	const Tilemap* GetTilemap(const std::string& tilemapName, bool createIfNotFound = true);
 
-	bool TilemapExists(const Tilemap* mesh);
+	bool TilemapExists(Tilemap* mesh);
 
 	void AddTilemap(Tilemap* mesh);
 

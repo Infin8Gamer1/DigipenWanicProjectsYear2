@@ -24,6 +24,7 @@
 //------------------------------------------------------------------------------
 
 class Tilemap;
+class Parser;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -43,6 +44,12 @@ public:
 
 	// Clone the sprite, returning a dynamically allocated copy.
 	Component* Clone() const override;
+
+	// Loads object data from a file.
+	void Deserialize(Parser& parser) override;
+
+	// Saves object data to a file.
+	void Serialize(Parser& parser) const override;
 
 	// Draw a sprite (Sprite can be textured or untextured).
 	void Draw() override;

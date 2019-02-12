@@ -120,13 +120,48 @@ void ResourceManager::AddSpriteSource(SpriteSource * ss)
 	}
 }
 
-Tilemap * ResourceManager::GetTilemap(const std::string & tilemapName, bool createIfNotFound, std::string FilePath)
+const Tilemap * ResourceManager::GetTilemap(const std::string & tilemapName, bool createIfNotFound)
 {
+	for (size_t i = 0; i < Tilemaps.size(); i++)
+	{
+		std::string currentName = Tilemaps[i]->GetName();
+
+		if (currentName == tilemapName) {
+			return Tilemaps[i];
+		}
+	}
+
+	if (createIfNotFound) {
+		Tilemap* map = Tilemap::CreateTilemapFromFile(tilemapName);
+
+		if (map == nullptr)
+		{
+			std::cout << "Error Loading Tilemap!";
+
+			delete map;
+		} else {
+			AddTilemap(map);
+
+			return map;
+		}
+	}
+
 	return nullptr;
 }
 
-bool ResourceManager::TilemapExists(const Tilemap * map)
+bool ResourceManager::TilemapExists(Tilemap * map)
 {
+	std::string tilemapName = map->GetName();
+	
+	for (size_t i = 0; i < Tilemaps.size(); i++)
+	{
+		std::string currentName = Tilemaps[i]->GetName();
+
+		if (currentName == tilemapName) {
+			return true;
+		}
+	}
+
 	return false;
 }
 

@@ -2,8 +2,10 @@
 #include "SpriteTilemap.h"
 #include "Tilemap.h"
 #include "Transform.h"
-#include "Sprite.h"
+#include <Sprite.h>
 #include <vector>
+#include <Parser.h>
+#include <ResourceManager.h>
 
 SpriteTilemap::SpriteTilemap() : Sprite()
 {
@@ -13,6 +15,23 @@ SpriteTilemap::SpriteTilemap() : Sprite()
 Component * SpriteTilemap::Clone() const
 {
 	return new SpriteTilemap(*this);
+}
+
+void SpriteTilemap::Deserialize(Parser & parser)
+{
+	Sprite::Deserialize(parser);
+
+	std::string tilemapLoc;
+	parser.ReadVariable("tilemapLoc", tilemapLoc);
+
+	SetTilemap(ResourceManager::GetInstance().GetTilemap(tilemapLoc));
+}
+
+void SpriteTilemap::Serialize(Parser & parser) const
+{
+	Sprite::Serialize(parser);
+
+	parser.WriteVariable("tilemapLoc", map->GetName());
 }
 
 void SpriteTilemap::Draw()

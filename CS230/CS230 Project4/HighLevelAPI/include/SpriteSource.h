@@ -24,6 +24,7 @@
 class Texture;
 class Vector2D;
 class Sprite;
+class SpriteTilemap;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -64,6 +65,7 @@ public:
 
 	// Sprite is friend for deserialization only
 	friend class Sprite;
+	friend class SpriteTilemap;
 
 private:
 	// The dimensions of the sprite sheet.

@@ -7,6 +7,8 @@
 #include <Shapes2D.h>
 #include "Matrix2DStudent.h"
 #include "Tilemap.h"
+#include <ResourceManager.h>
+#include <Parser.h>
 
 ColliderTilemap::ColliderTilemap() : Collider(ColliderType::ColliderTypeTilemap)
 {
@@ -16,6 +18,19 @@ ColliderTilemap::ColliderTilemap() : Collider(ColliderType::ColliderTypeTilemap)
 Component * ColliderTilemap::Clone() const
 {
 	return new ColliderTilemap(*this);
+}
+
+void ColliderTilemap::Deserialize(Parser & parser)
+{
+	std::string tilemapLoc;
+	parser.ReadVariable("tilemapLoc", tilemapLoc);
+
+	SetTilemap(ResourceManager::GetInstance().GetTilemap(tilemapLoc));
+}
+
+void ColliderTilemap::Serialize(Parser & parser) const
+{
+	parser.WriteVariable("tilemapLoc", map->GetName());
 }
 
 void ColliderTilemap::Draw()

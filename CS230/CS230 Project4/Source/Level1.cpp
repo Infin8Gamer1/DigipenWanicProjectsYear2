@@ -39,7 +39,6 @@ void Levels::Level1::Load()
 	meshShip->SetName("meshShip");
 	ResourceManager::GetInstance().AddMesh(meshShip);
 
-
 	/*soundManager = Engine::GetInstance().GetModule<SoundManager>();
 	soundManager->AddMusic("Asteroid_Field.mp3");
 	soundManager->AddEffect("teleport.wav");

@@ -35,8 +35,6 @@
 
 Levels::Level2::Level2() : Level("Level2")
 {
-	//map
-	dataMap = nullptr;
 }
 
 void Levels::Level2::Load()
@@ -48,12 +46,6 @@ void Levels::Level2::Initialize()
 {
 	std::cout << "Level2::Initialize" << std::endl;
 
-	dataMap = Tilemap::CreateTilemapFromFile("Assets/Levels/Level2.txt");
-	if (dataMap == nullptr)
-	{
-		std::cout << "Error Loading Tilemap!";
-	}
-
 	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::MonkeyMovement>();
 
 	GameObject* Monkey = GameObjectFactory::GetInstance().CreateObject("Monkey");
@@ -61,8 +53,6 @@ void Levels::Level2::Initialize()
 	GetSpace()->GetObjectManager().AddObject(*Monkey);
 
 	GameObject* Map = GameObjectFactory::GetInstance().CreateObject("tileMap");
-	Map->GetComponent<ColliderTilemap>()->SetTilemap(dataMap);
-	Map->GetComponent<SpriteTilemap>()->SetTilemap(dataMap);
 	GetSpace()->GetObjectManager().AddObject(*Map);
 }
 
@@ -85,9 +75,6 @@ void Levels::Level2::Update(float dt)
 void Levels::Level2::Unload()
 {
 	std::cout << "Level2::Unload" << std::endl;
-
-	delete dataMap;
-	dataMap = nullptr;
 
 	ResourceManager::GetInstance().Shutdown();
 }

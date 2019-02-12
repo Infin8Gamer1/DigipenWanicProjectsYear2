@@ -68,6 +68,10 @@ public:
 	//   filename = The name of the file containing the tilemap data.
 	static Tilemap* CreateTilemapFromFile(const std::string& filename);
 
+	std::string GetName() const;
+
+	void setName(std::string _name);
+
 private:
 	//------------------------------------------------------------------------------
 	// Private Functions:
@@ -96,6 +100,8 @@ private:
 	//------------------------------------------------------------------------------
 	// Private Variables:
 	//------------------------------------------------------------------------------
+
+	std::string name;
 
 	// Dimensions of the map
 	unsigned numColumns;

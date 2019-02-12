@@ -68,6 +68,8 @@ Tilemap * Tilemap::CreateTilemapFromFile(const std::string & filename)
 
 	Tilemap* output = new Tilemap(columns, rows, data);
 
+	output->setName(filename);
+
 	infile.close();
 
 	//print out data from tilemap to check if it was read sucessfully
@@ -85,6 +87,11 @@ Tilemap * Tilemap::CreateTilemapFromFile(const std::string & filename)
 	}
 	
 	return output;
+}
+
+std::string Tilemap::GetName() const
+{
+	return name;
 }
 
 bool Tilemap::ReadIntegerVariable(std::ifstream & file, const std::string & name, int & variable)
@@ -135,4 +142,9 @@ int ** Tilemap::ReadArrayVariable(std::ifstream & file, const std::string & name
 	}
 
 	return data;
+}
+
+void Tilemap::setName(std::string _name)
+{
+	name = _name;
 }
