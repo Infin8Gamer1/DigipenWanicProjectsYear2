@@ -45,7 +45,7 @@ public:
 	// Params:
 	//   objectName = The name of the mesh.
 	//   createIfNotFound = Whether to create a default quad mesh if no mesh is found.
-	Mesh* GetMesh(const std::string& objectName, bool createIfNotFound = true, Vector2D textureSize = Vector2D(1,1));
+	Mesh* GetMesh(const std::string& objectName, bool createIfNotFound = true, Vector2D textureSize = Vector2D(1,1), Vector2D textureExtents = Vector2D(1,1));
 
 	bool MeshExists(const Mesh* mesh);
 

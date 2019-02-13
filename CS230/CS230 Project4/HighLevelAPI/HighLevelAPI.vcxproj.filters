@@ -115,6 +115,9 @@
     <ClInclude Include="include\ResourceManager.h">
       <Filter>Resources</Filter>
     </ClInclude>
+    <ClInclude Include="include\SpriteText.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\stdafx.cpp">
@@ -180,19 +183,22 @@
     <ClCompile Include="src\GameObjectManager.cpp">
       <Filter>GameObject\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="include\GameObjectFactory.cpp">
-      <Filter>GameObject\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="include\Serializable.cpp">
-      <Filter>Serialization</Filter>
-    </ClCompile>
-    <ClCompile Include="include\Parser.cpp">
-      <Filter>Serialization</Filter>
-    </ClCompile>
     <ClCompile Include="src\Tilemap.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="include\ResourceManager.cpp">
+    <ClCompile Include="src\SpriteText.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObjectFactory.cpp">
+      <Filter>GameObject\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Parser.cpp">
+      <Filter>Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Serializable.cpp">
+      <Filter>Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ResourceManager.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
   </ItemGroup>

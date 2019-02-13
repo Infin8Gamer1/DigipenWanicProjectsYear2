@@ -1,0 +1,20 @@
+Text
+{
+  numComponents : 2
+  Transform
+  {
+    translation : { 0, -100 }
+    rotation : 0
+    scale : { 50, 50 }
+  }
+  SpriteText
+  {
+    color : { 1 , 0 , 1 , 1 }
+	textureName : CodeNewRoman.png
+    textureRows : 8
+    textureColumns : 12
+	text : testing
+	horizontalAlignment : 0
+	verticalAlignment : 0
+  }
+}

@@ -56,6 +56,9 @@ void Levels::Level1::Initialize()
 	GameObject* Ship = GameObjectFactory::GetInstance().CreateObject("Ship", ResourceManager::GetInstance().GetMesh("meshShip"));
 	GetSpace()->GetObjectManager().AddObject(*Ship);
 
+	GameObject* text = GameObjectFactory::GetInstance().CreateObject("Text");
+	GetSpace()->GetObjectManager().AddObject(*text);
+
 	//musicChannel = soundManager->PlaySound("Asteroid Field");
 }
 

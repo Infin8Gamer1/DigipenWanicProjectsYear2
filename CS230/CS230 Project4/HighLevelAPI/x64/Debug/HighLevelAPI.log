@@ -1,6 +1,11 @@
-﻿  GameObjectFactory.cpp
-  Animation.cpp
+﻿  ColliderTilemap.cpp
+  GameObjectFactory.cpp
+  GameObjectManager.cpp
+  ResourceManager.cpp
+  Space.cpp
   Sprite.cpp
+  SpriteSource.cpp
+  SpriteText.cpp
   SpriteTilemap.cpp
   Generating Code...
 fmodL64_vc.lib(fmodL64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64_D.lib(RPCRT4.dll); second definition ignored

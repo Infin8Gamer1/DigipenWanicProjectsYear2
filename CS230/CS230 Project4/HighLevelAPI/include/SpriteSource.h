@@ -25,6 +25,7 @@ class Texture;
 class Vector2D;
 class Sprite;
 class SpriteTilemap;
+class SpriteText;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -66,13 +67,14 @@ public:
 	// Sprite is friend for deserialization only
 	friend class Sprite;
 	friend class SpriteTilemap;
+	friend class SpriteText;
 
 private:
 	// The dimensions of the sprite sheet.
 	unsigned numRows;
 	unsigned numCols;
 
-	// Pointer to a texture created using the Alpha Engine.
+	// Pointer to a texture created using the Beta Engine.
 	Texture* texture;
 
 	// Texture name used for deserialization

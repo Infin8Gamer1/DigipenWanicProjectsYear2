@@ -28,6 +28,7 @@ class Mesh;
 class SpriteSource;
 class Transform;
 class Vector2D;
+class SpriteText;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -101,6 +102,8 @@ public:
 
 	// Retrieves the blend color for the sprite.
 	const Color& GetColor() const;
+
+	friend SpriteText;
 
 protected:
 	//------------------------------------------------------------------------------
