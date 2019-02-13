@@ -11,14 +11,9 @@
 
 #include "stdafx.h"
 #include "Level3.h"
-#include "MeshHelper.h"
-#include "SpriteSource.h"
-#include "Archetypes.h"
 #include "GameObject.h"
 #include "Physics.h"
 #include "Space.h"
-#include <Texture.h>
-#include <Mesh.h>
 #include <Input.h>
 #include "Level1.h"
 #include "Level2.h"

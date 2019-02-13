@@ -123,7 +123,7 @@ void GameObjectFactory::SaveObjectToFile(GameObject * object)
 	delete parser;
 	parser = nullptr;
 
-	std::cout << "The Game Object: " << object->GetName() << " was saved to " << objectFilePath << object->GetName() << ".txt" << std::endl;
+	std::cout << "The Game Object: " << object->GetName() << " was saved to \"" << objectFilePath << object->GetName() << ".txt\"" << std::endl;
 }
 
 GameObjectFactory & GameObjectFactory::GetInstance()

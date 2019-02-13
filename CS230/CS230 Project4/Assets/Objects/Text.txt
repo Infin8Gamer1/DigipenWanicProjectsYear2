@@ -9,11 +9,11 @@ Text
   }
   SpriteText
   {
-    color : { 1 , 0 , 1 , 1 }
+    color : { 0 , 1 , 1 , 1 }
 	textureName : CodeNewRoman.png
     textureRows : 8
     textureColumns : 12
-	text : testing
+	text : testing abcd 1234
 	horizontalAlignment : 0
 	verticalAlignment : 0
   }

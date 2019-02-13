@@ -91,9 +91,7 @@ public:
 #define ReadVar(var) ReadVariable(#var, var)
 
 	// Reads the value of a variable with the given name from the currently open file.
-	// Returns:
-	//   True if read was successful, false otherwise.
-	template<typename T>
+	template<class T>
 	void ReadVariable(const std::string& name, T& variable) {
 		CheckFileOpen();
 
@@ -111,6 +109,35 @@ public:
 
 		//place the next item in the stream into variable
 		stream >> variable;
+	}
+
+	// Reads the value of a variable with the given name from the currently open file.
+	template <>
+	void ReadVariable<std::string>(const std::string& name, std::string& variable) {
+		CheckFileOpen();
+
+		//Create a string variable and use the input operator (>>) to place the next word in the stream into it.
+		std::string word;
+		stream >> word;
+
+		//If the contents of the string don't match the name parameter, throw a ParseException, passing it the name and filename.
+		if (word != name) {
+			throw ParseException(filename, "the name " + name + "didn't match " + word + ". ERROR 1");
+		}
+
+		//skip forward in the stream to after the next colon character
+		ReadSkip(":");
+
+		//place the next item in the stream into variable
+		char var[256];
+		stream.getline(var, 256);
+
+		variable = var;
+
+		size_t strBegin = variable.find_first_not_of(" ");
+		size_t strEnd = variable.find_last_not_of(" ");
+
+		variable = variable.substr(strBegin, strEnd);
 	}
 
 	// Reads the next value from the currently open file.
