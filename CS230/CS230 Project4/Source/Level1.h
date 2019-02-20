@@ -66,9 +66,8 @@ namespace Levels
 		// Private Variables:
 		//------------------------------------------------------------------------------
 
-		// Title
-		static const unsigned titleStringLength = 20;
-		char windowTitle[titleStringLength];
+		// Window Title
+		const std::string WindowTitle = "Level 1";
 
 		/*// Sound manager
 		SoundManager* soundManager;

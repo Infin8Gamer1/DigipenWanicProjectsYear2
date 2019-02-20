@@ -12,26 +12,21 @@
 #include "stdafx.h"
 #include "Space.h"
 #include "Level2.h"
-#include "MeshHelper.h"
-#include "SpriteSource.h"
-#include "Sprite.h"
-#include "Animation.h"
+
+//Other Levels
 #include "Level1.h"
-#include "Transform.h"
-#include "Physics.h"
-#include "Archetypes.h"
-#include <Input.h>
-#include <Mesh.h>
-#include <gdiplus.h>
-#include <Texture.h>
-#include <Engine.h>
 #include "Level3.h"
-#include "Tilemap.h"
+
+//Components
+#include <Animation.h>
 #include "MonkeyMovement.h"
+#include <GameObject.h>
+
+//Systems
+#include <Input.h>
 #include <GameObjectFactory.h>
-#include <ColliderTilemap.h>
-#include <SpriteTilemap.h>
 #include <ResourceManager.h>
+#include <System.h>
 
 Levels::Level2::Level2() : Level("Level2")
 {
@@ -40,13 +35,15 @@ Levels::Level2::Level2() : Level("Level2")
 void Levels::Level2::Load()
 {
 	std::cout << "Level2::Load" << std::endl;
+
+	System::GetInstance().SetWindowTitle(WindowTitle);
+
+	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::MonkeyMovement>();
 }
 
 void Levels::Level2::Initialize()
 {
 	std::cout << "Level2::Initialize" << std::endl;
-
-	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::MonkeyMovement>();
 
 	GameObject* Monkey = GameObjectFactory::GetInstance().CreateObject("Monkey");
 	Monkey->GetComponent<Animation>()->Play(0, 8, 0.4f, false);

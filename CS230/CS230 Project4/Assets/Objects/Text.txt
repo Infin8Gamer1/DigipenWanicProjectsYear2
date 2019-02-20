@@ -13,7 +13,7 @@ Text
 	textureName : CodeNewRoman.png
     textureRows : 8
     textureColumns : 12
-	text : testing abcd 1234
+	text : cheezits are wonderfull and this is a test
 	horizontalAlignment : 0
 	verticalAlignment : 0
   }

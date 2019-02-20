@@ -1,3 +1,14 @@
+//------------------------------------------------------------------------------
+//
+// File Name:	Tilemap.cpp
+// Author(s):	Jacob Holyfield
+// Project:		BetaEngine
+// Course:		CS230
+//
+// Copyright © 2018 DigiPen (USA) Corporation.
+//
+//------------------------------------------------------------------------------
+
 #include "stdafx.h"
 #include "Tilemap.h"
 #include <fstream>

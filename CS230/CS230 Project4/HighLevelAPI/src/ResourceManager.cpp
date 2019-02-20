@@ -1,3 +1,14 @@
+//------------------------------------------------------------------------------
+//
+// File Name:	ResourceManager.cpp
+// Author(s):	Jacob Holyfield
+// Project:		BetaEngine
+// Course:		CS230
+//
+// Copyright © 2018 DigiPen (USA) Corporation.
+//
+//------------------------------------------------------------------------------
+
 #include "stdafx.h"
 #include "ResourceManager.h"
 #include "Tilemap.h"
@@ -5,6 +16,7 @@
 #include "MeshHelper.h"
 #include <Mesh.h>
 #include <Texture.h>
+#include <Parser.h>
 
 static ResourceManager* Instance;
 
@@ -67,11 +79,11 @@ void ResourceManager::AddMesh(Mesh * mesh)
 	}
 }
 
-SpriteSource * ResourceManager::GetSpriteSource(const std::string & textureName, int numCols, int numRows, bool createIfNotFound)
+SpriteSource * ResourceManager::GetSpriteSource(const std::string & textureName, unsigned numCols, unsigned numRows, unsigned frameCount, unsigned frameStart, bool createIfNotFound)
 {
 	for (size_t i = 0; i < SpriteSources.size(); i++)
 	{
-		std::string currentName = SpriteSources[i]->GetTexture()->GetName();
+		std::string currentName = SpriteSources[i]->GetName();
 
 		std::vector<std::string> tokens = explodeString(currentName, '/');
 
@@ -82,7 +94,34 @@ SpriteSource * ResourceManager::GetSpriteSource(const std::string & textureName,
 
 	if (createIfNotFound) {
 		Texture* texture = Texture::CreateTextureFromFile(textureName);
-		SpriteSource* ss = new SpriteSource(numCols, numRows, texture);
+		SpriteSource* ss = new SpriteSource(numCols, numRows, frameCount, frameStart, texture);
+
+		AddSpriteSource(ss);
+
+		return ss;
+	}
+
+	return nullptr;
+}
+
+SpriteSource * ResourceManager::GetSpriteSource(const std::string & Name, bool createIfNotFound)
+{
+	for (size_t i = 0; i < SpriteSources.size(); i++)
+	{
+		std::string currentName = SpriteSources[i]->GetName();
+
+		if (currentName == Name)
+		{
+			return SpriteSources[i];
+		}
+	}
+
+	if (createIfNotFound) {
+		Parser* parser = new Parser(Name + ".txt", std::fstream::in);
+
+		SpriteSource* ss = new SpriteSource();
+
+		ss->Deserialize(*parser);
 
 		AddSpriteSource(ss);
 

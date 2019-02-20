@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 //
 // File Name:	SpriteText.cpp
-// Author(s):	David Cohen (david.cohen)
+// Author(s):	David Cohen (david.cohen), Jacob Holyfield (jacob.holyfield)
 // Project:		Cookie Manor
 // Course:		WANIC VGP2 2018-2019
 //

@@ -57,7 +57,12 @@ public:
 	//	 numCols = The number of columns in the sprite sheet.
 	//	 numRows = The number of rows in the sprite sheet.
 	//   createIfNotFound = Whether to create a sprite source if no sprite source is found.
-	SpriteSource* GetSpriteSource(const std::string& textureName, int numCols = 1, int numRows = 1, bool createIfNotFound = true);
+	SpriteSource* GetSpriteSource(const std::string& textureName, unsigned numCols = 1, unsigned numRows = 1, unsigned frameCount = 1, unsigned frameStart = 0, bool createIfNotFound = true);
+
+	// Retrieve a sprite source that uses a given texture, create it if not found.
+	// Params:
+	//	 textureName = Filename of the texture used by the sprite source.
+	SpriteSource* GetSpriteSource(const std::string& Name, bool createIfNotFound = true);
 
 	bool SpriteSourceExists(const SpriteSource* mesh);
 

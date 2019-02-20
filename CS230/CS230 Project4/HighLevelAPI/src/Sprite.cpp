@@ -41,18 +41,13 @@ void Sprite::Deserialize(Parser & parser)
 	//get color
 	parser.ReadVariable("color", color);
 	//get spritesource
-	std::string textureName;
-	parser.ReadVariable("textureName", textureName);
-	int rows;
-	parser.ReadVariable("textureRows", rows);
-	int columns;
-	parser.ReadVariable("textureColumns", columns);
+	std::string ssName;
+	parser.ReadVariable("spriteSourceName", ssName);
 
-	if (textureName != "null" && textureName != "none") {
-		SetSpriteSource(ResourceManager::GetInstance().GetSpriteSource(textureName, columns, rows));
-	}
+	SetSpriteSource(ResourceManager::GetInstance().GetSpriteSource(ssName, true));
+
 	//get mesh
-	SetMesh(ResourceManager::GetInstance().GetMesh(GetOwner()->GetName() + "_AutoMesh", true, Vector2D(1.0f / columns, 1.0f / rows)));
+	SetMesh(ResourceManager::GetInstance().GetMesh(GetOwner()->GetName() + "_AutoMesh", true, Vector2D(1.0f / spriteSource->GetTextureDimensions().x, 1.0f / spriteSource->GetTextureDimensions().x)));
 }
 
 void Sprite::Serialize(Parser & parser) const
@@ -61,16 +56,8 @@ void Sprite::Serialize(Parser & parser) const
 	parser.WriteVariable("frameIndex", frameIndex);
 	//set color
 	parser.WriteVariable("color", color);
-	//set texture
-	if (spriteSource != nullptr) {
-		parser.WriteVariable("textureName", spriteSource->GetTexture()->GetName());
-		parser.WriteVariable("textureRows", spriteSource->numRows);
-		parser.WriteVariable("textureColumns", spriteSource->numCols);
-	} else {
-		parser.WriteVariable("textureName", "null");
-		parser.WriteVariable("textureRows", 1);
-		parser.WriteVariable("textureColumns", 1);
-	}
+	//set spriteSourceName
+	parser.WriteVariable("spriteSourceName", spriteSource->GetName());
 }
 
 void Sprite::Initialize()
@@ -91,9 +78,8 @@ void Sprite::Draw(const Vector2D& offset)
 
 	if (spriteSource != nullptr) {
 
-		Vector2D textureCords = Vector2D(0, 0);
-		spriteSource->GetUV(frameIndex, textureCords);
-		Graphics::GetInstance().SetTexture(spriteSource->GetTexture(), textureCords);
+		spriteSource->GetUV(frameIndex);
+		Graphics::GetInstance().SetTexture(spriteSource->GetTexture());
 	}
 	else {
 		Graphics::GetInstance().SetTexture(nullptr);

@@ -10,20 +10,28 @@
 //------------------------------------------------------------------------------
 
 #include "stdafx.h"
-#include "Level3.h"
-#include "GameObject.h"
-#include "Physics.h"
 #include "Space.h"
-#include <Input.h>
+#include "Level3.h"
+
+//Other Levels
 #include "Level1.h"
 #include "Level2.h"
-#include <GameObjectFactory.h>
+
+//Components
+#include <Transform.h>
+#include <Physics.h>
 #include "ColorChange.h"
 #include "ScreenWrap.h"
-#include <Transform.h>
+
+//Resources
+#include "GameObject.h"
+
+//Systems
+#include <Input.h>
+#include <GameObjectFactory.h>
 #include <Graphics.h>
 #include <ResourceManager.h>
-
+#include <System.h>
 
 Levels::Level3::Level3() : Level("Level3")
 {
@@ -33,6 +41,8 @@ Levels::Level3::Level3() : Level("Level3")
 void Levels::Level3::Load()
 {
 	std::cout << "Level3::Load" << std::endl;
+
+	System::GetInstance().SetWindowTitle(WindowTitle);
 
 	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::ColorChange>();
 	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::ScreenWrap>();

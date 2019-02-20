@@ -1,0 +1,9 @@
+1) There is way too much duplication of things
+	Way too many random numbers
+	Gets user input like 40 diffrent times for each part
+	
+2) I understand some of it but it is not exactly clear to tell what he is trying to do.
+
+3) Mabey a bit for the tilemap stuff and some other random vars
+
+4) A main factor to the stupididy of this code is that it tries to sepprate everything out into diffrent sections. Instead of just adding on to the code and using already setup functions.

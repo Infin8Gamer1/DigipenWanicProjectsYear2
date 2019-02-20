@@ -9,19 +9,29 @@
 //
 //------------------------------------------------------------------------------
 
+//NOTE : Sound Stuff is commented out to save in upload size when submiting
+
 #include "stdafx.h"
+#include "Space.h"
 #include "Level1.h"
+
+//Other Levels
 #include "Level2.h"
 #include "Level3.h"
-#include "Space.h"
-#include "MeshHelper.h"
-#include <Input.h>
+
+//Components
+#include "PlayerShip.h"
+
+//Resources
 #include <Mesh.h>
 #include <Color.h>
-#include <Engine.h>
+
+//Systems
 #include <GameObjectFactory.h>
-#include "PlayerShip.h"
 #include <ResourceManager.h>
+#include <System.h>
+#include <Input.h>
+#include <MeshHelper.h>
 //#include <SoundManager.h>
 
 Levels::Level1::Level1() : Level("Level1")
@@ -34,6 +44,8 @@ Levels::Level1::Level1() : Level("Level1")
 void Levels::Level1::Load()
 {
 	std::cout << GetName() << "::Load" << std::endl;
+
+	System::GetInstance().SetWindowTitle(WindowTitle);
 
 	Mesh* meshShip = CreateTriangleMesh(Color(1, 0, 0), Color(0, 1, 0), Color(0, 0, 1));
 	meshShip->SetName("meshShip");

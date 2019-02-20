@@ -44,22 +44,22 @@ Component * Transform::Clone() const
 void Transform::Deserialize(Parser & parser)
 {
 	//get translation
-	Vector2D translation;
-	parser.ReadVariable("translation", translation);
+	Vector2D _translation;
+	parser.ReadVariable("translation", _translation);
 
-	SetTranslation(translation);
+	SetTranslation(_translation);
 
 	//get rotation
-	float rotation;
-	parser.ReadVariable("rotation", rotation);
+	float _rotation;
+	parser.ReadVariable("rotation", _rotation);
 
-	SetRotation(rotation);
+	SetRotation(_rotation);
 
 	//get scale
-	Vector2D scale;
-	parser.ReadVariable("scale", scale);
+	Vector2D _scale;
+	parser.ReadVariable("scale", _scale);
 
-	SetScale(scale);
+	SetScale(_scale);
 }
 
 void Transform::Serialize(Parser & parser) const

@@ -32,7 +32,6 @@ class GameObject;
 //------------------------------------------------------------------------------
 // Public Structures:
 //------------------------------------------------------------------------------
-
 namespace Levels
 {
 	class Level3 : public Level
@@ -65,6 +64,9 @@ namespace Levels
 		// Private Variables:
 		//------------------------------------------------------------------------------
 		
+		// Window Title
+		const std::string WindowTitle = "Level 3";
+
 		GameObject* circle2;
 	};
 }
