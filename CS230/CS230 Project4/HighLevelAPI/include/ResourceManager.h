@@ -22,6 +22,7 @@
 //------------------------------------------------------------------------------
 
 class Mesh;
+class Texture;
 class SpriteSource;
 class Tilemap;
 //------------------------------------------------------------------------------
@@ -51,6 +52,16 @@ public:
 
 	void AddMesh(Mesh* mesh);
 
+	// Retrieve an existing mesh required by a game object.
+	// Params:
+	//   objectName = The name of the mesh.
+	//   createIfNotFound = Whether to create a default quad mesh if no mesh is found.
+	Texture* GetTexture(const std::string& objectName, bool createIfNotFound = true);
+
+	bool TextureExists(const Texture* mesh);
+
+	void AddTexture(Texture* mesh);
+
 	// Retrieve a sprite source that uses a given texture, create it if not found.
 	// Params:
 	//	 textureName = Filename of the texture used by the sprite source.
@@ -67,6 +78,8 @@ public:
 	bool SpriteSourceExists(const SpriteSource* mesh);
 
 	void AddSpriteSource(SpriteSource* mesh);
+
+	void SaveSpriteSourceToFile(SpriteSource * object);
 
 	// Retrieve an existing Tilemap required by a game object.
 	// Params:
@@ -111,10 +124,14 @@ private:
 	//------------------------------------------------------------------------------
 	
 	std::vector<Mesh*> Meshes;
+
+	std::vector<Texture*> Textures;
 	
 	std::vector<SpriteSource*> SpriteSources;
 
 	std::vector<Tilemap*> Tilemaps;
+
+	std::string SpriteSourcesFilePath = "Assets/SpriteSources/";
 
 };
 

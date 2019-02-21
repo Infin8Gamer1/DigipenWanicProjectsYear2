@@ -17,22 +17,29 @@
 #include <ResourceManager.h>
 #include <Texture.h>
 
-SpriteSource::SpriteSource(unsigned numColsInput, unsigned numRowsInput, unsigned frameCount, unsigned frameStart, Texture * textureInput) : Serializable()
+SpriteSource::SpriteSource(std::string _name, unsigned numColsInput, unsigned numRowsInput, unsigned frameCountInput, unsigned frameStartInput, Texture * textureInput) : Serializable()
 {
 	numRows = numRowsInput;
 	numCols = numColsInput;
+	frameCount = frameCountInput;
+	frameStart = frameStartInput;
 	texture = textureInput;
-	name = textureInput->GetName() + "_" + std::to_string(frameStart) + "_" + std::to_string(frameCount);
-}
 
-SpriteSource::~SpriteSource()
-{
-	delete texture;
-	texture = nullptr;
+	if (_name == "") {
+		name = textureInput->GetName() + "_" + std::to_string(frameStart) + "_" + std::to_string(frameCount);
+	}
+	else {
+		name = _name;
+	}
+	
 }
 
 void SpriteSource::Deserialize(Parser & parser)
 {
+	std::string mName = this->GetName();
+	parser.ReadSkip(mName);
+	parser.ReadSkip("{");
+
 	std::string textureName;
 	parser.ReadVariable("textureName", textureName);
 	parser.ReadVariable("textureRows", numRows);
@@ -41,19 +48,27 @@ void SpriteSource::Deserialize(Parser & parser)
 	parser.ReadVariable("frameStart", frameStart);
 
 	if (textureName != "null" && textureName != "none") {
-		texture = Texture::CreateTextureFromFile(textureName);
+		texture = ResourceManager::GetInstance().GetTexture(textureName);
 	}
 
-	ResourceManager::GetInstance().AddSpriteSource(this);
+	parser.ReadSkip("}");
+
+	//ResourceManager::GetInstance().AddSpriteSource(this);
 }
 
 void SpriteSource::Serialize(Parser & parser) const
 {
+	parser.WriteValue(GetName());
+
+	parser.BeginScope();
+
 	parser.WriteVariable("textureName", GetTexture()->GetName());
 	parser.WriteVariable("textureRows", numRows);
 	parser.WriteVariable("textureColumns", numCols);
 	parser.WriteVariable("frameCount", frameCount);
 	parser.WriteVariable("frameStart", frameStart);
+
+	parser.EndScope();
 }
 
 Texture * SpriteSource::GetTexture() const

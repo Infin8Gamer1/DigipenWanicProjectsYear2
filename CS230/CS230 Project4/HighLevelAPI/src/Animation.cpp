@@ -13,14 +13,14 @@
 #include "Animation.h"
 #include "Sprite.h"
 #include "GameObject.h"
+#include <SpriteSource.h>
 
 Animation::Animation() : Component("Animation")
 {
 	frameIndex = 0;
-	frameCount = 0;
-	frameStart = 0;
 	
 	frameDelay = 0;
+
 	frameDuration = 20;
 
 	isRunning = false;
@@ -29,6 +29,8 @@ Animation::Animation() : Component("Animation")
 	playInReverse = false;
 
 	sprite = nullptr;
+
+	lastSpriteSource = nullptr;
 }
 
 Component * Animation::Clone() const
@@ -43,15 +45,18 @@ Component * Animation::Clone() const
 void Animation::Initialize()
 {
 	sprite = GetOwner()->GetComponent<Sprite>();
+
+	lastSpriteSource = sprite->GetSpriteSource();
 }
 
-void Animation::Play(unsigned frameStartInput, unsigned frameCountInput, float frameDurationInput, bool isLoopingInput, bool playInReverseInput)
+void Animation::Play(float frameDurationInput, bool isLoopingInput, bool playInReverseInput)
 {
 	//std::cout << "Animation::Play" << std::endl;
 
-	frameStart = frameStartInput;
-	frameIndex = frameStartInput;
-	frameCount = frameCountInput;
+	lastSpriteSource = sprite->GetSpriteSource();
+
+	frameIndex = sprite->GetSpriteSource()->GetFrameStart();
+
 	frameDelay = frameDurationInput;
 	frameDuration = frameDurationInput;
 	isLooping = isLoopingInput;
@@ -63,9 +68,13 @@ void Animation::Play(unsigned frameStartInput, unsigned frameCountInput, float f
 	GetOwner()->GetComponent<Sprite>()->SetFrame(frameIndex);
 }
 
-void Animation::Update(float dt)
+void Animation::FixedUpdate(float dt)
 {
-	//std::cout << "Animation::Update" << std::endl;
+	//std::cout << "Animation::FixedUpdate" << std::endl;
+	if (lastSpriteSource != sprite->GetSpriteSource()) {
+		lastSpriteSource = sprite->GetSpriteSource();
+		Play(frameDuration, isLooping, playInReverse);
+	}
 
 	isDone = false;
 
@@ -82,16 +91,16 @@ void Animation::Update(float dt)
 			frameIndex++;
 		}
 		
-		if (frameIndex >= frameCount || (frameIndex < 0 && playInReverse)) {
+		if (frameIndex >= sprite->GetSpriteSource()->GetFrameCount() || (frameIndex < 0 && playInReverse)) {
 			if (isLooping) {
-				frameIndex = frameStart;
+				frameIndex = sprite->GetSpriteSource()->GetFrameStart();
 				isDone = true;
 				isRunning = true;
 				sprite->SetFrame(frameIndex);
 			} else {
 				isDone = true;
 				isRunning = false;
-				sprite->SetFrame(frameStart);
+				sprite->SetFrame(sprite->GetSpriteSource()->GetFrameStart());
 			}
 		} else {
 			sprite->SetFrame(frameIndex);
@@ -103,4 +112,9 @@ void Animation::Update(float dt)
 bool Animation::IsDone() const
 {
 	return isDone;
+}
+
+void Animation::SetFrameDuration(float duration)
+{
+	frameDuration = duration;
 }

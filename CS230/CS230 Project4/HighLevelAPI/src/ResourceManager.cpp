@@ -79,22 +79,70 @@ void ResourceManager::AddMesh(Mesh * mesh)
 	}
 }
 
+Texture * ResourceManager::GetTexture(const std::string & objectName, bool createIfNotFound)
+{
+	for (size_t i = 0; i < Textures.size(); i++)
+	{
+		std::string currentName = Textures[i]->GetName();
+
+		if (currentName == objectName) {
+			return Textures[i];
+		}
+	}
+
+	if (createIfNotFound) {
+		Texture* texture = Texture::CreateTextureFromFile(objectName);
+
+		AddTexture(texture);
+
+		return texture;
+	}
+
+	return nullptr;
+}
+
+bool ResourceManager::TextureExists(const Texture * texture)
+{
+	std::string textureName = texture->GetName();
+
+	for (size_t i = 0; i < Textures.size(); i++)
+	{
+		std::string currentName = Textures[i]->GetName();
+
+		if (currentName == textureName) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+void ResourceManager::AddTexture(Texture * texture)
+{
+	if (!TextureExists(texture)) {
+		Textures.push_back(texture);
+	}
+	else {
+		delete texture;
+	}
+}
+
 SpriteSource * ResourceManager::GetSpriteSource(const std::string & textureName, unsigned numCols, unsigned numRows, unsigned frameCount, unsigned frameStart, bool createIfNotFound)
 {
 	for (size_t i = 0; i < SpriteSources.size(); i++)
 	{
-		std::string currentName = SpriteSources[i]->GetName();
+		std::string currentName = SpriteSources[i]->GetTexture()->GetName();
 
 		std::vector<std::string> tokens = explodeString(currentName, '/');
 
-		if (tokens.back() == textureName) {
+		if (tokens.back() == textureName && SpriteSources[i]->GetFrameCount() == frameCount && SpriteSources[i]->GetFrameStart() == frameStart) {
 			return SpriteSources[i];
 		}
 	}
 
 	if (createIfNotFound) {
-		Texture* texture = Texture::CreateTextureFromFile(textureName);
-		SpriteSource* ss = new SpriteSource(numCols, numRows, frameCount, frameStart, texture);
+		Texture* texture = GetTexture(textureName);
+		SpriteSource* ss = new SpriteSource("", numCols, numRows, frameCount, frameStart, texture);
 
 		AddSpriteSource(ss);
 
@@ -117,9 +165,9 @@ SpriteSource * ResourceManager::GetSpriteSource(const std::string & Name, bool c
 	}
 
 	if (createIfNotFound) {
-		Parser* parser = new Parser(Name + ".txt", std::fstream::in);
+		Parser* parser = new Parser(SpriteSourcesFilePath + Name + ".spriteSource", std::fstream::in);
 
-		SpriteSource* ss = new SpriteSource();
+		SpriteSource* ss = new SpriteSource(Name);
 
 		ss->Deserialize(*parser);
 
@@ -133,15 +181,13 @@ SpriteSource * ResourceManager::GetSpriteSource(const std::string & Name, bool c
 
 bool ResourceManager::SpriteSourceExists(const SpriteSource * ss)
 {
-	std::string ssName = ss->GetTexture()->GetName();
+	std::string ssName = ss->GetName();
 
 	for (size_t i = 0; i < SpriteSources.size(); i++)
 	{
-		std::string currentName = SpriteSources[i]->GetTexture()->GetName();
+		std::string currentName = SpriteSources[i]->GetName();
 
-		std::vector<std::string> tokens = explodeString(currentName, '/');
-
-		if (tokens.back() == ssName) {
+		if (currentName == ssName) {
 			return true;
 		}
 	}
@@ -157,6 +203,18 @@ void ResourceManager::AddSpriteSource(SpriteSource * ss)
 	else {
 		delete ss;
 	}
+}
+
+void ResourceManager::SaveSpriteSourceToFile(SpriteSource * object)
+{
+	Parser* parser = new Parser(SpriteSourcesFilePath + object->GetName() + ".spriteSource", std::fstream::out);
+
+	object->Serialize(*parser);
+
+	delete parser;
+	parser = nullptr;
+
+	std::cout << "The Game Object: " << object->GetName() << " was saved to \"" << SpriteSourcesFilePath << object->GetName() << ".spriteSource\"" << std::endl;
 }
 
 const Tilemap * ResourceManager::GetTilemap(const std::string & tilemapName, bool createIfNotFound)
@@ -221,6 +279,8 @@ void ResourceManager::Shutdown()
 	DeleteVector<SpriteSource>(SpriteSources);
 
 	DeleteVector<Tilemap>(Tilemaps);
+
+	DeleteVector<Texture>(Textures);
 }
 
 ResourceManager & ResourceManager::GetInstance()

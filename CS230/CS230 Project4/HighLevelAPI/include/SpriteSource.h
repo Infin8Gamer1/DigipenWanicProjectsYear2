@@ -45,9 +45,7 @@ public:
 	//	 numCols = The number of columns in the sprite sheet.
 	//	 numRows = The number of rows in the sprite sheet.
 	//	 texture = A pointer to a texture that has been loaded by the Alpha Engine.
-	SpriteSource(unsigned numCols = 1, unsigned numRows = 1, unsigned frameCount = 1, unsigned frameStart = 0, Texture* texture = nullptr);
-
-	~SpriteSource();
+	SpriteSource(std::string name = "", unsigned numCols = 1, unsigned numRows = 1, unsigned frameCount = 1, unsigned frameStart = 0, Texture* texture = nullptr);
 
 	// Loads object data from a file.
 	void Deserialize(Parser& parser) override;

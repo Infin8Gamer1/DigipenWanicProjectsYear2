@@ -60,22 +60,8 @@ Component* SpriteText::Clone() const
 
 void SpriteText::Deserialize(Parser & parser)
 {
-	//get color
-	parser.ReadVariable("color", color);
-	//get spritesource
-	std::string textureName;
-	parser.ReadVariable("textureName", textureName);
-
-	parser.ReadVariable("textureRows", rows);
-
-	parser.ReadVariable("textureColumns", columns);
-
-	if (textureName != "null" && textureName != "none") {
-		SetSpriteSource(ResourceManager::GetInstance().GetSpriteSource(textureName, columns, rows));
-	}
-	//get mesh
-	SetMesh(ResourceManager::GetInstance().GetMesh(GetOwner()->GetName() + "_AutoMesh", true, Vector2D(1.0f / columns, 1.0f / rows), Vector2D(1, 1)));
-
+	Sprite::Deserialize(parser);
+	
 	parser.ReadVariable("text", text);
 
 	int hor;
@@ -89,19 +75,7 @@ void SpriteText::Deserialize(Parser & parser)
 
 void SpriteText::Serialize(Parser & parser) const
 {
-	//set color
-	parser.WriteVariable("color", color);
-	//set texture
-	if (spriteSource != nullptr) {
-		parser.WriteVariable("textureName", spriteSource->GetTexture()->GetName());
-		parser.WriteVariable("textureRows", spriteSource->numRows);
-		parser.WriteVariable("textureColumns", spriteSource->numCols);
-	}
-	else {
-		parser.WriteVariable("textureName", "null");
-		parser.WriteVariable("textureRows", 1);
-		parser.WriteVariable("textureColumns", 1);
-	}
+	Sprite::Serialize(parser);
 
 	parser.WriteVariable("text", text);
 
@@ -171,8 +145,7 @@ void SpriteText::Draw()
 			continue;
 
 		// Get the UV of the current character and set the current texture.
-		Vector2D uv;
-		spriteSource->GetUV(frame, uv);
+		Vector2D uv = spriteSource->GetUV(frame);
 		Graphics::GetInstance().SetTexture(spriteSource->GetTexture(), uv);
 
 		// Set the translation & scale for the mesh.

@@ -18,6 +18,8 @@
 #include "Collider.h"
 #include <Graphics.h>
 #include <Input.h>
+#include <Sprite.h>
+#include <ResourceManager.h>
 
 Behaviors::MonkeyMovement::MonkeyMovement() : Component("MonkeyMovement")
 {
@@ -25,6 +27,7 @@ Behaviors::MonkeyMovement::MonkeyMovement() : Component("MonkeyMovement")
 	transform = nullptr;
 	physics = nullptr;
 	animation = nullptr;
+	sprite = nullptr;
 }
 
 Component * Behaviors::MonkeyMovement::Clone() const
@@ -68,6 +71,7 @@ void Behaviors::MonkeyMovement::Initialize()
 	transform = GetOwner()->GetComponent<Transform>();
 	physics = GetOwner()->GetComponent<Physics>();
 	animation = GetOwner()->GetComponent<Animation>();
+	sprite = GetOwner()->GetComponent<Sprite>();
 	//set the collision handler for the monkey
 	GetOwner()->GetComponent<Collider>()->SetMapCollisionHandler(MonkeyMapCollisionHandler);
 	GetOwner()->GetComponent<Collider>()->SetCollisionHandler(MonkeyCollisionHandler);
@@ -83,17 +87,19 @@ void Behaviors::MonkeyMovement::Update(float dt)
 
 	//do animations
 	if (onGround) {
+		sprite->SetSpriteSource(ResourceManager::GetInstance().GetSpriteSource("MonkeyWalk", true));
 		if (animation->IsDone()) {
 			if (physics->GetVelocity().x >= 0) {
-				animation->Play(0, 8, 0.1f, false);
+				animation->Play(0.1f, false);
 			}
 			if (physics->GetVelocity().x < 0) {
-				animation->Play(7, 8, 0.1f, false, true);
+				animation->Play(0.1f, false, true);
 			}
 
 		}
 	} else {
-		animation->Play(9, 1, 0.05f, false);
+		sprite->SetSpriteSource(ResourceManager::GetInstance().GetSpriteSource("MonkeyJump", true));
+		animation->Play(0.05f, false);
 	}
 }
 

@@ -61,7 +61,7 @@ GameObject * GameObjectFactory::CreateObject(const std::string & name, Mesh * me
 {
 	GameObject* GO = new GameObject(name);
 
-	Parser* parser = new Parser(objectFilePath + name + ".txt", std::fstream::in);
+	Parser* parser = new Parser(objectFilePath + name + ".object", std::fstream::in);
 	
 	try
 	{
@@ -116,7 +116,7 @@ Component * GameObjectFactory::CreateComponent(const std::string & name)
 
 void GameObjectFactory::SaveObjectToFile(GameObject * object)
 {
-	Parser* parser = new Parser(objectFilePath + object->GetName() + ".txt", std::fstream::out);
+	Parser* parser = new Parser(objectFilePath + object->GetName() + ".object", std::fstream::out);
 
 	object->Serialize(*parser);
 

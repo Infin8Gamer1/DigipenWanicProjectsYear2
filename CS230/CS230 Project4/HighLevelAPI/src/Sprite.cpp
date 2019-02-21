@@ -77,9 +77,7 @@ void Sprite::Draw(const Vector2D& offset)
 	}
 
 	if (spriteSource != nullptr) {
-
-		spriteSource->GetUV(frameIndex);
-		Graphics::GetInstance().SetTexture(spriteSource->GetTexture());
+		Graphics::GetInstance().SetTexture(spriteSource->GetTexture(), spriteSource->GetUV(frameIndex));
 	}
 	else {
 		Graphics::GetInstance().SetTexture(nullptr);
@@ -112,7 +110,7 @@ void Sprite::SetFrame(unsigned int frameIndexInput)
 
 	//std::cout << "Sprite::SetFrame(" << frameIndexInput << ")" << std::endl;
 
-	if (frameIndexInput < spriteSource->GetFrameCount()) {
+	if (frameIndexInput < spriteSource->GetFrameCountTexture()) {
 		frameIndex = frameIndexInput;
 	}
 }
@@ -130,6 +128,11 @@ void Sprite::SetMesh(Mesh * meshInput)
 void Sprite::SetSpriteSource(SpriteSource * spriteSourceInput)
 {
 	spriteSource = spriteSourceInput;
+}
+
+SpriteSource * Sprite::GetSpriteSource()
+{
+	return spriteSource;
 }
 
 void Sprite::SetColor(Color colorInput)

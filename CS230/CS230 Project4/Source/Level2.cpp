@@ -46,7 +46,7 @@ void Levels::Level2::Initialize()
 	std::cout << "Level2::Initialize" << std::endl;
 
 	GameObject* Monkey = GameObjectFactory::GetInstance().CreateObject("Monkey");
-	Monkey->GetComponent<Animation>()->Play(0, 8, 0.4f, false);
+	//Monkey->GetComponent<Animation>()->Play(0.4f, false);
 	GetSpace()->GetObjectManager().AddObject(*Monkey);
 
 	GameObject* Map = GameObjectFactory::GetInstance().CreateObject("tileMap");

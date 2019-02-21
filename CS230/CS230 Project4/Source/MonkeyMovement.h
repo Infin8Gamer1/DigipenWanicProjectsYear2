@@ -29,6 +29,7 @@
 class Transform;
 class Physics;
 class Animation;
+class Sprite;
 struct MapCollision;
 
 //------------------------------------------------------------------------------
@@ -98,6 +99,7 @@ namespace Behaviors
 		Transform* transform;
 		Physics* physics;
 		Animation* animation;
+		Sprite* sprite;
 
 		// Misc
 		bool onGround;
