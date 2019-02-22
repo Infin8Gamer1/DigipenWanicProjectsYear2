@@ -52,8 +52,6 @@ void SpriteSource::Deserialize(Parser & parser)
 	}
 
 	parser.ReadSkip("}");
-
-	//ResourceManager::GetInstance().AddSpriteSource(this);
 }
 
 void SpriteSource::Serialize(Parser & parser) const
@@ -101,13 +99,14 @@ std::string SpriteSource::GetName() const
 	return name;
 }
 
-void SpriteSource::SetName(std::string Name) const
+void SpriteSource::SetName(const std::string &Name)
 {
-	name;
+	name = Name;
 }
 
 const Vector2D SpriteSource::GetUV(unsigned int frameIndex) const
 {
+	
 	float k_X = 1.0f / static_cast<float>(numCols);
 	float k_Y = 1.0f / static_cast<float>(numRows);
 

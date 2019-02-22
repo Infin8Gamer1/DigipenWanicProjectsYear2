@@ -85,7 +85,9 @@ Texture * ResourceManager::GetTexture(const std::string & objectName, bool creat
 	{
 		std::string currentName = Textures[i]->GetName();
 
-		if (currentName == objectName) {
+		std::vector<std::string> tokens = explodeString(currentName, '/');
+
+		if (tokens.back() == objectName) {
 			return Textures[i];
 		}
 	}
@@ -170,6 +172,9 @@ SpriteSource * ResourceManager::GetSpriteSource(const std::string & Name, bool c
 		SpriteSource* ss = new SpriteSource(Name);
 
 		ss->Deserialize(*parser);
+
+		delete parser;
+		parser = nullptr;
 
 		AddSpriteSource(ss);
 

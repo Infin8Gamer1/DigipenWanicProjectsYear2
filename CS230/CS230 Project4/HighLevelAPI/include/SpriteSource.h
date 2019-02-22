@@ -72,7 +72,7 @@ public:
 
 	std::string GetName() const;
 
-	void SetName(std::string Name) const;
+	void SetName(const std::string &Name);
 
 	// Returns the UV coordinates of the specified frame in a sprite sheet.
 	// Params:

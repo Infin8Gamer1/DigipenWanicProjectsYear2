@@ -47,7 +47,7 @@ void Sprite::Deserialize(Parser & parser)
 	SetSpriteSource(ResourceManager::GetInstance().GetSpriteSource(ssName, true));
 
 	//get mesh
-	SetMesh(ResourceManager::GetInstance().GetMesh(GetOwner()->GetName() + "_AutoMesh", true, Vector2D(1.0f / spriteSource->GetTextureDimensions().x, 1.0f / spriteSource->GetTextureDimensions().x)));
+	SetMesh(ResourceManager::GetInstance().GetMesh(GetOwner()->GetName() + "_AutoMesh", true, Vector2D(1.0f / spriteSource->GetTextureDimensions().x, 1.0f / spriteSource->GetTextureDimensions().y)));
 }
 
 void Sprite::Serialize(Parser & parser) const
@@ -77,7 +77,15 @@ void Sprite::Draw(const Vector2D& offset)
 	}
 
 	if (spriteSource != nullptr) {
-		Graphics::GetInstance().SetTexture(spriteSource->GetTexture(), spriteSource->GetUV(frameIndex));
+		if (frameIndex == 0) {
+			std::cout << "";
+		}
+		if (spriteSource->GetTexture() != nullptr) {
+			Graphics::GetInstance().SetTexture(spriteSource->GetTexture(), spriteSource->GetUV(frameIndex));
+		}
+		else {
+			Graphics::GetInstance().SetTexture(nullptr);
+		}
 	}
 	else {
 		Graphics::GetInstance().SetTexture(nullptr);
@@ -107,6 +115,7 @@ void Sprite::SetFrame(unsigned int frameIndexInput)
 	if (spriteSource == nullptr) {
 		return;
 	}
+	//std::cout << "FrameIndex : " << frameIndexInput << std::endl;
 
 	//std::cout << "Sprite::SetFrame(" << frameIndexInput << ")" << std::endl;
 

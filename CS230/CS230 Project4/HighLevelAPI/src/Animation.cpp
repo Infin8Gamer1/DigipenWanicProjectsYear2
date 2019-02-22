@@ -18,6 +18,9 @@
 Animation::Animation() : Component("Animation")
 {
 	frameIndex = 0;
+
+	frameStart = 0;
+	frameEnd = 0;
 	
 	frameDelay = 0;
 
@@ -55,27 +58,42 @@ void Animation::Play(float frameDurationInput, bool isLoopingInput, bool playInR
 
 	lastSpriteSource = sprite->GetSpriteSource();
 
-	frameIndex = sprite->GetSpriteSource()->GetFrameStart();
-
-	frameDelay = frameDurationInput;
-	frameDuration = frameDurationInput;
 	isLooping = isLoopingInput;
 	playInReverse = playInReverseInput;
 
-	isRunning = true;
-	isDone = false;
+
+	if (!playInReverse) {
+		frameStart = sprite->GetSpriteSource()->GetFrameStart();
+		frameEnd = sprite->GetSpriteSource()->GetFrameStart() + sprite->GetSpriteSource()->GetFrameCount() - 1;
+	}
+	else {
+		frameStart = sprite->GetSpriteSource()->GetFrameStart() + sprite->GetSpriteSource()->GetFrameCount() - 1;
+		frameEnd = sprite->GetSpriteSource()->GetFrameStart();
+	}
+	
+	frameIndex = frameStart;
+
+	//std::cout << "Start : " << frameStart << ", End : " << frameEnd << std::endl;
 
 	GetOwner()->GetComponent<Sprite>()->SetFrame(frameIndex);
+
+	frameDuration = frameDurationInput;
+	frameDelay = frameDuration;
+
+	isRunning = true;
+	isDone = false;
 }
 
 void Animation::FixedUpdate(float dt)
 {
 	//std::cout << "Animation::FixedUpdate" << std::endl;
+
+	//check if sprite source has been updated
 	if (lastSpriteSource != sprite->GetSpriteSource()) {
 		lastSpriteSource = sprite->GetSpriteSource();
 		Play(frameDuration, isLooping, playInReverse);
 	}
-
+	
 	isDone = false;
 
 	if (!isRunning) {
@@ -84,27 +102,33 @@ void Animation::FixedUpdate(float dt)
 
 	frameDelay -= dt;
 
+	//move on to the next frame if delay has been reached
 	if (frameDelay <= 0.0f) {
+		
+
+		//move frame up or down
 		if (playInReverse) {
 			frameIndex--;
 		} else {
 			frameIndex++;
 		}
-		
-		if (frameIndex >= sprite->GetSpriteSource()->GetFrameCount() || (frameIndex < 0 && playInReverse)) {
-			if (isLooping) {
-				frameIndex = sprite->GetSpriteSource()->GetFrameStart();
+
+		if ((frameIndex > frameEnd && !playInReverse) || (frameIndex < frameEnd && playInReverse))
+		{
+			if (isLooping)
+			{
+				frameIndex = frameStart;
 				isDone = true;
 				isRunning = true;
-				sprite->SetFrame(frameIndex);
 			} else {
+				frameIndex = frameStart;
 				isDone = true;
 				isRunning = false;
-				sprite->SetFrame(sprite->GetSpriteSource()->GetFrameStart());
 			}
-		} else {
-			sprite->SetFrame(frameIndex);
 		}
+
+		sprite->SetFrame(frameIndex);
+
 		frameDelay = frameDuration;
 	}
 }
@@ -112,6 +136,10 @@ void Animation::FixedUpdate(float dt)
 bool Animation::IsDone() const
 {
 	return isDone;
+}
+
+bool Animation::IsRunning() const {
+	return isRunning;
 }
 
 void Animation::SetFrameDuration(float duration)

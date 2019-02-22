@@ -63,6 +63,8 @@ public:
 	//	 The value in isDone.
 	bool IsDone() const;
 
+	bool IsRunning() const;
+
 	// Set the time to wait between frames for the currently playing animation.
 	// Params:
 	//	 duration = The amount of time to wait between frames (in seconds).
@@ -71,6 +73,10 @@ public:
 private:
 	// The current frame being displayed.
 	unsigned frameIndex;
+
+	unsigned frameStart;
+
+	unsigned frameEnd;
 
 	// The time remaining for the current frame.
 	float frameDelay;

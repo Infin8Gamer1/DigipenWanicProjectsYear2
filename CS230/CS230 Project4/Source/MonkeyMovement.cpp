@@ -86,32 +86,29 @@ void Behaviors::MonkeyMovement::Update(float dt)
 	MoveHorizontal();
 
 	//do animations
-	if (onGround) {
-		sprite->SetSpriteSource(ResourceManager::GetInstance().GetSpriteSource("MonkeyWalk", true));
-		if (animation->IsDone()) {
-			if (physics->GetVelocity().x >= 0) {
-				animation->Play(0.1f, false);
-			}
-			if (physics->GetVelocity().x < 0) {
-				animation->Play(0.1f, false, true);
-			}
+	if (!animation->IsRunning()) {
+		float xVelo = physics->GetVelocity().x;
 
+		if (onGround && abs(xVelo) >= 7) {
+			sprite->SetSpriteSource(ResourceManager::GetInstance().GetSpriteSource("MonkeyWalk", true));
+
+			if (xVelo >= 0) {
+				animation->Play(0.1f, false);
+				return;
+			}
+			if (xVelo <= -0) {
+				animation->Play(0.1f, false, true);
+				return;
+			}
+		} else if (onGround && abs(xVelo) < 7) {
+			sprite->SetSpriteSource(ResourceManager::GetInstance().GetSpriteSource("MonkeyIdle", true));
+			animation->Play(0.05f, false);
+		} else {
+			sprite->SetSpriteSource(ResourceManager::GetInstance().GetSpriteSource("MonkeyJump", true));
+			animation->Play(0.05f, false);
 		}
-	} else {
-		sprite->SetSpriteSource(ResourceManager::GetInstance().GetSpriteSource("MonkeyJump", true));
-		animation->Play(0.05f, false);
 	}
 }
-
-/*int Behaviors::MonkeyMovement::GetCoinsCollected()
-{
-	return CoinsCollected;
-}
-
-int Behaviors::MonkeyMovement::GetHealth()
-{
-	return Health;
-}*/
 
 void Behaviors::MonkeyMovement::MoveHorizontal() const
 {

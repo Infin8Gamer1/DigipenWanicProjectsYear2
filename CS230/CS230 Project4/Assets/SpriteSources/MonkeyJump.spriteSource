@@ -3,6 +3,6 @@ MonkeyJump
 	textureName : Monkey.png
     textureRows : 5
     textureColumns : 3
-	frameCount : 1
-	frameStart : 10
+	frameCount : 0
+	frameStart : 9
 }
