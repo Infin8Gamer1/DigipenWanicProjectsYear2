@@ -1,0 +1,36 @@
+﻿  stdafx.cpp
+  Animation.cpp
+  Collider.cpp
+  ColliderCircle.cpp
+  ColliderPoint.cpp
+  ColliderRectangle.cpp
+  ColliderTilemap.cpp
+  Component.cpp
+  GameObject.cpp
+  GameObjectFactory.cpp
+  GameObjectManager.cpp
+  Intersection2D.cpp
+  Level.cpp
+  Matrix2DStudent.cpp
+  MeshHelper.cpp
+  Parser.cpp
+  Physics.cpp
+  ResourceManager.cpp
+  Serializable.cpp
+  SoundManager.cpp
+  Space.cpp
+  Compiling...
+  Sprite.cpp
+  SpriteSource.cpp
+src\SpriteSource.cpp(77): warning C4458: declaration of 'texture' hides class member
+  C:\Users\jacob.holyfield\Documents\DigipenWanicProjectsYear2\CS230\CS230 Project5\HighLevelAPI\include\SpriteSource.h(106): note: see declaration of 'SpriteSource::texture'
+src\SpriteSource.cpp(126): warning C4244: 'argument': conversion from 'const unsigned int' to 'float', possible loss of data
+  SpriteText.cpp
+  SpriteTilemap.cpp
+  Tilemap.cpp
+  Transform.cpp
+BetaLow_x64.lib(gdiplus.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64.lib(RPCRT4.dll); second definition ignored
+BetaLow_x64.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64.lib(RPCRT4.dll); second definition ignored
+fmodL64_vc.lib(fmodL64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64.lib(RPCRT4.dll); second definition ignored
+fmodstudioL64_vc.lib(fmodstudioL64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64.lib(RPCRT4.dll); second definition ignored
+  HighLevelAPI.vcxproj -> C:\Users\jacob.holyfield\Documents\DigipenWanicProjectsYear2\CS230\CS230 Project5\HighLevelAPI\\lib\BetaHigh_x64.lib
