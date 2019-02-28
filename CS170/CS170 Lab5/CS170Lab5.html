@@ -1,0 +1,121 @@
+
+<!-- saved from url=(0085)http://azrael.digipen.edu/~mmead/www/Courses/2014/winter/cs170/labs/week12/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="./CS170Lab5_files/new.css">
+<title>CS 170 - Lab 5</title>
+<style>
+body {
+   background : #ffffff; 
+   margin-left : 50;
+   margin-right : 20;
+   background : url("./images/notebook.jpg");
+   }
+</style></head>
+
+<body>  
+<center>
+<h1>CS 170 - Lab 5<p></p></h1>
+</center>
+
+<p class="SectionHeader">
+Information
+</p>
+
+For this week's lab, you will be adding a few simple methods. Since you've already implemented all of the "hard" stuff, these new functions shouldn't be too
+difficult and most will finish within the lab today.
+
+<ol>
+<li>This lab adds 4 new methods and slightly modifies 4 others. The 4 new methods are:
+
+
+<blockquote><pre>  <font color="#003399"><i>// Swaps the contents of <b>other</b> with this Vector (Constant time)</i></font>
+<b>void</b> swapv(Vector &amp;other);
+
+  <font color="#003399"><i>// Reverses the order of the elements (Linear time)</i></font>
+<b>void</b> reverse(<b>void</b>);
+
+  <font color="#003399"><i>// Equality operator (Linear time)</i></font>
+  <font color="#003399"><i>// Both vectors must be the same size.</i></font>
+<b>bool</b> <b>operator</b>==(<b>const</b> Vector&amp; rhs) <b>const</b>;
+
+  <font color="#003399"><i>// Reallocates an array to match the size of the number </i></font>
+  <font color="#003399"><i>// of elements. If size == capacity, does nothing. </i></font>
+<b>void</b> shrink_to_fit(<b>void</b>);
+</pre></blockquote>
+
+and the 4 modified methods are the two subscript operators, the <tt><b>insert</b></tt> method, and the private <tt><b>check_bounds</b></tt> method. 
+These methods will now throw an exception via the check_bounds method. The exception class is already given to you in the header file
+on this page.
+
+<blockquote><pre>  <font color="#003399"><i>// Subscript operators. If the index is invalid, throws a SubscriptError.</i></font>
+<b>int</b> <b>operator</b>[](<b>unsigned</b> index) <b>const</b>;
+<b>int</b>&amp; <b>operator</b>[](<b>unsigned</b> index);
+
+  <font color="#003399"><i>// Inserts a new node at the specified position. Throws a</i></font>
+  <font color="#003399"><i>// SubscriptError if the position is invalid.</i></font>
+<b>void</b> insert(<b>int</b> value, <b>unsigned</b> position);
+
+  <font color="#003399"><i>// If the index is out of bounds, throw a SubscriptError.</i></font>
+<b>void</b> check_bounds(<b>unsigned</b> index) <b>const</b>;
+
+</pre></blockquote>
+<p>
+	
+
+Given this header file <a href="./CS170Lab5_files/Vector.h">Vector.h</a>, complete the implementation of the Vector class in Vector.cpp. Use the .cpp file
+  from the previous lab as your starting point.
+</p><p>
+
+Other hints:
+</p><ol>
+<li>You should work on the new functions in the order listed above. They are listed in order from very easy to less easy. 
+<p>
+</p></li><li>The <tt><b>swapv</b></tt> method only swaps the four private data members (not the actual contents of the internal array). 
+	You should implement a <tt><b>swap</b></tt> method to help your <tt><b>swapv</b></tt> method. You don't need to declare it or put it
+	in the class. You can just put this in your .cpp file at the top (inside the CS170 namespace):
+<blockquote><pre><b>template</b> &lt;<b>typename</b> T&gt;
+void swap(T &amp;a, T&amp; b)
+{
+  // TO DO: Implementation
+}
+</pre></blockquote>
+	
+<p>
+</p></li><li>You've written the <tt><b>reverse</b></tt> method in CS120, so that is also trivial.
+<p>
+</p></li><li>If you've implemented your <tt><b>insert</b></tt> method and subscript operators properly, then the only code that will
+	change is the private <tt><b>check_bounds</b></tt> method. You will remove the error code there and replace it with
+	a line of code that will throw the <tt><b>SubscriptError</b></tt> exception. (In a nutshell, that is why we factored out the bounds checking. 
+	Had you simply did bounds checking in each method that needed it, you would have to update a lot more code. Keep this in mind when you start
+	writing larger programs with error checking.) This means that the only place in your code where you'll have the <tt><b>throw</b></tt>
+  keyword is in your <tt><b>SubscriptError</b></tt> function. You will not <tt><b>catch</b></tt> anything.
+<p>
+</p></li></ol>
+
+<p>
+</p><hr width="100%">
+<p>
+
+</p></li><li>Add a file header comment to <tt><b>Vector.cpp</b></tt>. Create function header comments for each function.
+	Most of this work was done in the previous labs, so this should only take a few minutes to update.
+
+<p>
+</p><hr width="100%">
+<p>
+
+</p></li><li>Here are sample command lines:
+<blockquote><pre><b>g++</b> -o gnu -O2 -Wall -Wextra -Werror -std=c++11 -pedantic driver.cpp<br>
+<b>cl</b> /O2 /EHa /W4 /WX /Za /Fems.exe driver.cpp<br>
+</pre></blockquote>
+
+
+
+This is a sample driver for the new and modified methods: <a href="./CS170Lab5_files/driver.cpp">driver.cpp</a>
+and the <a href="./CS170Lab5_files/output.txt">output.txt</a>
+<p>
+
+Don't forget that you <i>may</i> need to add <tt>--strip-trailing-cr</tt> to the <tt>diff</tt> program to ignore the newlines.
+
+</p></li></ol>
+
+</body></html>
