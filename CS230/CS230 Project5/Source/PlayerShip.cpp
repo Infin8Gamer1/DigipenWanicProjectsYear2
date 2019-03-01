@@ -136,7 +136,6 @@ void Behaviors::PlayerShip::Shoot()
 	force = force.Normalized();
 
 	newBullet->GetComponent<BulletMovement>()->SetDirection(force);
-	//newBullet->GetComponent<BulletMovement>()->SetSpeed(bulletSpeed);
 
 	newBullet->GetComponent<Transform>()->SetTranslation(transform->GetTranslation());
 	newBullet->GetComponent<Transform>()->SetRotation(transform->GetRotation());

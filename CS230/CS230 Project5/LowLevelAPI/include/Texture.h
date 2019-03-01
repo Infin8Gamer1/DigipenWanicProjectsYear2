@@ -20,6 +20,17 @@
 //------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
+// Public Constants:
+//------------------------------------------------------------------------------
+
+enum TextureFilterMode
+{
+	TM_Nearest,
+	TM_Bilinear,
+	TM_Trilinear
+};
+
+//------------------------------------------------------------------------------
 // Public Structures:
 //------------------------------------------------------------------------------
 
@@ -45,7 +56,8 @@ public:
 	unsigned GetBufferID() const;
 
 	// Loads a texture from a file
-	static Texture* CreateTextureFromFile(const std::string& filename);
+	static Texture* CreateTextureFromFile(const std::string& filename, 
+		TextureFilterMode mode = TM_Nearest);
 
 	// Gets the current relative path for textures
 	static const std::string& GetFilePath();
@@ -63,7 +75,8 @@ private:
 	Texture(unsigned buffer, const std::string& name);
 
 	// Loads a texture from an array
-	void CreateTextureFromArray(const std::vector<Color>& colors, unsigned width, unsigned height);
+	void CreateTextureFromArray(const std::vector<Color>& colors, unsigned width, 
+		unsigned height, TextureFilterMode mode = TM_Nearest);
 
 	//------------------------------------------------------------------------------
 	// Private Variables

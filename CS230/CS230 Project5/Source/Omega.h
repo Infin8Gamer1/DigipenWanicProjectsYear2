@@ -16,8 +16,9 @@
 //------------------------------------------------------------------------------
 
 #include <Level.h>
-
+#include <fmod.hpp>
 #include "PlayerShip.h"
+#include <SpriteText.h>
 
 //------------------------------------------------------------------------------
 
@@ -28,6 +29,7 @@
 class Mesh;
 class SpriteSource;
 class Texture;
+class SoundManager;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -92,19 +94,25 @@ namespace Levels
 		// Player
 		Behaviors::PlayerShip* playerShip;
 		unsigned asteroidHighScore;
-		
-		// Window title stuff
-		static const unsigned titleStringLength = 128;
-		char windowTitle[titleStringLength];
 
-		// Resources
-		Mesh* mesh;
-		Texture* textureShip;
-		Texture* textureBullet;
-		Texture* textureAsteroid;
-		SpriteSource* spriteShip;
-		SpriteSource* spriteBullet;
-		SpriteSource* spriteAsteroid;
+		//scoreTracker
+		SpriteText* scoreText;
+		
+		// Window Title
+		const std::string WindowTitle = "Omega";
+
+		// Sound manager
+		SoundManager* soundManager;
+		FMOD::Channel* musicChannel;
+
+		//// Resources
+		//Mesh* mesh;
+		//Texture* textureShip;
+		//Texture* textureBullet;
+		//Texture* textureAsteroid;
+		//SpriteSource* spriteShip;
+		//SpriteSource* spriteBullet;
+		//SpriteSource* spriteAsteroid;
 	};
 }
 
