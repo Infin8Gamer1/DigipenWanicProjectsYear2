@@ -49,6 +49,12 @@ Component * Behaviors::PlayerShip::Clone() const
 	return new PlayerShip(forwardThrust, maximumSpeed, rotationSpeed, deathDuration);
 }
 
+void Behaviors::CollisionHandlerShip(GameObject & ship, GameObject & otherObject)
+{
+	UNREFERENCED_PARAMETER(ship);
+	UNREFERENCED_PARAMETER(otherObject);
+}
+
 void Behaviors::PlayerShip::Initialize()
 {
 	transform = GetOwner()->GetComponent<Transform>();
@@ -143,8 +149,4 @@ void Behaviors::PlayerShip::DeathSequence(float dt)
 	UNREFERENCED_PARAMETER(dt);
 }
 
-void Behaviors::CollisionHandlerShip(GameObject & ship, GameObject & otherObject)
-{
-	UNREFERENCED_PARAMETER(ship);
-	UNREFERENCED_PARAMETER(otherObject);
-}
+

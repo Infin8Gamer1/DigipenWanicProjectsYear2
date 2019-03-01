@@ -90,6 +90,7 @@
     <ClInclude Include="include\Animation.h" />
     <ClInclude Include="include\Collider.h" />
     <ClInclude Include="include\ColliderCircle.h" />
+    <ClInclude Include="include\ColliderLine.h" />
     <ClInclude Include="include\ColliderPoint.h" />
     <ClInclude Include="include\ColliderRectangle.h" />
     <ClInclude Include="include\ColliderTilemap.h" />

@@ -118,6 +118,9 @@
     <ClInclude Include="include\SpriteText.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="include\ColliderLine.h">
+      <Filter>Collisions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\stdafx.cpp">
