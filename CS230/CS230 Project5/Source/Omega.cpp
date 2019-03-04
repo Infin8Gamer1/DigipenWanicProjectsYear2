@@ -79,6 +79,9 @@ void Levels::Omega::Initialize()
 	scoreText = text->GetComponent<SpriteText>();
 	GetSpace()->GetObjectManager().AddObject(*text);
 
+	GameObject* Line = GameObjectFactory::GetInstance().CreateObject("Line");
+	GetSpace()->GetObjectManager().AddObject(*Line);
+
 	//play background music
 	musicChannel = soundManager->PlaySound("Asteroid Field");
 }

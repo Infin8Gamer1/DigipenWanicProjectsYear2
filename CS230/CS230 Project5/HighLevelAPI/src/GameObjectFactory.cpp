@@ -24,6 +24,7 @@
 #include <Physics.h>
 #include <SpriteTilemap.h>
 #include <SpriteText.h>
+#include <ColliderLine.h>
 
 static GameObjectFactory* Instance;
 
@@ -41,6 +42,7 @@ GameObjectFactory::GameObjectFactory()
 	RegisterComponent<ColliderPoint>();
 	RegisterComponent<ColliderRectangle>();
 	RegisterComponent<ColliderTilemap>();
+	RegisterComponent<ColliderLine>();
 }
 
 GameObjectFactory::~GameObjectFactory()
