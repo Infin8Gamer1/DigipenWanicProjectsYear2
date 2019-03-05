@@ -3,7 +3,7 @@ Line
   numComponents : 3
   Transform
   {
-    translation : { 100, 100 }
+    translation : { 0, -200 }
     rotation : 0
     scale : { 1, 1 }
   }
@@ -15,7 +15,10 @@ Line
   }
   ColliderLine
   {
-	StartPoint : { 100, 100 }
-	EndPoint : { -100, -100 }
+	NumberOfLines : 4
+	Line : { { 0, 0 }, { 200, 200 } }
+	Line : { { 0, 0 }, { -200, 200 } }
+	Line : { { 200, 200 }, { 0, 400 } }
+	Line : { { -200, 200 }, { 0, 400 } }
   }
 }

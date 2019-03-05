@@ -1,19 +1,18 @@
 ﻿  Intersection2D.cpp
-c:\users\jacob.holyfield\documents\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(89): warning C4100: 't': unreferenced formal parameter
-c:\users\jacob.holyfield\documents\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(89): warning C4100: 'intersection': unreferenced formal parameter
-c:\users\jacob.holyfield\documents\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(89): warning C4100: 'movingPoint': unreferenced formal parameter
-c:\users\jacob.holyfield\documents\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(89): warning C4100: 'staticLine': unreferenced formal parameter
-c:\users\jacob.holyfield\documents\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(136): warning C4100: 'intersection': unreferenced formal parameter
-c:\users\jacob.holyfield\documents\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(136): warning C4100: 'movingPoint': unreferenced formal parameter
-c:\users\jacob.holyfield\documents\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(136): warning C4100: 'staticLine': unreferenced formal parameter
-c:\users\jacob.holyfield\documents\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(136): warning C4100: 'physics': unreferenced formal parameter
-c:\users\jacob.holyfield\documents\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(136): warning C4100: 'transform': unreferenced formal parameter
-c:\users\jacob.holyfield\documents\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(152): warning C4100: 'normal': unreferenced formal parameter
-c:\users\jacob.holyfield\documents\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(152): warning C4100: 'secondLine': unreferenced formal parameter
-c:\users\jacob.holyfield\documents\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(152): warning C4100: 'firstLine': unreferenced formal parameter
-c:\users\jacob.holyfield\documents\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(152): warning C4100: 'point': unreferenced formal parameter
-c:\users\jacob.holyfield\documents\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(190): warning C4100: 'line': unreferenced formal parameter
-c:\users\jacob.holyfield\documents\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(190): warning C4100: 'point': unreferenced formal parameter
+x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(128): warning C4189: 'NormalXY': local variable is initialized but not referenced
+x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(124): warning C4189: 'a': local variable is initialized but not referenced
+x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(125): warning C4189: 'b': local variable is initialized but not referenced
+x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(159): warning C4100: 'intersection': unreferenced formal parameter
+x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(159): warning C4100: 'movingPoint': unreferenced formal parameter
+x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(159): warning C4100: 'staticLine': unreferenced formal parameter
+x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(159): warning C4100: 'physics': unreferenced formal parameter
+x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(159): warning C4100: 'transform': unreferenced formal parameter
+x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(175): warning C4100: 'normal': unreferenced formal parameter
+x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(175): warning C4100: 'secondLine': unreferenced formal parameter
+x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(175): warning C4100: 'firstLine': unreferenced formal parameter
+x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(175): warning C4100: 'point': unreferenced formal parameter
+x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(213): warning C4100: 'line': unreferenced formal parameter
+x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(213): warning C4100: 'point': unreferenced formal parameter
 BetaLow_x64_D.lib(gdiplus.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64_D.lib(RPCRT4.dll); second definition ignored
 BetaLow_x64_D.lib(gdiplus.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
 BetaLow_x64_D.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64_D.lib(RPCRT4.dll); second definition ignored
@@ -22,4 +21,4 @@ fmodL64_vc.lib(fmodL64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already 
 fmodL64_vc.lib(fmodL64.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
 fmodstudioL64_vc.lib(fmodstudioL64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64_D.lib(RPCRT4.dll); second definition ignored
 fmodstudioL64_vc.lib(fmodstudioL64.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
-  HighLevelAPI.vcxproj -> C:\Users\jacob.holyfield\Documents\DigipenWanicProjectsYear2\CS230\CS230 Project5\HighLevelAPI\\lib\BetaHigh_x64_D.lib
+  HighLevelAPI.vcxproj -> X:\_Dev\DigipenWanicProjectsYear2\CS230\CS230 Project5\HighLevelAPI\\lib\BetaHigh_x64_D.lib

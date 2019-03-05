@@ -51,10 +51,10 @@ bool ColliderLine::IsCollidingWith(const Collider & other) const
 			Vector2D intersection = Vector2D(0, 0);
 			float t = 0;
 
-			MovingPointLineIntersection(myLine, othersLine, intersection, t);
+			bool intersected = MovingPointLineIntersection(myLine, othersLine, intersection, t);
 
 			//check if we intersected this frame
-			if (t < 1 || t > 0) {
+			if ((t < 1 || t > 0) && intersected) {
 				if (reflection) {
 					MovingPointLineReflection(*other.GetOwner()->GetComponent<Transform>(), *other.GetOwner()->GetComponent<Physics>(), myLine, othersLine, intersection);
 				}
@@ -69,17 +69,25 @@ bool ColliderLine::IsCollidingWith(const Collider & other) const
 
 void ColliderLine::Serialize(Parser & parser) const
 {
-	parser.WriteVariable("StartPoint", lineSegments[0].start);
-	parser.WriteVariable("EndPoint", lineSegments[0].end);
+	parser.WriteVariable("NumberOfLines", lineSegments.size());
+	for (size_t i = 0; i < lineSegments.size(); i++)
+	{
+		parser.WriteVariable("Line", lineSegments[i]);
+	}
 }
 
 void ColliderLine::Deserialize(Parser & parser)
 {
-	Vector2D startPoint, endPoint;
-	parser.ReadVariable("StartPoint", startPoint);
-	parser.ReadVariable("EndPoint", endPoint);
+	unsigned numLines;
+	parser.ReadVariable("NumberOfLines", numLines);
 
-	AddLineSegment(startPoint, endPoint);
+	for (unsigned i = 0; i < numLines; i++)
+	{
+		LineSegment line;
+		parser.ReadVariable("Line", line);
+
+		lineSegments.push_back(line);
+	}
 }
 
 LineSegment ColliderLine::GetLineWithTransform(unsigned index) const

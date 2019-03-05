@@ -89,9 +89,14 @@ bool RectangleCircleIntersection(const BoundingRectangle & rect, const Circle & 
 bool MovingPointLineIntersection(const LineSegment & staticLine, const LineSegment & movingPoint, Vector2D & intersection, float & t)
 {
 	// 1. Calculate the second object's change in translation during the current frame. Store this in your velocity variable.
+	Vector2D Velocity = Vector2D(abs(movingPoint.start.x - movingPoint.end.y), abs(movingPoint.start.y - movingPoint.end.y));
 
 	// 2. Return false if the second object is stationary or is moving parallel to the line segment. 
 	// (HINT: Use dot product with the velocity and line's normal!)
+	if (Velocity.DotProduct(staticLine.normal) == 0)
+	{
+		return false;
+	}
 
 	//////////////////////////////////////////////////////////////////
 	//								//
@@ -116,21 +121,34 @@ bool MovingPointLineIntersection(const LineSegment & staticLine, const LineSegme
 	//////////////////////////////////////////////////////////////////
 
 	// 3. Using the above information, solve for t.
+	t = (staticLine.normal.DotProduct(staticLine.start) - staticLine.normal.DotProduct(movingPoint.start)) / staticLine.normal.DotProduct(Velocity);
 
 	// 4. Check if intersection is between moving point start and end (if t is < 0 or > 1)
 	// If not between start and end, return false
+	if (t < 0 || t > 1)
+	{
+		return false;
+	}
 
 	// 5. Calculate the point of intersection using the start, velocity, and t.
+	intersection = movingPoint.start + Velocity * t;
 
 	// 6. Verify intersection point is on static segment (using static line direction as normal)
-	// If intersection point is not between static line start and static line end
-	//	return false
+	// If intersection point is not between static line start and static line end return false
+	float intersectionDotStart = (intersection - staticLine.start).DotProduct((staticLine.end - staticLine.start));
+	float intersectionDotEnd = (intersection - staticLine.end).DotProduct((staticLine.start - staticLine.end));
+
+	if (intersectionDotStart < 0 || intersectionDotEnd < 0)
+	{
+		return false;
+	}
 
 	// 7. Other possibilities have been eliminated, so
 	// this must be an intersection. Return true!
+	//std::cout << "We Collided!" << std::endl;
+	return true;
 	
 	
-	return false;
 }
 
 void MovingPointLineReflection(Transform & transform, Physics & physics, const LineSegment & staticLine, const LineSegment & movingPoint, const Vector2D & intersection)
