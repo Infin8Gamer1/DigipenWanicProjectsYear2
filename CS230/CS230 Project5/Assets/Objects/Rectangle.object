@@ -23,6 +23,8 @@ Rectangle
   }
   ColliderRectangle
   {
+	CollisionGroup : default
+	CollisionFlags : all
     extents : { 125, 50 }
   }
   Behaviors::ColorChange

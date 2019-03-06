@@ -65,6 +65,8 @@ namespace Behaviors
 		//   parser = The parser that is reading this object's data from a file.
 		void Deserialize(Parser& parser) override;
 
+		void Initialize() override;
+
 		// Update function for this component.
 		// Params:
 		//   dt = The (fixed) change in time since the last step.

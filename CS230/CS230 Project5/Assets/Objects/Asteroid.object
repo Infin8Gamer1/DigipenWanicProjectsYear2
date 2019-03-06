@@ -23,7 +23,9 @@ Asteroid
   }
   ColliderCircle
   {
-    radius : 15
+    CollisionGroup : asteroid
+	CollisionFlags : !asteroid,default,ship,line
+	radius : 15
   }
   Behaviors::Asteroid
   {

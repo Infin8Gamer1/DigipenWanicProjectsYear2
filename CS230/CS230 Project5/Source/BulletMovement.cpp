@@ -42,10 +42,14 @@ void Behaviors::BulletMovement::Serialize(Parser & parser) const
 	parser.WriteVariable("speed", speed);
 }
 
+void Behaviors::BulletMovement::Initialize()
+{
+	GetOwner()->GetComponent<Physics>()->SetVelocity(forceDirection * speed);
+}
+
 void Behaviors::BulletMovement::Update(float dt)
 {
 	UNREFERENCED_PARAMETER(dt);
-	GetOwner()->GetComponent<Physics>()->SetVelocity(forceDirection * speed);
 }
 
 void Behaviors::BulletMovement::SetSpeed(float Speed)

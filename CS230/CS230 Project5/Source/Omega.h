@@ -19,6 +19,8 @@
 #include <fmod.hpp>
 #include "PlayerShip.h"
 #include <SpriteText.h>
+#include <iostream>
+#include <vector>
 
 //------------------------------------------------------------------------------
 
@@ -104,6 +106,8 @@ namespace Levels
 		// Sound manager
 		SoundManager* soundManager;
 		FMOD::Channel* musicChannel;
+
+		GameObject* Line;
 
 		//// Resources
 		//Mesh* mesh;

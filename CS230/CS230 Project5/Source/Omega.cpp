@@ -24,6 +24,7 @@
 #include "BulletMovement.h"
 #include "TimedDeath.h"
 #include <SpriteText.h>
+#include <Transform.h>
 
 //Resources
 #include <Mesh.h>
@@ -79,7 +80,7 @@ void Levels::Omega::Initialize()
 	scoreText = text->GetComponent<SpriteText>();
 	GetSpace()->GetObjectManager().AddObject(*text);
 
-	GameObject* Line = GameObjectFactory::GetInstance().CreateObject("Line");
+	Line = GameObjectFactory::GetInstance().CreateObject("Line");
 	GetSpace()->GetObjectManager().AddObject(*Line);
 
 	//play background music
@@ -93,6 +94,8 @@ void Levels::Omega::Update(float dt)
 	if (Input::GetInstance().CheckReleased('T')) {
 		soundManager->PlaySound("teleport.wav");
 	}
+
+	//Line->GetComponent<Transform>()->SetTranslation(Line->GetComponent<Transform>()->GetTranslation() + Vector2D(0.01f, 0));
 
 	SwitchLevels();
 	UpdateScore();

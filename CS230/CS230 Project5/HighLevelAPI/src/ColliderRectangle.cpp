@@ -32,11 +32,13 @@ Component * ColliderRectangle::Clone() const
 
 void ColliderRectangle::Deserialize(Parser & parser)
 {
+	BaseDeserialize(parser);
 	parser.ReadVar(extents);
 }
 
 void ColliderRectangle::Serialize(Parser & parser) const
 {
+	BaseSerialize(parser);
 	parser.WriteVar(extents);
 }
 

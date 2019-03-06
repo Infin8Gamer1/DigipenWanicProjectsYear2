@@ -16,6 +16,8 @@ tileMap
   }
   ColliderTilemap
   {
+	CollisionGroup : default
+	CollisionFlags : all
 	tilemapLoc : Assets/Levels/Level2.txt
   }
 }

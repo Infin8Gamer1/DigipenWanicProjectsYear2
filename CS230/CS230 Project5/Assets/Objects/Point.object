@@ -23,6 +23,8 @@ Point
   }
   ColliderPoint
   {
+	CollisionGroup : default
+	CollisionFlags : all
   }
   Behaviors::ColorChange
   {

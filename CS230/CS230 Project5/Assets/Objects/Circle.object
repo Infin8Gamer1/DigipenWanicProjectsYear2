@@ -23,6 +23,8 @@ Circle
   }
   ColliderCircle
   {
+	CollisionGroup : default
+	CollisionFlags : all
     radius : 50
   }
   Behaviors::ColorChange

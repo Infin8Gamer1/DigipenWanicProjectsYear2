@@ -88,11 +88,13 @@ public:
 	template<class T>
 	T * GetComponent()
 	{
-		std::string Type = std::string(typeid(T).name());
+		//std::string Type = std::string(typeid(T).name());
+		const char* Type = typeid(T).name();
 
 		for (size_t i = 0; i < components.size(); i++)
 		{
-			std::string compType = std::string(typeid(*components[i]).name());
+			//std::string compType(typeid(*components[i]).name());
+			const char* compType = typeid(*components[i]).name();
 			
 			if (Type == compType)
 			{

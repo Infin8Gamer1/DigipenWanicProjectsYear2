@@ -33,6 +33,8 @@ Component * ColliderTilemap::Clone() const
 
 void ColliderTilemap::Deserialize(Parser & parser)
 {
+	BaseDeserialize(parser);
+
 	std::string tilemapLoc;
 	parser.ReadVariable("tilemapLoc", tilemapLoc);
 
@@ -41,6 +43,8 @@ void ColliderTilemap::Deserialize(Parser & parser)
 
 void ColliderTilemap::Serialize(Parser & parser) const
 {
+	BaseSerialize(parser);
+
 	parser.WriteVariable("tilemapLoc", map->GetName());
 }
 

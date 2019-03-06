@@ -1,4 +1,5 @@
 ﻿  stdafx.cpp
+  ColliderLine.cpp
   Animation.cpp
   Collider.cpp
   ColliderCircle.cpp
@@ -10,6 +11,10 @@
   GameObjectFactory.cpp
   GameObjectManager.cpp
   Intersection2D.cpp
+x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(211): warning C4100: 'normal': unreferenced formal parameter
+x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(211): warning C4100: 'secondLine': unreferenced formal parameter
+x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(211): warning C4100: 'firstLine': unreferenced formal parameter
+x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(211): warning C4100: 'point': unreferenced formal parameter
   Level.cpp
   Matrix2DStudent.cpp
   MeshHelper.cpp
@@ -18,13 +23,11 @@
   ResourceManager.cpp
   Serializable.cpp
   SoundManager.cpp
-  Space.cpp
   Compiling...
+  Space.cpp
   Sprite.cpp
   SpriteSource.cpp
-src\SpriteSource.cpp(77): warning C4458: declaration of 'texture' hides class member
-  C:\Users\jacob.holyfield\Documents\DigipenWanicProjectsYear2\CS230\CS230 Project5\HighLevelAPI\include\SpriteSource.h(106): note: see declaration of 'SpriteSource::texture'
-src\SpriteSource.cpp(126): warning C4244: 'argument': conversion from 'const unsigned int' to 'float', possible loss of data
+x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\spritesource.cpp(126): warning C4244: 'argument': conversion from 'const unsigned int' to 'float', possible loss of data
   SpriteText.cpp
   SpriteTilemap.cpp
   Tilemap.cpp
@@ -33,4 +36,4 @@ BetaLow_x64.lib(gdiplus.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already
 BetaLow_x64.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64.lib(RPCRT4.dll); second definition ignored
 fmodL64_vc.lib(fmodL64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64.lib(RPCRT4.dll); second definition ignored
 fmodstudioL64_vc.lib(fmodstudioL64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64.lib(RPCRT4.dll); second definition ignored
-  HighLevelAPI.vcxproj -> C:\Users\jacob.holyfield\Documents\DigipenWanicProjectsYear2\CS230\CS230 Project5\HighLevelAPI\\lib\BetaHigh_x64.lib
+  HighLevelAPI.vcxproj -> X:\_Dev\DigipenWanicProjectsYear2\CS230\CS230 Project5\HighLevelAPI\\lib\BetaHigh_x64.lib

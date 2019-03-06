@@ -112,6 +112,16 @@ public:
 	// Get the map collision handler function pointer.
 	MapCollisionEventHandler GetMapCollisionHandler() const;
 
+	// Save object data to file.
+	// Params:
+	//   parser = The parser object used to save the object's data.
+	void BaseSerialize(Parser& parser) const;
+
+	// Load object data from file
+	// Params:
+	//   parser = The parser object used to load the object's data.
+	void BaseDeserialize(Parser & parser);
+
 protected:
 	//------------------------------------------------------------------------------
 	// Protected Variables:
@@ -122,6 +132,22 @@ protected:
 	Physics* physics;
 
 private:
+
+	// C++ template to print vector container elements 
+	template <typename T>
+	std::string printVector(const std::vector<T>& v) const
+	{
+		std::string os;
+		for (int i = 0; i < v.size(); ++i) {
+			os + v[i];
+			if (i != v.size() - 1)
+				os + ",";
+		}
+		return os;
+	}
+
+	std::vector<std::string> explodeString(const std::string& str, const char& ch);
+
 	//------------------------------------------------------------------------------
 	// Private Variables:
 	//------------------------------------------------------------------------------
@@ -134,6 +160,12 @@ private:
 	
 	// Function pointer for tilemap collision handling
 	MapCollisionEventHandler mapHandler;
+
+	// The Group That This Collider Belongs To
+	std::string CollisionGroup;
+
+	// A List of strings that identify Collision Flags
+	std::vector<std::string> CollisionFlags;
 };
 
 //------------------------------------------------------------------------------

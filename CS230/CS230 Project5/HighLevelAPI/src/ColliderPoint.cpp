@@ -31,6 +31,16 @@ Component * ColliderPoint::Clone() const
 	return new ColliderPoint();
 }
 
+void ColliderPoint::Serialize(Parser & parser) const
+{
+	BaseSerialize(parser);
+}
+
+void ColliderPoint::Deserialize(Parser & parser)
+{
+	BaseDeserialize(parser);
+}
+
 void ColliderPoint::Draw()
 {
 	DebugDraw::GetInstance().AddCircle(transform->GetTranslation(), 10.0f, Graphics::GetInstance().GetCurrentCamera(), Color(0,1,0,1));

@@ -23,6 +23,8 @@ Ship
   }
   ColliderCircle
   {
+	CollisionGroup : ship
+	CollisionFlags : !bullet,asteroid,default
     radius : 20
   }
   Behaviors::PlayerShip

@@ -33,11 +33,15 @@ Component * ColliderCircle::Clone() const
 
 void ColliderCircle::Deserialize(Parser & parser)
 {
+	BaseDeserialize(parser);
+
 	parser.ReadVariable("radius", radius);
 }
 
 void ColliderCircle::Serialize(Parser & parser) const
 {
+	BaseSerialize(parser);
+
 	parser.WriteVariable("radius", radius);
 }
 

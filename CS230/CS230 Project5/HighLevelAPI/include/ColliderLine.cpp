@@ -69,6 +69,8 @@ bool ColliderLine::IsCollidingWith(const Collider & other) const
 
 void ColliderLine::Serialize(Parser & parser) const
 {
+	BaseSerialize(parser);
+
 	parser.WriteVariable("NumberOfLines", lineSegments.size());
 	for (size_t i = 0; i < lineSegments.size(); i++)
 	{
@@ -78,6 +80,8 @@ void ColliderLine::Serialize(Parser & parser) const
 
 void ColliderLine::Deserialize(Parser & parser)
 {
+	BaseDeserialize(parser);
+
 	unsigned numLines;
 	parser.ReadVariable("NumberOfLines", numLines);
 

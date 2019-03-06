@@ -23,6 +23,8 @@ Bullet
   }
   ColliderCircle
   {
+	CollisionGroup : bullet
+	CollisionFlags : !bullet,!line,!ship,default
     radius : 7
   }
   Behaviors::BulletMovement
