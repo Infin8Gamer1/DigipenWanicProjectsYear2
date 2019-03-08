@@ -72,16 +72,21 @@ void Levels::Omega::Initialize()
 {
 	std::cout << GetName() << "::Initialize" << std::endl;
 
-	GameObject* Ship = GameObjectFactory::GetInstance().CreateObject("Ship");
-	playerShip = Ship->GetComponent<Behaviors::PlayerShip>();
-	GetSpace()->GetObjectManager().AddObject(*Ship);
+	//arena setup
+	GameObject* walls = GameObjectFactory::GetInstance().CreateObject("Walls");
+	GetSpace()->GetObjectManager().AddObject(*walls);
+
+	Line = GameObjectFactory::GetInstance().CreateObject("Line");
+	GetSpace()->GetObjectManager().AddObject(*Line);
 
 	GameObject* text = GameObjectFactory::GetInstance().CreateObject("ScoreText");
 	scoreText = text->GetComponent<SpriteText>();
 	GetSpace()->GetObjectManager().AddObject(*text);
 
-	Line = GameObjectFactory::GetInstance().CreateObject("Line");
-	GetSpace()->GetObjectManager().AddObject(*Line);
+
+	GameObject* Ship = GameObjectFactory::GetInstance().CreateObject("Ship");
+	playerShip = Ship->GetComponent<Behaviors::PlayerShip>();
+	GetSpace()->GetObjectManager().AddObject(*Ship);
 
 	//play background music
 	musicChannel = soundManager->PlaySound("Asteroid Field");

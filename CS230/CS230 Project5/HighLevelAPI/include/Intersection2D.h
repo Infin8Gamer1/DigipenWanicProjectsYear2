@@ -89,6 +89,14 @@ bool MovingPointLineIntersection(const LineSegment& staticLine, const LineSegmen
 //  intersection = Intersection point of the line and circle. 
 void MovingPointLineReflection(Transform& transform, Physics& physics, const LineSegment& staticLine, const LineSegment& movingPoint, const Vector2D& intersection);
 
+// Reflects a point over a line.
+// Params:
+//   point = The point being reflected.
+//   line = The line the point will be reflected over.
+// Returns:
+//   The reflected point.
+Vector2D ReflectPointOverLine(const Vector2D& point, const LineSegment& line);
+
 // Checks whether a point is between two parallel lines.
 // Params:
 //   point = The point in question.
@@ -99,12 +107,16 @@ void MovingPointLineReflection(Transform& transform, Physics& physics, const Lin
 //   True if the point is between the two lines, false otherwise.
 bool PointIsBetweenLines(const Vector2D& point, const Vector2D& firstLine, const Vector2D& secondLine, const Vector2D& normal);
 
-// Reflects a point over a line.
+
+// Check whether a moving point and line intersect.
 // Params:
-//   point = The point being reflected.
-//   line = The line the point will be reflected over.
+//  staticLine   = Start and end of first line segment.
+//  movingPoint = Start and end of second line segment (usually a moving point).
+//  radius = the radius of the circle
+//  intersection = Intersection point, if any.
+//  t = The t value from the intersection calculation.
 // Returns:
-//   The reflected point.
-Vector2D ReflectPointOverLine(const Vector2D& point, const LineSegment& line);
+//   True if intersection, false otherwise.
+bool MovingCircleLineIntersection(const LineSegment& staticLine, const LineSegment& movingPoint, const float radius, Vector2D& intersection, float& t);
 
 //------------------------------------------------------------------------------

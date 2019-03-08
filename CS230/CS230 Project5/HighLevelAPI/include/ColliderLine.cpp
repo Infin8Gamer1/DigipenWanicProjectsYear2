@@ -12,6 +12,7 @@
 ColliderLine::ColliderLine(bool _reflection) : Collider(ColliderType::ColliderTypeLines)
 {
 	reflection = _reflection;
+	includeScale = true;
 }
 
 Component * ColliderLine::Clone() const
@@ -42,8 +43,8 @@ bool ColliderLine::IsCollidingWith(const Collider & other) const
 
 	switch (other.GetType())
 	{
-	case ColliderType::ColliderTypePoint:
 	case ColliderType::ColliderTypeCircle:
+	case ColliderType::ColliderTypePoint:
 
 		for (unsigned i = 0; i < lineSegments.size(); i++)
 		{
@@ -71,6 +72,9 @@ void ColliderLine::Serialize(Parser & parser) const
 {
 	BaseSerialize(parser);
 
+	parser.WriteVariable("LineTypeRelitive", includeScale);
+	parser.WriteVariable("Reflection", reflection);
+
 	parser.WriteVariable("NumberOfLines", lineSegments.size());
 	for (size_t i = 0; i < lineSegments.size(); i++)
 	{
@@ -81,6 +85,9 @@ void ColliderLine::Serialize(Parser & parser) const
 void ColliderLine::Deserialize(Parser & parser)
 {
 	BaseDeserialize(parser);
+
+	parser.ReadVariable("LineTypeRelitive", includeScale);
+	parser.ReadVariable("Reflection", reflection);
 
 	unsigned numLines;
 	parser.ReadVariable("NumberOfLines", numLines);
@@ -96,5 +103,17 @@ void ColliderLine::Deserialize(Parser & parser)
 
 LineSegment ColliderLine::GetLineWithTransform(unsigned index) const
 {
-	return LineSegment(lineSegments[index].start + transform->GetTranslation(), lineSegments[index].end + transform->GetTranslation());
+	Vector2D startPos = (lineSegments[index].start + transform->GetTranslation());
+
+	Vector2D endPos = (lineSegments[index].end + transform->GetTranslation());
+	
+	if (includeScale)
+	{
+		Vector2D scale = transform->GetScale();
+
+		startPos = Vector2D(startPos.x * scale.x, startPos.y * scale.y);
+		endPos = Vector2D(endPos.x * scale.x, endPos.y * scale.y);
+	}
+
+	return LineSegment(startPos, endPos);
 }

@@ -1,18 +1,7 @@
-﻿  stdafx.cpp
-  Archetypes.cpp
-  BulletMovement.cpp
-  ColorChange.cpp
-  Level2.cpp
-  Level1.cpp
-  Level3.cpp
-  Main.cpp
-  MonkeyMovement.cpp
-  Omega.cpp
-  PlayerShip.cpp
-  ScreenWrap.cpp
-  TimedDeath.cpp
-  Generating code
-  All 1451 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+﻿  Generating code
+  0 of 1453 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
 BetaHigh_x64.lib(Vertex.obj) : warning LNK4099: PDB 'BetaLow_x64.pdb' was not found with 'BetaHigh_x64.lib(Vertex.obj)' or at 'X:\_Dev\DigipenWanicProjectsYear2\CS230\CS230 Project5\x64\Release\BetaLow_x64.pdb'; linking object as if no debug info
 BetaHigh_x64.lib(Vector3D.obj) : warning LNK4099: PDB 'BetaLow_x64.pdb' was not found with 'BetaHigh_x64.lib(Vector3D.obj)' or at 'X:\_Dev\DigipenWanicProjectsYear2\CS230\CS230 Project5\x64\Release\BetaLow_x64.pdb'; linking object as if no debug info

@@ -46,15 +46,15 @@
     <OutDir>$(ProjectDir)\lib\</OutDir>
     <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>BetaHigh_x64_D</TargetName>
-    <IncludePath>..\LowLevelAPI\include;..\fmod\inc;include;src;$(IncludePath)</IncludePath>
-    <LibraryPath>..\LowLevelAPI\lib;..\fmod\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\LowLevelAPI\include;..\FMOD\inc;include;src;$(IncludePath)</IncludePath>
+    <LibraryPath>..\LowLevelAPI\lib;..\FMOD\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(ProjectDir)\lib\</OutDir>
     <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>BetaHigh_x64</TargetName>
-    <IncludePath>..\LowLevelAPI\include;..\fmod\inc;include;src;$(IncludePath)</IncludePath>
-    <LibraryPath>..\LowLevelAPI\lib;..\fmod\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\LowLevelAPI\include;..\FMOD\inc;include;src;$(IncludePath)</IncludePath>
+    <LibraryPath>..\LowLevelAPI\lib;..\FMOD\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

@@ -3,7 +3,7 @@ Ship
   numComponents : 5
   Transform
   {
-    translation : { 0, 0 }
+    translation : { -350, 0 }
     rotation : 0
     scale : { 30, 30 }
   }

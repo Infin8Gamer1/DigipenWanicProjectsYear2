@@ -85,6 +85,7 @@ public:
 	// Gets a line segment that incorporates the transform of the object
 	// Params:
 	//   index = The index of the line within the array of line segments.
+	//   includeScale = Weither or not to include scale in the calculations
 	LineSegment GetLineWithTransform(unsigned index) const;
 
 private:
@@ -98,6 +99,9 @@ private:
 
 	// Should the collider perform reflection
 	bool reflection;
+
+	// Should the line calculation include the objects scale
+	bool includeScale;
 };
 
 //------------------------------------------------------------------------------

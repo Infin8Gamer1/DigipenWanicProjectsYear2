@@ -1,38 +1,4 @@
-﻿  stdafx.cpp
-  ColliderLine.cpp
-  Animation.cpp
-  Collider.cpp
-  ColliderCircle.cpp
-  ColliderPoint.cpp
-  ColliderRectangle.cpp
-  ColliderTilemap.cpp
-  Component.cpp
-  GameObject.cpp
-  GameObjectFactory.cpp
-  GameObjectManager.cpp
-  Intersection2D.cpp
-x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(211): warning C4100: 'normal': unreferenced formal parameter
-x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(211): warning C4100: 'secondLine': unreferenced formal parameter
-x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(211): warning C4100: 'firstLine': unreferenced formal parameter
-x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\intersection2d.cpp(211): warning C4100: 'point': unreferenced formal parameter
-  Level.cpp
-  Matrix2DStudent.cpp
-  MeshHelper.cpp
-  Parser.cpp
-  Physics.cpp
-  ResourceManager.cpp
-  Serializable.cpp
-  SoundManager.cpp
-  Compiling...
-  Space.cpp
-  Sprite.cpp
-  SpriteSource.cpp
-x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\highlevelapi\src\spritesource.cpp(126): warning C4244: 'argument': conversion from 'const unsigned int' to 'float', possible loss of data
-  SpriteText.cpp
-  SpriteTilemap.cpp
-  Tilemap.cpp
-  Transform.cpp
-BetaLow_x64.lib(gdiplus.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64.lib(RPCRT4.dll); second definition ignored
+﻿BetaLow_x64.lib(gdiplus.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64.lib(RPCRT4.dll); second definition ignored
 BetaLow_x64.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64.lib(RPCRT4.dll); second definition ignored
 fmodL64_vc.lib(fmodL64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64.lib(RPCRT4.dll); second definition ignored
 fmodstudioL64_vc.lib(fmodstudioL64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64.lib(RPCRT4.dll); second definition ignored

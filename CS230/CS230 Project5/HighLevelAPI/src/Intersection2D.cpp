@@ -208,6 +208,11 @@ Vector2D ReflectPointOverLine(const Vector2D & point, const LineSegment & line)
 	return reflectedPoint;
 }
 
+bool MovingCircleLineIntersection(const LineSegment & staticLine, const LineSegment & movingPoint, const float radius, Vector2D & intersection, float & t)
+{
+	return false;
+}
+
 bool PointIsBetweenLines(const Vector2D & point, const Vector2D & firstLine, const Vector2D & secondLine, const Vector2D & normal)
 {
 	//////////////////////////////////////////////////////////////////////////////////
