@@ -35,7 +35,7 @@ typedef class Physics Physics;
 namespace Behaviors
 {
 
-	class BulletMovement : public Component
+	class Bullet : public Component
 	{
 	public:
 		//------------------------------------------------------------------------------
@@ -43,12 +43,12 @@ namespace Behaviors
 		//------------------------------------------------------------------------------
 
 		// Default constructor
-		BulletMovement();
+		Bullet();
 
 		// Non-default constructor
 		// Params:
 		//   timeUntilDeath = Amount of time until the object self-destructs.
-		BulletMovement(Vector2D Direction, float Speed);
+		Bullet(Vector2D Direction, float Speed, int Damage);
 
 		// Clone a component and return a pointer to the cloned component.
 		// Returns:
@@ -85,9 +85,13 @@ namespace Behaviors
 		//float timeUntilDeath;
 		Vector2D forceDirection;
 		float speed;
+		int damage;
 
-		// Number of objects with this component in existence
-		static unsigned instanceCount;
+		// The collision handling function for Asteroids.
+		// Params:
+		//	 asteroid = The asteroid.
+		//   otherObject = The other object.
+		static friend void CollisionHandlerBullet(GameObject& bullet, GameObject& other);
 	};
 }
 

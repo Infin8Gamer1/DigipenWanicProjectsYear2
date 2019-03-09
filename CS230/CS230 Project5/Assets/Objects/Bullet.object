@@ -24,12 +24,13 @@ Bullet
   ColliderCircle
   {
 	CollisionGroup : bullet
-	CollisionFlags : !bullet,!line,!ship,default
+	CollisionFlags : asteroid,!bullet,!line,!ship,default
     radius : 7
   }
-  Behaviors::BulletMovement
+  Behaviors::Bullet
   {
 	speed : 200
+	damage : 1
   }
   Behaviors::TimedDeath
   {

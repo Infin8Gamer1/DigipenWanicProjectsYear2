@@ -51,7 +51,7 @@ void Levels::Level1::Load()
 	System::GetInstance().SetWindowTitle(WindowTitle);
 
 	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::TimedDeath>();
-	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::BulletMovement>();
+	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::Bullet>();
 
 	GetSpace()->GetObjectManager().AddArchetype(*GameObjectFactory::GetInstance().CreateObject("Bullet"));
 

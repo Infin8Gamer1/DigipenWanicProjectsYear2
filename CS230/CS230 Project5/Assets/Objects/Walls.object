@@ -16,7 +16,7 @@ Walls
   ColliderLine
   {
 	CollisionGroup : line
-	CollisionFlags : default,bullet,ship,asteroid
+	CollisionFlags : default,bullet,ship,!asteroid
 	LineTypeRelitive : 1
 	Reflection : 1
 	NumberOfLines : 4

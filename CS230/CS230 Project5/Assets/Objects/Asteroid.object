@@ -5,7 +5,7 @@ Asteroid
   {
     translation : { 0, 0 }
     rotation : 0
-    scale : { 30, 30 }
+    scale : { 65, 65 }
   }
   Sprite
   {
@@ -24,8 +24,8 @@ Asteroid
   ColliderCircle
   {
     CollisionGroup : asteroid
-	CollisionFlags : !asteroid,default,ship,line
-	radius : 15
+	CollisionFlags : !asteroid,default,ship,line,bullet
+	radius : 33
   }
   Behaviors::Asteroid
   {

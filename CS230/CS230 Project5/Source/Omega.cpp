@@ -23,8 +23,10 @@
 #include "ScreenWrap.h"
 #include "BulletMovement.h"
 #include "TimedDeath.h"
+#include "Asteroid.h"
 #include <SpriteText.h>
 #include <Transform.h>
+#include <Physics.h>
 
 //Resources
 #include <Mesh.h>
@@ -38,12 +40,15 @@
 #include <MeshHelper.h>
 #include <Engine.h>
 #include <SoundManager.h>
+#include <Random.h>
 
 Levels::Omega::Omega() : Level("Omega")
 {
 	// Sound manager
 	soundManager = nullptr;
 	musicChannel = nullptr;
+
+	timer = 0;
 }
 
 void Levels::Omega::Load()
@@ -54,10 +59,13 @@ void Levels::Omega::Load()
 
 	//Register Custom Components
 	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::TimedDeath>();
-	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::BulletMovement>();
+	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::Bullet>();
 	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::PlayerShip>();
+	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::Asteroid>();
 
 	GetSpace()->GetObjectManager().AddArchetype(*GameObjectFactory::GetInstance().CreateObject("Bullet"));
+
+	GetSpace()->GetObjectManager().AddArchetype(*GameObjectFactory::GetInstance().CreateObject("Asteroid"));
 
 	//Setup Sounds
 	soundManager = Engine::GetInstance().GetModule<SoundManager>();
@@ -76,14 +84,14 @@ void Levels::Omega::Initialize()
 	GameObject* walls = GameObjectFactory::GetInstance().CreateObject("Walls");
 	GetSpace()->GetObjectManager().AddObject(*walls);
 
-	Line = GameObjectFactory::GetInstance().CreateObject("Line");
+	GameObject* Line = GameObjectFactory::GetInstance().CreateObject("Line");
 	GetSpace()->GetObjectManager().AddObject(*Line);
 
 	GameObject* text = GameObjectFactory::GetInstance().CreateObject("ScoreText");
 	scoreText = text->GetComponent<SpriteText>();
 	GetSpace()->GetObjectManager().AddObject(*text);
 
-
+	
 	GameObject* Ship = GameObjectFactory::GetInstance().CreateObject("Ship");
 	playerShip = Ship->GetComponent<Behaviors::PlayerShip>();
 	GetSpace()->GetObjectManager().AddObject(*Ship);
@@ -94,44 +102,33 @@ void Levels::Omega::Initialize()
 
 void Levels::Omega::Update(float dt)
 {
-	UNREFERENCED_PARAMETER(dt);
+	timer -= dt;
 
-	if (Input::GetInstance().CheckReleased('T')) {
-		soundManager->PlaySound("teleport.wav");
+	if (timer < 0) {
+		SpawnAsteroid();
+		timer = RandomRange(1.5f, 7.0f);
 	}
 
-	//Line->GetComponent<Transform>()->SetTranslation(Line->GetComponent<Transform>()->GetTranslation() + Vector2D(0.01f, 0));
-
-	SwitchLevels();
 	UpdateScore();
 }
 
 void Levels::Omega::SpawnAsteroid(void)
 {
-}
+	GameObject* newAsteroid = new GameObject(*GetSpace()->GetObjectManager().GetArchetypeByName("Asteroid"));
 
-void Levels::Omega::SpawnAsteroidWave(void)
-{
+	//newAsteroid->GetComponent<Behaviors::Asteroid>()->Spawn();
+
+	newAsteroid->GetComponent<Transform>()->SetTranslation(Vector2D(RandomRange(-500.0f, 500.0f), 400));
+
+	newAsteroid->GetComponent<Physics>()->SetVelocity(Vector2D(0, -newAsteroid->GetComponent<Behaviors::Asteroid>()->getRandSpeed()));
+
+	GetSpace()->GetObjectManager().AddObject(*newAsteroid);
 }
 
 void Levels::Omega::UpdateScore()
 {
 	std::string scoreString = "Score : " + std::to_string(playerShip->GetScore());
 	scoreText->SetText(scoreString);
-}
-
-void Levels::Omega::SwitchLevels()
-{
-	if (Input::GetInstance().CheckReleased('1')) {
-		GetSpace()->RestartLevel();
-	}
-	else if (Input::GetInstance().CheckReleased('2'))
-	{
-		GetSpace()->SetLevel<Levels::Level2>();
-	}
-	else if (Input::GetInstance().CheckReleased('3')) {
-		GetSpace()->SetLevel(new Levels::Level3());
-	}
 }
 
 void Levels::Omega::Shutdown()

@@ -78,6 +78,11 @@ void Behaviors::PlayerShip::Update(float dt)
 	if (Input::GetInstance().CheckReleased(' ')) {
 		Shoot();
 	}
+
+	if (Input::GetInstance().CheckReleased('T')) {
+		Engine::GetInstance().GetModule<SoundManager>()->PlaySound("teleport.wav");
+		Teleport();
+	}
 }
 
 void Behaviors::PlayerShip::Serialize(Parser & parser) const
@@ -135,12 +140,19 @@ void Behaviors::PlayerShip::Shoot()
 
 	force = force.Normalized();
 
-	newBullet->GetComponent<BulletMovement>()->SetDirection(force);
+	newBullet->GetComponent<Bullet>()->SetDirection(force);
 
 	newBullet->GetComponent<Transform>()->SetTranslation(transform->GetTranslation());
 	newBullet->GetComponent<Transform>()->SetRotation(transform->GetRotation());
 
 	GetOwner()->GetSpace()->GetObjectManager().AddObject(*newBullet);
+}
+
+void Behaviors::PlayerShip::Teleport()
+{
+	Vector2D MousePos = Graphics::GetInstance().ScreenToWorldPosition(Input::GetInstance().GetCursorPosition());
+
+	transform->SetTranslation(MousePos);
 }
 
 void Behaviors::PlayerShip::DeathSequence(float dt)

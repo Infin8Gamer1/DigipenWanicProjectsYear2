@@ -28,6 +28,12 @@
 class Component;
 class Space;
 
+// Function pointer for Damage event handlers.
+// Params:
+//   callingObject = The object whose handler is being called.
+//   otherObject = The other object that the object collided with.
+typedef void(*DamageEventHandler)(int ammount, std::string type, GameObject& damageCauser, GameObject& damageTaker);
+
 //------------------------------------------------------------------------------
 // Public Structures:
 //------------------------------------------------------------------------------
@@ -137,6 +143,18 @@ public:
 	// Get the space that contains this object.
 	Space* GetSpace() const;
 
+	// Sets the damage handler function for the Game Object
+	void setDamageHandler(DamageEventHandler handler);
+
+	// Deal Damage to this Gameobject
+	static void DealDamage(GameObject& damegedGO, GameObject& damageCauser, int ammount, std::string damageType = "Default");
+
+	// Get the health of this gameobject
+	int getHealth();
+
+	// Set the health of this gameobject
+	void setHealth(int Health);
+
 private:
 	//------------------------------------------------------------------------------
 	// Private Variables:
@@ -145,8 +163,13 @@ private:
 	// Components
 	std::vector<Component*> components;
 
+	DamageEventHandler damageHandler;
+
 	// Whether the object has been marked for destruction.
 	bool isDestroyed;
+
+	// the health of this object
+	int Health;
 };
 
 //------------------------------------------------------------------------------

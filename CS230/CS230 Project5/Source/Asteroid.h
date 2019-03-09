@@ -48,8 +48,7 @@ namespace Behaviors
 		//   basePointsValue = Point value for largest asteroid.
 		//   sizePointsModifier = Multiplicative scale applied to points for smaller asteroids.
 		//   spawnScaleModifier = Percentage of original asteroid's scale to use for new asteroids.
-		Asteroid(float speedMin = 50.0f, float speedMax = 100.0f, unsigned basePointsValue = 20,
-			float sizePointsModifier = 0.5f, float spawnScaleModifier = 0.8f);
+		Asteroid(float speedMin = 50.0f, float speedMax = 100.0f);
 
 		// Clone a component and return a pointer to the cloned component.
 		// Returns:
@@ -59,38 +58,20 @@ namespace Behaviors
 		// Initialize this component (happens at object creation).
 		void Initialize() override;
 
-		// Write object data to file
+		// Update function for this component.
 		// Params:
-		//   parser = The parser that is writing this object to a file.
-		void Serialize(Parser& parser) const override;
+		//   dt = The (fixed) change in time since the last step.
+		void Update(float dt) override;
 
-		// Read object data from a file
-		// Params:
-		//   parser = The parser that is reading this object's data from a file.
-		void Deserialize(Parser& parser) override;
-
-		// Get the value of this object for increasing the player's score.
-		unsigned GetPointValue() const;
+		float getRandSpeed();
 
 	private:
 		//------------------------------------------------------------------------------
 		// Private Functions:
 		//------------------------------------------------------------------------------
 
-		// The collision handling function for Asteroids.
-		// Params:
-		//	 asteroid = The asteroid.
-		//   otherObject = The other object.
-		static friend void CollisionHandlerAsteroid(GameObject& asteroid, GameObject& otherObject);
-
-		// Set position of asteroid based on origin
-		void SetPosition();
-
-		// Set velocity based on size
-		void SetVelocity();
-
-		// Generate new asteroids based off this asteroid
-		void SpawnNewAsteroids();
+		// The damage handling function for Asteroids.
+		static friend void DamageHandlerAsteroid(int ammount, std::string type, GameObject& damageCauser, GameObject& damageTaker);
 
 		//------------------------------------------------------------------------------
 		// Private Structures:
@@ -103,14 +84,6 @@ namespace Behaviors
 			SizeLarge,
 		};
 
-		enum Location
-		{
-			LocationTopLeft,
-			LocationTopRight,
-			LocationBottomLeft,
-			LocationBottomRight,
-		};
-
 		//------------------------------------------------------------------------------
 		// Private Variables:
 		//------------------------------------------------------------------------------
@@ -118,17 +91,12 @@ namespace Behaviors
 		// Properties (save to/load from file)
 		float speedMin;
 		float speedMax;
-		unsigned basePointsValue;
-		float sizePointsModifier;
-		float spawnScaleModifier;
 
 		// Other variables
 		Size size;
-		Location location;
 
 		// Components
 		Transform* transform;
-		Physics* physics;
 	};
 }
 

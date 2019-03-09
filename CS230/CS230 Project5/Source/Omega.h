@@ -80,9 +80,6 @@ namespace Levels
 		// Update the score string
 		void UpdateScore();
 
-		// Switch levels when keys are pressed
-		void SwitchLevels();
-
 		//------------------------------------------------------------------------------
 		// Private Variables:
 		//------------------------------------------------------------------------------
@@ -107,7 +104,7 @@ namespace Levels
 		SoundManager* soundManager;
 		FMOD::Channel* musicChannel;
 
-		GameObject* Line;
+		float timer = 0;
 
 		//// Resources
 		//Mesh* mesh;

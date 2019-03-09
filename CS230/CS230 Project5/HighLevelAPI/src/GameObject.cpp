@@ -170,3 +170,26 @@ Space * GameObject::GetSpace() const
 {
 	return static_cast<Space*>(GetParent());
 }
+
+void GameObject::setDamageHandler(DamageEventHandler handler)
+{
+	damageHandler = handler;
+}
+
+void GameObject::DealDamage(GameObject & damegedGO, GameObject & damageCauser, int ammount, std::string damageType)
+{
+	if (damegedGO.damageHandler == nullptr) {
+		return;
+	}
+
+	damegedGO.damageHandler(ammount, damageType, damageCauser, damegedGO);
+}
+
+int GameObject::getHealth()
+{
+	return Health;
+}
+
+void GameObject::setHealth(int _health) {
+	Health = _health;
+}

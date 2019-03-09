@@ -95,6 +95,9 @@ namespace Behaviors
 		// Shoot projectiles when space is pressed
 		void Shoot();
 
+		// Teleport to the mouse position
+		void Teleport();
+
 		// Play death "animation"
 		void DeathSequence(float dt);
 
