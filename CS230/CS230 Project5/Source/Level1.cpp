@@ -98,7 +98,7 @@ void Levels::Level1::Update(float dt)
 		GetSpace()->SetLevel<Levels::Level2>();
 	}
 	else if (Input::GetInstance().CheckReleased('3')) {
-		GetSpace()->SetLevel(new Levels::Level3());
+		GetSpace()->SetLevel<Levels::Level3>();
 	}
 }
 

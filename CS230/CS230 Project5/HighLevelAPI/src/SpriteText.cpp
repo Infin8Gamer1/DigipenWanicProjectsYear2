@@ -64,6 +64,12 @@ void SpriteText::Deserialize(Parser & parser)
 	
 	parser.ReadVariable("text", text);
 
+	std::string::size_type pos = 0;
+	while ((pos = text.find("\\n", pos)) != std::string::npos)
+	{
+		text.replace(pos, 2, "\n");
+	}
+
 	int hor;
 	parser.ReadVariable("horizontalAlignment", hor);
 	horizontalAlignment = static_cast<Alignment>(hor);

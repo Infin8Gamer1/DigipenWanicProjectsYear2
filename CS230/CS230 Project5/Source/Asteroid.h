@@ -48,7 +48,7 @@ namespace Behaviors
 		//   basePointsValue = Point value for largest asteroid.
 		//   sizePointsModifier = Multiplicative scale applied to points for smaller asteroids.
 		//   spawnScaleModifier = Percentage of original asteroid's scale to use for new asteroids.
-		Asteroid(float speedMin = 50.0f, float speedMax = 100.0f);
+		Asteroid(float speedMin = 50.0f, float speedMax = 100.0f, float strafeSpeedMin = -60.0f, float strafeSpeedMax = 60.0f, float sizeChangePerHit = 0.7);
 
 		// Clone a component and return a pointer to the cloned component.
 		// Returns:
@@ -58,12 +58,20 @@ namespace Behaviors
 		// Initialize this component (happens at object creation).
 		void Initialize() override;
 
+		// Loads object data from a file.
+		void Deserialize(Parser& parser) override;
+
+		// Saves object data to a file.
+		void Serialize(Parser& parser) const override;
+
 		// Update function for this component.
 		// Params:
 		//   dt = The (fixed) change in time since the last step.
 		void Update(float dt) override;
 
 		float getRandSpeed();
+
+		float getRandStrafeSpeed();
 
 	private:
 		//------------------------------------------------------------------------------
@@ -74,26 +82,15 @@ namespace Behaviors
 		static friend void DamageHandlerAsteroid(int ammount, std::string type, GameObject& damageCauser, GameObject& damageTaker);
 
 		//------------------------------------------------------------------------------
-		// Private Structures:
-		//------------------------------------------------------------------------------
-
-		enum Size
-		{
-			SizeSmall,
-			SizeMedium,
-			SizeLarge,
-		};
-
-		//------------------------------------------------------------------------------
 		// Private Variables:
 		//------------------------------------------------------------------------------
 
 		// Properties (save to/load from file)
 		float speedMin;
 		float speedMax;
-
-		// Other variables
-		Size size;
+		float strafeSpeedMin;
+		float strafeSpeedMax;
+		float sizeChangePerHit;
 
 		// Components
 		Transform* transform;

@@ -91,7 +91,9 @@ void Levels::Omega::Initialize()
 	scoreText = text->GetComponent<SpriteText>();
 	GetSpace()->GetObjectManager().AddObject(*text);
 
-	
+	GameObject* instructionText = GameObjectFactory::GetInstance().CreateObject("Instructions");
+	GetSpace()->GetObjectManager().AddObject(*instructionText);
+
 	GameObject* Ship = GameObjectFactory::GetInstance().CreateObject("Ship");
 	playerShip = Ship->GetComponent<Behaviors::PlayerShip>();
 	GetSpace()->GetObjectManager().AddObject(*Ship);
@@ -106,7 +108,7 @@ void Levels::Omega::Update(float dt)
 
 	if (timer < 0) {
 		SpawnAsteroid();
-		timer = RandomRange(1.5f, 7.0f);
+		timer = RandomRange(0.2f, 3.0f);
 	}
 
 	UpdateScore();
@@ -116,11 +118,11 @@ void Levels::Omega::SpawnAsteroid(void)
 {
 	GameObject* newAsteroid = new GameObject(*GetSpace()->GetObjectManager().GetArchetypeByName("Asteroid"));
 
-	//newAsteroid->GetComponent<Behaviors::Asteroid>()->Spawn();
-
 	newAsteroid->GetComponent<Transform>()->SetTranslation(Vector2D(RandomRange(-500.0f, 500.0f), 400));
 
-	newAsteroid->GetComponent<Physics>()->SetVelocity(Vector2D(0, -newAsteroid->GetComponent<Behaviors::Asteroid>()->getRandSpeed()));
+	Behaviors::Asteroid* asteroidComp = newAsteroid->GetComponent<Behaviors::Asteroid>();
+
+	newAsteroid->GetComponent<Physics>()->SetVelocity(Vector2D(asteroidComp->getRandStrafeSpeed(), -asteroidComp->getRandSpeed()));
 
 	GetSpace()->GetObjectManager().AddObject(*newAsteroid);
 }

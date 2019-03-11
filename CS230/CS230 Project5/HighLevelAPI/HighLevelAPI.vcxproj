@@ -115,11 +115,9 @@
     <ClInclude Include="include\stdafx.h" />
     <ClInclude Include="include\Tilemap.h" />
     <ClInclude Include="include\Transform.h" />
-    <ClInclude Include="Random.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\ColliderLine.cpp" />
-    <ClCompile Include="Random.cpp" />
     <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\Collider.cpp" />
     <ClCompile Include="src\ColliderCircle.cpp" />

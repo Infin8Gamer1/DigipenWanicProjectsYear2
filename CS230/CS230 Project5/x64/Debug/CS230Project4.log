@@ -1,10 +1,7 @@
-﻿  Asteroid.cpp
-x:\_dev\digipenwanicprojectsyear2\cs230\cs230 project5\source\asteroid.cpp(43): warning C4100: 'dt': unreferenced formal parameter
-  Omega.cpp
-  Generating Code...
+﻿  PlayerShip.cpp
   CS230Project4.vcxproj -> X:\_Dev\DigipenWanicProjectsYear2\CS230\CS230 Project5\\x64\Debug\BetaFramework.exe
-  File not found - glfw3.dll
   0 File(s) copied
+  File not found - glfw3.dll
   fmod\lib\fmodL64.dll
   1 File(s) copied
   fmod\lib\fmodstudioL64.dll

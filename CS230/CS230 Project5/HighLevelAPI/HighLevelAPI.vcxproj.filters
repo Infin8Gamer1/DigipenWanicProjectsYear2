@@ -121,9 +121,6 @@
     <ClInclude Include="include\ColliderLine.h">
       <Filter>Collisions</Filter>
     </ClInclude>
-    <ClInclude Include="Random.h">
-      <Filter>Math</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\stdafx.cpp">
@@ -209,9 +206,6 @@
     </ClCompile>
     <ClCompile Include="include\ColliderLine.cpp">
       <Filter>Collisions</Filter>
-    </ClCompile>
-    <ClCompile Include="Random.cpp">
-      <Filter>Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

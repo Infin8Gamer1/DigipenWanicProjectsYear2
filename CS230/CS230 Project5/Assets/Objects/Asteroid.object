@@ -29,5 +29,8 @@ Asteroid
   }
   Behaviors::Asteroid
   {
+	minSpeed : 75
+	maxSpeed : 125
+	sizeChangePerHit : 0.7
   }
 }

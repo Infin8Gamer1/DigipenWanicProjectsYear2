@@ -25,6 +25,7 @@
 
 class Transform;
 class Physics;
+class Sprite;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -99,13 +100,16 @@ namespace Behaviors
 		void Teleport();
 
 		// Play death "animation"
-		void DeathSequence(float dt);
+		void PlayDeathSequence();
 
 		// Collision start event handler.
 		// Params:
 		//	 ship = The player ship.
 		//   otherObject = The other object.
 		static friend void CollisionHandlerShip(GameObject& ship, GameObject& otherObject);
+
+		// The damage handling function for Asteroids.
+		static friend void DamageHandlerShip(int ammount, std::string type, GameObject& damageCauser, GameObject& damageTaker);
 
 		//------------------------------------------------------------------------------
 		// Private Variables:
@@ -123,9 +127,13 @@ namespace Behaviors
 		// Components
 		Transform* transform;
 		Physics* physics;
+		Sprite* sprite;
 
 		// Other variables
 		float timer;
+		int counter;
+		float startAlpha;
+		float endAlpha;
 		bool isDying;
 		unsigned score;
 	};

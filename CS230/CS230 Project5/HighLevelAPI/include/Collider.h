@@ -122,6 +122,10 @@ public:
 	//   parser = The parser object used to load the object's data.
 	void BaseDeserialize(Parser & parser);
 
+	void Disable();
+
+	void Enable();
+
 protected:
 	//------------------------------------------------------------------------------
 	// Protected Variables:
@@ -160,6 +164,8 @@ private:
 	
 	// Function pointer for tilemap collision handling
 	MapCollisionEventHandler mapHandler;
+
+	bool enabled;
 
 	// The Group That This Collider Belongs To
 	std::string CollisionGroup;

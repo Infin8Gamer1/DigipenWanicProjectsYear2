@@ -22,6 +22,30 @@
 #include <Collider.h>
 #include <GameObjectManager.h>
 #include "BulletMovement.h"
+#include <Sprite.h>
+#include "Omega.h"
+
+void Behaviors::CollisionHandlerShip(GameObject & ship, GameObject & otherObject)
+{
+	if (otherObject.GetName() == "Asteroid") {
+		//deal damage to the asteroid
+		GameObject::DealDamage(otherObject, ship, 1);
+		//deal damage to our ship
+		GameObject::DealDamage(ship, otherObject, 100);
+	}
+}
+
+void Behaviors::DamageHandlerShip(int ammount, std::string type, GameObject & damageCauser, GameObject & damageTaker)
+{
+	UNREFERENCED_PARAMETER(damageCauser);
+	UNREFERENCED_PARAMETER(ammount);
+
+	damageTaker.setHealth(0);
+
+	damageTaker.GetComponent<Behaviors::PlayerShip>()->PlayDeathSequence();
+
+	damageTaker.GetComponent<Collider>()->Disable();
+}
 
 Behaviors::PlayerShip::PlayerShip(float _forwardThrust, float _maximumSpeed, float _rotationSpeed, float _deathDuration) : Component("PlayerShip")
 {
@@ -34,12 +58,14 @@ Behaviors::PlayerShip::PlayerShip(float _forwardThrust, float _maximumSpeed, flo
 	// Components
 	transform = nullptr;
 	physics = nullptr;
+	sprite = nullptr;
 
 	//other
 	//soundEvent = nullptr;
 
 	// Other variables
 	timer = 0;
+	counter = 0;
 	isDying = false;
 	score = 0;
 }
@@ -49,18 +75,14 @@ Component * Behaviors::PlayerShip::Clone() const
 	return new PlayerShip(forwardThrust, maximumSpeed, rotationSpeed, deathDuration);
 }
 
-void Behaviors::CollisionHandlerShip(GameObject & ship, GameObject & otherObject)
-{
-	UNREFERENCED_PARAMETER(ship);
-	UNREFERENCED_PARAMETER(otherObject);
-}
-
 void Behaviors::PlayerShip::Initialize()
 {
 	transform = GetOwner()->GetComponent<Transform>();
 	physics = GetOwner()->GetComponent<Physics>();
+	sprite = GetOwner()->GetComponent<Sprite>();
 
 	GetOwner()->GetComponent<Collider>()->SetCollisionHandler(CollisionHandlerShip);
+	GetOwner()->setDamageHandler(DamageHandlerShip);
 
 	/*soundEvent = Engine::GetInstance().GetModule<SoundManager>()->PlayEvent("Test Tones");
 	soundEvent->setPaused(true);
@@ -71,18 +93,51 @@ void Behaviors::PlayerShip::Initialize()
 
 void Behaviors::PlayerShip::Update(float dt)
 {
-	UNREFERENCED_PARAMETER(dt);
-	Move();
-	Rotate();
+	if (!isDying) {
+		Move();
+		Rotate();
 
-	if (Input::GetInstance().CheckReleased(' ')) {
-		Shoot();
-	}
+		if (Input::GetInstance().CheckReleased(' ')) {
+			Shoot();
+		}
 
-	if (Input::GetInstance().CheckReleased('T')) {
-		Engine::GetInstance().GetModule<SoundManager>()->PlaySound("teleport.wav");
-		Teleport();
+		if (Input::GetInstance().CheckReleased('T')) {
+			Engine::GetInstance().GetModule<SoundManager>()->PlaySound("teleport.wav");
+			Teleport();
+		}
 	}
+	else {
+		timer += dt;
+
+		physics->SetAngularVelocity(4.5f);
+
+		if (counter % 2 == 0) {
+			startAlpha = 1.0f;
+			endAlpha = 0.05f;
+		}
+		else
+		{
+			startAlpha = 0.05f;
+			endAlpha = 1.0f;
+		}
+
+		float percent = timer / 0.45f;
+		float alpha = startAlpha + percent * (endAlpha - startAlpha);
+
+		sprite->SetAlpha(alpha);
+
+		if (timer > 0.45f)
+		{
+			timer = 0;
+			counter++;
+		}
+
+		if (counter > 4) {
+			//restart the game
+			GetOwner()->GetSpace()->SetLevel<Levels::Omega>();
+		}
+	}
+	
 }
 
 void Behaviors::PlayerShip::Serialize(Parser & parser) const
@@ -155,9 +210,9 @@ void Behaviors::PlayerShip::Teleport()
 	transform->SetTranslation(MousePos);
 }
 
-void Behaviors::PlayerShip::DeathSequence(float dt)
+void Behaviors::PlayerShip::PlayDeathSequence()
 {
-	UNREFERENCED_PARAMETER(dt);
+	isDying = true;
 }
 
 

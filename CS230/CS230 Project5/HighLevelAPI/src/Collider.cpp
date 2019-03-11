@@ -19,7 +19,11 @@
 Collider::Collider(ColliderType _type) : Component("Collider")
 {
 	type = _type;
+
+	enabled = true;
+
 	handler = nullptr;
+	mapHandler = nullptr;
 }
 
 void Collider::Initialize()
@@ -30,6 +34,10 @@ void Collider::Initialize()
 
 void Collider::CheckCollision(const Collider & other)
 {
+	if (!enabled || !other.enabled) {
+		return;
+	}
+	
 	bool canCollide = false;
 	//if the flag all is in the flags or the flags are empty then collide
 	if (std::find(CollisionFlags.begin(), CollisionFlags.end(), "all") != CollisionFlags.end() || CollisionFlags.empty()) {
@@ -107,6 +115,16 @@ void Collider::BaseDeserialize(Parser & parser)
 	parser.ReadVariable("CollisionFlags", collisionGroupsString);
 
 	CollisionFlags = explodeString(collisionGroupsString, ',');
+}
+
+void Collider::Disable()
+{
+	enabled = false;
+}
+
+void Collider::Enable()
+{
+	enabled = true;
 }
 
 MapCollision::MapCollision(bool _bottom, bool _top, bool _left, bool _right)
