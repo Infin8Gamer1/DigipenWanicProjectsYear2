@@ -83,7 +83,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>BetaLow_x64.lib;fmodL64_vc.lib;fmodstudioL64_vc.lib</AdditionalDependencies>
+      <AdditionalDependencies>BetaLow_x64.lib;fmod64_vc.lib;fmodstudio64_vc.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>

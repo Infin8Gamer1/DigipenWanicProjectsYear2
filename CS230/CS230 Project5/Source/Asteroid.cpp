@@ -67,6 +67,8 @@ void Behaviors::Asteroid::Serialize(Parser & parser) const
 
 void Behaviors::Asteroid::Update(float dt)
 {
+	UNREFERENCED_PARAMETER(dt);
+
 	//check if the asteroid is still in the arena and if it isn't then destroy it with fire and death
 	if (transform->GetTranslation().y < -450 || transform->GetTranslation().y > 600) {
 		GetOwner()->Destroy();

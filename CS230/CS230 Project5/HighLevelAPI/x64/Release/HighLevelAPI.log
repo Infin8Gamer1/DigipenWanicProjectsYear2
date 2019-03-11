@@ -1,5 +1,5 @@
 ﻿BetaLow_x64.lib(gdiplus.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64.lib(RPCRT4.dll); second definition ignored
 BetaLow_x64.lib(OPENGL32.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64.lib(RPCRT4.dll); second definition ignored
-fmodL64_vc.lib(fmodL64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64.lib(RPCRT4.dll); second definition ignored
-fmodstudioL64_vc.lib(fmodstudioL64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64.lib(RPCRT4.dll); second definition ignored
-  HighLevelAPI.vcxproj -> X:\_Dev\DigipenWanicProjectsYear2\CS230\CS230 Project5\HighLevelAPI\\lib\BetaHigh_x64.lib
+fmod64_vc.lib(fmod64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64.lib(RPCRT4.dll); second definition ignored
+fmodstudio64_vc.lib(fmodstudio64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64.lib(RPCRT4.dll); second definition ignored
+  HighLevelAPI.vcxproj -> C:\Users\jacob.holyfield\Documents\DigipenWanicProjectsYear2\CS230\CS230 Project5\HighLevelAPI\\lib\BetaHigh_x64.lib
