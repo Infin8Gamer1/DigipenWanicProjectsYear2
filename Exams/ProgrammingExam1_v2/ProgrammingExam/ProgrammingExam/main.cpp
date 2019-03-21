@@ -1,6 +1,6 @@
 #include "MyArray.h"
 
-static void PrintArrayWithStats(const char *array_name_, myArray a_)
+static void PrintArrayWithStats(const char *array_name_, const myArray& a_)
 {
     std::cout << array_name_ << "'s capacity = " << a_.get_capacity() << std::endl;
     std::cout << array_name_ << "'s size = " << a_.get_size() << std::endl;
@@ -13,11 +13,11 @@ void Test1(void)
 
     PrintArrayWithStats("a1", a1);
     std::cout << std::endl;
-    
+
     a1.push(10);
     PrintArrayWithStats("a1", a1);
     std::cout << std::endl;
-    
+
     a1.push(20);
     PrintArrayWithStats("a1", a1);
     std::cout << std::endl;
@@ -26,7 +26,7 @@ void Test1(void)
     PrintArrayWithStats("a1", a1);
     std::cout << std::endl;
 
-    for (int i = 0; i < 5; ++i)
+    /*for (int i = 0; i < 5; ++i)
     {
         a1.pop();
     }
@@ -38,10 +38,10 @@ void Test1(void)
         a1.push(i);
     }
     PrintArrayWithStats("a1", a1);
-    std::cout << std::endl;
+    std::cout << std::endl;*/
 }
 
-void Test2(void)
+/*void Test2(void)
 {
     myArray a1;
 
@@ -118,8 +118,8 @@ void Test3(void)
     const myArray a5 = a1 + a3;
     PrintArrayWithStats("a5", a5);
     std::cout << std::endl;
-    
-    
+
+
     std::cout << "a6 = a5 + a4:" << std::endl;
     std::cout << "==============" << std::endl;
     myArray a6 = a5 + a4;
@@ -187,7 +187,7 @@ void Test4(void)
 
     //Should not compile
     //a4 += a2;
-    
+
 
     std::cout << "Printing all arrays:" << std::endl;
     std::cout << "=====================" << std::endl;
@@ -200,14 +200,15 @@ void Test4(void)
     PrintArrayWithStats("a4", a4);
     std::cout << std::endl;
 
-}
+}*/
 
 int main(void)
 {
-    //Test1();
+    Test1();
     //Test2();
-    Test3();
+    //Test3();
     //Test4();
 
+    //system("pause");
     return 0;
 }

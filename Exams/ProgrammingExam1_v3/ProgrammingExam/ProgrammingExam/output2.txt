@@ -1,0 +1,4 @@
+a1's capacity = 1
+a1's size = 0
+
+

@@ -3,8 +3,8 @@
 myArray::myArray()
 {
     size = 0;
-    capacity = 1;
-    numbers = new int[1];
+    capacity = 0;
+    numbers = nullptr;
 }
 
 int myArray::get_capacity(void) const
@@ -19,6 +19,14 @@ int myArray::get_size(void) const
 
 void myArray::push(int input)
 {
+	size += 1;
+
+	if (size > capacity)
+	{
+		growArray();
+	}
+
+	numbers[size - 1] = input;
 }
 
 void myArray::growArray()
@@ -49,7 +57,10 @@ std::ostream & operator<<(std::ostream & output, const myArray & m_Array)
 	// TODO: insert return statement here
 	for (int i = 0; i < m_Array.size; i++)
 	{
-		output << m_Array.numbers[i] << ", ";
+		output << m_Array.numbers[i] << " ";
 	}
+
+	output << std::endl;
+
 	return output;
 }

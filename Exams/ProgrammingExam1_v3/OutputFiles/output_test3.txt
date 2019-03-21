@@ -12,19 +12,19 @@ a3's size = 3
 
 a4 = a1 + a2:
 ==============
-a4's capacity = 8
+a4's capacity = 7
 a4's size = 7
 1 5 9 13 17 11 13 
 
 a5 = a1 + a3:
 ==============
-a5's capacity = 8
+a5's capacity = 5
 a5's size = 5
 -1 4 9 6 8 
 
 a6 = a5 + a4:
 ==============
-a6's capacity = 8
+a6's capacity = 7
 a6's size = 7
 0 9 18 19 25 11 13 
 
@@ -42,15 +42,15 @@ a3's capacity = 4
 a3's size = 3
 -1 2 5 
 
-a4's capacity = 8
+a4's capacity = 7
 a4's size = 7
 1 5 9 13 17 11 13 
 
-a5's capacity = 8
+a5's capacity = 5
 a5's size = 5
 -1 4 9 6 8 
 
-a6's capacity = 8
+a6's capacity = 7
 a6's size = 7
 0 9 18 19 25 11 13 
 
