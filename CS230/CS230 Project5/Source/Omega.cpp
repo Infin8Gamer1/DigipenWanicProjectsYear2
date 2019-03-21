@@ -9,6 +9,8 @@
 //
 //------------------------------------------------------------------------------
 
+//NOTE : Sound Stuff is commented out to save in upload size when submiting
+
 #include "stdafx.h"
 #include <Space.h>
 #include "Omega.h"
@@ -39,14 +41,14 @@
 #include <Input.h>
 #include <MeshHelper.h>
 #include <Engine.h>
-#include <SoundManager.h>
+//#include <SoundManager.h>
 #include <Random.h>
 
 Levels::Omega::Omega() : Level("Omega")
 {
-	// Sound manager
+	/*// Sound manager
 	soundManager = nullptr;
-	musicChannel = nullptr;
+	musicChannel = nullptr;*/
 
 	timer = 0;
 }
@@ -67,13 +69,13 @@ void Levels::Omega::Load()
 
 	GetSpace()->GetObjectManager().AddArchetype(*GameObjectFactory::GetInstance().CreateObject("Asteroid"));
 
-	//Setup Sounds
+	/*//Setup Sounds
 	soundManager = Engine::GetInstance().GetModule<SoundManager>();
 	soundManager->AddMusic("Asteroid_Field.mp3");
 	soundManager->AddEffect("teleport.wav");
 
 	soundManager->AddBank("Master Bank.strings.bank");
-	soundManager->AddBank("Master Bank.bank");
+	soundManager->AddBank("Master Bank.bank");*/
 }
 
 void Levels::Omega::Initialize()
@@ -98,8 +100,8 @@ void Levels::Omega::Initialize()
 	playerShip = Ship->GetComponent<Behaviors::PlayerShip>();
 	GetSpace()->GetObjectManager().AddObject(*Ship);
 
-	//play background music
-	musicChannel = soundManager->PlaySound("Asteroid Field");
+	/*//play background music
+	musicChannel = soundManager->PlaySound("Asteroid Field");*/
 }
 
 void Levels::Omega::Update(float dt)
@@ -137,8 +139,8 @@ void Levels::Omega::Shutdown()
 {
 	std::cout << GetName() << "::Shutdown" << std::endl;
 
-	musicChannel->stop();
-	musicChannel = nullptr;
+	/*musicChannel->stop();
+	musicChannel = nullptr;*/
 }
 
 void Levels::Omega::Unload()
@@ -147,5 +149,5 @@ void Levels::Omega::Unload()
 
 	ResourceManager::GetInstance().Shutdown();
 
-	soundManager->Shutdown();
+	//soundManager->Shutdown();
 }
