@@ -17,7 +17,7 @@
 #include "Space.h"
 #include <Graphics.h>
 #include <Input.h>
-#include "SoundManager.h"
+//#include "SoundManager.h"
 #include <Engine.h>
 #include <Collider.h>
 #include <GameObjectManager.h>
@@ -102,7 +102,7 @@ void Behaviors::PlayerShip::Update(float dt)
 		}
 
 		if (Input::GetInstance().CheckReleased('T')) {
-			Engine::GetInstance().GetModule<SoundManager>()->PlaySound("teleport.wav");
+			//Engine::GetInstance().GetModule<SoundManager>()->PlaySound("teleport.wav");
 			Teleport();
 		}
 	}

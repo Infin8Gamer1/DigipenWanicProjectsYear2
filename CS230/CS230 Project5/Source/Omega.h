@@ -31,7 +31,7 @@
 class Mesh;
 class SpriteSource;
 class Texture;
-class SoundManager;
+//class SoundManager;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -74,9 +74,6 @@ namespace Levels
 		// Create a single asteroid object from the archetype
 		void SpawnAsteroid(void);
 
-		// Create a group of asteroids
-		void SpawnAsteroidWave(void);
-
 		// Update the score string
 		void UpdateScore();
 
@@ -100,9 +97,9 @@ namespace Levels
 		// Window Title
 		const std::string WindowTitle = "Omega";
 
-		// Sound manager
+		/*// Sound manager
 		SoundManager* soundManager;
-		FMOD::Channel* musicChannel;
+		FMOD::Channel* musicChannel;*/
 
 		float timer = 0;
 
