@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Precompiled">
+      <UniqueIdentifier>{c54e400a-0b22-4fb9-ad4a-68aaa9abc7ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{d6a6b6cd-f9a5-4355-88ae-c73c49b1ecae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Components">
+      <UniqueIdentifier>{d61db114-734b-443c-abd2-cf881a2452de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Levels">
+      <UniqueIdentifier>{eb42e325-6dc2-4ec9-a38c-fed4827f3174}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Effects">
+      <UniqueIdentifier>{5c35aa79-a0ae-47c3-bb8c-4c1871a90fd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Effects\ColorInverter">
+      <UniqueIdentifier>{99642423-526d-48e4-8ca6-1048453cdb99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Effects\FadeToBlack">
+      <UniqueIdentifier>{ef3480f4-9238-4258-8e4c-b19243b18cb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Effects\Vignette">
+      <UniqueIdentifier>{382b2f80-056a-481a-a136-89ca3c0d339b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\stdafx.cpp">
+      <Filter>Precompiled</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Test.cpp">
+      <Filter>Game\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ColorInverter.cpp">
+      <Filter>Game\Effects\ColorInverter</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FadeToBlack.cpp">
+      <Filter>Game\Effects\FadeToBlack</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Vignette.cpp">
+      <Filter>Game\Effects\Vignette</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\stdafx.h">
+      <Filter>Precompiled</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Test.h">
+      <Filter>Game\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ColorInverter.h">
+      <Filter>Game\Effects\ColorInverter</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FadeToBlack.h">
+      <Filter>Game\Effects\FadeToBlack</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vignette.h">
+      <Filter>Game\Effects\Vignette</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Shaders\colorInverter.frag">
+      <Filter>Game\Effects\ColorInverter</Filter>
+    </None>
+    <None Include="Assets\Shaders\fadeToBlack.frag">
+      <Filter>Game\Effects\FadeToBlack</Filter>
+    </None>
+    <None Include="Assets\Shaders\vignette.frag">
+      <Filter>Game\Effects\Vignette</Filter>
+    </None>
+  </ItemGroup>
+</Project>
