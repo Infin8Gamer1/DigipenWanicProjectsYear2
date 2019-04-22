@@ -67,7 +67,7 @@ namespace Levels
 		vignette = new Effects::Vignette();
 		graphics = &Graphics::GetInstance();
 
-		graphics->PushEffect(*vignette);
+		
 
 
 		// Set Beta Framework’s background color to black
@@ -164,6 +164,28 @@ namespace Levels
 			invertColors->Update(dt);
 		}
 #pragma endregion
+
+#pragma region Vignette
+		// If the user presses the 'V' key, Turn on Vignette.
+		if (input->CheckTriggered('V'))
+		{
+			if (!vignette->IsActive())
+			{
+				graphics->PushEffect(*vignette);
+			}
+			else
+			{
+				graphics->RemoveEffect(*vignette);
+			}
+		}
+
+		// Is the fade effect active?
+		if (vignette->IsActive())
+		{
+			vignette->Update(dt);
+		}
+#pragma endregion
+
 
 	}
 

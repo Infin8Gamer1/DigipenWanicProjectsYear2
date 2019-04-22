@@ -17,6 +17,6 @@ void Effects::Vignette::Initialize()
 
 void Effects::Vignette::Draw()
 {
-	GetProgram().SetUniform("ScreenX", screenSize.x);
-	GetProgram().SetUniform("ScreenY", screenSize.y);
+	GetProgram().SetUniform("ScreenX", (float)screenSize.x);
+	GetProgram().SetUniform("ScreenY", (float)screenSize.y);
 }
