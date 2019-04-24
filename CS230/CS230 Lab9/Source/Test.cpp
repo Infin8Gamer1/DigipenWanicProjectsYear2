@@ -31,6 +31,8 @@
 #include "FadeToBlack.h"
 #include "ColorInverter.h"
 #include "Vignette.h"
+#include "Noise.h"
+#include "Scanline.h"
 
 // Components
 #include "GameObject.h"
@@ -65,9 +67,9 @@ namespace Levels
 		fadeToBlack = new Effects::FadeToBlack();
 		invertColors = new Effects::ColorInverter();
 		vignette = new Effects::Vignette();
+		noise = new Effects::Noise();
+		scanline = new Effects::Scanline();
 		graphics = &Graphics::GetInstance();
-
-		
 
 
 		// Set Beta Framework’s background color to black
@@ -110,6 +112,51 @@ namespace Levels
 		textComponent->SetColor(Colors::Blue);
 		textComponent->SetZDepth(0.25f);
 		textObject->GetComponent<Transform>()->SetTranslation(Vector2D(0, -1));
+		GetSpace()->GetObjectManager().AddObject(*textObject);
+
+		textObject = GameObjectFactory::GetInstance().CreateObject("Text", GetSpace());
+		textComponent = textObject->GetComponent<SpriteText>();
+		textComponent->SetText("F To Fade");
+		textComponent->SetColor(Colors::Red);
+		textComponent->SetZDepth(0.1f);
+		textObject->GetComponent<Transform>()->SetScale(Vector2D(0.3f, 0.3f));
+		textObject->GetComponent<Transform>()->SetTranslation(Vector2D(-2, 0));
+		GetSpace()->GetObjectManager().AddObject(*textObject);
+
+		textObject = GameObjectFactory::GetInstance().CreateObject("Text", GetSpace());
+		textComponent = textObject->GetComponent<SpriteText>();
+		textComponent->SetText("V for Vignette");
+		textComponent->SetColor(Colors::Green);
+		textComponent->SetZDepth(0.1f);
+		textObject->GetComponent<Transform>()->SetScale(Vector2D(0.3f, 0.3f));
+		textObject->GetComponent<Transform>()->SetTranslation(Vector2D(2, 1));
+		GetSpace()->GetObjectManager().AddObject(*textObject);
+
+		textObject = GameObjectFactory::GetInstance().CreateObject("Text", GetSpace());
+		textComponent = textObject->GetComponent<SpriteText>();
+		textComponent->SetText("I to Inverse");
+		textComponent->SetColor(Colors::Orange);
+		textComponent->SetZDepth(0.05f);
+		textObject->GetComponent<Transform>()->SetScale(Vector2D(0.3f, 0.3f));
+		textObject->GetComponent<Transform>()->SetTranslation(Vector2D(2, 0));
+		GetSpace()->GetObjectManager().AddObject(*textObject);
+
+		textObject = GameObjectFactory::GetInstance().CreateObject("Text", GetSpace());
+		textComponent = textObject->GetComponent<SpriteText>();
+		textComponent->SetText("N For Noise");
+		textComponent->SetColor(Colors::Aqua);
+		textComponent->SetZDepth(0.1f);
+		textObject->GetComponent<Transform>()->SetScale(Vector2D(0.3f, 0.3f));
+		textObject->GetComponent<Transform>()->SetTranslation(Vector2D(-2, 1));
+		GetSpace()->GetObjectManager().AddObject(*textObject);
+
+		textObject = GameObjectFactory::GetInstance().CreateObject("Text", GetSpace());
+		textComponent = textObject->GetComponent<SpriteText>();
+		textComponent->SetText("L for ScanLines");
+		textComponent->SetColor(Colors::Grey);
+		textComponent->SetZDepth(0.02f);
+		textObject->GetComponent<Transform>()->SetScale(Vector2D(0.3f, 0.3f));
+		textObject->GetComponent<Transform>()->SetTranslation(Vector2D(-3, 0.5));
 		GetSpace()->GetObjectManager().AddObject(*textObject);
 	}
 
@@ -186,6 +233,47 @@ namespace Levels
 		}
 #pragma endregion
 
+#pragma region Noise
+		// If the user presses the 'N' key, noise time.
+		if (input->CheckTriggered('N'))
+		{
+			if (!noise->IsActive())
+			{
+				graphics->PushEffect(*noise);
+			}
+			else
+			{
+				graphics->RemoveEffect(*noise);
+			}
+		}
+
+		// Is the fade effect active?
+		if (noise->IsActive())
+		{
+			noise->Update(dt);
+		}
+#pragma endregion
+
+#pragma region ScanLines
+		// If the user presses the 'L' key, Scan Lines ON.
+		if (input->CheckTriggered('L'))
+		{
+			if (!scanline->IsActive())
+			{
+				graphics->PushEffect(*scanline);
+			}
+			else
+			{
+				graphics->RemoveEffect(*scanline);
+			}
+		}
+
+		// Is the fade effect active?
+		if (scanline->IsActive())
+		{
+			scanline->Update(dt);
+		}
+#pragma endregion
 
 	}
 
@@ -204,6 +292,10 @@ namespace Levels
 		delete invertColors;
 
 		delete vignette;
+
+		delete noise;
+
+		delete scanline;
 	}
 
 	//------------------------------------------------------------------------------

@@ -24,6 +24,7 @@
 //------------------------------------------------------------------------------
 
 class Tilemap;
+class Area;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -43,6 +44,12 @@ public:
 
 	// Clone the sprite, returning a dynamically allocated copy.
 	Component* Clone() const override;
+
+	// Get component dependencies.
+	void Initialize() override;
+
+	// Update area data.
+	void Update(float dt) override;
 
 	// Draw a sprite (Sprite can be textured or untextured).
 	void Draw() override;
@@ -69,6 +76,9 @@ private:
 
 	// The tilemap
 	const Tilemap* map;
+
+	// Area component
+	Area* area;
 };
 
 //------------------------------------------------------------------------------

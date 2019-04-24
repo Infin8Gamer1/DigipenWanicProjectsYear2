@@ -1,7 +1,7 @@
 Text
 {
   numComponents : 2
-  Transform
+  Area
   {
     translation : { 0, 0 }
     rotation : 0

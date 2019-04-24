@@ -75,6 +75,8 @@ namespace Levels
 		PostEffect* fadeToBlack;
 		PostEffect* invertColors;
 		PostEffect* vignette;
+		PostEffect* noise;
+		PostEffect* scanline;
 
 		// Systems
 		Graphics* graphics;

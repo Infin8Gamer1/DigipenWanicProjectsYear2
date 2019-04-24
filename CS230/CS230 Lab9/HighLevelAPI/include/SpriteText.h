@@ -24,7 +24,7 @@
 // Forward Declarations:
 //------------------------------------------------------------------------------
 
-class Transform;
+class Area;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -44,14 +44,20 @@ public:
 	//   text = The text to display.
 	//   wrap = Whether to wrap text onto multiple lines
 	//   rowLength = Characters to print before wrapping.
-	SpriteText(const std::string& text = "", bool wrap = false, 
+	SpriteText(const std::string& text = "", bool wrap = false,
 		unsigned rowLength = 10);
 
 	// Returns a dynamically allocated copy of the component.
 	// Must be implemented so correct component is copied during copy.
 	Component* Clone() const;
 
-	// Draw a sprite (Sprite can be textured or untextured).
+	// Get component dependencies.
+	void Initialize() override;
+
+	// Update function
+	void Update(float dt) override;
+
+	// Draw sprite text.
 	void Draw() override;
 
 	// Sets the text that will be displayed by the sprite.
@@ -77,11 +83,17 @@ private:
 	// Wrap text?
 	bool wrap;
 
-	// Left justification
-	bool leftJustify;
-
 	// Number of characters per row (for wrapping)
 	unsigned rowLength;
+
+	// Number of rows
+	unsigned numRows;
+
+	// Number of columns in the longest row
+	unsigned maxColumns;
+
+	// Area component
+	Area* area;
 };
 
 //------------------------------------------------------------------------------

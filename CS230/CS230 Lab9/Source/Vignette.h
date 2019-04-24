@@ -36,15 +36,8 @@ namespace Effects
 		// Constructor
 		Vignette();
 
-		// Restart timer
-		void Initialize() override;
-
 		// Send data to OpenGL
 		void Draw() override;
-
-	private:
-
-		Vector2D screenSize;
 	};
 }
 

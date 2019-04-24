@@ -25,6 +25,12 @@
     <Filter Include="Game\Effects\Vignette">
       <UniqueIdentifier>{382b2f80-056a-481a-a136-89ca3c0d339b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Effects\Noise">
+      <UniqueIdentifier>{e02e9800-1a81-4e28-bde5-08fa512e826b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Effects\Scanline">
+      <UniqueIdentifier>{0adf09c6-37b7-4e34-9082-af5748e075a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp" />
@@ -43,6 +49,12 @@
     <ClCompile Include="Source\Vignette.cpp">
       <Filter>Game\Effects\Vignette</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Noise.cpp">
+      <Filter>Game\Effects\Noise</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scanline.cpp">
+      <Filter>Game\Effects\Scanline</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\stdafx.h">
@@ -60,6 +72,12 @@
     <ClInclude Include="Source\Vignette.h">
       <Filter>Game\Effects\Vignette</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Noise.h">
+      <Filter>Game\Effects\Noise</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scanline.h">
+      <Filter>Game\Effects\Scanline</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\colorInverter.frag">
@@ -70,6 +88,12 @@
     </None>
     <None Include="Assets\Shaders\vignette.frag">
       <Filter>Game\Effects\Vignette</Filter>
+    </None>
+    <None Include="Assets\Shaders\Noise.frag">
+      <Filter>Game\Effects\Noise</Filter>
+    </None>
+    <None Include="Assets\Shaders\Scanline.frag">
+      <Filter>Game\Effects\Scanline</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -83,7 +83,7 @@ public:
 
 	// Set the scale of a transform component.
 	// Params:
-	//	 translation = Reference to a scale vector.
+	//	 scale = Reference to a scale vector.
 	void SetScale(const Vector2D& scale);
 
 	// Get the scale of a transform component.
@@ -92,7 +92,7 @@ public:
 	const Vector2D& GetScale() const;
 
 	// Returns a bounding rectangle using translation and (half) scale.
-	const BoundingRectangle GetBounds() const;
+	virtual const BoundingRectangle GetBounds() const;
 
 	// Tests whether the object is visible on screen.
 	bool IsOnScreen() const;

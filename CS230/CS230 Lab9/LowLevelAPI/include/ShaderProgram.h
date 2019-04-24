@@ -24,7 +24,9 @@
 //------------------------------------------------------------------------------
 
 class Vector2D;
+struct Vector3D;
 class Color;
+class Matrix2D;
 struct Matrix3D;
 
 //------------------------------------------------------------------------------
@@ -47,9 +49,19 @@ public:
 	// Set values of uniform variables
 	void SetUniform(const std::string& name, int value) const;
 	void SetUniform(const std::string& name, float value) const;
+	void SetUniform(const std::string& name, bool value) const;
 	void SetUniform(const std::string& name, const Vector2D& value) const;
+	void SetUniform(const std::string& name, const Vector3D& value) const;
 	void SetUniform(const std::string& name, const Color& value) const;
-	void SetUniform(const std::string& name, const Matrix3D& transform) const;
+	void SetUniform(const std::string& name, const Matrix2D& value) const;
+	void SetUniform(const std::string& name, const Matrix3D& value) const;
+	
+	// Set values of uniform arrays
+	void SetUniform(const std::string& name, std::vector<int>& values) const;
+	void SetUniform(const std::string& name, std::vector<float>& values) const;
+	void SetUniform(const std::string& name, std::vector<Vector2D>& values) const;
+	void SetUniform(const std::string& name, std::vector<Vector3D>& values) const;
+	void SetUniform(const std::string& name, std::vector<Color>& values) const;
 
 	// Operators
 	bool operator==(const ShaderProgram& other) const;
@@ -86,8 +98,8 @@ private:
 	int GetAttributeLocation(const std::string& name) const;
 
 	// Loads shaders into OpenGL from strings/files
-	static void AddShaderFromString(unsigned program, const std::string& source, int glType);
-	static void AddShaderFromFile(unsigned program, const std::string& filename, int glType);
+	static bool AddShaderFromString(unsigned program, const std::string& source, int glType);
+	static bool AddShaderFromFile(unsigned program, const std::string& filename, int glType);
 
 	// Reads contents from a file into a string
 	static std::string ReadFromFile(const std::string& filename);
