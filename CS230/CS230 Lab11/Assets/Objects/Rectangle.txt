@@ -1,0 +1,32 @@
+Rectangle
+{
+  numComponents : 6
+  Transform
+  {
+    translation : { 0, 0 }
+    rotation : 0
+    scale : { 2.5, 1 }
+  }
+  Sprite
+  {
+    color : { 1 , 1 , 1 , 1 }
+  }
+  ColliderRectangle
+  {
+    extents : { 1.25, 0.5 }
+  }
+  Behaviors::ColorChange
+  {
+    normalColor : { 0 , 1 , 0 , 1 }
+    collidedColor : { 1 , 0 , 0 , 1 }
+  }
+  Physics
+  {
+    velocity : { 0, 0 }
+    angularVelocity : 0
+    mass : 1
+  }
+  Behaviors::ScreenWrap
+  {
+  }
+}
