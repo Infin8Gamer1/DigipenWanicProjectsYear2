@@ -67,6 +67,9 @@ public:
 	// Remove all objects from the tree.
 	void Clear();
 
+	// returns a string that contains info about this node in the tree
+	std::string GetNodeInfo();
+
 private:
 	//------------------------------------------------------------------------------
 	// Private Functions:

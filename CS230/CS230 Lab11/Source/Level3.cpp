@@ -83,7 +83,7 @@ namespace Levels
 
 		transform = point->GetComponent<Transform>();
 		physics = point->GetComponent<Physics>();
-		transform->SetTranslation(Vector2D(-0.3f, 3));
+		transform->SetTranslation(Vector2D(0, 3));
 		physics->SetVelocity(Vector2D(0, -1) * pointSpeed);
 
 		transform = rectangle->GetComponent<Transform>();
