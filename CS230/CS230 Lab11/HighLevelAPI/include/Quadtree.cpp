@@ -17,6 +17,7 @@
 #include "Intersection2D.h"
 #include "GameObject.h"
 #include "Transform.h"
+#include <sstream>      // std::stringstream
 
 enum Quadrants : short
 {
@@ -203,6 +204,39 @@ void Quadtree::Clear()
 		}
 		
 	}
+}
+
+std::string Quadtree::GetNodeInfo()
+{
+	std::stringstream ss;
+
+	for (int i = 0; i < level; i++)
+	{
+		ss << "\t";
+	}
+
+	std::string tabs = ss.str();
+
+	ss << "Level : " << level << ", center : " << bounds.center << "\n";
+
+	if (IsLeafNode())
+	{
+		ss << tabs << "\tobjects : " << "\n";
+		for (size_t i = 0; i < objects.size(); i++)
+		{
+			ss << tabs << "\t\tName: " << objects[i]->GetName() << ", GUID : " << objects[i]->GetID() << "\n";
+		}
+	}
+
+	if (!IsLeafNode())
+	{
+		for (size_t i = 0; i < 4; i++)
+		{
+			ss << nodes[i]->GetNodeInfo();
+		}
+	}
+	
+	return ss.str();
 }
 
 void Quadtree::Split()

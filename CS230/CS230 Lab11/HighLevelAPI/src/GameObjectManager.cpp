@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 //
 // File Name:	GameObjectManager.cpp
-// Author(s):	Jeremy Kings (j.kings)
+// Author(s):	Jeremy Kings (j.kings), Jacob Holyfield
 // Project:		BetaFramework
 // Course:		WANIC VGP2 2018-2019
 //
@@ -290,6 +290,9 @@ void GameObjectManager::FixedUpdate(float dt)
 		{
 			PopulateQuadtree();
 
+			//print out tree (for debug)
+			//std::cout << quadtree->GetNodeInfo() << std::endl;
+
 			CheckCollisionsQuadtree();
 		}
 		else {
@@ -329,7 +332,7 @@ void GameObjectManager::Draw(void)
 		(*it)->Draw();
 	}
 
-	if (quadtree != nullptr)
+	if (useQuadtree && quadtree != nullptr)
 	{
 		quadtree->Draw();
 	}
@@ -400,6 +403,12 @@ void GameObjectManager::CheckCollisionsQuadtree()
 		for (auto x = nearbyObjects.begin(); x != nearbyObjects.end(); ++x)
 		{
 			GameObject* second = *x;
+
+			//if the IDs of first and second match then skip
+			if (second->GetID() == first->GetID())
+			{
+				continue;
+			}
 
 			// Skip inactive/destroyed
 			if (second->IsDestroyed())
