@@ -65,7 +65,7 @@ int WINAPI WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prevInstance, _In
 	}
 
 	// Game engine goes!
-	Engine::GetInstance().Start(1280, 720);
+	Engine::GetInstance().Start(1920, 1080);
 
 	return 0;
 }
